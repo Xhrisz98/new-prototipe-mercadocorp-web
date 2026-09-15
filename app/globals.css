@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: var(--font-kanit), sans-serif;
+  --font-body: var(--font-montserrat), sans-serif;
+  --color-brand-primary: #0022D2;
+  --color-brand-primary-dark: #3F5FFF;
+  --color-brand-gray: #3B3C40;
+  --color-brand-ai-accent: #04E7AF;
+}
+
+:root {
+  /* Tokens Oficiales Tema Claro */
+  --color-bg: #FAFAFB;
+  --color-surface: #FFFFFF;
+  --color-text: #3B3C40;
+  --color-text-muted: #6B6D73;
+  --color-border: #E4E5E9;
+  --color-primary: #0022D2;
+  --color-primary-hover: #001ba8;
+  --color-primary-glow: rgba(0, 34, 210, 0.15);
+  --color-ai-accent: #04E7AF;
+  --color-card-bg: #FFFFFF;
+}
+
+.dark {
+  /* Tokens Oficiales Tema Oscuro */
+  --color-bg: #0B0D14;
+  --color-surface: #151822;
+  --color-text: #EDEFF3;
+  --color-text-muted: #9A9DA8;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-primary: #3F5FFF;
+  --color-primary-hover: #5a75ff;
+  --color-primary-glow: rgba(63, 95, 255, 0.3);
+  --color-ai-accent: #04E7AF;
+  --color-card-bg: #151822;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-montserrat), sans-serif;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Kanit solo para H1 y H2 según la Sección 4 */
+h1, h2, .font-display {
+  font-family: var(--font-kanit), sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+/* Montserrat para todo lo demás */
+body, p, span, a, button, input, textarea, select, h3, h4, h5, h6 {
+  font-family: var(--font-montserrat), sans-serif;
+}
