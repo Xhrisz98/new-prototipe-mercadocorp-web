@@ -37,6 +37,10 @@ export interface CasosDeExitoContent {
     body: string;
   };
   cases: CaseStudyItem[];
+  emptyState: {
+    title: string;
+    body: string;
+  };
   finalCta: {
     title: string;
     description: string;
@@ -76,38 +80,16 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
       { number: "A medida", label: "Construido sobre su operación real, sin plantillas" },
     ],
     notice: {
-      title: "Casos de Estudio en Proceso de Aprobación de Divulgación",
-      body: "Por acuerdos de confidencialidad comercial (NDA) con nuestros clientes corporativos, publicamos resúmenes cualitativos verificados de arquitectura técnica sin divulgar cifras no autorizadas.",
+      title: "Casos de Éxito en Construcción",
+      body: "Estamos confirmando con nuestros clientes qué proyectos pueden publicarse con nombre, logo y detalle verificado. Esta sección se completará únicamente con casos reales y aprobados — no publicamos cifras ni clientes sin confirmar.",
     },
-    cases: [
-      {
-        id: "caso-01",
-        clientName: "Empresa de Servicios Corporativos B2B",
-        clientIndustry: "Servicios y Consultoría B2B",
-        pillar: "Tecnología & Automatización",
-        problemContext: "Pérdida de oportunidades comerciales y retrasos de hasta 48 horas en la calificación de prospectos.",
-        solutionBuilt: "Arquitectura integral de CRM con agente de IA para WhatsApp y sincronización con base de datos interna, eliminando la carga manual de seguimiento.",
-        isConfirmed: true,
-      },
-      {
-        id: "caso-02",
-        clientName: "Distribuidora e Importadora Industrial",
-        clientIndustry: "Distribución y Comercio Mayorista",
-        pillar: "Tecnología & Automatización",
-        problemContext: "Silos de información entre bodegas, inventarios y ejecutivos comerciales que generaban errores de cotización.",
-        solutionBuilt: "Desarrollo de panel web interno a medida conectado en tiempo real con inventario y módulo de órdenes para la fuerza de ventas.",
-        isConfirmed: true,
-      },
-      {
-        id: "caso-03",
-        clientName: "Marca de Consumo y Comercio Especializado",
-        clientIndustry: "E-commerce & Retail",
-        pillar: "E-commerce & IA",
-        problemContext: "Tasa de abandono de checkout superior al 65% sin mecanismos automatizados de recuperación.",
-        solutionBuilt: "Integración de flujos automatizados de remarketing inteligente, optimización del embudo de compra y agente de asesoría en tiempo real.",
-        isConfirmed: true,
-      },
-    ],
+    // No inventar clientes ni cifras (PROJECT_PLAN.md §5 y AGENTS.md).
+    // Completar únicamente con casos reales confirmados por el cliente.
+    cases: [],
+    emptyState: {
+      title: "Nuestros primeros casos están en camino",
+      body: "Estamos documentando nuestros primeros casos verificados. Vuelve pronto.",
+    },
     finalCta: {
       title: "¿Listo para ser nuestro próximo caso de éxito?",
       description:
@@ -154,38 +136,16 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
       { number: "Custom Built", label: "Tailored to your real workflows, never forced templates" },
     ],
     notice: {
-      title: "Case Studies and Disclosure Compliance",
-      body: "Under non-disclosure agreements (NDAs) with our enterprise partners, we publish qualitative technical architectures and verified outcomes without releasing unauthorized financial telemetry.",
+      title: "Case Studies in Progress",
+      body: "We are confirming with our clients which projects can be published with name, logo, and verified detail. This section will only be completed with real, approved case studies — we do not publish unconfirmed clients or figures.",
     },
-    cases: [
-      {
-        id: "caso-01",
-        clientName: "B2B Professional Services Firm",
-        clientIndustry: "Professional Services & Advisory",
-        pillar: "Tecnología & Automatización",
-        problemContext: "Slow lead qualification and commercial lag exceeding 48 hours for inbound RFPs.",
-        solutionBuilt: "Autonomous WhatsApp AI sales agent integrated directly with custom CRM and backend databases, eradicating manual follow-up friction.",
-        isConfirmed: true,
-      },
-      {
-        id: "caso-02",
-        clientName: "Industrial Equipment & Wholesale Distributor",
-        clientIndustry: "Wholesale & Industrial Logistics",
-        pillar: "Tecnología & Automatización",
-        problemContext: "Information silos between warehouse inventory, quotes, and field sales executives.",
-        solutionBuilt: "Custom cloud backoffice dashboard synchronizing live inventory levels with client quotes for nationwide sales reps.",
-        isConfirmed: true,
-      },
-      {
-        id: "caso-03",
-        clientName: "Direct-to-Consumer Specialized Retailer",
-        clientIndustry: "E-commerce & Retail",
-        pillar: "E-commerce & IA",
-        problemContext: "Cart abandonment rate hovering over 65% with zero automated follow-up.",
-        solutionBuilt: "Conversion rate overhaul, real-time AI sales assistance, and autonomous checkout recovery messaging funnels.",
-        isConfirmed: true,
-      },
-    ],
+    // Do not invent clients or figures (PROJECT_PLAN.md §5 and AGENTS.md).
+    // Populate only with real, client-confirmed case studies.
+    cases: [],
+    emptyState: {
+      title: "Our first case studies are on the way",
+      body: "We're documenting our first verified case studies. Check back soon.",
+    },
     finalCta: {
       title: "Ready to become our next success story?",
       description:
@@ -232,38 +192,16 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
       { number: "Под ключ", label: "Разработано под реальные процессы бизнеса" },
     ],
     notice: {
-      title: "Кейсы и конфиденциальность данных",
-      body: "В соответствии с соглашениями о неразглашении (NDA) мы публикуем качественные описания технических решений без раскрытия закрытых финансовых показателей.",
+      title: "Кейсы в процессе подтверждения",
+      body: "Мы согласовываем с клиентами, какие проекты можно опубликовать с названием, логотипом и проверенными деталями. Этот раздел будет дополнен только реальными, подтвержденными кейсами — без неподтвержденных клиентов или показателей.",
     },
-    cases: [
-      {
-        id: "caso-01",
-        clientName: "B2B компания в сфере корпоративных услуг",
-        clientIndustry: "Консалтинг и B2B услуги",
-        pillar: "Tecnología & Automatización",
-        problemContext: "Задержки в квалификации входящих заявок до 48 часов и потеря лидов.",
-        solutionBuilt: "Внедрение CRM с ИИ-агентом для WhatsApp и интеграцией с корпоративной базой данных, автоматизировавшее обработку запросов.",
-        isConfirmed: true,
-      },
-      {
-        id: "caso-02",
-        clientName: "Промышленный дистрибьютор оборудования",
-        clientIndustry: "Оптовая торговля и логистика",
-        pillar: "Tecnología & Automatización",
-        problemContext: "Разрозненность данных между складом, бухгалтерией и менеджерами по продажам.",
-        solutionBuilt: "Разработка кастомной панели управления с актуальными остатками на складе и быстрым формированием коммерческих предложений.",
-        isConfirmed: true,
-      },
-      {
-        id: "caso-03",
-        clientName: "Розничный бренд специализированных товаров",
-        clientIndustry: "E-commerce и ритейл",
-        pillar: "E-commerce & IA",
-        problemContext: "Доля брошенных корзин свыше 65% при отсутствии автоматических напоминаний.",
-        solutionBuilt: "Оптимизация воронки оформления заказа, интеграция онлайн-ассистента и цепочек возврата покупателей.",
-        isConfirmed: true,
-      },
-    ],
+    // Не придумывать клиентов или цифры (PROJECT_PLAN.md §5 и AGENTS.md).
+    // Заполнять только реальными кейсами, подтвержденными клиентом.
+    cases: [],
+    emptyState: {
+      title: "Наши первые кейсы уже готовятся",
+      body: "Мы документируем наши первые подтвержденные кейсы. Загляните позже.",
+    },
     finalCta: {
       title: "Готовы стать нашим следующим успешным кейсом?",
       description:

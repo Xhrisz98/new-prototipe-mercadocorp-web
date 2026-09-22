@@ -143,74 +143,74 @@ const contentData: Record<Locale, NosotrosPageContent> = {
     seo: {
       title: "About MercadoCorp | B2B Technology Consultancy in Ecuador",
       description:
-        "Discover MercadoCorp's story, philosophy, and evolution: from digital marketing agency to a technology consultancy specializing in enterprise automation and AI.",
+        "Learn about MercadoCorp's history, philosophy, and trajectory: from a marketing agency to a technology consultancy specialized in automation and AI for businesses.",
     },
     hero: {
-      badge: "Our Identity & Enterprise Vision",
-      h1: "We do not believe in magic solutions. We believe in building, step by step.",
+      badge: "Our Identity and B2B Vision",
+      h1: "We don't believe in magic solutions. We believe in building, step by step.",
       subheadline:
-        "We exist to integrate, innovate, and scale alongside companies committed to engineering resilient operational systems rather than chasing short-lived campaigns.",
+        "We were born to integrate, innovate, and scale alongside companies willing to build a real system, not a one-off campaign.",
       ctaPrimary: {
-        label: "Explore our work →",
+        label: "Get to know our work →",
         href: "/casos-de-exito",
       },
       ctaSecondary: {
-        label: "Talk to our team",
+        label: "Let's talk about your company",
         href: "/contacto",
       },
     },
     history: {
       title: "From Digital Agency to B2B Technology Consultancy",
-      body: "Originally founded as a digital marketing agency, we evolved into a full-scope technology consultancy: today we engineer automation and custom software as the true engine of client scale, with digital marketing serving as the amplifier once operational efficiency is locked in.",
+      body: "From an agency focused on digital marketing, we evolved into a technology consultancy: today we structure technology and automation as the true driver of our clients' growth, with digital marketing as the complement that amplifies that system once it's already working.",
     },
     dualSpecialization: {
       title: "Dual Specialization",
-      subtitle: "A balanced enterprise approach addressing operational systems and market positioning simultaneously.",
+      subtitle: "A balanced approach to address both operational infrastructure and brand perception.",
       pillars: [
         {
           name: "Technology & Automation",
-          description: "Workflow automation, autonomous AI agents, tailored CRMs, and bespoke software built for friction-free scale.",
+          description: "Process automation, AI agents, custom CRMs, and tailored software to scale without friction.",
           href: "/tecnologia-automatizacion",
         },
         {
           name: "Digital Marketing",
-          description: "Strategic content, executive branding, and corporate events when the operational foundation is solid.",
+          description: "Strategic content, executive branding, and event management once the operational foundation is already solved.",
           href: "/marketing-digital",
         },
       ],
     },
     philosophy: {
-      title: "Our Guiding Principles",
+      title: "Our Work Philosophy",
       values: [
         {
           title: "Comprehensive Strategy",
-          description: "We never deploy disconnected point tools; we architect the business as an interconnected operational system.",
+          description: "We don't implement isolated tools; we conceive the company as a living, interconnected system.",
         },
         {
-          title: "Continuous Innovation",
-          description: "We stress-test emerging AI and automation architectures rigorously in-house before recommending them to clients.",
+          title: "Constant Innovation",
+          description: "We explore, test, and adapt emerging technologies and AI agents before recommending them to clients.",
         },
         {
-          title: "Collaborative Synergy",
-          description: "We work side-by-side with our clients' internal teams to build enduring in-house capability and autonomy.",
+          title: "Synergy and Collaboration",
+          description: "We work integrated with our clients' teams to transfer real knowledge and capabilities.",
         },
       ],
     },
     trajectory: {
-      title: "Company Milestones & Trajectory",
+      title: "Trajectory and Timeline of Milestones",
       statusBadge: "Coming Soon",
-      note: "We are currently documenting the verified chronological timeline and corporate milestones to publish here shortly.",
+      note: "We are consolidating the detailed documentation and official timeline of the company's milestones to publish here.",
     },
     finalCta: {
-      title: "Ready to engineer a true operational system for your business?",
+      title: "Ready to build a real system for your business?",
       description:
-        "Let's evaluate your workflows and map out how AI and automation can deliver measurable enterprise value.",
+        "Let's talk about your current operation and how automation and artificial intelligence can accelerate your growth.",
       ctaPrimary: {
         label: "Request Diagnostic",
         href: "/contacto",
       },
       ctaSecondary: {
-        label: "Review Case Studies",
+        label: "See Case Studies",
         href: "/casos-de-exito",
       },
     },
@@ -226,76 +226,76 @@ const contentData: Record<Locale, NosotrosPageContent> = {
   },
   ru: {
     seo: {
-      title: "О компании MercadoCorp | B2B Технологический консалтинг в Эквадоре",
+      title: "О MercadoCorp | B2B консалтинг в сфере технологий в Эквадоре",
       description:
-        "История, философия и эволюция MercadoCorp: от диджитал-агентства к технологической консалтинговой компании в сфере ИИ и автоматизации бизнеса.",
+        "Узнайте историю, философию и путь развития MercadoCorp: от маркетингового агентства до технологической консалтинговой компании, специализирующейся на автоматизации и ИИ для бизнеса.",
     },
     hero: {
-      badge: "Наша Миссия и Видение",
-      h1: "Мы не верим в волшебные решения. Мы верим в системное построение шаг за шагом.",
+      badge: "Наша идентичность и B2B видение",
+      h1: "Мы не верим в волшебные решения. Мы верим в постепенное построение, шаг за шагом.",
       subheadline:
-        "Мы созданы для того, чтобы внедрять инновации и расти вместе с компаниями, готовыми строить надежную систему, а не разовую кампанию.",
+        "Мы созданы для того, чтобы интегрировать, внедрять инновации и расти вместе с компаниями, готовыми строить настоящую систему, а не разовую кампанию.",
       ctaPrimary: {
-        label: "Посмотреть наши работы →",
+        label: "Узнать о нашей работе →",
         href: "/casos-de-exito",
       },
       ctaSecondary: {
-        label: "Обсудить проект",
+        label: "Поговорим о вашей компании",
         href: "/contacto",
       },
     },
     history: {
-      title: "От диджитал-агентства к технологическому консалтингу",
-      body: "Пройдя путь от агентства интернет-маркетинга, мы выросли в технологическую консалтинговую компанию. Сегодня автоматизация и разработка ПО служат фундаментом роста наших клиентов, а маркетинг масштабирует уже отлаженную систему.",
+      title: "От диджитал-агентства к B2B технологическому консалтингу",
+      body: "Начав как агентство цифрового маркетинга, мы превратились в технологическую консалтинговую компанию: сегодня мы выстраиваем технологии и автоматизацию как настоящую основу роста наших клиентов, а цифровой маркетинг служит дополнением, которое усиливает эту систему, когда она уже работает.",
     },
     dualSpecialization: {
-      title: "Двойная Специализация",
-      subtitle: "Сбалансированный подход, закрывающий операционную базу и позиционирование бренда.",
+      title: "Двойная специализация",
+      subtitle: "Сбалансированный подход к решению как операционной инфраструктуры, так и восприятия бренда.",
       pillars: [
         {
           name: "Технологии и Автоматизация",
-          description: "Автоматизация процессов, ИИ-агенты, CRM и заказное ПО для масштабирования без рутины.",
+          description: "Автоматизация процессов, ИИ-агенты, индивидуальные CRM и программное обеспечение на заказ для масштабирования без трения.",
           href: "/tecnologia-automatizacion",
         },
         {
           name: "Цифровой Маркетинг",
-          description: "Стратегия контента, личный бренд и организация событий, когда технологическая база уже работает.",
+          description: "Стратегический контент, брендинг руководителей и организация мероприятий, когда операционная база уже решена.",
           href: "/marketing-digital",
         },
       ],
     },
     philosophy: {
-      title: "Философия нашей работы",
+      title: "Наша рабочая философия",
       values: [
         {
-          title: "Комплексная Стратегия",
-          description: "Мы не внедряем разрозненные инструменты — мы проектируем бизнес как единый живой организм.",
+          title: "Комплексная стратегия",
+          description: "Мы не внедряем изолированные инструменты; мы воспринимаем компанию как единую взаимосвязанную живую систему.",
         },
         {
-          title: "Постоянные Инновации",
-          description: "Мы тестируем ИИ-технологии на собственных проектах, прежде чем предлагать их клиентам.",
+          title: "Постоянные инновации",
+          description: "Мы изучаем, тестируем и адаптируем новые технологии и ИИ-агентов, прежде чем рекомендовать их клиентам.",
         },
         {
-          title: "Синергия и Партнерство",
-          description: "Мы работаем в тесном контакте с командами заказчиков, передавая им экспертизу.",
+          title: "Синергия и сотрудничество",
+          description: "Мы работаем в тесной интеграции с командами наших клиентов, чтобы передавать реальные знания и навыки.",
         },
       ],
     },
     trajectory: {
-      title: "Хронология и Вехи Развития",
+      title: "Путь развития и хронология этапов",
       statusBadge: "Скоро",
-      note: "Мы финализируем подтвержденную хронологию ключевых этапов развития компании для публикации в этом блоке.",
+      note: "Мы завершаем подготовку подробной документации и официальной хронологии ключевых этапов компании для публикации здесь.",
     },
     finalCta: {
-      title: "Готовы построить надежную систему для вашего бизнеса?",
+      title: "Готовы построить настоящую систему для вашего бизнеса?",
       description:
-        "Давайте разберем ваши текущие процессы и определим, где ИИ и автоматизация принесут максимальный эффект.",
+        "Давайте обсудим вашу текущую деятельность и то, как автоматизация и искусственный интеллект могут ускорить ваш рост.",
       ctaPrimary: {
-        label: "Запросить аудит",
+        label: "Запросить диагностику",
         href: "/contacto",
       },
       ctaSecondary: {
-        label: "Изучить кейсы",
+        label: "Смотреть кейсы",
         href: "/casos-de-exito",
       },
     },
@@ -304,8 +304,8 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       links: [
         { label: "Кейсы и результаты", href: "/casos-de-exito" },
         { label: "Технологии и Автоматизация", href: "/tecnologia-automatizacion" },
-        { label: "Контакты", href: "/contacto" },
-        { label: "Маркетинг", href: "/marketing-digital" },
+        { label: "Прямой контакт", href: "/contacto" },
+        { label: "Цифровой маркетинг", href: "/marketing-digital" },
       ],
     },
   },

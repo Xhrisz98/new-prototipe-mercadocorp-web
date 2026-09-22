@@ -171,42 +171,42 @@ const contentData: Record<Locale, ServicePageContent> = {
           tag: "Web Apps",
         },
         {
-          title: "Internal Dashboards & ERP Panels",
+          title: "Internal Dashboards & Panels",
           description:
-            "Comprehensive management systems for tasks, inventory, teams, and workflows with granular role-based access.",
+            "Management systems for tasks, inventory, teams, clients, or processes, with clear dashboards and role-based access.",
           tag: "Backoffice",
         },
         {
           title: "Custom CRMs",
           description:
-            "Client relationship platforms aligned to your actual sales cycle, built with native automations and syncs.",
+            "Implementation and setup of client management systems tailored to your real sales cycle, including built-in automations and integrations.",
           tag: "CRM",
         },
         {
-          title: "Ecosystem Expansion & APIs",
+          title: "Digital Ecosystem Expansion",
           description:
-            "We integrate your existing apps, removing information silos and tedious manual data handoffs between disconnected systems.",
+            "We connect the tools you already use, removing information silos and unnecessary manual workflows between systems that currently don't talk to each other.",
           tag: "Integrations",
         },
         {
-          title: "Smart Microsites & Linkpages",
+          title: "Smart Linkpages & Microsites",
           description:
-            "High-conversion digital catalogs and landing pages instrumented with analytics from day one.",
+            "Linkpages, digital catalogs, and microsites optimized for conversion, with analytics built in from day one.",
           tag: "Conversion",
         },
         {
           title: "Integrated AI Solutions",
           description:
-            "Conversational agents, smart automations, and purpose-built AI models embedded where they drive real ROI.",
+            "Conversational agents, smart automations, and AI models embedded within your tools and internal processes, where they genuinely add value (not just for decoration).",
           tag: "AI Agents",
           isAi: true,
         },
       ],
     },
     reasoningBlock: {
-      badge: "ROI & Efficiency",
+      badge: "Profitability & Efficiency",
       title: "Isn't custom development more expensive?",
-      body: "It is far more expensive to continuously pay subscription fees for generic software that fails your team, and even costlier to lose hundreds of billable hours to manual tasks. Custom software is an asset built once that yields daily compound returns.",
+      body: "It is more expensive to keep paying for generic software licenses that don't fit, and even more costly to keep losing your team's hours on manual tasks that a system could handle on its own. Custom software is paid for once and works for you every day.",
       cta: {
         label: "Request a technical proposal →",
         href: "/contacto",
@@ -215,7 +215,7 @@ const contentData: Record<Locale, ServicePageContent> = {
     finalCta: {
       title: "Ready to build the software your operations truly require?",
       description:
-        "Let's audit your current architecture and design a custom software roadmap with proven business returns.",
+        "We analyze your current architecture and design a custom technology solution with measurable financial impact.",
       ctaPrimary: {
         label: "Request Technical Proposal",
         href: "/contacto",
@@ -241,7 +241,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       badge: "Технологии и Автоматизация · Заказное ПО",
       h1: "Программное обеспечение, нужное вашему бизнесу, а не шаблонные ограничения",
       subheadline:
-        "Типовые решения часто не справляются с реальными задачами. Мы проектируем и разрабатываем кастомные цифровые решения, устраняющие рутину и расширяющие возможности бизнеса.",
+        "Типовые инструменты часто не решают такие задачи. Мы проектируем и разрабатываем кастомные цифровые решения, которые автоматизируют, централизуют и расширяют реальные возможности вашей работы.",
       ctaPrimary: {
         label: "Рассказать о вашем процессе →",
         href: "/contacto",
@@ -265,17 +265,17 @@ const contentData: Record<Locale, ServicePageContent> = {
         {
           title: "Внутренние панели и бэкофис",
           description:
-            "Системы управления задачами, складом, командами и процессами с четкими дашбордами и разграничением прав.",
+            "Системы управления задачами, складом, командами, клиентами и процессами с четкими дашбордами и разграничением прав.",
           tag: "Backoffice",
         },
         {
           title: "Кастомные CRM-системы",
           description:
-            "Внедрение и настройка платформ управления клиентами под ваш цикл продаж со встроенной автоматизацией.",
+            "Внедрение и настройка платформ управления клиентами под ваш реальный цикл продаж, включая автоматизацию и интеграции.",
           tag: "CRM",
         },
         {
-          title: "Интеграция цифровой экосистемы",
+          title: "Расширение цифровой экосистемы",
           description:
             "Объединение используемых инструментов, устранение информационных разрывов и ручного переноса данных.",
           tag: "Интеграции",
@@ -289,14 +289,14 @@ const contentData: Record<Locale, ServicePageContent> = {
         {
           title: "Решения со встроенным ИИ",
           description:
-            "Диалоговые агенты, умная автоматизация и алгоритмы машинного обучения для реальной пользы бизнеса.",
+            "Диалоговые агенты, умная автоматизация и модели ИИ, встроенные в ваши инструменты и внутренние процессы там, где они действительно приносят пользу (а не для галочки).",
           tag: "ИИ-агенты",
           isAi: true,
         },
       ],
     },
     reasoningBlock: {
-      badge: "Окупаемость и Эффективность",
+      badge: "Рентабельность и Эффективность",
       title: "Разве кастомная разработка не дороже?",
       body: "Гораздо дороже годами оплачивать лицензии типового софта, который не решает задачи, и терять часы команды на рутину. Индивидуальное ПО создается один раз и работает на вас ежедневно.",
       cta: {
@@ -305,9 +305,9 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     finalCta: {
-      title: "Готовы создать программное обеспечение для вашего бизнеса?",
+      title: "Готовы создать программное обеспечение, которое действительно нужно вашей компании?",
       description:
-        "Мы проведем аудит текущих процессов и предложим решение с прозрачной бизнес-отдачей.",
+        "Мы анализируем вашу текущую архитектуру и разрабатываем индивидуальное технологическое решение с измеримым финансовым эффектом.",
       ctaPrimary: {
         label: "Запросить предложение",
         href: "/contacto",

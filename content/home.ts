@@ -237,13 +237,6 @@ const contentData: Record<Locale, HomeContent> = {
       },
       items: [
         {
-          client: "Bullpadel Ecuador",
-          pillar: "Tecnología & Automatización",
-          problem: "Hojas de cálculo dispersas y atención comercial manual sin trazabilidad.",
-          solution:
-            "Ecosistema centralizado: backend propio, sincronización automática de catálogo y CRM con agente de IA que gestiona la conversación de venta.",
-        },
-        {
           client: "Sector Retail & Distribución",
           pillar: "E-commerce Inteligente",
           problem: "Carritos abandonados y pedidos que tardaban horas en procesarse.",
@@ -316,7 +309,7 @@ const contentData: Record<Locale, HomeContent> = {
       badge: "B2B Tech Consultancy",
       h1: "Automate your company's growth with Artificial Intelligence",
       subheadline:
-        "We stopped selling \"strategies\". We engineer the system of AI agents, automation, and software that allows your business to operate without friction — scaling without headcount bloat.",
+        "We no longer sell \"strategies\". We build the system of AI agents, automation, and software that makes your business operate without friction — without depending on more people to scale.",
       ctaPrimary: {
         label: "Request Free Tech Diagnostic",
         href: "/contacto",
@@ -327,13 +320,13 @@ const contentData: Record<Locale, HomeContent> = {
       },
     },
     trust: {
-      title: "Battle-tested tech already powering companies like yours.",
+      title: "Technology that already operates within companies like yours.",
       logos: [
         { name: "Next.js", category: "Full-Stack" },
         { name: "Python / AI", category: "Machine Learning" },
         { name: "WhatsApp Business API", category: "Integration" },
         { name: "Shopify / WooCommerce", category: "E-commerce" },
-        { name: "OpenAI / Claude", category: "LLM Engines" },
+        { name: "OpenAI / Claude", category: "LLM Models" },
         { name: "PostgreSQL", category: "Database" },
       ],
     },
@@ -357,7 +350,7 @@ const contentData: Record<Locale, HomeContent> = {
         {
           title: "Hours Wasted on Repetitive Tasks",
           description:
-            "Your team manually performs tasks an AI agent or automated webhook could solve in seconds, 24/7, error-free.",
+            "Your team manually performs tasks an AI agent or automated workflow could solve in seconds, 24/7, error-free.",
           tag: "Manual drag",
         },
       ],
@@ -406,56 +399,56 @@ const contentData: Record<Locale, HomeContent> = {
       steps: [
         {
           number: "01",
-          title: "Initial Discovery",
-          description: "Deep dive into your business model and operational friction.",
+          title: "Initial Meeting",
+          description: "We thoroughly understand your goals and current operations.",
         },
         {
           number: "02",
-          title: "Technical Audit",
-          description: "Pinpointing bottlenecks where time and capital leak.",
+          title: "Audit",
+          description: "Technical diagnostic to find where time and money are being lost.",
         },
         {
           number: "03",
-          title: "Architecture & Strategy",
-          description: "System blueprint and custom technical roadmap.",
+          title: "Strategy",
+          description: "Roadmap and solution architecture (software or automation).",
         },
         {
           number: "04",
-          title: "Execution & Build",
-          description: "Clean development and tailored API integration.",
+          title: "Execution",
+          description: "Development and implementation with technical precision and custom code.",
         },
         {
           number: "05",
-          title: "Production Monitoring",
-          description: "Rigorous stress-testing in live real-world production.",
+          title: "Monitoring",
+          description: "We validate that the system works in production, not just in the demo.",
         },
         {
           number: "06",
-          title: "Results & Scaling",
-          description: "Continuous iteration, analytics, and predictable scale.",
+          title: "Results",
+          description: "Reports, continuous adjustment, and planned scaling.",
         },
       ],
     },
     stats: [
       {
         value: "24/7",
-        label: "Continuous Uptime",
-        description: "Automated advisory and sales round-the-clock without shift breaks.",
+        label: "Continuous Operation",
+        description: "Automated advisory and sales, with no fixed hours.",
       },
       {
         value: "100%",
         label: "Traceability",
-        description: "Zero lost leads due to manual follow-up delays.",
+        description: "Zero leads lost due to lack of follow-up.",
       },
       {
         value: "Ecuador · LatAm",
-        label: "Global Reach",
-        description: "Seamless remote operations and engineering.",
+        label: "Reach",
+        description: "Seamless remote presence and operation.",
       },
       {
         value: "Bespoke",
-        label: "Custom Built",
-        description: "Tailored to your genuine workflows, zero templates.",
+        label: "Customization",
+        description: "Built around your real operation, no templates.",
       },
     ],
     caseStudiesPreview: {
@@ -468,25 +461,18 @@ const contentData: Record<Locale, HomeContent> = {
       },
       items: [
         {
-          client: "Bullpadel Ecuador",
-          pillar: "Technology & Automation",
-          problem: "Fragmented inventory spreadsheets and delayed WhatsApp replies.",
-          solution:
-            "Centralized ecosystem: custom backend, automatic catalog sync, and an AI agent managing sales conversations end-to-end.",
-        },
-        {
-          client: "Retail & Distribution Group",
+          client: "Retail & Distribution Sector",
           pillar: "Smart E-commerce",
-          problem: "High cart abandonment and lengthy order qualification cycles.",
+          problem: "Abandoned carts and orders that took hours to process.",
           solution:
-            "Storefront connected with an intelligent sales assistant automating catalog Q&A and WhatsApp checkouts.",
+            "Store integrated with a conversational agent for live assistance and WhatsApp checkout automation.",
         },
         {
           client: "B2B Corporate Services",
           pillar: "Custom Software",
-          problem: "Information silos between quoting reps and internal invoicing.",
+          problem: "Information silos between commercial quotes and internal invoicing.",
           solution:
-            "Tailored operational CRM with automated pipeline tracking and real-time ERP data sync.",
+            "Custom CRM and operations manager with real-time inventory synchronization.",
         },
       ],
     },
@@ -498,34 +484,34 @@ const contentData: Record<Locale, HomeContent> = {
         {
           question: "What is an AI agent, and how does it differ from a chatbot?",
           answer:
-            "A traditional chatbot replies using rigid script trees and fixed buttons. An AI agent understands conversational nuance, accesses your CRM and live inventories in real time, and can consult, quote, and close deals just like an experienced sales executive.",
+            "A traditional chatbot replies using rigid script trees and fixed buttons. An AI agent understands conversational nuance, accesses your CRM and databases in real time, and can consult, quote, and guide a sale from start to finish, just like an executive from your team.",
         },
         {
           question: "How does Mind integrate with our existing stack?",
           answer:
-            "Mind links seamlessly to your official WhatsApp Business API and routes every interaction into a dedicated CRM. It doesn't disrupt your existing tooling overnight: it deploys gradually where volume is highest.",
+            "Mind links seamlessly to your official WhatsApp Business and routes every interaction into a dedicated CRM. It doesn't disrupt your existing tooling overnight: it deploys gradually, starting with your highest-volume sales channel.",
         },
         {
-          question: "Do you only work in Ecuador?",
+          question: "Do you only work in Quito?",
           answer:
-            "While our engineering hub is in Quito, we work across Ecuador, Peru, and the United States via fully remote, asynchronous pipelines.",
+            "Our headquarters is in Quito, Ecuador, but we work actively with clients in Ecuador, Peru, and the United States thanks to fully remote engineering and consulting processes.",
         },
         {
           question: "Can non-technical teams easily adopt these systems?",
           answer:
-            "Yes, 100%. Hands-on training, interactive playbooks, and continuous onboarding support are part of every deployment.",
+            "Yes, absolutely. An integral part of our service includes training, interactive manuals, and continuous support: we don't just implement code, we educate your team.",
         },
         {
           question: "How quickly do we see results?",
           answer:
-            "Core technical implementations launch within weeks, not quarters. Conversion gains and labor-hour savings compound month after month.",
+            "Initial technical implementation usually takes weeks, not months. The maturation and optimization of results (increased conversions, hours saved) is evaluated and refined month by month.",
         },
       ],
     },
     finalCta: {
       title: "Ready to automate your company's growth?",
       description:
-        "Schedule a free Initial Diagnostic Session. We'll examine your workflows and give you a no-obligation architectural recommendation.",
+        "Schedule a free Initial Diagnostic Session. We'll tell you, with no obligation, whether our system fits what you need.",
       ctaPrimary: {
         label: "Request Diagnostic",
         href: "/contacto",
@@ -547,7 +533,7 @@ const contentData: Record<Locale, HomeContent> = {
       badge: "B2B Технологический Консалтинг",
       h1: "Автоматизируйте рост вашего бизнеса с помощью Искусственного Интеллекта",
       subheadline:
-        "Мы не продаем абстрактные стратегии. Мы создаем систему ИИ-агентов, автоматизации и программного обеспечения, которая позволяет вашему бизнесу масштабироваться без раздувания штата.",
+        "Мы больше не продаем «стратегии». Мы создаем систему ИИ-агентов, автоматизации и программного обеспечения, которая позволяет вашему бизнесу работать без сбоев — и масштабироваться, не завися от увеличения штата.",
       ctaPrimary: {
         label: "Запросить Технологический Аудит",
         href: "/contacto",
@@ -558,7 +544,7 @@ const contentData: Record<Locale, HomeContent> = {
       },
     },
     trust: {
-      title: "Технологии, которые уже работают в передовых компаниях.",
+      title: "Технологии, которые уже работают в таких же компаниях, как ваша.",
       logos: [
         { name: "Next.js", category: "Full-Stack" },
         { name: "Python / AI", category: "Machine Learning" },
@@ -588,7 +574,7 @@ const contentData: Record<Locale, HomeContent> = {
         {
           title: "Рутинная Ручная Работа",
           description:
-            "Сотрудники часами вручную выполняют то, что умный ИИ-агент решает за секунды, 24/7 и без ошибок.",
+            "Сотрудники часами вручную выполняют то, что ИИ-агент или автоматизированный процесс решает за секунды, 24/7 и без ошибок.",
           tag: "Рутинный балласт",
         },
       ],
@@ -637,33 +623,33 @@ const contentData: Record<Locale, HomeContent> = {
       steps: [
         {
           number: "01",
-          title: "Первичный Аудит",
-          description: "Изучаем цели и структуру текущих бизнес-процессов.",
+          title: "Первая Встреча",
+          description: "Подробно изучаем ваши цели и текущую работу компании.",
         },
         {
           number: "02",
-          title: "Диагностика",
-          description: "Находим узкие места, где теряются время и прибыль.",
+          title: "Аудит",
+          description: "Технический диагноз, чтобы найти, где теряются время и деньги.",
         },
         {
           number: "03",
-          title: "Архитектура",
-          description: "Проектируем дорожную карту и технический план системы.",
+          title: "Стратегия",
+          description: "Дорожная карта и архитектура решения (ПО или автоматизация).",
         },
         {
           number: "04",
-          title: "Разработка",
-          description: "Создание и интеграция ПО с максимальной точностью.",
+          title: "Выполнение",
+          description: "Разработка и внедрение с технической точностью и кодом под ваши задачи.",
         },
         {
           number: "05",
-          title: "Запуск и Мониторинг",
-          description: "Тестируем систему в реальной боевой эксплуатации.",
+          title: "Мониторинг",
+          description: "Проверяем, что система работает в реальной эксплуатации, а не только в демо-версии.",
         },
         {
           number: "06",
-          title: "Результаты и Масштаб",
-          description: "Аналитика, постоянная оптимизация и масштабирование.",
+          title: "Результаты",
+          description: "Отчеты, постоянная донастройка и запланированное масштабирование.",
         },
       ],
     },
@@ -671,17 +657,17 @@ const contentData: Record<Locale, HomeContent> = {
       {
         value: "24/7",
         label: "Бесперебойная Работа",
-        description: "Автоматизированные консультации и продажи в любое время суток.",
+        description: "Автоматизированные консультации и продажи без фиксированного графика.",
       },
       {
         value: "100%",
         label: "Прозрачность",
-        description: "Ноль потерянных лидов благодаря сквозной автоматизации.",
+        description: "Ноль потерянных лидов из-за отсутствия сопровождения.",
       },
       {
         value: "Ecuador · LatAm",
         label: "Масштаб",
-        description: "Надежная удаленная работа без географических барьеров.",
+        description: "Присутствие и удаленная работа без препятствий.",
       },
       {
         value: "Кастомно",
@@ -699,25 +685,18 @@ const contentData: Record<Locale, HomeContent> = {
       },
       items: [
         {
-          client: "Bullpadel Ecuador",
-          pillar: "Технологии и Автоматизация",
-          problem: "Разрозненные таблицы и задержки в обработке заказов в мессенджерах.",
-          solution:
-            "Единая экосистема: собственный бэкенд, автоматическая синхронизация каталогов и ИИ-агент продаж в WhatsApp.",
-        },
-        {
           client: "Розничные Сети и Дистрибуция",
           pillar: "Умный E-commerce",
-          problem: "Брошенные корзины и долгое оформление покупок вручную.",
+          problem: "Брошенные корзины и заказы, обработка которых занимала часы.",
           solution:
-            "Интеграция магазина с умным диалоговым агентом для консультаций и быстрого чекаута.",
+            "Интеграция магазина с диалоговым агентом для консультаций в реальном времени и автоматизации оформления заказа через WhatsApp.",
         },
         {
           client: "Корпоративные B2B Услуги",
           pillar: "Заказное ПО",
-          problem: "Информационные барьеры между отделом продаж и бухгалтерией.",
+          problem: "Информационная разобщенность между коммерческими предложениями и внутренним выставлением счетов.",
           solution:
-            "Кастомная CRM с автоматическим формированием коммерческих предложений и статусов.",
+            "Кастомная CRM и система управления операциями с синхронизацией склада в реальном времени.",
         },
       ],
     },
@@ -737,26 +716,26 @@ const contentData: Record<Locale, HomeContent> = {
             "Mind подключается к официальному WhatsApp Business и аккумулирует диалоги в CRM. Внедрение проходит плавно, начиная с наиболее нагруженных каналов.",
         },
         {
-          question: "Работаете ли вы за пределами Эквадора?",
+          question: "Вы работаете только в Кито?",
           answer:
-            "Штаб-квартира находится в Кито, но мы успешно сотрудничаем с клиентами в Эквадоре, Перу и США в 100% удаленном формате.",
+            "Наш главный офис находится в Кито, Эквадор, но мы активно работаем с клиентами в Эквадоре, Перу и США благодаря на 100% удаленным процессам разработки и консалтинга.",
         },
         {
           question: "Сможет ли команда без технического опыта работать с системой?",
           answer:
-            "Да, абсолютно. Мы проводим обучение, предоставляем инструкции и сопровождаем сотрудников на каждом этапе запуска.",
+            "Да, абсолютно. Неотъемлемая часть нашей услуги включает обучение, интерактивные инструкции и постоянное сопровождение: мы не просто внедряем код, мы обучаем вашу команду.",
         },
         {
           question: "Когда будут первые результаты?",
           answer:
-            "Технический запуск занимает недели, а не месяцы. Рост показателей конверсии и экономия времени ощущаются уже в первый месяц работы.",
+            "Первичное техническое внедрение обычно занимает недели, а не месяцы. Рост результатов (увеличение конверсий, сэкономленные часы) оценивается и дорабатывается каждый месяц.",
         },
       ],
     },
     finalCta: {
       title: "Готовы автоматизировать рост вашей компании?",
       description:
-        "Заполните заявку на бесплатную первичную консультацию. Мы открыто подскажем, подходит ли наше решение для вашей специфики.",
+        "Заполните заявку и запишитесь на первичную диагностическую сессию. Мы без обязательств скажем, подходит ли наше решение для того, что вам нужно.",
       ctaPrimary: {
         label: "Запросить Аудит",
         href: "/contacto",

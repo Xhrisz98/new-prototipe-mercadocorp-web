@@ -5,6 +5,14 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useTheme } from "@/components/theme/ThemeProvider";
 
+// Detección síncrona en el primer render vía matchMedia — evita el frame en blanco
+// que dejaba el patrón useState(false) + mounted + useEffect. En SSR (sin `window`)
+// asume desktop; el cliente corrige de inmediato en la inicialización de useState.
+function getIsMobileSync(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(max-width: 767px)").matches;
+}
+
 // Hook ligero para tracking de scroll con desacoplamiento suave (Lerp)
 function useScrollProgress() {
   const scrollRef = useRef(0);
@@ -42,10 +50,11 @@ function NeuralCoreScene({ isDark }: { isDark: boolean }) {
     () => (isDark ? new THREE.Color("#3F5FFF") : new THREE.Color("#0022D2")),
     [isDark]
   );
-  const brandAccent = useMemo(
-    () => (isDark ? new THREE.Color("#5C78FF") : new THREE.Color("#3F5FFF")),
-    [isDark]
-  );
+  // En modo oscuro brandAccent comparte el mismo token que brandPrimary (brand.primaryDark,
+  // #3F5FFF) — la separación visual de las piezas secundarias (anillo 1, facetas impares)
+  // se logra con opacidad reducida (~65%) en vez de un segundo color, para no introducir
+  // un hex fuera de lib/design-tokens.ts. El núcleo (brandPrimary, wireframe) queda a 100%.
+  const brandAccent = useMemo(() => new THREE.Color("#3F5FFF"), []);
 
   // 1. Facetas cristalinas exteriores (Deconstructibles con el scroll)
   const facetData = useMemo(() => {
@@ -234,7 +243,7 @@ function NeuralCoreScene({ isDark }: { isDark: boolean }) {
           emissive={brandAccent}
           emissiveIntensity={0.4}
           transparent
-          opacity={isDark ? 0.6 : 0.35}
+          opacity={isDark ? 0.65 : 0.35}
         />
       </mesh>
 
@@ -259,7 +268,7 @@ function NeuralCoreScene({ isDark }: { isDark: boolean }) {
               roughness={0.12}
               metalness={0.85}
               transparent
-              opacity={isDark ? (idx % 2 === 0 ? 0.32 : 0.2) : 0.12}
+              opacity={isDark ? (idx % 2 === 0 ? 0.32 : 0.65) : 0.12}
               wireframe={idx % 2 === 0}
             />
           </mesh>
@@ -313,24 +322,17 @@ function StaticMobileFallback({ isDark }: { isDark: boolean }) {
 
 export function KineticNeuralCore() {
   const { theme } = useTheme();
-  const [isMobile, setIsMobile] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean>(getIsMobileSync);
 
   useEffect(() => {
-    setMounted(true);
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const mql = window.matchMedia("(max-width: 767px)");
+    const handleChange = () => setIsMobile(mql.matches);
+    handleChange();
+    mql.addEventListener("change", handleChange);
+    return () => mql.removeEventListener("change", handleChange);
   }, []);
 
   const isDark = theme === "dark";
-
-  if (!mounted) {
-    return <div className="w-full h-full min-h-[500px]" />;
-  }
 
   // En pantallas móviles, entregar el fallback estático ligero (< 768px) conforme a AGENTS.md
   if (isMobile) {

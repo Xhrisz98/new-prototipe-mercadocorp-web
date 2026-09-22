@@ -89,13 +89,13 @@ const contentData: Record<Locale, ServicePageContent> = {
     seo: {
       title: "End-to-End Corporate Event Management | MercadoCorp",
       description:
-        "Conceptualization, budgeting, vendor curation, and flawless execution for corporate events. From idea to unforgettable experience, zero hassle for your team.",
+        "Conceptualization, budgeting, vendors, and complete execution for your corporate event. From idea to a memorable experience, without you managing anything.",
     },
     hero: {
-      badge: "Digital Marketing · Corporate Event Management",
-      h1: "Your corporate event, without you having to manage a single detail",
+      badge: "Digital Marketing · Comprehensive Event Management",
+      h1: "Your event, without you having to manage anything",
       subheadline:
-        "We handle every single piece to transform your concept into an unforgettable executive experience — from initial storytelling to the final confirmed supplier.",
+        "We take care of absolutely everything to turn your idea into a memorable experience — from conceptualization to the last confirmed vendor.",
       ctaPrimary: {
         label: "Share your event idea →",
         href: "/contacto",
@@ -106,49 +106,49 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     features: {
-      sectionTitle: "Comprehensive 360° Event Execution",
+      sectionTitle: "Comprehensive Event Coverage and Execution",
       sectionSubtitle:
-        "Flawless logistics, refined aesthetics, and seamless execution so your team can focus on relationships.",
+        "360° executive management to guarantee punctuality, sophistication, and zero worries for your team.",
       items: [
         {
-          title: "Creative Conceptualization & Experience Design",
+          title: "Initial Conceptualization and Experience Design",
           description:
-            "Storyline development, spatial ambiance, immersive branding, and attendee journey mapping designed to make a statement.",
+            "Design of the theme, visual narrative, brand ambiance, and guest flows to create a memorable experience.",
           tag: "Concept & Design",
         },
         {
-          title: "Rigorous End-to-End Budget Control",
+          title: "Financial and Budget Control from Start to Finish",
           description:
-            "Transparent financial planning, audited vendor bids, and itemized forecasting with zero surprise expenses.",
-          tag: "Financial Control",
+            "Transparent financial planning, comparative quoting, and optimization of every line item with no unexpected overruns.",
+          tag: "Budget 360°",
         },
         {
-          title: "Top-Tier Vendor Curation & Contracts",
+          title: "Negotiation and Contracting of Qualified Vendors",
           description:
-            "Elite venues, gourmet catering, cutting-edge AV technology, lighting, security, and bilingual support staff.",
-          tag: "Vendors & AV",
+            "Premium venues, high-end catering, audiovisual equipment, decoration, security, and support staff.",
+          tag: "Vendors",
         },
         {
-          title: "On-Site Production & Live Protocol Direction",
+          title: "Coordination and Full Direction on Event Day",
           description:
-            "Minute-by-minute stage management, VIP guest hospitality, schedule pacing, and proactive contingency handling.",
+            "Minute-by-minute supervision, protocol, immediate resolution of contingencies, and on-site time management.",
           tag: "Live Direction",
         },
       ],
     },
     reasoningBlock: {
-      badge: "Digital + Physical Synergy",
-      title: "An event that fuels your digital authority for months",
-      body: "Unlike traditional legacy event production companies, we integrate offline gatherings with your digital growth strategy: real-time content capture, executive interviews, and PR distribution that compounds the event's reach long after attendees leave.",
+      badge: "Digital + In-Person Synergy",
+      title: "An event that also fuels your digital presence",
+      body: "Unlike a traditional event production company, we integrate the offline experience with your digital strategy: content, coverage, and public relations that extend the event's impact beyond the day it happens.",
       cta: {
-        label: "Request custom event proposal →",
+        label: "Request an event proposal →",
         href: "/contacto",
       },
     },
     finalCta: {
-      title: "Planning an upcoming corporate gathering or summit?",
+      title: "Do you have a corporate event in mind?",
       description:
-        "Let us conceptualize and deliver an executive experience that commands respect from partners, clients, and industry stakeholders.",
+        "We design, produce, and coordinate experiences that elevate your brand's perception among clients, partners, and investors.",
       ctaPrimary: {
         label: "Request Event Proposal",
         href: "/contacto",
@@ -168,13 +168,13 @@ const contentData: Record<Locale, ServicePageContent> = {
     seo: {
       title: "Комплексная организация корпоративных мероприятий | MercadoCorp",
       description:
-        "Концепция, смета, работа с подрядчиками и проведение корпоративных событий. От идеи до безупречного результата без хлопот для вашей команды.",
+        "Концепция, смета, подрядчики и полное проведение вашего корпоративного мероприятия. От идеи до незабываемого впечатления — без необходимости управлять чем-либо.",
     },
     hero: {
-      badge: "Цифровой Маркетинг · Корпоративные События",
-      h1: "Ваше мероприятие без необходимости управлять деталями",
+      badge: "Цифровой Маркетинг · Комплексная Организация Мероприятий",
+      h1: "Ваше мероприятие — без необходимости управлять хоть чем-то",
       subheadline:
-        "Мы берем на себя абсолютно все задачи, чтобы превратить идею в незабываемый опыт — от сценарной концепции до координации каждого подрядчика.",
+        "Мы берем на себя абсолютно все, чтобы превратить вашу идею в незабываемое впечатление — от концепции до последнего подтвержденного подрядчика.",
       ctaPrimary: {
         label: "Поделиться идеей события →",
         href: "/contacto",
@@ -185,49 +185,49 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     features: {
-      sectionTitle: "Комплексная организация событий 360°",
+      sectionTitle: "Полное сопровождение и проведение мероприятий",
       sectionSubtitle:
-        "Безупречная логистика, статусная атмосфера и полное спокойствие для вашей управленческой команды.",
+        "Исполнительное управление 360° для обеспечения пунктуальности, безупречного стиля и полного спокойствия для вашей команды.",
       items: [
         {
-          title: "Концепция и сценарий впечатлений",
+          title: "Начальная концепция и дизайн впечатлений",
           description:
-            "Тематика события, пространственный брендинг, интерактивные зоны и режиссура внимания гостей.",
+            "Разработка тематики, визуальной концепции, оформления в стиле бренда и маршрутов гостей для создания незабываемого впечатления.",
           tag: "Концепт и Дизайн",
         },
         {
-          title: "Прозрачный финансовый и сметный контроль",
+          title: "Финансовый и сметный контроль от начала до конца",
           description:
-            "Детальное бюджетирование, тендерный выбор подрядчиков и оптимизация расходов без непредвиденных переплат.",
-          tag: "Бюджетирование",
+            "Прозрачное финансовое планирование, сравнительные коммерческие предложения и оптимизация каждой статьи расходов без непредвиденных переплат.",
+          tag: "Бюджет 360°",
         },
         {
-          title: "Подбор и контрактация надежных подрядчиков",
+          title: "Переговоры и контрактация квалифицированных подрядчиков",
           description:
-            "Статусные площадки, кейтеринг высокого класса, мультимедийное оборудование, декор и персонал.",
-          tag: "Подрядчики и Оборудование",
+            "Площадки премиум-класса, кейтеринг высокого уровня, аудиовизуальное оборудование, декор, охрана и вспомогательный персонал.",
+          tag: "Подрядчики",
         },
         {
-          title: "Координация и живая режиссура в день события",
+          title: "Координация и полное управление в день мероприятия",
           description:
-            "Поминутный контроль тайминга, протокол встречи VIP-гостей и оперативное решение любых ситуаций.",
+            "Поминутный контроль, протокол, немедленное решение внештатных ситуаций и контроль тайминга на месте.",
           tag: "Живое Управление",
         },
       ],
     },
     reasoningBlock: {
       badge: "Синергия Офлайн + Онлайн",
-      title: "Событие, работающее на ваше цифровое присутствие",
-      body: "В отличие от традиционных event-агентств, мы связываем оффлайн-мероприятие с цифровой стратегией: качественный медиаконтент, интервью с топ-менеджерами и PR-материалы, продлевающие эффект на месяцы вперед.",
+      title: "Событие, которое также работает на ваше цифровое присутствие",
+      body: "В отличие от традиционного event-агентства, мы связываем офлайн-опыт с вашей цифровой стратегией: контент, освещение мероприятия и PR-материалы, продлевающие эффект события за пределы дня, когда оно проходит.",
       cta: {
         label: "Запросить предложение по мероприятию →",
         href: "/contacto",
       },
     },
     finalCta: {
-      title: "Планируете статусное корпоративное событие?",
+      title: "У вас на примете корпоративное мероприятие?",
       description:
-        "Доверьте нам организацию от концепции до финала, укрепив деловые отношения с партнерами и клиентами.",
+        "Мы разрабатываем, производим и координируем впечатления, повышающие восприятие вашего бренда среди клиентов, партнеров и инвесторов.",
       ctaPrimary: {
         label: "Запросить организацию события",
         href: "/contacto",

@@ -102,7 +102,7 @@ const contentData: Record<Locale, ServicePageContent> = {
     seo: {
       title: "E-commerce with Artificial Intelligence and Automation | MercadoCorp",
       description:
-        "We build and scale online stores with integrated AI: sales agents, order automation, and commercial analytics. Sell 24/7 with zero friction.",
+        "We build and scale online stores with integrated AI: sales agents, order automation, and commercial analytics. Sell 24/7, with less friction.",
     },
     hero: {
       badge: "Technology & Automation · Intelligent E-commerce",
@@ -124,57 +124,57 @@ const contentData: Record<Locale, ServicePageContent> = {
         "Conversion-focused architecture, automated recovery, and seamless operational integrations.",
       items: [
         {
-          title: "Conversion-Centric UX/UI & Architecture",
+          title: "Conversion-Focused UX/UI Design & Development",
           description:
-            "Design tailored for checkout conversion, frictionless product catalogs, localized gateways, and rock-solid technical setup.",
+            "UX/UI architecture designed to sell, product catalog, payment gateways, and complete technical setup — not a generic store template.",
           tag: "UX/UI & CRO",
         },
         {
           title: "Integrated Mind AI Sales Agent",
           description:
-            "An AI assistant that proactively answers questions, recommends items, and closes transactions live on your storefront 24/7.",
+            "An AI assistant that engages with, advises, and closes sales in real time right inside your own store, without depending on a human being connected.",
           tag: "Mind · AI Agent",
           isAi: true,
         },
         {
-          title: "End-to-End Workflow Automation",
+          title: "Process Automation",
           description:
-            "Order dispatch triggers, abandoned cart recovery funnels, automated notifications, and retention workflows with zero human intervention.",
+            "Order management, abandoned cart follow-up, automatic notifications, and repurchase workflows — all running without manual intervention.",
           tag: "Automation",
         },
         {
-          title: "High-Intent Traffic & Growth Strategy",
+          title: "Traffic & Conversion Strategy",
           description:
-            "Targeted Meta Ads and Google Ads focused on purchase intent, audience segmentation, and profitable ROAS.",
+            "Meta Ads and Google Ads campaigns focused on sales, segmented by behavior and real purchase intent.",
           tag: "Paid Traffic",
         },
         {
           title: "Commercial Analytics & Insights",
           description:
-            "Actionable dashboards tracking top SKUs, customer journey drops, Lifetime Value (LTV), and real-time conversion levers.",
+            "Dashboard of key metrics: top-selling products, customer behavior, and continuous optimization recommendations.",
           tag: "Data & BI",
         },
         {
-          title: "Enterprise ERP & Logistics Integrations",
+          title: "Integrations with Leading Market Platforms",
           description:
-            "Direct connections with leading ecommerce platforms, inventory management tools, and billing software.",
+            "We connect your store with the ecommerce platforms and ERPs most used in the industry, based on what your operation already uses.",
           tag: "ERP Integrations",
         },
       ],
     },
     reasoningBlock: {
       badge: "Cart Recovery",
-      title: "Every unrecovered abandoned cart is revenue you already paid to acquire",
-      body: "Most online stores abandon 60-70% of initiated checkouts. Automated remarketing and instant conversational follow-up is not a luxury — it is reclaiming marketing budget you already spent.",
+      title: "Every unrecovered abandoned cart is a sale you already paid to attract",
+      body: "Most online stores lose between 60-70% of their carts. Automating follow-up is not a luxury — it's recovering marketing budget you already spent.",
       cta: {
         label: "Audit my current store →",
         href: "/auditoria-digital",
       },
     },
     finalCta: {
-      title: "Ready to accelerate your ecommerce revenue?",
+      title: "Ready to multiply your online store's sales?",
       description:
-        "We build scalable ecommerce systems powered by AI agents, frictionless checkouts, and automated retention.",
+        "We design e-commerce systems that operate 24/7 with intelligent agents, less friction, and a higher average order value.",
       ctaPrimary: {
         label: "Schedule Store Diagnostic",
         href: "/contacto",
@@ -194,7 +194,7 @@ const contentData: Record<Locale, ServicePageContent> = {
     seo: {
       title: "E-commerce с искусственным интеллектом и автоматизацией | MercadoCorp",
       description:
-        "Создаем и масштабируем интернет-магазины с ИИ: встроенный продавец, автоматизация заказов и коммерческая аналитика. Продажи 24/7 без трения.",
+        "Создаем и масштабируем интернет-магазины с ИИ: встроенный продавец, автоматизация заказов и коммерческая аналитика. Продажи 24/7, с меньшим трением.",
     },
     hero: {
       badge: "Технологии и Автоматизация · Умный E-commerce",
@@ -243,13 +243,13 @@ const contentData: Record<Locale, ServicePageContent> = {
         {
           title: "Коммерческая аналитика и метрики",
           description:
-            "Дашборды ключевых показателей: маржинальные товары, поведение покупателей и точки роста конверсии.",
+            "Дашборды ключевых показателей: самые продаваемые товары, поведение покупателей и рекомендации по постоянной оптимизации.",
           tag: "Data & BI",
         },
         {
-          title: "Интеграция с ведущими платформами и ERP",
+          title: "Интеграции с ведущими платформами рынка",
           description:
-            "Синхронизация магазина с 1С/ERP, складскими системами и ведущими сервисами доставки.",
+            "Подключаем ваш магазин к самым распространенным в отрасли платформам электронной коммерции и ERP-системам, в зависимости от того, что уже использует ваш бизнес.",
           tag: "Интеграции ERP",
         },
       ],

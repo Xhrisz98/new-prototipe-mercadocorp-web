@@ -43,7 +43,7 @@ export default function EcommercePage() {
           imageSrc="/images/ecommerce-ai-funnel.jpg"
           alt="Embudo de E-commerce y Recuperación de Carritos con IA"
           badge="Flujo de Conversión & Retención"
-          badgeVariant="ai"
+          badgeVariant="brand"
           title="Recuperación Automática de Carritos y Analítica en Tiempo Real"
           subtitle="Secuencias automatizadas por WhatsApp y remarketing inteligente que rescatan hasta el 30% de compras no finalizadas."
           caption="Panel analítico de e-commerce con diagrama de flujo automatizado de recuperación de pedidos."

@@ -105,9 +105,9 @@ const contentData: Record<Locale, ServicePageContent> = {
     },
     hero: {
       badge: "Strategic Diagnosis · Digital Audit",
-      h1: "Before investing another dollar in marketing, know exactly where you stand",
+      h1: "Before investing more in marketing, know exactly where you stand",
       subheadline:
-        "Many companies pour capital into campaigns without knowing what actually produces revenue and what drains their budget. We deliver an honest, data-backed diagnostic with prioritized actions — never endless lists of unsolvable issues.",
+        "Many companies spend on campaigns and content without knowing what generates results and what is draining their budget. We give you an honest, data-driven diagnostic with prioritized actions — not a list of problems with no way out.",
       ctaPrimary: {
         label: "Request my Digital Audit →",
         href: "/contacto",
@@ -125,37 +125,37 @@ const contentData: Record<Locale, ServicePageContent> = {
         {
           title: "Website UX & Conversion Rate Audit",
           description:
-            "Page load speeds, mobile responsiveness, navigation clarity, call-to-action friction, and actual checkout efficiency.",
+            "Page load speed, mobile user experience, navigation architecture, call-to-action effectiveness, and actual conversion rate.",
           tag: "Web & CRO",
         },
         {
           title: "Technical SEO & Organic Visibility",
           description:
-            "Search console health, high-intent keyword rankings, indexation errors, backlink equity, and competitor keyword gaps.",
+            "Organic positioning in Google, transactional keyword analysis, technical errors, and gaps versus the competition.",
           tag: "Technical SEO",
         },
         {
-          title: "Social Channels & Content Audit",
+          title: "Social Channels & Community Audit",
           description:
-            "Brand coherence, post traction, engagement velocity, and qualified executive reach across relevant platforms.",
+            "Brand consistency, actual post performance, genuine engagement, and qualified B2B community growth.",
           tag: "Social Media",
         },
         {
-          title: "Paid Media & Ads Efficiency Audit",
+          title: "Paid Media & Ads Audit",
           description:
-            "Account architecture in Google and Meta Ads, CPA drift, conversion attribution leaks, and budget allocation waste.",
+            "Account structure in Meta and Google Ads, cost per acquisition (CPA), return on ad spend, and budget leaks.",
           tag: "Paid Media",
         },
         {
           title: "Competitive Market Benchmarking",
           description:
-            "Direct comparison against your top 3 industry rivals in digital footprint, search share, and messaging authority.",
+            "Comparison of positioning, search volume, and digital maturity against your top 3 industry competitors.",
           tag: "Benchmarking",
         },
         {
           title: "Executive Report & 90-Day Roadmap",
           description:
-            "Clear C-level report classifying opportunities by business impact and implementation effort, with actionable milestones.",
+            "Executive document with findings classified by impact and effort, with concrete steps to fix issues and accelerate results.",
           tag: "Roadmap",
         },
       ],
@@ -163,16 +163,16 @@ const contentData: Record<Locale, ServicePageContent> = {
     reasoningBlock: {
       badge: "Unbiased Advisory",
       title: "Not sure if your bottleneck is marketing or technology? Start here.",
-      body: "Our audit assesses both fronts: if leads are rotting due to lack of automation or poor CRM response, we route you to Technology. If the issue is qualified demand generation, we focus on Marketing. Zero agenda, pure operational clarity.",
+      body: "The audit covers both fronts: if leads are cooling off due to lack of automation, we'll tell you and route you to Technology. If the issue is visibility or content, we stay within Marketing. No bias toward 'selling you what we already offer'.",
       cta: {
         label: "Get my objective diagnostic →",
         href: "/contacto",
       },
     },
     finalCta: {
-      title: "Ready to eliminate wasted spend and unlock genuine digital growth?",
+      title: "Ready to know for certain where to optimize your digital investment?",
       description:
-        "Request your complimentary diagnostic and receive an executive 90-day action plan tailored to your business.",
+        "Request your free technical and commercial audit and receive a prioritized roadmap with measurable return.",
       ctaPrimary: {
         label: "Request Free Audit",
         href: "/contacto",
@@ -196,9 +196,9 @@ const contentData: Record<Locale, ServicePageContent> = {
     },
     hero: {
       badge: "Стратегическая Диагностика · Цифровой Аудит",
-      h1: "Прежде чем инвестировать в маркетинг, узнайте реальное положение дел",
+      h1: "Прежде чем вкладывать больше в маркетинг, узнайте реальное положение дел",
       subheadline:
-        "Многие компании тратят бюджет на рекламу, не понимая, что приносит прибыль, а что сжигает деньги. Мы даем честный анализ на основе данных с четкими приоритетами действий.",
+        "Многие компании тратят деньги на кампании и контент, не понимая, что приносит результат, а что сжигает бюджет. Мы даем честный анализ на основе данных с приоритизированными действиями — а не список проблем без выхода.",
       ctaPrimary: {
         label: "Запросить цифровой аудит →",
         href: "/contacto",
@@ -226,27 +226,27 @@ const contentData: Record<Locale, ServicePageContent> = {
           tag: "SEO-аудит",
         },
         {
-          title: "Аудит соцсетей и вовлеченности",
+          title: "Аудит соцсетей и сообщества",
           description:
-            "Целостность бренда, охваты публикаций, качество аудитории и реальная отдача от контента.",
+            "Целостность бренда, реальная эффективность публикаций, искренняя вовлеченность и квалифицированный рост B2B-сообщества.",
           tag: "Соцсети",
         },
         {
           title: "Аудит контекстной и таргетированной рекламы",
           description:
-            "Структура рекламных кабинетов Google/Meta, стоимость лида (CPA), сквозная аналитика и слив бюджета.",
+            "Структура рекламных кабинетов Meta и Google Ads, стоимость привлечения (CPA), окупаемость рекламных расходов и слив бюджета.",
           tag: "Платный трафик",
         },
         {
           title: "Конкурентный анализ ниши",
           description:
-            "Сравнение видимости, маркетинговых механик и цифровой зрелости с 3 главными конкурентами в секторе.",
+            "Сравнение позиционирования, объема поисковых запросов и цифровой зрелости с 3 главными конкурентами в вашем секторе.",
           tag: "Бенчмаркинг",
         },
         {
           title: "Итоговый отчет и дорожная карта на 90 дней",
           description:
-            "Презентация для руководства с приоритизацией задач по влиянию на прибыль и понятными шагами внедрения.",
+            "Документ для руководства с результатами, ранжированными по влиянию и трудозатратам, и конкретными шагами для исправления ситуации и ускорения результатов.",
           tag: "План на 90 дней",
         },
       ],
@@ -254,16 +254,16 @@ const contentData: Record<Locale, ServicePageContent> = {
     reasoningBlock: {
       badge: "Без Скрытых Продаж",
       title: "Не знаете, где сбой — в маркетинге или в технологиях? Начните отсюда.",
-      body: "Аудит исследует оба направления: если лиды теряются из-за отсутствия CRM и автоматизации, мы честно покажем это и подключим блок Технологий. Если дело в трафике — оптимизируем Маркетинг. Без навязывания лишних услуг.",
+      body: "Аудит охватывает оба направления: если проблема в том, что лиды остывают из-за отсутствия автоматизации, мы честно скажем об этом и направим вас в блок Технологий. Если проблема в видимости или контенте, продолжаем работу в Маркетинге. Без уклона в сторону «продать то, что мы и так предлагаем».",
       cta: {
         label: "Получить честный аудит →",
         href: "/contacto",
       },
     },
     finalCta: {
-      title: "Готовы устранить утечки бюджета и ускорить рост?",
+      title: "Готовы точно узнать, где оптимизировать ваши цифровые инвестиции?",
       description:
-        "Запросите диагностику и получите приоритизированную дорожную карту с измеримым бизнес-результатом.",
+        "Запросите бесплатный технический и коммерческий аудит и получите приоритизированную дорожную карту с измеримой отдачей.",
       ctaPrimary: {
         label: "Запросить бесплатный аудит",
         href: "/contacto",

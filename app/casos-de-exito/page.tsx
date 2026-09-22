@@ -9,7 +9,7 @@ import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { Badge } from "@/components/ui/Badge";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getCasosDeExitoContent } from "@/content/casos-de-exito";
-import { Building, ShieldCheck, CheckCircle2, ArrowRight } from "lucide-react";
+import { Building, ShieldCheck, CheckCircle2, ArrowRight, Hourglass } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export default function CasosDeExitoPage() {
@@ -68,6 +68,20 @@ export default function CasosDeExitoPage() {
               </div>
             </div>
 
+            {content.cases.length === 0 ? (
+              <div className="flex flex-col items-center text-center gap-3 py-16 px-6 rounded-3xl border border-dashed border-[var(--color-border)]">
+                <Hourglass className="w-6 h-6 text-[var(--color-text-muted)]" />
+                <h3
+                  className="text-lg sm:text-xl font-medium tracking-tight text-[var(--color-text)]"
+                  style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
+                >
+                  {content.emptyState.title}
+                </h3>
+                <p className="text-sm text-[var(--color-text-muted)] max-w-md leading-relaxed">
+                  {content.emptyState.body}
+                </p>
+              </div>
+            ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {content.cases.map((caso) => (
                 <div
@@ -132,6 +146,7 @@ export default function CasosDeExitoPage() {
                 </div>
               ))}
             </div>
+            )}
           </div>
         </section>
 

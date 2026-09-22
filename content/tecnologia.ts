@@ -148,13 +148,13 @@ const contentData: Record<Locale, TecnologiaContent> = {
     seo: {
       title: "Automation, AI Agents & Custom Software | MercadoCorp",
       description:
-        "AI agents, process automation, bespoke CRMs, and custom software for companies in Ecuador and LatAm. Eliminate manual grunt work from your operations.",
+        "AI agents, process automation, custom CRMs, and bespoke software for companies in Ecuador. Discover how to eliminate manual work from your operations.",
     },
     hero: {
       badge: "Pillar 01 — Technology & Automation",
       h1: "The software, agents, and automation your business needs to operate friction-free",
       subheadline:
-        "We don't sell generic software licenses. We engineer the exact technological systems your operations require — connecting seamlessly with your real team.",
+        "We don't sell generic tools. We design the specific technological system your operation needs — and we connect it with your real team, not with a user manual.",
       ctaPrimary: {
         label: "Free Tech Diagnostic",
         href: "/contacto",
@@ -169,7 +169,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           number: "01",
           title: "Mind — CRM + AI Agent",
           description:
-            "A proprietary CRM featuring a 24/7 WhatsApp AI sales agent trained on your business knowledge to assist, quote, and close leads autonomously.",
+            "A CRM with a WhatsApp sales agent available 24/7, trained on your business knowledge to assist, quote, and close deals tirelessly.",
           href: "/mind",
           ctaLabel: "Explore Mind →",
           badge: "Flagship CRM + AI",
@@ -179,7 +179,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           number: "02",
           title: "Digital Tools & Applications",
           description:
-            "Bespoke software: internal portals, admin dashboards, custom CRMs, and API integrations that eliminate data silos.",
+            "Custom software: internal apps, management tools, custom CRMs, and ecosystem integrations that eliminate information silos.",
           href: "/aplicaciones-herramientas-digitales",
           ctaLabel: "View service →",
           badge: "Custom Software",
@@ -188,7 +188,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           number: "03",
           title: "Smart E-commerce",
           description:
-            "Online storefronts amplified with AI sales assistance and automated order recovery that sell 24/7 with zero checkout drag.",
+            "Online stores powered by AI and automation that sell around the clock with less friction and automatically recovered carts.",
           href: "/ecommerce-inteligente",
           ctaLabel: "View service →",
           badge: "Autonomous Commerce",
@@ -208,19 +208,19 @@ const contentData: Record<Locale, TecnologiaContent> = {
         {
           question: "Do I need to replace all my current tools?",
           answer:
-            "No. Automation is architected to connect with your existing toolchain (WhatsApp, email, spreadsheets, ERPs) and replace only the points of friction.",
+            "No. Automation is designed to integrate with what you already use (WhatsApp, email, spreadsheets, existing CRMs) and to replace only what creates friction or duplicated work.",
         },
         {
           question: "Is this only for enterprise-scale businesses?",
           answer:
-            "No. Our bespoke modular approach allows us to solve a single high-impact bottleneck first (such as automated WhatsApp sales) and scale incrementally.",
+            "No. The custom modular design lets you start with a single priority process (for example, service and lead qualification via WhatsApp) and scale in controlled phases.",
         },
       ],
     },
     finalCta: {
       title: "Ready to streamline and automate your business operations?",
       description:
-        "Schedule an initial technical diagnostic with our engineering team — zero fluff, actionable system architecture.",
+        "We analyze your current workflow at no cost and hand you a clear technical architecture recommendation.",
       ctaPrimary: {
         label: "Schedule Tech Diagnostic",
         href: "/contacto",
@@ -242,13 +242,13 @@ const contentData: Record<Locale, TecnologiaContent> = {
     seo: {
       title: "Автоматизация, ИИ-Агенты и Заказное ПО | MercadoCorp",
       description:
-        "ИИ-агенты, сквозная автоматизация процессов, кастомные CRM и заказное ПО для компаний. Устраните ручную рутину из вашего бизнеса.",
+        "ИИ-агенты, автоматизация процессов, кастомные CRM и заказное ПО для компаний в Эквадоре. Узнайте, как устранить ручной труд из вашей работы.",
     },
     hero: {
       badge: "Столп 01 — Технологии и Автоматизация",
       h1: "Программное обеспечение, агенты и автоматизация для работы компании без трения",
       subheadline:
-        "Мы не продаем шаблонные решения. Мы проектируем индивидуальную технологическую систему под ваши реальные бизнес-процессы.",
+        "Мы не продаем шаблонные инструменты. Мы разрабатываем конкретную технологическую систему, которая нужна вашей компании, — и связываем ее с вашей реальной командой, а не с инструкцией пользователя.",
       ctaPrimary: {
         label: "Бесплатный Технологический Аудит",
         href: "/contacto",
@@ -263,7 +263,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           number: "01",
           title: "Mind — CRM + ИИ-Агент",
           description:
-            "CRM с диалоговым ИИ-агентом в WhatsApp, доступным 24/7 и обученным на специфике вашего бизнеса для консультаций и закрытия сделок.",
+            "CRM с ИИ-агентом продаж в WhatsApp, доступным 24/7, обученным на знаниях вашего бизнеса, чтобы обслуживать, консультировать по ценам и закрывать сделки без устали.",
           href: "/mind",
           ctaLabel: "Узнать о Mind →",
           badge: "Флагман CRM + ИИ",
@@ -273,7 +273,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           number: "02",
           title: "Приложения и Цифровые Инструменты",
           description:
-            "Заказная разработка: внутренние панели, дашборды, кастомные CRM и интеграции, устраняющие изоляцию данных.",
+            "Заказное ПО: внутренние приложения, системы управления, кастомные CRM и экосистемные интеграции, устраняющие изоляцию данных.",
           href: "/aplicaciones-herramientas-digitales",
           ctaLabel: "Подробнее об услуге →",
           badge: "Заказное ПО",
@@ -282,7 +282,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           number: "03",
           title: "Умный E-commerce",
           description:
-            "Интернет-магазины с ИИ-ассистентами и автоматической обработкой заказов, продающие круглосуточно без задержек.",
+            "Интернет-магазины на базе ИИ и автоматизации, продающие круглосуточно с меньшим трением и автоматическим возвратом брошенных корзин.",
           href: "/ecommerce-inteligente",
           ctaLabel: "Подробнее об услуге →",
           badge: "Автономные Продажи",
@@ -292,8 +292,8 @@ const contentData: Record<Locale, TecnologiaContent> = {
     philosophyBlock: {
       title: "Прежде чем тратить на привлечение клиентов, убедитесь, что можете обслужить каждого",
       description:
-        "Успешная реклама бесполезна, если 30% лидов теряются из-за несвоевременного ответа. Сначала мы настраиваем двигатель — CRM, автоматизацию, ИИ-агентов — чтобы каждый вложенный рубль приносил максимальный доход.",
-      keyTakeaway: "Надежная техническая база многократно увеличивает отдачу от маркетинга.",
+        "Успешная реклама бесполезна, если 30% лидов теряются из-за несвоевременного ответа. Сначала мы настраиваем двигатель — CRM, автоматизацию, ИИ-агентов — чтобы каждый доллар, вложенный позже в маркетинг, работал на реальную систему, которая его капитализирует.",
+      keyTakeaway: "Эффективная система многократно увеличивает отдачу от каждого поступающего лида.",
     },
     faq: {
       title: "Частые Вопросы по Технологиям",
@@ -302,19 +302,19 @@ const contentData: Record<Locale, TecnologiaContent> = {
         {
           question: "Нужно ли полностью менять текущие программы?",
           answer:
-            "Нет. Автоматизация встраивается в уже используемые вами сервисы (WhatsApp, почта, таблицы, учетные системы) и заменяет лишь проблемные звенья.",
+            "Нет. Автоматизация проектируется так, чтобы встраиваться в уже используемые вами сервисы (WhatsApp, почта, таблицы, существующие CRM), заменяя лишь то, что создает трение или дублирует работу.",
         },
         {
           question: "Это подходит только крупным корпорациям?",
           answer:
-            "Нет. Модульная архитектура позволяет автоматизировать сначала один ключевой процесс (например, квалификацию лидов в WhatsApp) и масштабироваться поэтапно.",
+            "Нет. Индивидуальный модульный дизайн позволяет начать с одного приоритетного процесса (например, обслуживания и квалификации лидов в WhatsApp) и масштабироваться контролируемыми этапами.",
         },
       ],
     },
     finalCta: {
       title: "Готовы навести порядок и автоматизировать процессы?",
       description:
-        "Мы проведем анализ текущих процессов и предложим понятную техническую архитектуру без лишних затрат.",
+        "Мы бесплатно проанализируем ваш текущий рабочий процесс и предоставим четкую рекомендацию по технической архитектуре.",
       ctaPrimary: {
         label: "Записаться на Технический Аудит",
         href: "/contacto",

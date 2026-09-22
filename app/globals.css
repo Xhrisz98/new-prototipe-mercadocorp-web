@@ -22,6 +22,7 @@
   --color-primary-hover: #001ba8;
   --color-primary-glow: rgba(0, 34, 210, 0.15);
   --color-ai-accent: #04E7AF;
+  --color-ai: #04E7AF;
   --color-card-bg: #FFFFFF;
 }
 
@@ -36,6 +37,7 @@
   --color-primary-hover: #5a75ff;
   --color-primary-glow: rgba(63, 95, 255, 0.3);
   --color-ai-accent: #04E7AF;
+  --color-ai: #04E7AF;
   --color-card-bg: #151822;
 }
 

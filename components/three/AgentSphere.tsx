@@ -187,23 +187,24 @@ function MobileFallback() {
   );
 }
 
+// Detección síncrona en el primer render vía matchMedia — evita el frame en blanco
+// que dejaba el patrón useState(null) + useEffect. En SSR (sin `window`) asume
+// desktop; el cliente corrige de inmediato en la inicialización de useState.
+function getIsMobileSync(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(max-width: 767px)").matches;
+}
+
 export function AgentSphere({ isDark = true }: { isDark?: boolean }) {
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(getIsMobileSync);
 
   useEffect(() => {
-    const checkViewport = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkViewport();
-    window.addEventListener("resize", checkViewport);
-    return () => window.removeEventListener("resize", checkViewport);
+    const mql = window.matchMedia("(max-width: 767px)");
+    const handleChange = () => setIsMobile(mql.matches);
+    handleChange();
+    mql.addEventListener("change", handleChange);
+    return () => mql.removeEventListener("change", handleChange);
   }, []);
-
-  // SSR / Hidratación inicial
-  if (isMobile === null) {
-    return <div className="w-full h-[380px] md:h-[500px]" />;
-  }
 
   // Fallback estático bajo 768px conforme a AGENTS.md
   if (isMobile) {

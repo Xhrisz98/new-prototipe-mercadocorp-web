@@ -15,11 +15,12 @@ Reconstruir mercadocorp.ec como un sitio moderno multipágina que reposiciona la
 
 ## 2. Stack técnico (versiones exactas — no usar otras)
 
-- **Next.js 15** (App Router, no Pages Router)
-- **TypeScript** en todo el proyecto, sin archivos `.js` sueltos
+- **Next.js 16** (App Router, no Pages Router) — actualizado desde v15 original de este plan; 16.3.x es la versión activa/LTS actual
+- **React 19** (19.2.x) + **TypeScript** en todo el proyecto, sin archivos `.js` sueltos
 - **Tailwind CSS 4** con `class` strategy para el tema oscuro (nunca `prefers-color-scheme` como única fuente de verdad — el toggle manual manda)
 - **React Three Fiber** + `@react-three/drei` para las piezas de Three.js (nunca Three.js "a pelo" sin R3F)
-- **Framer Motion** para transiciones y micro-interacciones
+- **Motion** (antes "Framer Motion" — el paquete se renombró; usa `npm install motion` e importa desde `motion/react`, nunca `framer-motion`) para transiciones y micro-interacciones 2D. **No uses `framer-motion-3d`/Motion para 3D — está deprecado**; toda animación 3D va directo en R3F (`useFrame`, lerp manual), como ya hacen `AgentSphere` y `KineticNeuralCore`
+- **Internacionalización (ES/EN/RU)** — ver sección 3.1, formalizada a partir de v1.1 de este plan
 - Fuentes vía `next/font/google`: **Kanit** (weight 500, `italic`) y **Montserrat** (variable, todos los pesos)
 - Gestor de paquetes: `npm` (mismo que usa Mind CRM, para mantener consistencia de stack entre productos)
 - Despliegue objetivo: Vercel (mismo patrón que Mind CRM en `crm.mind.ec`)
@@ -44,15 +45,25 @@ app/
   politicas-de-privacidad/page.tsx
   terminos-y-condiciones/page.tsx
 components/
-  ui/                        # Button (pill), Card, Badge, FormField — atómicos, reutilizables
-  layout/                    # Navbar (con toggle tema), Footer
+  ui/                        # Button (pill), Card, Badge, FormField, ProductShowcase (mockup de navegador para capturas de producto), FloatingWhatsAppQR (widget flotante global), InteractiveTreeQR (QR + WhatsApp), ScrollProgress (barra de progreso de scroll)
+  layout/                    # Navbar (con toggle tema + LanguageSelector), Footer
   sections/                  # Hero, PillarCard, FAQAccordion, CaseStudyCard, StatsStrip
-  three/                     # ParticleNetwork (Hero Inicio), AgentSphere (Mind) — cada uno en su propio componente cliente ("use client")
+  three/                     # KineticNeuralCore (Hero Inicio — icosaedro wireframe + anillos orbitales + facetas, reemplaza al ParticleNetwork original de este plan), AgentSphere (Mind) — cada uno "use client" con fallback estático mobile
 lib/
   design-tokens.ts           # Todos los colores/tipografía de la sección 4, como constantes — nunca hardcodear hex sueltos en componentes
 content/
   <page>.ts                  # Copy de cada página extraído de copywriting-nueva-web-mercadocorp.md como objetos tipados, no strings sueltos en el JSX
 ```
+
+### 3.1 Internacionalización (ES/EN/RU) — formalizado
+
+El sitio soporta 3 idiomas: **español (idioma base/fuente de verdad), inglés y ruso**. Esta sección estandariza lo que ya existe en el código (`lib/i18n.ts`, `components/i18n/LocaleProvider.tsx`, `LanguageSelector.tsx`) para que futuras fases lo respeten en vez de tratarlo como algo aparte.
+
+- El **español es la fuente de verdad**: cualquier cambio de copy se hace primero en `content/<page>.ts` en español, y las traducciones EN/RU se derivan de ahí — nunca al revés.
+- `LanguageSelector` debe vivir en el Navbar, visible en las 14 páginas.
+- El selector de idioma es independiente del toggle claro/oscuro — no deben compartir el mismo control ni el mismo estado.
+- **SEO por idioma**: cada página debe generar sus propios `<title>`/`meta description` traducidos, no solo el body de la página — de lo contrario el trabajo de SEO de `copywriting-nueva-web-mercadocorp.md` (hecho en español) queda invisible para búsquedas en inglés/ruso.
+- Las traducciones EN/RU no están escritas por un traductor humano — deben marcarse internamente (comentario o flag) como "traducción generada, pendiente de revisión nativa" hasta que alguien las valide, siguiendo el mismo principio que ya aplicamos a los textos legales (placeholder + nota, no contenido final sin revisión).
 
 ## 4. Sistema de diseño — tokens (fuente: Manual de Identidad Corporativa oficial)
 
@@ -101,13 +112,38 @@ Cada página usa el copy exacto de `copywriting-nueva-web-mercadocorp.md` (títu
 4. CTA final
 
 **Casos especiales:**
-- **Inicio (`/`)** — única página con el componente Three.js `ParticleNetwork` en el hero (red de nodos en azul de marca)
+- **Inicio (`/`)** — única página con el componente Three.js `KineticNeuralCore` en el hero (icosaedro wireframe + anillos orbitales + partículas, todo en azules de marca — oficializado en reemplazo del `ParticleNetwork` original de este plan; `ParticleNetwork.tsx` se elimina del repo por ser código muerto)
 - **Mind (`/mind`)** — único lugar del sitio con el acento verde `#04E7AF` y el componente `AgentSphere`; el CTA principal es un link externo `target="_blank"` a `mind.ec`/`crm.mind.ec`, no un formulario interno
 - **Casos de Éxito (`/casos-de-exito`)** — construir con datos placeholder tipados (`content/casos-de-exito.ts` con array vacío o de ejemplo comentado) hasta que se confirme la lista definitiva de clientes — **no inventar clientes ni cifras**
 - **Nosotros (`/nosotros`)** — la sección "Trayectoria" queda como placeholder visual (título + nota "Próximamente") hasta tener hitos reales
 - **Políticas de Privacidad / Términos** — contenido legal placeholder con nota `<!-- TODO: legal review -->`, no generar texto legal por IA sin revisión de un humano
 
-## 6. Fases de construcción (pensadas para el Manager View de Antigravity — varios agentes en paralelo)
+## 5.1 Estructura canónica de página (por tipo)
+
+Toda página del sitio sigue uno de estos 3 esqueletos — nunca una estructura ad-hoc distinta por página:
+
+**Tipo Hub (Tecnología, Marketing):**
+`Hero → Franja de logos de stack/plataformas (adaptada al pilar) → Franja de estadísticas (adaptada al pilar, no genérica) → Tarjetas de los 2-3 servicios del pilar → FAQ del hub → CTA de cierre`
+
+**Tipo Servicio (las 5 páginas hijas + Mind + Auditoría + Eventos):**
+`Hero → Qué incluye (lista de sub-servicios) → Bloque de objeción/prueba específico del servicio → Enlazado interno → CTA de cierre`
+Sin franja de logos ni de estadísticas — repetir esas franjas en cada página de servicio diluye su impacto (ver sección "Franjas de confianza" abajo).
+
+**Tipo Institucional (Inicio, Nosotros, Casos de Éxito, Contacto):**
+Cada una mantiene su estructura ya definida en la sección "Contenido por página" de `guia-nueva-web-mercadocorp.md` — Inicio es la única página con la franja completa de logos + estadísticas.
+
+## 5.2 Franjas de confianza (logos de stack + estadísticas)
+
+- **Logos de marcas aliadas = plataformas/tecnologías que MercadoCorp integra** (WhatsApp Business API, Meta, plataformas de e-commerce, etc.) — nunca logos de clientes reales de MercadoCorp (eso sigue las mismas reglas que Casos de Éxito: pendiente de confirmación, nunca se mezclan ambos conceptos en la misma franja)
+- **Dónde aparece cada franja:**
+  - Inicio: franja completa de logos de stack + franja completa de estadísticas (como ya estaba definido)
+  - Tecnología (hub): franja de logos de stack **relevantes a ese pilar** (WhatsApp, plataformas CRM/automatización — no las de e-commerce) + estadísticas **adaptadas** (ej. "24/7 atención automatizada", "100% trazabilidad de leads")
+  - Marketing (hub): franja de logos de stack **relevantes a ese pilar** (Meta Ads, Google Ads, plataformas de e-commerce) + estadísticas **adaptadas** (ej. cifras de alcance/contenido, no las mismas de Tecnología)
+  - Ninguna otra página lleva estas franjas
+
+## 5.3 Iconografía — nunca emojis
+
+Ningún emoji (✅, 🚀, 💡, etc.) en copy, UI, badges, ni bullets de ninguna página, en ningún idioma. Todo ícono usa `lucide-react` (ya está en el stack vía `ProductShowcase`/`FloatingWhatsAppQR`) — consistente con el resto del sistema de diseño. Si un componente actual usa un emoji como ícono, se reemplaza por el ícono de `lucide-react` semánticamente más cercano.
 
 **Fase 0 — Fundaciones (agente único, bloqueante para todo lo demás)**
 - Setup del proyecto Next.js + Tailwind + fuentes + `design-tokens.ts`

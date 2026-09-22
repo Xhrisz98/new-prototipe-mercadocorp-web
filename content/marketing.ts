@@ -136,7 +136,7 @@ const contentData: Record<Locale, MarketingContent> = {
       badge: "Pillar 02 — B2B Digital Marketing",
       h1: "Once technological foundations are resolved, we elevate market perception",
       subheadline:
-        "Content without strategy is noise. Strategy without technology fails to scale. Here we engineer both together.",
+        "Content without strategy is noise. Strategy without technology behind it doesn't scale. Here we connect both.",
       ctaPrimary: {
         label: "Audit my digital presence →",
         href: "/auditoria-digital",
@@ -151,7 +151,7 @@ const contentData: Record<Locale, MarketingContent> = {
           number: "01",
           title: "Strategy, Creativity & Personal Branding",
           description:
-            "Narrative architecture and high-impact content: positioning your firm and executives as benchmarks in your industry.",
+            "Identity, narrative, and strategic content: we position your company and its executives as undisputed benchmarks in your industry.",
           href: "/estrategia-creatividad-branding",
           ctaLabel: "View service →",
           badge: "Branding & Content",
@@ -169,7 +169,7 @@ const contentData: Record<Locale, MarketingContent> = {
           number: "03",
           title: "Corporate Event Management",
           description:
-            "From conceptual narrative to high-touch executive experience: budgeting, venue curation, logistics, and premium vendor coordination.",
+            "From the initial concept to a memorable corporate experience: design, budgeting, end-to-end logistics, and top-tier vendors.",
           href: "/gestion-eventos",
           ctaLabel: "View service →",
           badge: "B2B Experiences",
@@ -183,14 +183,14 @@ const contentData: Record<Locale, MarketingContent> = {
         {
           question: "Can we hire Marketing services without hiring the tech stack?",
           answer:
-            "Yes, our services are modular. However, if your sales follow-up is still manual, we strongly advise an initial joint audit so you don't spend acquisition capital on leads your team cannot promptly service.",
+            "Yes, they are independent services. However, if your sales operation is still manual or scattered, we recommend starting with a joint diagnostic so you don't invest in attracting more leads than your team can currently handle with quality.",
         },
       ],
     },
     finalCta: {
-      title: "Ready to elevate your market authority and brand reach?",
+      title: "Do you want to boost your brand's visibility and authority?",
       description:
-        "Request an actionable assessment of your brand narrative and discovery channels.",
+        "We evaluate your current presence and show you how to connect your message with a qualified audience that converts.",
       ctaPrimary: {
         label: "Request Digital Audit",
         href: "/auditoria-digital",
@@ -216,7 +216,7 @@ const contentData: Record<Locale, MarketingContent> = {
     },
     hero: {
       badge: "Столп 02 — B2B Цифровой Маркетинг",
-      h1: "Когда технологическая основа готова, мы усиливаем позиционирование на рынке",
+      h1: "Когда технологическая основа уже готова, мы усиливаем то, как вас воспринимает рынок",
       subheadline:
         "Контент без стратегии — это шум. Стратегия без технологий не масштабируется. Мы объединяем оба направления.",
       ctaPrimary: {
@@ -242,7 +242,7 @@ const contentData: Record<Locale, MarketingContent> = {
           number: "02",
           title: "Цифровой Аудит",
           description:
-            "Глубокая и честная диагностика цифрового следа компании (SEO, соцсети, трафик, конкуренты) с понятным планом действий на 90 дней.",
+            "Глубокая и честная диагностика цифрового присутствия компании (SEO, соцсети, платная реклама, конкуренты) с понятным планом действий на 90 дней.",
           href: "/auditoria-digital",
           ctaLabel: "Подробнее об услуге →",
           badge: "Диагностика и Стратегия",
@@ -265,14 +265,14 @@ const contentData: Record<Locale, MarketingContent> = {
         {
           question: "Можно ли заказать только маркетинг без IT-разработки?",
           answer:
-            "Да, услуги полностью автономны. Однако, если обработка лидов в компании ведется вручную, мы рекомендуем совместный аудит, чтобы привлеченный трафик не терялся из-за задержек менеджеров.",
+            "Да, это независимые услуги. Однако, если коммерческий процесс в компании все еще ведется вручную или разрознен, мы рекомендуем начать с совместной диагностики, чтобы не инвестировать в привлечение большего числа лидов, чем ваша команда сегодня способна качественно обработать.",
         },
       ],
     },
     finalCta: {
       title: "Хотите усилить видимость и экспертный авторитет компании?",
       description:
-        "Мы проведем анализ текущего позиционирования и покажем, как привлечь платежеспособную аудиторию.",
+        "Мы оценим ваше текущее присутствие и покажем, как связать ваше сообщение с квалифицированной аудиторией, которая конвертируется в продажи.",
       ctaPrimary: {
         label: "Запросить Аудит Присутствия",
         href: "/auditoria-digital",

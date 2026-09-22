@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import {
   MessageCircle,
@@ -172,7 +172,7 @@ export function InteractiveTreeQR({
               />
               <div className="absolute bottom-2 inset-x-2 text-center">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-black/60 text-white backdrop-blur-md opacity-90 group-hover:opacity-100 transition-opacity">
-                  <Sparkles className="w-3 h-3 text-[#04E7AF]" />
+                  <Sparkles className="w-3 h-3 text-[var(--color-primary)]" />
                   <span>{t.tapHint}</span>
                 </span>
               </div>

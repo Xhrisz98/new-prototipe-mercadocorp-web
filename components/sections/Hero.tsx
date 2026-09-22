@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, Shield, Cpu, Zap } from "lucide-react";
 

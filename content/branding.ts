@@ -162,7 +162,7 @@ const contentData: Record<Locale, BrandingPageContent> = {
       badge: "Digital Marketing · Strategy & Branding",
       h1: "Your brand declares who you are before you speak a single word",
       subheadline:
-        "Whether it is your company's identity or your own as an industry leader, we craft the brand narrative and content ecosystem that builds long-term authority — never random posts to fill a calendar.",
+        "Whether it is your company's brand or your own as an industry leader, we build the identity, narrative, and content that sustain it over time — not random posts just to fill a calendar.",
       ctaPrimary: {
         label: "Build my brand →",
         href: "/contacto",
@@ -178,24 +178,24 @@ const contentData: Record<Locale, BrandingPageContent> = {
       paths: [
         {
           category: "For your company",
-          title: "Digital Strategy & Creative Direction",
-          body: "We combine strategic rigor with creative execution: narrative design, digital visual identity, high-end asset production, campaigns, community management, and continuous optimization. Every piece serves a distinct business goal.",
+          title: "Digital Strategy & Creativity",
+          body: "We combine strategic thinking with creative execution: content strategy, digital visual identity, asset production, creative campaigns, community management, and continuous measurement. Every piece serves an objective, an audience, and a narrative — not just to fill a calendar.",
           points: [
-            "Corporate narrative and editorial blueprint",
-            "Cohesive visual identity across all digital touchpoints",
-            "High-impact graphic and audiovisual production",
-            "Targeted campaigns designed for qualified B2B attention",
+            "Editorial strategy and corporate narrative",
+            "Cohesive visual identity across all digital channels",
+            "High-end audiovisual and graphic production",
+            "Creative campaigns and community management focused on conversion",
           ],
         },
         {
-          category: "For you as a leader",
-          title: "Executive Personal Branding",
-          body: "Your personal brand is your career's most valuable asset. We audit your current reputation, define your executive archetype, construct your thought-leadership narrative, and deliver a sustainable editorial blueprint you can lead with confidence.",
+          category: "For you",
+          title: "Personal Branding",
+          body: "Your personal brand is your career's most powerful asset. We assess your current presence, define your value proposition and brand archetype, build your professional narrative, and deliver an editorial plan and an implementation guide so you can stay consistent with or without us.",
           points: [
-            "Executive presence and reputation audit",
-            "Unique value proposition & leadership archetype",
-            "Thought-leadership talking points & key hooks",
-            "Ongoing editorial schedule and standalone execution guidelines",
+            "Diagnosis of reputation and current positioning",
+            "Value proposition and executive archetype definition",
+            "Professional narrative and key authority messages",
+            "Ongoing editorial plan and self-implementation guidelines",
           ],
         },
       ],
@@ -206,45 +206,45 @@ const contentData: Record<Locale, BrandingPageContent> = {
       items: [
         {
           title: "Current Brand Diagnosis",
-          description: "Rigorous audit of brand sentiment, positioning gaps, and competitive whitespace.",
+          description: "Rigorous evaluation of how your corporate or personal brand is currently perceived across the digital ecosystem.",
           tag: "Audit",
         },
         {
-          title: "Core Identity Definition",
-          description: "Value propositions, executive tone of voice, content pillars, and editorial manifestos.",
+          title: "Identity Definition",
+          description: "Unique value proposition, institutional or executive tone of voice, content pillars, and communication guidelines.",
           tag: "Identity",
         },
         {
-          title: "Narrative & Authority Anchors",
-          description: "Distinct talking points that position you and your organization as definitive domain experts.",
+          title: "Narrative & Key Messages",
+          description: "Articulation of the differentiating arguments that position your brand as the undisputed reference in your sector.",
           tag: "Storytelling",
         },
         {
-          title: "Multichannel Editorial Calendar",
-          description: "Strategic planning across LinkedIn, web, and social platforms designed to compound attention.",
+          title: "Multichannel Strategy & Calendar",
+          description: "Tactical planning by platform (LinkedIn, Instagram, YouTube, web) aimed at building audience and trust.",
           tag: "Planning",
         },
         {
-          title: "Full-Cycle Asset Production",
-          description: "Graphic design, persuasive copy, video scripts, reels, carousels, and whitepapers.",
+          title: "Full Asset Production",
+          description: "Graphic design, persuasive copywriting, video scripts, reels, carousels, and high-impact downloadable resources.",
           tag: "Production",
         },
         {
-          title: "Community Growth & Moderation",
-          description: "High-value peer interactions, timely engagement, and strategic relationship building.",
+          title: "Community Management & Moderation",
+          description: "Strategic interaction with industry leaders, timely responses, and active B2B relationship building.",
           tag: "Community",
         },
         {
           title: "Measurement & Continuous Optimization",
-          description: "Tracking qualified reach, thought-leadership citations, and incoming business opportunities.",
+          description: "Constant monitoring of growth in qualified reach, reputation, and new business opportunities.",
           tag: "Metrics",
         },
       ],
     },
     finalCta: {
-      title: "Ready to cement your leadership and market authority?",
+      title: "Ready to position your brand as an industry reference?",
       description:
-        "Let's architect the narrative and high-fidelity content that opens doors to high-value B2B relationships.",
+        "Let's build the authority and content that open commercial doors and accelerate strategic relationships.",
       ctaPrimary: {
         label: "Book Branding Strategy Session",
         href: "/contacto",
@@ -270,7 +270,7 @@ const contentData: Record<Locale, BrandingPageContent> = {
       badge: "Цифровой Маркетинг · Стратегия и Брендинг",
       h1: "Ваш бренд говорит о вас еще до того, как вы начнете говорить",
       subheadline:
-        "Будь то бренд вашей компании или ваш личный статус эксперта, мы создаем айдентику, нарратив и контент, укрепляющие авторитет — а не случайные посты ради графика.",
+        "Будь то бренд вашей компании или ваш личный бренд как лидера отрасли, мы создаем айдентику, нарратив и контент, которые поддерживают его во времени — а не случайные посты ради заполнения графика.",
       ctaPrimary: {
         label: "Создать сильный бренд →",
         href: "/contacto",
@@ -287,23 +287,23 @@ const contentData: Record<Locale, BrandingPageContent> = {
         {
           category: "Для вашей компании",
           title: "Цифровая стратегия и креатив",
-          body: "Мы соединяем системный анализ и креативное исполнение: контент-стратегия, визуальный стиль, медиапроизводство, кампании и постоянная аналитика. Каждый материал работает на конкретную бизнес-цель.",
+          body: "Мы соединяем стратегическое мышление и креативное исполнение: контент-стратегия, визуальная айдентика, производство материалов, креативные кампании, управление сообществом и постоянная аналитика. Каждый материал работает на конкретную цель, аудиторию и нарратив — а не просто заполняет график.",
           points: [
-            "Корпоративный нарратив и контентный план",
+            "Редакционная стратегия и корпоративный нарратив",
             "Единая визуальная айдентика во всех цифровых каналах",
-            "Премиальный графический и видеоконтент",
-            "Целевые креативные кампании для привлечения B2B-клиентов",
+            "Премиальное аудиовизуальное и графическое производство",
+            "Креативные кампании и управление сообществом, ориентированные на конверсию",
           ],
         },
         {
-          category: "Для руководителя",
-          title: "Личный бренд лидера отрасли",
-          body: "Личный бренд — сильнейший нематериальный актив вашей карьеры. Мы диагностируем текущий образ, формулируем экспертное позиционирование и создаем контентный план для уверенного укрепления авторитета.",
+          category: "Для вас",
+          title: "Личный брендинг",
+          body: "Ваш личный бренд — самый мощный актив вашей карьеры. Мы диагностируем ваше текущее присутствие, определяем ценностное предложение и архетип бренда, выстраиваем ваш профессиональный нарратив и предоставляем редакционный план и руководство по внедрению, чтобы вы могли сохранять последовательность с нами или без нас.",
           points: [
             "Аудит текущей репутации и позиционирования",
-            "Формулирование ценностного предложения и архетипа",
-            "Профессиональный нарратив и ключевые тезисы",
-            "Редакционный план и руководство по самостоятельному ведению",
+            "Формулирование ценностного предложения и архетипа руководителя",
+            "Профессиональный нарратив и ключевые сообщения об авторитете",
+            "Постоянный редакционный план и руководство по самостоятельному ведению",
           ],
         },
       ],
@@ -319,32 +319,32 @@ const contentData: Record<Locale, BrandingPageContent> = {
         },
         {
           title: "Определение идентичности",
-          description: "Уникальное позиционирование, tone of voice, смысловые столпы и принципы коммуникации.",
+          description: "Уникальное ценностное предложение, институциональный или руководительский тон общения, смысловые столпы контента и принципы коммуникации.",
           tag: "Айдентика",
         },
         {
           title: "Нарратив и ключевые смыслы",
-          description: "Формулирование дифференцирующих аргументов, выделяющих компанию среди конкурентов.",
+          description: "Формулирование отличительных аргументов, которые позиционируют вашу компанию как безусловного лидера в своей отрасли.",
           tag: "Сторителлинг",
         },
         {
-          title: "Мультиканальный контент-план",
-          description: "Тактическое планирование в LinkedIn, соцсетях и на сайте для привлечения целевой аудитории.",
+          title: "Мультиканальная стратегия и план",
+          description: "Тактическое планирование по платформам (LinkedIn, Instagram, YouTube, сайт), направленное на рост аудитории и доверия.",
           tag: "Планирование",
         },
         {
-          title: "Производство медиаматериалов",
-          description: "Графический дизайн, убеждающий копирайтинг, видео, сценарии и аналитические обзоры.",
+          title: "Полное производство материалов",
+          description: "Графический дизайн, убедительный копирайтинг, сценарии видео, рилсы, карусели и эффективные материалы для скачивания.",
           tag: "Производство",
         },
         {
-          title: "Управление сообществом",
-          description: "Стратегическое взаимодействие с лидерами мнений и активное развитие B2B-контактов.",
+          title: "Управление сообществом и модерация",
+          description: "Стратегическое взаимодействие с лидерами отрасли, своевременные ответы и активное развитие B2B-отношений.",
           tag: "Сообщество",
         },
         {
           title: "Метрики и постоянное улучшение",
-          description: "Анализ динамики целевого охвата, упоминаемости и входящих деловых запросов.",
+          description: "Постоянный мониторинг роста квалифицированного охвата, репутации и генерации деловых возможностей.",
           tag: "Метрики",
         },
       ],
@@ -352,7 +352,7 @@ const contentData: Record<Locale, BrandingPageContent> = {
     finalCta: {
       title: "Готовы закрепить позицию лидера в вашей индустрии?",
       description:
-        "Создадим убедительный нарратив и визуальный стиль, открывающие новые коммерческие возможности.",
+        "Создадим авторитет и контент, которые открывают двери для бизнеса и ускоряют стратегические отношения.",
       ctaPrimary: {
         label: "Записаться на сессию по брендингу",
         href: "/contacto",

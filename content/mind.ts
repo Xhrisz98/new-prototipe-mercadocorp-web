@@ -112,52 +112,52 @@ const contentData: Record<Locale, MindPageContent> = {
     seo: {
       title: "Mind | AI Sales Agent & CRM for WhatsApp — MercadoCorp",
       description:
-        "Meet Mind, MercadoCorp's flagship AI CRM: advises, qualifies, and closes sales on WhatsApp 24/7. Discover the complete product at mind.ec.",
+        "Meet Mind, MercadoCorp's AI-agent CRM: attends to, advises, and closes sales on WhatsApp 24/7. Discover the complete product at mind.ec.",
     },
     hero: {
-      badge: "MercadoCorp Proprietary Product · Mind CRM + AI Agent",
-      h1: "Mind: your top-performing salesperson never sleeps",
+      badge: "MercadoCorp Exclusive Product · Mind CRM + AI Agent",
+      h1: "Mind: your best salesperson never sleeps",
       subheadline:
-        "Mind is not a basic chatbot. It is a full-featured CRM with an autonomous AI sales agent that advises and closes deals on WhatsApp 24/7 — trained on your company's proprietary knowledge base.",
+        "Mind is not a chatbot. It is a complete CRM with an AI sales agent that attends to, advises, and closes sales on WhatsApp — trained on the voice and knowledge of your business, available 24/7.",
       ctaPrimary: {
         label: "Explore Mind at mind.ec →",
         href: "https://mind.ec",
         external: true,
       },
       ctaSecondary: {
-        label: "Chat via WhatsApp →",
+        label: "Get a Quote via WhatsApp →",
         href: "https://wa.me/593983315439?text=Hello,%20I%20would%20like%20information%20about%20Mind",
         external: true,
       },
     },
     about: {
-      title: "Autonomous Sales Automation Without Operational Friction",
+      title: "Tireless Intelligent Commercial Automation",
       description:
-        "Mind unifies every conversation, lead, and client into a single CRM view: your entire commercial funnel, automated. The AI agent resolves complex inquiries, recommends products, and executes sales without manual intervention.",
-      modulesTitle: "Integrated Platform Capabilities",
+        "Mind centralizes every conversation, lead, and client in one place: your entire sales funnel, automated. The AI agent answers questions, advises on products or services, and can close the sale without a human having to intervene in every message.",
+      modulesTitle: "Modules Integrated in the Platform",
       modules: [
         {
           name: "Project Management",
-          description: "Centralized execution tracking, milestones, and client handoffs directly in the CRM.",
+          description: "Centralized tracking of deliverables, milestones, and sales flows in a single dashboard.",
         },
         {
-          name: "Smart Booking Engine",
-          description: "Autonomous scheduling of discovery calls and product demos with calendar sync.",
+          name: "Booking System",
+          description: "Automatic scheduling of appointments and demos, synced in real time.",
         },
         {
-          name: "Visual Email Campaigns",
-          description: "Drag-and-drop email sequencing with comprehensive open, click, and conversion telemetry.",
+          name: "Email Campaigns with Visual Editor",
+          description: "Design and sequencing of automated emails with open and click analytics.",
         },
         {
-          name: "WhatsApp Meta-Approved Templates",
-          description: "Personalized bulk messaging workflows compliant with Meta guidelines.",
+          name: "WhatsApp Message Templates",
+          description: "Personalized bulk communications approved by Meta for maximum conversion.",
         },
       ],
     },
     domainReason: {
       title: "Why does Mind live on its own domain?",
       description:
-        "Mind is a standalone SaaS product with dedicated engineering sprints and continuous updates — which is why full documentation, interactive demos, and live onboarding live at mind.ec. We showcase it here as the technological cornerstone of the MercadoCorp ecosystem.",
+        "Mind is a standalone product with its own development and updates — that's why the full details, demos, and documentation live at mind.ec. Here we simply present it as part of the MercadoCorp services ecosystem.",
       ctaPrimary: {
         label: "Deep Dive into Mind →",
         href: "https://mind.ec",
@@ -182,37 +182,37 @@ const contentData: Record<Locale, MindPageContent> = {
     seo: {
       title: "Mind | ИИ-агент продаж и CRM для WhatsApp — MercadoCorp",
       description:
-        "Познакомьтесь с Mind: CRM со встроенным агентом ИИ для продаж в WhatsApp 24/7. Полная информация о продукте на mind.ec.",
+        "Познакомьтесь с Mind — CRM с ИИ-агентом от MercadoCorp: обслуживает, консультирует и закрывает продажи в WhatsApp 24/7. Полная информация о продукте на mind.ec.",
     },
     hero: {
-      badge: "Продукт MercadoCorp · CRM Mind + ИИ-агент",
+      badge: "Эксклюзивный Продукт MercadoCorp · CRM Mind + ИИ-агент",
       h1: "Mind: ваш лучший продавец никогда не спит",
       subheadline:
-        "Mind — это не простой чат-бот. Это полноценная CRM со встроенным агентом продаж на базе ИИ, который консультирует и закрывает сделки в WhatsApp 24/7, обученный на знаниях вашего бизнеса.",
+        "Mind — это не чат-бот. Это полноценная CRM с агентом продаж на базе ИИ, который обслуживает, консультирует и закрывает продажи в WhatsApp — обученный на голосе и знаниях вашего бизнеса, доступный 24/7.",
       ctaPrimary: {
         label: "Открыть Mind на mind.ec →",
         href: "https://mind.ec",
         external: true,
       },
       ctaSecondary: {
-        label: "Консультация в WhatsApp →",
+        label: "Запросить расценки в WhatsApp →",
         href: "https://wa.me/593983315439?text=Здравствуйте,%20интересует%20Mind",
         external: true,
       },
     },
     about: {
-      title: "Автономная автоматизация коммерческого цикла",
+      title: "Умная коммерческая автоматизация без устали",
       description:
-        "Mind объединяет все диалоги, лиды и клиентов в единой системе: воронка продаж работает автоматически. ИИ-агент отвечает на сложные вопросы, рекомендует товары и доводит до оплаты без необходимости постоянного ручного вмешательства менеджеров.",
+        "Mind объединяет каждый диалог, лид и клиента в одном месте: вся ваша воронка продаж, автоматизированная. ИИ-агент отвечает на вопросы, консультирует по продуктам или услугам и может закрыть продажу без необходимости вмешательства человека в каждое сообщение.",
       modulesTitle: "Встроенные модули платформы",
       modules: [
         {
           name: "Управление проектами",
-          description: "Контроль этапов, задач и статусов клиентов в едином пространстве.",
+          description: "Централизованный контроль результатов, этапов и коммерческих процессов в единой панели.",
         },
         {
-          name: "Система онлайн-бронирования",
-          description: "Автоматическая запись на демонстрации и встречи с синхронизацией календарей.",
+          name: "Система бронирования",
+          description: "Автоматическая запись на встречи и демонстрации с синхронизацией в реальном времени.",
         },
         {
           name: "Email-рассылки с визуальным редактором",
@@ -227,7 +227,7 @@ const contentData: Record<Locale, MindPageContent> = {
     domainReason: {
       title: "Почему Mind живет на отдельном домене?",
       description:
-        "Mind — это независимый программный продукт с собственной разработкой и регулярными релизами. Именно поэтому подробная документация, демо и тарифы доступны на mind.ec. Здесь мы представляем его как ключевой элемент экосистемы MercadoCorp.",
+        "Mind — это независимый продукт с собственной разработкой и обновлениями — поэтому полная информация, демо и документация находятся на mind.ec. Здесь мы лишь представляем его как часть экосистемы услуг MercadoCorp.",
       ctaPrimary: {
         label: "Узнать все о Mind →",
         href: "https://mind.ec",
