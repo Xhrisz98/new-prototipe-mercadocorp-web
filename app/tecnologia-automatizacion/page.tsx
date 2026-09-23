@@ -9,6 +9,8 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { StatsStrip } from "@/components/sections/StatsStrip";
+import { TrustStrip } from "@/components/sections/TrustStrip";
+import { ServiceNodeDiagram } from "@/components/sections/ServiceNodeDiagram";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getTecnologiaContent } from "@/content/tecnologia";
 import { CheckCircle2 } from "lucide-react";
@@ -30,6 +32,12 @@ export default function TecnologiaPage() {
           ctaPrimary={content.hero.ctaPrimary}
           align="center"
         />
+
+        {/* Franja de Confianza (Stack Tecnológico) */}
+        <TrustStrip title={content.trust.title} logos={content.trust.logos} />
+
+        {/* Diagrama de Nodos 2D (Capa 1 de scroll-reveal — PROJECT_PLAN.md §5.4) */}
+        <ServiceNodeDiagram />
 
         {/* Fichas de los 3 Servicios del Pilar */}
         <section className="w-full py-20 bg-[var(--color-surface)] border-y border-[var(--color-border)]">
@@ -88,7 +96,7 @@ export default function TecnologiaPage() {
         </section>
 
         {/* Cifras de Capacidad del Pilar */}
-        <StatsStrip />
+        <StatsStrip stats={content.stats} />
 
         {/* FAQ del Hub */}
         <FAQAccordion

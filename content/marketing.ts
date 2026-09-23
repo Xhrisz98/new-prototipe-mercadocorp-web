@@ -15,6 +15,11 @@ export interface MarketingContent {
     subheadline: string;
     ctaPrimary: { label: string; href: string };
   };
+  trust: {
+    title: string;
+    logos: { name: string; category: string }[];
+  };
+  stats: { value: string; label: string; description: string }[];
   services: {
     sectionTitle: string;
     sectionSubtitle: string;
@@ -60,6 +65,36 @@ const contentData: Record<Locale, MarketingContent> = {
         href: "/auditoria-digital",
       },
     },
+    trust: {
+      title: "Plataformas y canales que ya activamos para nuestros clientes.",
+      logos: [
+        { name: "Meta Ads", category: "Publicidad" },
+        { name: "Google Ads", category: "Publicidad" },
+        { name: "Shopify / WooCommerce", category: "E-commerce" },
+      ],
+    },
+    stats: [
+      {
+        value: "360°",
+        label: "Ecosistema integral de marca",
+        description: "Contenido, identidad y presencia digital trabajando como un solo sistema, no piezas sueltas.",
+      },
+      {
+        value: "Multicanal",
+        label: "Coherencia en cada plataforma",
+        description: "La misma voz de marca en cada red social, campaña y pieza de contenido.",
+      },
+      {
+        value: "Basado en datos",
+        label: "Decisiones con analítica real",
+        description: "Cada ajuste de estrategia responde a métricas, no solo a intuición.",
+      },
+      {
+        value: "Complementario",
+        label: "Potencia la base tecnológica",
+        description: "Pensado para empresas que ya resolvieron su automatización y ahora quieren que el mercado lo perciba.",
+      },
+    ],
     services: {
       sectionTitle: "Servicios de Posicionamiento y Comunicación",
       sectionSubtitle:
@@ -142,6 +177,36 @@ const contentData: Record<Locale, MarketingContent> = {
         href: "/auditoria-digital",
       },
     },
+    trust: {
+      title: "Platforms and channels we already activate for our clients.",
+      logos: [
+        { name: "Meta Ads", category: "Advertising" },
+        { name: "Google Ads", category: "Advertising" },
+        { name: "Shopify / WooCommerce", category: "E-commerce" },
+      ],
+    },
+    stats: [
+      {
+        value: "360°",
+        label: "Comprehensive Brand Ecosystem",
+        description: "Content, identity, and digital presence working as a single system, not scattered pieces.",
+      },
+      {
+        value: "Multi-Channel",
+        label: "Consistency Across Every Platform",
+        description: "The same brand voice on every social network, campaign, and piece of content.",
+      },
+      {
+        value: "Data-Driven",
+        label: "Decisions Backed by Real Analytics",
+        description: "Every strategic adjustment responds to metrics, not just intuition.",
+      },
+      {
+        value: "Complementary",
+        label: "Powers Your Tech Foundation",
+        description: "Designed for companies that already solved their automation and now want the market to perceive it.",
+      },
+    ],
     services: {
       sectionTitle: "Positioning & Communication Services",
       sectionSubtitle:
@@ -224,6 +289,36 @@ const contentData: Record<Locale, MarketingContent> = {
         href: "/auditoria-digital",
       },
     },
+    trust: {
+      title: "Платформы и каналы, которые мы уже используем для наших клиентов.",
+      logos: [
+        { name: "Meta Ads", category: "Реклама" },
+        { name: "Google Ads", category: "Реклама" },
+        { name: "Shopify / WooCommerce", category: "E-commerce" },
+      ],
+    },
+    stats: [
+      {
+        value: "360°",
+        label: "Комплексная экосистема бренда",
+        description: "Контент, идентичность и цифровое присутствие работают как единая система, а не разрозненные элементы.",
+      },
+      {
+        value: "Мультиканальность",
+        label: "Единый стиль на каждой платформе",
+        description: "Один и тот же голос бренда в каждой соцсети, кампании и материале.",
+      },
+      {
+        value: "На основе данных",
+        label: "Решения на реальной аналитике",
+        description: "Каждая корректировка стратегии основана на метриках, а не только на интуиции.",
+      },
+      {
+        value: "Дополняющий",
+        label: "Усиливает технологическую базу",
+        description: "Создано для компаний, которые уже наладили автоматизацию и теперь хотят, чтобы рынок это заметил.",
+      },
+    ],
     services: {
       sectionTitle: "Услуги Позиционирования и Коммуникаций",
       sectionSubtitle:

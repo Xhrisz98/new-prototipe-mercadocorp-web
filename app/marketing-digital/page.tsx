@@ -8,6 +8,8 @@ import { PillarCard } from "@/components/sections/PillarCard";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
+import { TrustStrip } from "@/components/sections/TrustStrip";
+import { StatsStrip } from "@/components/sections/StatsStrip";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMarketingContent } from "@/content/marketing";
 
@@ -28,6 +30,9 @@ export default function MarketingPage() {
           ctaPrimary={content.hero.ctaPrimary}
           align="center"
         />
+
+        {/* Franja de Confianza (Plataformas y Canales) */}
+        <TrustStrip title={content.trust.title} logos={content.trust.logos} />
 
         {/* Fichas de los 3 Servicios del Pilar */}
         <section className="w-full py-20 bg-[var(--color-surface)] border-y border-[var(--color-border)]">
@@ -59,6 +64,9 @@ export default function MarketingPage() {
             </div>
           </div>
         </section>
+
+        {/* Cifras de Capacidad del Pilar */}
+        <StatsStrip stats={content.stats} />
 
         {/* FAQ del Hub */}
         <FAQAccordion

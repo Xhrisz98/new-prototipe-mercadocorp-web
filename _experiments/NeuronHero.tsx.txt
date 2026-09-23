@@ -1,0 +1,498 @@
+"use client";
+
+import React, { useRef, useMemo, useEffect, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+
+// ============================================================================
+// PALETA EXACTA DE MARCA MERCADOCORP
+// ============================================================================
+export const BRAND_COLORS = {
+  blueDark: "#0022D2",
+  blueVibrant: "#3F5FFF",
+  greenReserved: "#04E7AF",
+  bgDark: "#0B0D14",
+} as const;
+
+export const HERO_SCROLL_RANGE = 450;
+export const DEFAULT_PARTICLE_COUNT = 18000;
+
+// ============================================================================
+// GLSL SHADER: Morphing, Jerarquía, Gradientes y Nodos
+// ============================================================================
+const NeuronShaderDefinition = {
+  uniforms: {
+    uProgress: { value: 0.0 },
+    uTime: { value: 0.0 },
+    uColorBlueDark: { value: new THREE.Color(BRAND_COLORS.blueDark) },
+    uColorBlueVibrant: { value: new THREE.Color(BRAND_COLORS.blueVibrant) },
+    uColorGreen: { value: new THREE.Color(BRAND_COLORS.greenReserved) },
+    uPixelRatio: { value: 1.0 },
+  },
+  vertexShader: `
+    uniform float uProgress;
+    uniform float uTime;
+    uniform float uPixelRatio;
+
+    attribute vec3 aTargetPosition;
+    attribute float aType; // 0.0 = Soma, 1.0 = Rama, 2.0 = Nodo Sináptico
+    attribute float aBranchDist;
+    attribute float aRandom;
+    attribute float aSize;
+    attribute float aDistToCenter;
+
+    varying float vType;
+    varying float vBranchDist;
+    varying float vDistToCenter;
+    varying float vRandom;
+
+    void main() {
+      vType = aType;
+      vBranchDist = aBranchDist;
+      vDistToCenter = aDistToCenter;
+      vRandom = aRandom;
+
+      // 1. Interpolación suave en GPU hacia el estado activado
+      vec3 currentPos = mix(position, aTargetPosition, uProgress);
+
+      // 2. Micro-movimiento orgánico en reposo
+      if (vType == 1.0 || vType == 2.0) { // Ramas y nodos se mueven sutilmente
+        float displacement = sin(uTime * 1.2 + currentPos.y * 2.0 + aRandom * 6.28) * 0.03 * (1.0 - uProgress);
+        currentPos += normal * displacement;
+      }
+
+      vec4 mvPosition = modelViewMatrix * vec4(currentPos, 1.0);
+      gl_Position = projectionMatrix * mvPosition;
+
+      // Dinámica de tamaño
+      float sizeFactor = aSize;
+      if (vType == 2.0) {
+        // Los nodos pulsan su tamaño
+        sizeFactor *= 1.0 + sin(uTime * 4.0 + aRandom * 6.28) * 0.3;
+      }
+      gl_PointSize = sizeFactor * uPixelRatio * (42.0 / -mvPosition.z);
+    }
+  `,
+  fragmentShader: `
+    uniform vec3 uColorBlueDark;
+    uniform vec3 uColorBlueVibrant;
+    uniform vec3 uColorGreen;
+    uniform float uProgress;
+    uniform float uTime;
+
+    varying float vType;
+    varying float vBranchDist;
+    varying float vDistToCenter;
+    varying float vRandom;
+
+    void main() {
+      // Glow radial suave para la partícula
+      float distToPoint = length(gl_PointCoord - vec2(0.5));
+      if (distToPoint > 0.5) discard;
+      float pointAlpha = smoothstep(0.5, 0.1, distToPoint);
+
+      vec3 color;
+      float baseAlpha = 1.0;
+
+      // ==========================================
+      // CORRECCIÓN 1: SOMA (Núcleo) - Gradiente visible, sin sobreexposición
+      // ==========================================
+      if (vType == 0.0) {
+        // El radio del soma es ~1.2. Normalizamos la distancia.
+        float somaNorm = clamp(vDistToCenter / 1.2, 0.0, 1.0);
+        
+        // Centro más claro/saturado, bordes oscuros (#0022D2)
+        vec3 somaCenter = mix(uColorBlueVibrant, vec3(0.9, 0.95, 1.0), 0.4); 
+        color = mix(somaCenter, uColorBlueDark, somaNorm);
+        
+        // Alpha drásticamente reducido para que las 4000 partículas no sumen un blanco sólido
+        baseAlpha = 0.06; 
+      }
+      
+      // ==========================================
+      // CORRECCIÓN 3: RAMIFICACIONES - Gradiente de 3 paradas
+      // ==========================================
+      else if (vType == 1.0) {
+        vec3 tipColor = vec3(0.95, 0.98, 1.0); // Blanco muy claro en las puntas (energía)
+        
+        if (vBranchDist < 0.4) {
+          // Cerca del soma -> Media distancia
+          color = mix(uColorBlueDark, uColorBlueVibrant, vBranchDist * 2.5);
+        } else {
+          // Media distancia -> Puntas
+          color = mix(uColorBlueVibrant, tipColor, (vBranchDist - 0.4) * 1.66);
+        }
+        
+        baseAlpha = 0.35;
+
+        // Pulso de energía viajando hacia afuera
+        float pulse = sin(vBranchDist * 15.0 - uTime * 3.0) * 0.5 + 0.5;
+        color = mix(color, tipColor, pulse * 0.3);
+      }
+      
+      // ==========================================
+      // CORRECCIÓN 4: NODOS SINÁPTICOS - Destellos localizados
+      // ==========================================
+      else {
+        color = mix(uColorBlueVibrant, vec3(1.0), 0.7); // Azul casi blanco super brillante
+        baseAlpha = 0.75 + sin(uTime * 6.0 + vRandom * 6.28) * 0.25; // Parpadeo
+      }
+
+      // ==========================================
+      // MORPH DE SCROLL: Transformación al estado final (Verde en puntos de energía)
+      // ==========================================
+      // En reposo (uProgress == 0), greenFactor es estrictamente 0.0.
+      float greenTarget = (vType == 0.0 || vType == 2.0) ? 1.0 : 0.15; // Soma y nodos brillan full verde, ramas un tinte muy leve
+      float activation = smoothstep(0.0, 1.0, uProgress) * greenTarget;
+      
+      color = mix(color, uColorGreen, activation);
+      
+      // Refuerzo de opacidad al activarse para darle impacto visual
+      baseAlpha = mix(baseAlpha, baseAlpha * 1.6, uProgress);
+
+      gl_FragColor = vec4(color, pointAlpha * baseAlpha);
+    }
+  `,
+};
+
+// ============================================================================
+// CORRECCIÓN 2: ALGORITMO DE RAMIFICACIÓN RECURSIVA FRACTAL (Árbol/Coral)
+// ============================================================================
+interface Segment {
+  start: THREE.Vector3;
+  end: THREE.Vector3;
+  depth: number;
+  length: number;
+  weight: number;
+}
+
+function useNeuronBufferGeometry(count: number) {
+  return useMemo(() => {
+    const initialPositions = new Float32Array(count * 3);
+    const targetPositions = new Float32Array(count * 3);
+    const types = new Float32Array(count); // 0 = Soma, 1 = Rama, 2 = Nodo
+    const branchDist = new Float32Array(count);
+    const randoms = new Float32Array(count);
+    const sizes = new Float32Array(count);
+    const distToCenter = new Float32Array(count);
+
+    let offset = 0;
+    const addParticle = (init: THREE.Vector3, target: THREE.Vector3, type: number, bDist: number, size: number) => {
+      if (offset >= count) return;
+      const i3 = offset * 3;
+      initialPositions[i3] = init.x; initialPositions[i3+1] = init.y; initialPositions[i3+2] = init.z;
+      targetPositions[i3] = target.x; targetPositions[i3+1] = target.y; targetPositions[i3+2] = target.z;
+      types[offset] = type;
+      branchDist[offset] = bDist;
+      randoms[offset] = Math.random();
+      sizes[offset] = size;
+      distToCenter[offset] = init.length();
+      offset++;
+    };
+
+    const SOMA_COUNT = 4500;
+    const NODE_COUNT = 1500;
+    const BRANCH_COUNT = count - SOMA_COUNT - NODE_COUNT; // 12000
+
+    // A) GENERAR SOMA (Esfera densa pero con volumen medible para el gradiente)
+    const somaRadius = 1.2;
+    for (let i = 0; i < SOMA_COUNT; i++) {
+      const u = Math.random();
+      const v = Math.random();
+      const theta = u * 2.0 * Math.PI;
+      const phi = Math.acos(2.0 * v - 1.0);
+      const r = Math.cbrt(Math.random()) * somaRadius;
+
+      const initPos = new THREE.Vector3(
+        r * Math.sin(phi) * Math.cos(theta),
+        r * Math.sin(phi) * Math.sin(theta),
+        r * Math.cos(phi)
+      );
+      // Estado final: se contrae densamente
+      const targetPos = initPos.clone().multiplyScalar(0.35);
+      
+      addParticle(initPos, targetPos, 0.0, 0.0, 1.8 + Math.random() * 1.5);
+    }
+
+    // B) GENERACIÓN DEL ESQUELETO FRACTAL
+    const segments: Segment[] = [];
+    const bifurcations: THREE.Vector3[] = [];
+    let maxDist = 0;
+
+    const growBranch = (start: THREE.Vector3, dir: THREE.Vector3, len: number, depth: number) => {
+      const end = start.clone().add(dir.clone().multiplyScalar(len));
+      const weight = len / (depth + 1);
+      segments.push({ start, end, depth, length: len, weight });
+      
+      const d = end.length();
+      if (d > maxDist) maxDist = d;
+
+      if (depth < 4) { // Recursión hasta 4 niveles
+        const numForks = Math.floor(Math.random() * 3) + 2; // 2 a 4 subdivisiones
+        bifurcations.push(end.clone());
+        
+        for (let i = 0; i < numForks; i++) {
+          const spread = 0.3 + depth * 0.2;
+          const axis = new THREE.Vector3(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5).normalize();
+          const newDir = dir.clone().applyAxisAngle(axis, (Math.random() * spread)).normalize();
+          const newLen = len * (0.5 + Math.random() * 0.3);
+          growBranch(end, newDir, newLen, depth + 1);
+        }
+      }
+    };
+
+    const numMainBranches = 12;
+    for (let i = 0; i < numMainBranches; i++) {
+      const phi = Math.acos(-1 + (2 * i) / numMainBranches);
+      const theta = Math.sqrt(numMainBranches * Math.PI) * phi;
+      const dir = new THREE.Vector3(
+        Math.cos(theta) * Math.sin(phi),
+        Math.sin(theta) * Math.sin(phi),
+        Math.cos(phi)
+      ).normalize();
+      
+      const start = dir.clone().multiplyScalar(somaRadius * 0.9);
+      growBranch(start, dir, 2.5 + Math.random(), 0);
+    }
+
+    // C) POBLAR RAMAS CON PARTÍCULAS
+    const totalWeight = segments.reduce((sum, seg) => sum + seg.weight, 0);
+    
+    segments.forEach(seg => {
+      const segParticles = Math.floor(BRANCH_COUNT * (seg.weight / totalWeight));
+      for (let i = 0; i < segParticles; i++) {
+        if (offset >= count - NODE_COUNT) break;
+        
+        const t = Math.random();
+        const basePos = seg.start.clone().lerp(seg.end, t);
+        
+        const thickness = 0.18 / (seg.depth + 1);
+        const jitter = new THREE.Vector3(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5).normalize().multiplyScalar(Math.random() * thickness);
+        const initPos = basePos.add(jitter);
+        
+        const bDist = initPos.length() / maxDist;
+        const targetPos = initPos.clone().normalize().multiplyScalar(1.4 + Math.random() * 0.6);
+        
+        addParticle(initPos, targetPos, 1.0, bDist, 1.2 + Math.random() * 1.0);
+      }
+    });
+
+    // D) GENERAR NODOS SINÁPTICOS (Destellos en bifurcaciones)
+    const synapticNodes = bifurcations.sort(() => 0.5 - Math.random()).slice(0, 10);
+    const particlesPerNode = Math.floor(NODE_COUNT / synapticNodes.length);
+
+    synapticNodes.forEach(nodePos => {
+      for (let i = 0; i < particlesPerNode; i++) {
+        if (offset >= count) break;
+        const r = Math.cbrt(Math.random()) * 0.3;
+        const jitter = new THREE.Vector3(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5).normalize().multiplyScalar(r);
+        const initPos = nodePos.clone().add(jitter);
+        
+        const bDist = initPos.length() / maxDist;
+        const targetPos = initPos.clone().normalize().multiplyScalar(1.6 + Math.random() * 0.2);
+        
+        addParticle(initPos, targetPos, 2.0, bDist, 1.5 + Math.random() * 1.5);
+      }
+    });
+
+    // Rellenar residuos
+    while (offset < count) {
+      addParticle(new THREE.Vector3(), new THREE.Vector3(), 0.0, 0.0, 1.0);
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(initialPositions, 3));
+    geometry.setAttribute("aTargetPosition", new THREE.BufferAttribute(targetPositions, 3));
+    geometry.setAttribute("aType", new THREE.BufferAttribute(types, 1));
+    geometry.setAttribute("aBranchDist", new THREE.BufferAttribute(branchDist, 1));
+    geometry.setAttribute("aRandom", new THREE.BufferAttribute(randoms, 1));
+    geometry.setAttribute("aSize", new THREE.BufferAttribute(sizes, 1));
+    geometry.setAttribute("aDistToCenter", new THREE.BufferAttribute(distToCenter, 1));
+
+    return geometry;
+  }, [count]);
+}
+
+// ============================================================================
+// CORRECCIÓN 5: CAPA DE ESTRELLAS DE FONDO (Profundidad Espacial)
+// ============================================================================
+function BackgroundStars({ count = 350 }: { count?: number }) {
+  const geometry = useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = 12 + Math.random() * 15;
+      const theta = Math.random() * 2 * Math.PI;
+      const phi = Math.acos(Math.random() * 2 - 1);
+      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      pos[i * 3 + 2] = r * Math.cos(phi);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    return geo;
+  }, [count]);
+
+  return (
+    <points geometry={geometry}>
+      <pointsMaterial 
+        size={0.06} 
+        color="#3F5FFF" 
+        transparent 
+        opacity={0.35} 
+        depthWrite={false} 
+        blending={THREE.AdditiveBlending} 
+      />
+    </points>
+  );
+}
+
+// ============================================================================
+// ESCENA THREE.JS
+// ============================================================================
+interface NeuronSceneProps {
+  scrollProgress: number;
+  particleCount?: number;
+}
+
+function NeuronScene({ scrollProgress, particleCount = DEFAULT_PARTICLE_COUNT }: NeuronSceneProps) {
+  const pointsRef = useRef<THREE.Points>(null!);
+  const materialRef = useRef<THREE.ShaderMaterial>(null!);
+  const geometry = useNeuronBufferGeometry(particleCount);
+
+  const mousePos = useRef({ x: 0, y: 0 });
+  const smoothedProgress = useRef(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mousePos.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
+      mousePos.current.y = -(e.clientY / window.innerHeight - 0.5) * 2;
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  useFrame((state, delta) => {
+    if (!materialRef.current || !pointsRef.current) return;
+
+    smoothedProgress.current = THREE.MathUtils.damp(smoothedProgress.current, scrollProgress, 8.0, delta);
+
+    materialRef.current.uniforms.uProgress.value = smoothedProgress.current;
+    materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime();
+    materialRef.current.uniforms.uPixelRatio.value = Math.min(state.viewport.dpr, 2.0);
+
+    pointsRef.current.rotation.y += delta * 0.05;
+
+    const targetRotX = mousePos.current.y * 0.18;
+    const targetRotZ = -mousePos.current.x * 0.15;
+    pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, targetRotX, delta * 3.0);
+    pointsRef.current.rotation.z = THREE.MathUtils.lerp(pointsRef.current.rotation.z, targetRotZ, delta * 3.0);
+  });
+
+  return (
+    <>
+      <BackgroundStars />
+      <points ref={pointsRef} geometry={geometry}>
+        <shaderMaterial
+          ref={materialRef}
+          args={[NeuronShaderDefinition]}
+          transparent
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
+      </points>
+    </>
+  );
+}
+
+// ============================================================================
+// FALLBACK MOBILE ESTÁTICO
+// ============================================================================
+function MobileStaticFallback() {
+  return (
+    <div className="relative flex items-center justify-center w-full h-full overflow-hidden" style={{ backgroundColor: BRAND_COLORS.bgDark }}>
+      <div className="absolute rounded-full pointer-events-none" style={{
+        width: "260px", height: "260px",
+        background: `radial-gradient(circle, ${BRAND_COLORS.greenReserved} 0%, ${BRAND_COLORS.blueVibrant} 45%, ${BRAND_COLORS.blueDark} 75%, transparent 88%)`,
+        filter: "blur(35px)", opacity: 0.7,
+      }} />
+      <svg className="relative z-10 w-64 h-64" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="mobileFinalGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={BRAND_COLORS.greenReserved} stopOpacity="1" />
+            <stop offset="50%" stopColor={BRAND_COLORS.blueVibrant} stopOpacity="0.85" />
+            <stop offset="100%" stopColor={BRAND_COLORS.blueDark} stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <g stroke={BRAND_COLORS.blueVibrant} strokeWidth="1.2" strokeOpacity="0.55">
+          {[...Array(16)].map((_, i) => {
+            const angle = (i / 16) * Math.PI * 2;
+            return <line key={i} x1="100" y1="100" x2={100 + Math.cos(angle) * 75} y2={100 + Math.sin(angle) * 75} strokeDasharray="3 4" />;
+          })}
+        </g>
+        <circle cx="100" cy="100" r="34" fill="url(#mobileFinalGlow)" />
+        <circle cx="100" cy="100" r="12" fill={BRAND_COLORS.greenReserved} />
+      </svg>
+    </div>
+  );
+}
+
+// ============================================================================
+// COMPONENTE PRINCIPAL
+// ============================================================================
+export interface NeuronHeroProps {
+  scrollRangePx?: number;
+  particleCount?: number;
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export default function NeuronHero({ scrollRangePx = HERO_SCROLL_RANGE, particleCount = DEFAULT_PARTICLE_COUNT, className = "", children }: NeuronHeroProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const updateMobile = () => setIsMobile(media.matches);
+    updateMobile();
+    media.addEventListener("change", updateMobile);
+    return () => media.removeEventListener("change", updateMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const scrolled = -containerRef.current.getBoundingClientRect().top;
+      if (scrolled <= 0) setScrollProgress(0);
+      else if (scrolled >= scrollRangePx) setScrollProgress(1);
+      else setScrollProgress(scrolled / scrollRangePx);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isMobile, scrollRangePx]);
+
+  if (isMobile === null) return <div className={`w-full h-screen ${className}`} style={{ backgroundColor: BRAND_COLORS.bgDark }} />;
+
+  if (isMobile) {
+    return (
+      <section ref={containerRef} className={`relative w-full h-[620px] flex items-center justify-center overflow-hidden ${className}`} style={{ backgroundColor: BRAND_COLORS.bgDark }}>
+        <MobileStaticFallback />
+        {children && <div className="absolute inset-0 z-20 pointer-events-auto">{children}</div>}
+      </section>
+    );
+  }
+
+  return (
+    <section ref={containerRef} className={`relative w-full ${className}`} style={{ backgroundColor: BRAND_COLORS.bgDark, height: `calc(100vh + ${scrollRangePx}px)` }}>
+      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden">
+        <Canvas camera={{ position: [0, 0, 7.5], fov: 45 }} gl={{ antialias: false, powerPreference: "high-performance", alpha: false }} dpr={[1, 2]}>
+          <color attach="background" args={[BRAND_COLORS.bgDark]} />
+          <NeuronScene scrollProgress={scrollProgress} particleCount={particleCount} />
+        </Canvas>
+        {children && <div className="absolute inset-0 z-20 pointer-events-none"><div className="w-full h-full pointer-events-auto">{children}</div></div>}
+      </div>
+    </section>
+  );
+}

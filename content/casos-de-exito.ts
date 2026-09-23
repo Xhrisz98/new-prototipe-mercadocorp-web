@@ -28,10 +28,6 @@ export interface CasosDeExitoContent {
     ctaPrimary: { label: string; href: string };
     ctaSecondary: { label: string; href: string };
   };
-  stats: {
-    number: string;
-    label: string;
-  }[];
   notice: {
     title: string;
     body: string;
@@ -73,12 +69,6 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
         href: "/tecnologia-automatizacion",
       },
     },
-    stats: [
-      { number: "24/7", label: "Atención y ventas automatizadas, sin horario" },
-      { number: "100%", label: "Trazabilidad del pipeline comercial, cero leads perdidos" },
-      { number: "Ecuador · LatAm", label: "Presencia y operación remota sin fricción" },
-      { number: "A medida", label: "Construido sobre su operación real, sin plantillas" },
-    ],
     notice: {
       title: "Casos de Éxito en Construcción",
       body: "Estamos confirmando con nuestros clientes qué proyectos pueden publicarse con nombre, logo y detalle verificado. Esta sección se completará únicamente con casos reales y aprobados — no publicamos cifras ni clientes sin confirmar.",
@@ -129,12 +119,6 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
         href: "/tecnologia-automatizacion",
       },
     },
-    stats: [
-      { number: "24/7", label: "Autonomous advisory and sales, zero downtime" },
-      { number: "100%", label: "Pipeline traceability, zero leads dropped" },
-      { number: "Ecuador · LatAm", label: "Seamless remote deployment across regions" },
-      { number: "Custom Built", label: "Tailored to your real workflows, never forced templates" },
-    ],
     notice: {
       title: "Case Studies in Progress",
       body: "We are confirming with our clients which projects can be published with name, logo, and verified detail. This section will only be completed with real, approved case studies — we do not publish unconfirmed clients or figures.",
@@ -185,12 +169,6 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
         href: "/tecnologia-automatizacion",
       },
     },
-    stats: [
-      { number: "24/7", label: "Автоматизированные консультации и продажи" },
-      { number: "100%", label: "Прозрачность воронки, ни одного потерянного лида" },
-      { number: "Эквадор · LatAm", label: "Удаленная работа и внедрение без границ" },
-      { number: "Под ключ", label: "Разработано под реальные процессы бизнеса" },
-    ],
     notice: {
       title: "Кейсы в процессе подтверждения",
       body: "Мы согласовываем с клиентами, какие проекты можно опубликовать с названием, логотипом и проверенными деталями. Этот раздел будет дополнен только реальными, подтвержденными кейсами — без неподтвержденных клиентов или показателей.",

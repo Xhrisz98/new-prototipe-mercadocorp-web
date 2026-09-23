@@ -31,6 +31,12 @@ export interface MindPageContent {
     ctaPrimary: { label: string; href: string; external: boolean };
     ctaSecondary: { label: string; href: string };
   };
+  closingCta: {
+    title: string;
+    description: string;
+    ctaPrimary: { label: string; href: string; external: boolean };
+    ctaSecondary: { label: string; href: string; external: boolean };
+  };
   internalLinks: {
     title: string;
     links: { label: string; href: string }[];
@@ -96,6 +102,20 @@ const contentData: Record<Locale, MindPageContent> = {
       ctaSecondary: {
         label: "Prefiero que me llamen →",
         href: "/contacto",
+      },
+    },
+    closingCta: {
+      title: "¿Listo para que Mind atienda su primera conversación?",
+      description: "Vea el producto completo, sus módulos y planes en su propio dominio.",
+      ctaPrimary: {
+        label: "Ver Mind en mind.ec",
+        href: "https://mind.ec",
+        external: true,
+      },
+      ctaSecondary: {
+        label: "Cotizar por WhatsApp",
+        href: "https://wa.me/593983315439?text=Hola,%20deseo%20información%20sobre%20Mind",
+        external: true,
       },
     },
     internalLinks: {
@@ -168,6 +188,20 @@ const contentData: Record<Locale, MindPageContent> = {
         href: "/contacto",
       },
     },
+    closingCta: {
+      title: "Ready for Mind to handle its first conversation?",
+      description: "See the complete product, its modules, and plans on its own domain.",
+      ctaPrimary: {
+        label: "See Mind at mind.ec",
+        href: "https://mind.ec",
+        external: true,
+      },
+      ctaSecondary: {
+        label: "Get a Quote via WhatsApp",
+        href: "https://wa.me/593983315439?text=Hello,%20I%20would%20like%20information%20about%20Mind",
+        external: true,
+      },
+    },
     internalLinks: {
       title: "Explore Related Solutions",
       links: [
@@ -236,6 +270,20 @@ const contentData: Record<Locale, MindPageContent> = {
       ctaSecondary: {
         label: "Заказать звонок →",
         href: "/contacto",
+      },
+    },
+    closingCta: {
+      title: "Готовы, чтобы Mind обработал свой первый диалог?",
+      description: "Посмотрите продукт целиком, его модули и тарифы на собственном домене.",
+      ctaPrimary: {
+        label: "Открыть Mind на mind.ec",
+        href: "https://mind.ec",
+        external: true,
+      },
+      ctaSecondary: {
+        label: "Запросить расценки в WhatsApp",
+        href: "https://wa.me/593983315439?text=Здравствуйте,%20интересует%20Mind",
+        external: true,
       },
     },
     internalLinks: {

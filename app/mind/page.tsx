@@ -234,6 +234,45 @@ export default function MindPage() {
           </div>
         </section>
 
+        {/* CTA de Cierre de Mind */}
+        <section className="w-full py-16 md:py-24 bg-[var(--color-surface)] border-y border-[var(--color-border)]">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2
+              className="text-2xl sm:text-4xl font-medium tracking-tight mb-5 text-[var(--color-text)]"
+              style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
+            >
+              {content.closingCta.title}
+            </h2>
+            <p className="text-base sm:text-lg text-[var(--color-text-muted)] leading-relaxed mb-8 max-w-2xl mx-auto">
+              {content.closingCta.description}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Button
+                variant="primary"
+                size="lg"
+                href={content.closingCta.ctaPrimary.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                icon={<ExternalLink className="w-4 h-4" />}
+                iconPosition="right"
+              >
+                {content.closingCta.ctaPrimary.label}
+              </Button>
+              <Button
+                variant="secondary"
+                size="lg"
+                href={content.closingCta.ctaSecondary.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                icon={<MessageSquare className="w-4 h-4" />}
+                iconPosition="left"
+              >
+                {content.closingCta.ctaSecondary.label}
+              </Button>
+            </div>
+          </div>
+        </section>
+
         {/* Enlazado Interno de Retención */}
         <InternalLinksStrip
           title={content.internalLinks.title}

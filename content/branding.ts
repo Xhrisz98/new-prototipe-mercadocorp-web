@@ -32,6 +32,12 @@ export interface BrandingPageContent {
     sectionSubtitle: string;
     items: FeatureItem[];
   };
+  reasoningBlock: {
+    badge: string;
+    title: string;
+    body: string;
+    cta: { label: string; href: string };
+  };
   finalCta: {
     title: string;
     description: string;
@@ -132,6 +138,15 @@ const contentData: Record<Locale, BrandingPageContent> = {
           tag: "Métricas",
         },
       ],
+    },
+    reasoningBlock: {
+      badge: "¿Y si ya tengo una agencia?",
+      title: "¿No es esto lo mismo que ya hacía la agencia de siempre?",
+      body: "No. La diferencia no es el contenido, es lo que hay detrás: cada pieza responde a una estrategia de datos, no a un calendario que hay que llenar. Y si ya resolvió la parte tecnológica con nosotros, esta capa se conecta directo con lo que el CRM y los agentes ya saben de sus clientes — algo que una agencia de marketing tradicional no puede hacer.",
+      cta: {
+        label: "Hablar de mi marca",
+        href: "/contacto",
+      },
     },
     finalCta: {
       title: "¿Listo para posicionar su marca como referente de la industria?",
@@ -241,6 +256,15 @@ const contentData: Record<Locale, BrandingPageContent> = {
         },
       ],
     },
+    reasoningBlock: {
+      badge: "What if I already have an agency?",
+      title: "Isn't this the same as what my usual agency already does?",
+      body: "No. The difference isn't the content, it's what's behind it: every piece responds to a data strategy, not a calendar that needs filling. And if you've already solved the technology side with us, this layer connects directly with what the CRM and the agents already know about your clients — something a traditional marketing agency can't do.",
+      cta: {
+        label: "Talk About My Brand",
+        href: "/contacto",
+      },
+    },
     finalCta: {
       title: "Ready to position your brand as an industry reference?",
       description:
@@ -348,6 +372,15 @@ const contentData: Record<Locale, BrandingPageContent> = {
           tag: "Метрики",
         },
       ],
+    },
+    reasoningBlock: {
+      badge: "А если у меня уже есть агентство?",
+      title: "Разве это не то же самое, что уже делает моё обычное агентство?",
+      body: "Нет. Разница не в контенте, а в том, что стоит за ним: каждый материал отвечает стратегии на основе данных, а не календарю, который нужно заполнять. А если вы уже решили технологическую часть с нами, этот слой напрямую подключается к тому, что CRM и агенты уже знают о ваших клиентах — то, чего традиционное маркетинговое агентство сделать не может.",
+      cta: {
+        label: "Обсудить мой бренд",
+        href: "/contacto",
+      },
     },
     finalCta: {
       title: "Готовы закрепить позицию лидера в вашей индустрии?",

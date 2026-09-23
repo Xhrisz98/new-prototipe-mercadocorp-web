@@ -47,8 +47,10 @@ app/
 components/
   ui/                        # Button (pill), Card, Badge, FormField, ProductShowcase (mockup de navegador para capturas de producto), FloatingWhatsAppQR (widget flotante global), InteractiveTreeQR (QR + WhatsApp), ScrollProgress (barra de progreso de scroll)
   layout/                    # Navbar (con toggle tema + LanguageSelector), Footer
-  sections/                  # Hero, PillarCard, FAQAccordion, CaseStudyCard, StatsStrip
-  three/                     # KineticNeuralCore (Hero Inicio — icosaedro wireframe + anillos orbitales + facetas, reemplaza al ParticleNetwork original de este plan), AgentSphere (Mind) — cada uno "use client" con fallback estático mobile
+  sections/                  # Hero, PillarCard, FAQAccordion, CaseStudyCard, StatsStrip, TrustStrip, ReasoningBlock, ServiceNodeDiagram (2D, SVG + Motion — diagrama de 3 nodos con scroll-reveal, hub Tecnología, ver §5.4 Capa 1)
+  three/                     # NeuralNetworkCore (Hero Inicio — red neuronal de IA abstracta: nodos + conexiones por capas, morph controlado por scroll; reemplaza a NeuralAgentCore, que a su vez había reemplazado a KineticNeuralCore, que a su vez había reemplazado al ParticleNetwork original), AgentSphere (Mind) — cada uno "use client" con fallback estático mobile
+
+**Deuda técnica activa a limpiar una vez NeuralNetworkCore esté verificado:** `KineticNeuralCore.tsx` y `NeuralAgentCore.tsx` quedan como código muerto (no importados) tras este cambio — es la tercera iteración del hero de Inicio. A diferencia de las veces anteriores, esta vez ambos archivos se eliminan del repo apenas se confirme visualmente que `NeuralNetworkCore` funciona — no se conservan "por si acaso". Acumular componentes 3D huérfanos ya es un patrón repetido que hay que cortar aquí.
 lib/
   design-tokens.ts           # Todos los colores/tipografía de la sección 4, como constantes — nunca hardcodear hex sueltos en componentes
 content/
@@ -112,7 +114,7 @@ Cada página usa el copy exacto de `copywriting-nueva-web-mercadocorp.md` (títu
 4. CTA final
 
 **Casos especiales:**
-- **Inicio (`/`)** — única página con el componente Three.js `KineticNeuralCore` en el hero (icosaedro wireframe + anillos orbitales + partículas, todo en azules de marca — oficializado en reemplazo del `ParticleNetwork` original de este plan; `ParticleNetwork.tsx` se elimina del repo por ser código muerto)
+- **Inicio (`/`)** — única página con el componente Three.js `NeuralNetworkCore` en el hero: red neuronal de IA abstracta (nodos en capas conectados por líneas de luz, no una neurona biológica), posicionada de forma asimétrica para no cruzar el bloque de texto del H1. En reposo (0% scroll) los nodos/conexiones están en azules de marca; al hacer scroll dentro del rango del hero, converge hacia un estado "activado" con acento verde `#04E7AF` únicamente en ese estado final. Reemplaza a `NeuralAgentCore` (neurona orgánica, descartada por no leerse como "red neuronal de IA")
 - **Mind (`/mind`)** — único lugar del sitio con el acento verde `#04E7AF` y el componente `AgentSphere`; el CTA principal es un link externo `target="_blank"` a `mind.ec`/`crm.mind.ec`, no un formulario interno
 - **Casos de Éxito (`/casos-de-exito`)** — construir con datos placeholder tipados (`content/casos-de-exito.ts` con array vacío o de ejemplo comentado) hasta que se confirme la lista definitiva de clientes — **no inventar clientes ni cifras**
 - **Nosotros (`/nosotros`)** — la sección "Trayectoria" queda como placeholder visual (título + nota "Próximamente") hasta tener hitos reales
@@ -145,6 +147,20 @@ Cada una mantiene su estructura ya definida en la sección "Contenido por págin
 
 Ningún emoji (✅, 🚀, 💡, etc.) en copy, UI, badges, ni bullets de ninguna página, en ningún idioma. Todo ícono usa `lucide-react` (ya está en el stack vía `ProductShowcase`/`FloatingWhatsAppQR`) — consistente con el resto del sistema de diseño. Si un componente actual usa un emoji como ícono, se reemplaza por el ícono de `lucide-react` semánticamente más cercano.
 
+## 5.4 Scroll-reveal en Tecnología (hub)
+
+Dos capas complementarias, ambas activadas por scroll — no se mezclan entre sí:
+
+**Capa 1 — Diagrama de nodos interactivo (2D, no Three.js)**
+Un diagrama SVG/Motion de nodos abstractos conectados (mismo lenguaje visual que `NeuralNetworkCore`, pero en 2D — nunca una tercera escena WebGL, ya hay 2 piezas 3D "premium" en el sitio y agregar una más diluye su valor). A medida que el usuario hace scroll, cada nodo se activa y revela un ícono de `lucide-react` + etiqueta corta de texto, representando: Agentes de IA, CRM/Automatización, Software a Medida (los 3 servicios del pilar). Colores: azules de marca en reposo, el nodo activo puede usar el acento `#04E7AF` momentáneamente al revelarse (excepción puntual ya cubierta por el contexto de Tecnología/IA).
+
+**Capa 2 — ProductShowcase por tarjeta de servicio**
+Como ya estaba definido: cada tarjeta de servicio revela su captura asociada al entrar al viewport — Mind con captura real de `crm.mind.ec`, Aplicaciones y E-commerce con mockup genérico/ficticio (nunca un cliente real, mismo límite que Casos de Éxito hasta tener lista confirmada). Transición vía `whileInView` de Motion.
+
+La Capa 1 vive más arriba en la página (cerca del hero del hub, como transición conceptual), la Capa 2 vive junto a cada tarjeta de servicio — no se superponen ni compiten por el mismo espacio de scroll.
+
+## 6. Fases de construcción (pensadas para el Manager View de Antigravity — varios agentes en paralelo)
+
 **Fase 0 — Fundaciones (agente único, bloqueante para todo lo demás)**
 - Setup del proyecto Next.js + Tailwind + fuentes + `design-tokens.ts`
 - `ThemeProvider` con toggle claro/oscuro persistente (`localStorage` + atributo `class` en `<html>`)
@@ -155,6 +171,7 @@ Ningún emoji (✅, 🚀, 💡, etc.) en copy, UI, badges, ni bullets de ninguna
 - Agente A: Inicio completo (incluye `ParticleNetwork`)
 - Agente B: Tecnología & Automatización + Marketing Digital (hubs)
 - **Verificación:** captura de cada hero en claro/oscuro + mobile (375px) y desktop (1440px)
+
 
 **Fase 2 — Páginas hijas de servicio (5 páginas, hasta 3 agentes en paralelo)**
 - Aplicaciones y Herramientas Digitales, E-commerce Inteligente, Estrategia/Creatividad/Branding, Auditoría Digital, Gestión de Eventos

@@ -136,7 +136,7 @@ export function Hero({
                 variant="secondary"
                 size="lg"
                 href={ctaSecondary.href}
-                className="backdrop-blur-md bg-white/5 border border-white/15 dark:border-white/20 hover:bg-white/10 dark:text-white transition-all duration-300"
+                className="backdrop-blur-md bg-[var(--color-text)]/5 dark:bg-white/5 border border-[var(--color-text)]/15 dark:border-white/20 text-[var(--color-text)] hover:bg-[var(--color-text)]/10 dark:text-white dark:hover:bg-white/10 transition-all duration-300"
               >
                 {ctaSecondary.label}
               </Button>

@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { DualPillarsBlock } from "@/components/sections/DualPillarsBlock";
 import { FeatureGrid } from "@/components/sections/FeatureGrid";
+import { ReasoningBlock } from "@/components/sections/ReasoningBlock";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { useLocale } from "@/components/i18n/LocaleProvider";
@@ -42,6 +43,14 @@ export default function BrandingPage() {
           sectionTitle={content.features.sectionTitle}
           sectionSubtitle={content.features.sectionSubtitle}
           items={content.features.items}
+        />
+
+        {/* Bloque de Objeción / Diferenciación frente a Agencia Tradicional */}
+        <ReasoningBlock
+          badge={content.reasoningBlock.badge}
+          title={content.reasoningBlock.title}
+          body={content.reasoningBlock.body}
+          cta={content.reasoningBlock.cta}
         />
 
         {/* Enlazado Interno de Retención */}

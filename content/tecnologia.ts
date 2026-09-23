@@ -15,6 +15,11 @@ export interface TecnologiaContent {
     subheadline: string;
     ctaPrimary: { label: string; href: string };
   };
+  trust: {
+    title: string;
+    logos: { name: string; category: string }[];
+  };
+  stats: { value: string; label: string; description: string }[];
   services: {
     sectionTitle: string;
     sectionSubtitle: string;
@@ -66,6 +71,38 @@ const contentData: Record<Locale, TecnologiaContent> = {
         href: "/contacto",
       },
     },
+    trust: {
+      title: "Tecnología que ya opera dentro de empresas como la suya.",
+      logos: [
+        { name: "Next.js", category: "Full-Stack" },
+        { name: "Python / AI", category: "Machine Learning" },
+        { name: "PostgreSQL", category: "Base de Datos" },
+        { name: "OpenAI / Claude", category: "Modelos LLM" },
+        { name: "WhatsApp Business API", category: "Integración" },
+      ],
+    },
+    stats: [
+      {
+        value: "24/7",
+        label: "Automatización activa",
+        description: "Agentes de IA que atienden y siguen leads sin descanso, ningún horario de oficina de por medio.",
+      },
+      {
+        value: "0",
+        label: "Tareas manuales repetidas",
+        description: "Todo proceso automatizable queda automatizado — sin excepciones ni parches temporales.",
+      },
+      {
+        value: "100%",
+        label: "Trazabilidad de leads",
+        description: "Cada conversación y cada lead queda registrado dentro del CRM, de principio a fin.",
+      },
+      {
+        value: "Sin límite",
+        label: "Integraciones conectadas",
+        description: "CRM, e-commerce y pasarelas de pago funcionando como un mismo ecosistema.",
+      },
+    ],
     services: {
       sectionTitle: "Servicios Especializados del Pilar",
       sectionSubtitle:
@@ -160,6 +197,38 @@ const contentData: Record<Locale, TecnologiaContent> = {
         href: "/contacto",
       },
     },
+    trust: {
+      title: "Technology that already operates within companies like yours.",
+      logos: [
+        { name: "Next.js", category: "Full-Stack" },
+        { name: "Python / AI", category: "Machine Learning" },
+        { name: "PostgreSQL", category: "Database" },
+        { name: "OpenAI / Claude", category: "LLM Models" },
+        { name: "WhatsApp Business API", category: "Integration" },
+      ],
+    },
+    stats: [
+      {
+        value: "24/7",
+        label: "Active Automation",
+        description: "AI agents that attend to and follow up with leads tirelessly, with no office hours in between.",
+      },
+      {
+        value: "0",
+        label: "Repeated Manual Tasks",
+        description: "Every automatable process gets automated — no exceptions, no temporary patches.",
+      },
+      {
+        value: "100%",
+        label: "Lead Traceability",
+        description: "Every conversation and every lead is logged inside the CRM, from start to finish.",
+      },
+      {
+        value: "No Limit",
+        label: "Connected Integrations",
+        description: "CRM, e-commerce, and payment gateways working as a single ecosystem.",
+      },
+    ],
     services: {
       sectionTitle: "Specialized Technology Offerings",
       sectionSubtitle:
@@ -254,6 +323,38 @@ const contentData: Record<Locale, TecnologiaContent> = {
         href: "/contacto",
       },
     },
+    trust: {
+      title: "Технологии, которые уже работают в таких же компаниях, как ваша.",
+      logos: [
+        { name: "Next.js", category: "Full-Stack" },
+        { name: "Python / AI", category: "Machine Learning" },
+        { name: "PostgreSQL", category: "Базы Данных" },
+        { name: "OpenAI / Claude", category: "LLM Модели" },
+        { name: "WhatsApp Business API", category: "Интеграции" },
+      ],
+    },
+    stats: [
+      {
+        value: "24/7",
+        label: "Активная автоматизация",
+        description: "ИИ-агенты, которые без устали обслуживают и сопровождают лиды — без привязки к рабочим часам.",
+      },
+      {
+        value: "0",
+        label: "Повторяющихся ручных задач",
+        description: "Каждый процесс, который можно автоматизировать, автоматизируется — без исключений и временных заплаток.",
+      },
+      {
+        value: "100%",
+        label: "Прозрачность лидов",
+        description: "Каждый разговор и каждый лид фиксируется в CRM от начала до конца.",
+      },
+      {
+        value: "Без ограничений",
+        label: "Подключенные интеграции",
+        description: "CRM, электронная коммерция и платежные шлюзы работают как единая экосистема.",
+      },
+    ],
     services: {
       sectionTitle: "Специализированные Технологические Направления",
       sectionSubtitle:

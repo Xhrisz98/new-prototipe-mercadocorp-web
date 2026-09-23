@@ -149,7 +149,7 @@ export function InteractiveTreeQR({
       {/* Interactive Visual Display (Click to flip/toggle) */}
       <div
         onClick={() => setViewMode(viewMode === "tree" ? "qr" : "tree")}
-        className="relative group cursor-pointer w-full aspect-square max-w-[320px] mx-auto rounded-2xl overflow-hidden bg-[#F6F1E7] border border-[#E8E1D3] shadow-inner flex items-center justify-center p-3 transition-transform duration-300 hover:scale-[1.02]"
+        className="relative group cursor-pointer w-full aspect-square max-w-[320px] mx-auto rounded-2xl overflow-hidden bg-[#F6F1E7] dark:bg-[var(--color-surface)] border border-[#E8E1D3] dark:border-[var(--color-border)] shadow-inner flex items-center justify-center p-3 transition-transform duration-300 hover:scale-[1.02]"
         title={t.tapHint}
       >
         <AnimatePresence mode="wait">

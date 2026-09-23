@@ -31,27 +31,6 @@ export default function CasosDeExitoPage() {
           align="center"
         />
 
-        {/* Franja de Cifras Generales de Capacidad */}
-        <section className="w-full py-12 bg-[var(--color-surface)] border-y border-[var(--color-border)]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {content.stats.map((stat, idx) => (
-                <div key={idx} className="flex flex-col items-center text-center">
-                  <span
-                    className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[var(--color-primary)] mb-2"
-                    style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
-                  >
-                    {stat.number}
-                  </span>
-                  <span className="text-xs sm:text-sm text-[var(--color-text-muted)] max-w-[180px] leading-snug">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Lista de Casos Cualitativos Verificados */}
         <section className="w-full py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
