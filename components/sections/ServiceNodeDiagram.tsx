@@ -7,9 +7,9 @@ import { colors } from "@/lib/design-tokens";
 
 // Diagrama de nodos 2D (SVG + Motion) — capa 1 de scroll-reveal del hub de
 // Tecnología (PROJECT_PLAN.md §5.4). Intencionalmente plano: NO Three.js/R3F,
-// para no diluir el valor de las 2 piezas 3D "premium" del sitio (NeuralAgentCore,
-// AgentSphere). Mismo lenguaje visual (nodos + conexiones curvas, gradiente
-// azul de marca) pero sin WebGL.
+// para no diluir el valor de las 2 piezas 3D "premium" del sitio (DataFlowCore,
+// AgentSphere). Mismo lenguaje visual (conexiones curvas, gradiente azul de
+// marca) pero sin WebGL.
 const NODES = [
   { id: "ai-agents", icon: Bot, label: "Agentes de IA", x: 14, y: 70 },
   { id: "crm", icon: Workflow, label: "CRM/Automatización", x: 50, y: 24 },

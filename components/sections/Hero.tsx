@@ -51,21 +51,26 @@ export function Hero({
         </div>
       )}
 
-      {/* Iluminación Atmosférica estilo CollectUI (Multi-capa Radial Glow) */}
+      {/* Iluminación Atmosférica estilo CollectUI (Multi-capa Radial Glow).
+          En layout a la izquierda el brillo acompaña al visual del lado derecho. */}
       <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] md:w-[900px] h-[400px] md:h-[500px] bg-[var(--color-primary)]/15 dark:bg-[var(--color-primary)]/20 rounded-full blur-[130px] pointer-events-none z-0"
+        className={`absolute ${isCenter ? "top-1/3 left-1/2" : "top-1/2 left-[72%]"} -translate-x-1/2 -translate-y-1/2 w-[650px] md:w-[900px] h-[400px] md:h-[500px] bg-[var(--color-primary)]/15 dark:bg-[var(--color-primary)]/20 rounded-full blur-[130px] pointer-events-none z-0`}
         aria-hidden="true"
       />
       <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] h-[250px] bg-[#3F5FFF]/20 dark:bg-[#3F5FFF]/25 rounded-full blur-[90px] pointer-events-none z-0"
+        className={`absolute ${isCenter ? "top-1/4 left-1/2" : "top-[52%] left-[74%]"} -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] h-[250px] bg-[#3F5FFF]/20 dark:bg-[#3F5FFF]/25 rounded-full blur-[90px] pointer-events-none z-0`}
         aria-hidden="true"
       />
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}
-        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 my-auto"
+        className={`relative z-10 mx-auto px-4 sm:px-6 lg:px-8 my-auto ${isCenter ? "max-w-5xl" : "max-w-7xl w-full"}`}
       >
-        <div className={`relative flex flex-col ${isCenter ? "items-center text-center" : "items-start text-left"}`}>
+        {/* data-hero-text: el canvas 3D mide esta columna para no dibujar nunca sobre el texto */}
+        <div
+          data-hero-text
+          className={`relative flex flex-col ${isCenter ? "items-center text-center" : "items-start text-left max-w-xl"}`}
+        >
           {/* Velo de contraste radial suave detrás del texto */}
           <div
             className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,var(--color-bg)_0%,transparent_75%)] opacity-70 dark:opacity-60 pointer-events-none"
@@ -97,7 +102,7 @@ export function Hero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-[-0.035em] leading-[1.08] mb-4 sm:mb-6 text-[var(--color-text)] max-w-4xl"
+            className={`${isCenter ? "text-3xl sm:text-5xl md:text-6xl lg:text-7xl max-w-4xl" : "text-3xl sm:text-5xl lg:text-6xl"} font-medium tracking-[-0.035em] leading-[1.08] mb-4 sm:mb-6 text-[var(--color-text)]`}
             style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
           >
             {h1}
@@ -118,7 +123,7 @@ export function Hero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="flex flex-wrap items-center justify-center gap-4"
+            className={`flex flex-wrap items-center gap-4 ${isCenter ? "justify-center" : "justify-start"}`}
           >
             <Button
               variant="primary"
@@ -149,7 +154,7 @@ export function Hero({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 pt-6 border-t border-[var(--color-border)]/50 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-[var(--color-text-muted)] font-medium"
+              className={`mt-8 pt-6 border-t border-[var(--color-border)]/50 flex flex-wrap items-center text-xs text-[var(--color-text-muted)] font-medium ${isCenter ? "justify-center gap-6 sm:gap-10" : "justify-start gap-x-6 gap-y-3"}`}
             >
               <div className="inline-flex items-center gap-2">
                 <Zap className="w-3.5 h-3.5 text-[var(--color-primary)]" />
@@ -172,7 +177,7 @@ export function Hero({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-8 sm:mt-10 flex flex-col items-center justify-center gap-2.5 opacity-50 hover:opacity-100 transition-opacity cursor-default"
+              className={`mt-8 sm:mt-10 flex flex-col justify-center gap-2.5 opacity-50 hover:opacity-100 transition-opacity cursor-default ${isCenter ? "items-center" : "items-start"}`}
             >
               <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[var(--color-text-muted)]">
                 SCROLL

@@ -4,7 +4,7 @@ import React from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { NeuralAgentCore } from "@/components/three/NeuralAgentCore";
+import { DataFlowCore } from "@/components/three/DataFlowCore";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { PainBlock } from "@/components/sections/PainBlock";
 import { PillarCard } from "@/components/sections/PillarCard";
@@ -36,15 +36,15 @@ export default function HomePage() {
       <Navbar />
 
       <main className="flex-1">
-        {/* 1. Hero con Canvas Three.js NeuralAgentCore (neurona con morph por scroll) */}
+        {/* 1. Hero con Canvas Three.js DataFlowCore (espiral de flujo de datos, lado derecho) */}
         <Hero
           badge={content.hero.badge}
           h1={content.hero.h1}
           subheadline={content.hero.subheadline}
           ctaPrimary={content.hero.ctaPrimary}
           ctaSecondary={content.hero.ctaSecondary}
-          threeCanvas={<NeuralAgentCore />}
-          align="center"
+          threeCanvas={<DataFlowCore />}
+          align="left"
           showProofChips={true}
           showScrollIndicator={true}
         />
