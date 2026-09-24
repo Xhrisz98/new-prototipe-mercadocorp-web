@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/Badge";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 interface PillarCardProps {
-  number: string;
   title: string;
   description: string;
   href: string;
@@ -16,7 +15,6 @@ interface PillarCardProps {
 }
 
 export function PillarCard({
-  number,
   title,
   description,
   href,
@@ -26,24 +24,21 @@ export function PillarCard({
 }: PillarCardProps) {
   return (
     <div
-      className={`relative p-8 sm:p-9 rounded-3xl border transition-all duration-300 flex flex-col justify-between group backdrop-blur-md ${
+      className={`relative p-8 sm:p-9 rounded-3xl border transition-[border-color,box-shadow,transform] duration-300 flex flex-col justify-between group backdrop-blur-md ${
         isMind
           ? "border-[var(--color-ai-accent)]/30 bg-[var(--color-surface)]/90 shadow-[0_0_30px_rgba(4,231,175,0.08)] hover:border-[var(--color-ai-accent)]/70 hover:shadow-[0_12px_40px_rgba(4,231,175,0.18)] hover:-translate-y-2"
           : "border-[var(--color-border)] bg-[var(--color-surface)]/90 hover:border-[var(--color-primary)]/50 hover:shadow-[0_12px_40px_rgba(0,34,210,0.14)] hover:-translate-y-2"
       }`}
     >
       <div>
-        <div className="flex items-center justify-between mb-6">
-          <span className="text-3xl font-mono font-extrabold text-[var(--color-text-muted)]/30 group-hover:text-[var(--color-primary)]/40 transition-colors">
-            {number}
-          </span>
-          {badge && (
+        {badge && (
+          <div className="flex items-center justify-end mb-6">
             <Badge variant={isMind ? "ai" : "brand"} size="sm" dot={isMind}>
               {isMind && <Sparkles className="w-3 h-3 mr-1 inline" />}
               {badge}
             </Badge>
-          )}
-        </div>
+          </div>
+        )}
 
         <h3 className="text-xl sm:text-2xl font-bold mb-3 text-[var(--color-text)] leading-snug">
           {title}

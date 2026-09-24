@@ -150,7 +150,7 @@ const contentData: Record<Locale, MarketingContent> = {
       },
     },
     internalLinks: {
-      title: "Continuar explorando el ecosistema:",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Estrategia y Branding Personal", href: "/estrategia-creatividad-branding" },
         { label: "Auditoría Digital", href: "/auditoria-digital" },
@@ -262,7 +262,7 @@ const contentData: Record<Locale, MarketingContent> = {
       },
     },
     internalLinks: {
-      title: "Explore related ecosystem modules:",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Strategy & Branding", href: "/estrategia-creatividad-branding" },
         { label: "Digital Audit", href: "/auditoria-digital" },
@@ -374,7 +374,7 @@ const contentData: Record<Locale, MarketingContent> = {
       },
     },
     internalLinks: {
-      title: "Другие разделы экосистемы:",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Стратегия и Личный Бренд", href: "/estrategia-creatividad-branding" },
         { label: "Цифровой Аудит", href: "/auditoria-digital" },

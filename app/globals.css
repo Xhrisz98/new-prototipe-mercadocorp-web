@@ -12,6 +12,10 @@
 }
 
 :root {
+  /* color-scheme por el valor del tema activo (no "light dark": el toggle es manual,
+     vía .dark en <html>, no debe seguir prefers-color-scheme del SO). Corrige el
+     chrome nativo del navegador (scrollbar, <select>, date pickers) en modo oscuro. */
+  color-scheme: light;
   /* Tokens Oficiales Tema Claro */
   --color-bg: #FAFAFB;
   --color-surface: #FFFFFF;
@@ -27,6 +31,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   /* Tokens Oficiales Tema Oscuro */
   --color-bg: #0B0D14;
   --color-surface: #151822;
@@ -67,6 +72,21 @@ h1, h2, .font-display {
   font-weight: 500;
   font-style: italic;
   letter-spacing: -0.02em;
+}
+
+/* Motion reducida: detiene todo loop decorativo infinito del sitio (badges con
+   pulso, punto "en vivo" de WhatsApp/Mind, ping del botón flotante, anillo
+   giratorio del fallback de AgentSphere) sin tener que tocar cada componente
+   uno por uno. Los fallbacks estáticos de DataFlowCore/AgentSphere se resuelven
+   aparte, en React, porque ahí cambia qué se monta, no solo si anima. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ping,
+  .animate-pulse,
+  .animate-spin,
+  .animate-spin-slow,
+  .animate-bounce {
+    animation: none !important;
+  }
 }
 
 /* Montserrat para todo lo demás */

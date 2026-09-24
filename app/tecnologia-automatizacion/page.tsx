@@ -58,7 +58,6 @@ export default function TecnologiaPage() {
               {content.services.items.map((service) => (
                 <PillarCard
                   key={service.number}
-                  number={service.number}
                   title={service.title}
                   description={service.description}
                   href={service.href}
@@ -75,7 +74,7 @@ export default function TecnologiaPage() {
         <section className="w-full py-20 bg-[var(--color-bg)]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="p-8 sm:p-12 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[var(--color-primary)] mb-3 block">
+              <span className="text-sm font-bold text-[var(--color-primary)] mb-3 block">
                 Arquitectura Comercial Estratégica
               </span>
               <h2

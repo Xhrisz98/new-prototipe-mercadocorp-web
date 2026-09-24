@@ -89,7 +89,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Servicios y Recursos Relacionados",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Aplicaciones y Herramientas Digitales", href: "/aplicaciones-herramientas-digitales" },
         { label: "Mind: CRM + Agente de IA", href: "/mind" },
@@ -181,7 +181,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Related Services & Ecosystem",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Custom Applications & Tools", href: "/aplicaciones-herramientas-digitales" },
         { label: "Mind: CRM + AI Agent", href: "/mind" },
@@ -273,7 +273,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Связанные решения",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Индивидуальные веб-приложения", href: "/aplicaciones-herramientas-digitales" },
         { label: "Mind: CRM + ИИ-агент", href: "/mind" },

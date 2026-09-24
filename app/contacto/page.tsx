@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/Badge";
@@ -18,7 +18,6 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
-  AlertCircle,
 } from "lucide-react";
 
 export default function ContactoPage() {
@@ -37,27 +36,49 @@ export default function ContactoPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  const nombreRef = useRef<HTMLInputElement>(null);
+  const correoRef = useRef<HTMLInputElement>(null);
+  const whatsappRef = useRef<HTMLInputElement>(null);
+  const fieldRefs: Record<string, React.RefObject<HTMLInputElement | null>> = {
+    nombre: nombreRef,
+    correo: correoRef,
+    whatsapp: whatsappRef,
+  };
+
+  const requiredFieldMessage =
+    locale === "en"
+      ? "This field is required."
+      : locale === "ru"
+      ? "Это поле обязательно."
+      : "Este campo es obligatorio.";
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (errorMessage) setErrorMessage("");
+    if (fieldErrors[e.target.name]) {
+      const next = { ...fieldErrors };
+      delete next[e.target.name];
+      setFieldErrors(next);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validación básica client-side
-    if (!formData.nombre.trim() || !formData.correo.trim() || !formData.whatsapp.trim()) {
-      setErrorMessage(
-        locale === "en"
-          ? "Please fill in all required fields."
-          : locale === "ru"
-          ? "Пожалуйста, заполните обязательные поля."
-          : "Por favor complete todos los campos obligatorios."
-      );
+    // Validación básica client-side — errores inline por campo, en orden de
+    // aparición en el formulario, con foco automático al primero.
+    const errors: Record<string, string> = {};
+    if (!formData.nombre.trim()) errors.nombre = requiredFieldMessage;
+    if (!formData.correo.trim()) errors.correo = requiredFieldMessage;
+    if (!formData.whatsapp.trim()) errors.whatsapp = requiredFieldMessage;
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      const firstErrorField = ["nombre", "correo", "whatsapp"].find((name) => errors[name]);
+      if (firstErrorField) fieldRefs[firstErrorField].current?.focus();
       return;
     }
 
@@ -78,6 +99,7 @@ export default function ContactoPage() {
       servicio: "tecnologia",
       mensaje: "",
     });
+    setFieldErrors({});
     setIsSuccess(false);
   };
 
@@ -137,86 +159,120 @@ export default function ContactoPage() {
                     </Button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    {errorMessage && (
-                      <div className="flex items-center gap-2.5 p-4 rounded-xl bg-[var(--color-border)]/40 border border-[var(--color-primary)]/30 text-[var(--color-text)] text-sm font-medium">
-                        <AlertCircle className="w-4 h-4 shrink-0 text-[var(--color-primary)]" />
-                        {errorMessage}
-                      </div>
-                    )}
-
+                  <form onSubmit={handleSubmit} noValidate className="space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+                        <label htmlFor="contacto-nombre" className="block text-xs font-semibold text-[var(--color-text-muted)] mb-2">
                           {content.form.nameLabel} *
                         </label>
                         <input
+                          id="contacto-nombre"
+                          ref={nombreRef}
                           type="text"
                           name="nombre"
                           required
+                          autoComplete="name"
                           value={formData.nombre}
                           onChange={handleChange}
                           placeholder={content.form.namePlaceholder}
-                          className="w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-primary)] transition-colors text-sm"
+                          aria-invalid={!!fieldErrors.nombre}
+                          aria-describedby={fieldErrors.nombre ? "contacto-nombre-error" : undefined}
+                          className={`w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] transition-colors text-sm ${
+                            fieldErrors.nombre ? "border-2 border-[var(--color-primary)]" : "border-[var(--color-border)]"
+                          }`}
                         />
+                        {fieldErrors.nombre && (
+                          <p id="contacto-nombre-error" role="alert" className="mt-1.5 text-xs text-[var(--color-primary)] font-medium">
+                            {fieldErrors.nombre}
+                          </p>
+                        )}
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+                        <label htmlFor="contacto-empresa" className="block text-xs font-semibold text-[var(--color-text-muted)] mb-2">
                           {content.form.companyLabel}
                         </label>
                         <input
+                          id="contacto-empresa"
                           type="text"
                           name="empresa"
+                          autoComplete="organization"
                           value={formData.empresa}
                           onChange={handleChange}
                           placeholder={content.form.companyPlaceholder}
-                          className="w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-primary)] transition-colors text-sm"
+                          className="w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] transition-colors text-sm"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+                        <label htmlFor="contacto-correo" className="block text-xs font-semibold text-[var(--color-text-muted)] mb-2">
                           {content.form.emailLabel} *
                         </label>
                         <input
+                          id="contacto-correo"
+                          ref={correoRef}
                           type="email"
                           name="correo"
                           required
+                          autoComplete="email"
+                          spellCheck={false}
                           value={formData.correo}
                           onChange={handleChange}
                           placeholder={content.form.emailPlaceholder}
-                          className="w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-primary)] transition-colors text-sm"
+                          aria-invalid={!!fieldErrors.correo}
+                          aria-describedby={fieldErrors.correo ? "contacto-correo-error" : undefined}
+                          className={`w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] transition-colors text-sm ${
+                            fieldErrors.correo ? "border-2 border-[var(--color-primary)]" : "border-[var(--color-border)]"
+                          }`}
                         />
+                        {fieldErrors.correo && (
+                          <p id="contacto-correo-error" role="alert" className="mt-1.5 text-xs text-[var(--color-primary)] font-medium">
+                            {fieldErrors.correo}
+                          </p>
+                        )}
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+                        <label htmlFor="contacto-whatsapp" className="block text-xs font-semibold text-[var(--color-text-muted)] mb-2">
                           {content.form.whatsappLabel} *
                         </label>
                         <input
+                          id="contacto-whatsapp"
+                          ref={whatsappRef}
                           type="tel"
                           name="whatsapp"
                           required
+                          autoComplete="tel"
+                          inputMode="tel"
                           value={formData.whatsapp}
                           onChange={handleChange}
                           placeholder={content.form.whatsappPlaceholder}
-                          className="w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-primary)] transition-colors text-sm"
+                          aria-invalid={!!fieldErrors.whatsapp}
+                          aria-describedby={fieldErrors.whatsapp ? "contacto-whatsapp-error" : undefined}
+                          className={`w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] transition-colors text-sm ${
+                            fieldErrors.whatsapp ? "border-2 border-[var(--color-primary)]" : "border-[var(--color-border)]"
+                          }`}
                         />
+                        {fieldErrors.whatsapp && (
+                          <p id="contacto-whatsapp-error" role="alert" className="mt-1.5 text-xs text-[var(--color-primary)] font-medium">
+                            {fieldErrors.whatsapp}
+                          </p>
+                        )}
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+                      <label htmlFor="contacto-servicio" className="block text-xs font-semibold text-[var(--color-text-muted)] mb-2">
                         {content.form.serviceLabel}
                       </label>
                       <select
+                        id="contacto-servicio"
                         name="servicio"
                         value={formData.servicio}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] focus:outline-none focus:border-[var(--color-primary)] transition-colors text-sm cursor-pointer"
+                        className="w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] transition-colors text-sm cursor-pointer"
                       >
                         {content.form.serviceOptions.map((opt) => (
                           <option key={opt.value} value={opt.value}>
@@ -227,16 +283,17 @@ export default function ContactoPage() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+                      <label htmlFor="contacto-mensaje" className="block text-xs font-semibold text-[var(--color-text-muted)] mb-2">
                         {content.form.messageLabel}
                       </label>
                       <textarea
+                        id="contacto-mensaje"
                         name="mensaje"
                         rows={4}
                         value={formData.mensaje}
                         onChange={handleChange}
                         placeholder={content.form.messagePlaceholder}
-                        className="w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-primary)] transition-colors text-sm resize-y"
+                        className="w-full px-4 py-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text)] placeholder-[var(--color-text-muted)]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] transition-colors text-sm resize-y"
                       />
                     </div>
 

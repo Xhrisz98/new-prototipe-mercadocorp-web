@@ -5,6 +5,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { colors } from "@/lib/design-tokens";
 import { useTheme } from "@/components/theme/ThemeProvider";
+import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
 // Rango de scroll (px) del hero para el morph reposo → activado. Fuera del rango
 // el estado queda fijo: la velocidad depende del progreso ya acotado, así que
@@ -524,6 +525,7 @@ export function DataFlowCore() {
   const { theme } = useTheme();
   const isMobile = useSyncExternalStore(subscribeMobile, getMobileSnapshot, getMobileServerSnapshot);
   const isTablet = useSyncExternalStore(subscribeTablet, getTabletSnapshot, getTabletServerSnapshot);
+  const prefersReducedMotion = usePrefersReducedMotion();
   const rootRef = useRef<HTMLDivElement>(null);
   const layoutRef = useRef<HeroLayout>({ safeX: 0, centerFrac: 0.5, visibleFrac: 1 });
   const pointerRef = useRef({ x: 0, y: 0 });
@@ -534,7 +536,7 @@ export function DataFlowCore() {
   // - qué franja del canvas es visible en la primera pantalla, para centrar ahí
   //   la espiral aunque el hero sea más alto que el viewport.
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || prefersReducedMotion) return;
     const root = rootRef.current;
     const text = root?.closest("section")?.querySelector<HTMLElement>("[data-hero-text]");
     if (!root) return;
@@ -567,12 +569,12 @@ export function DataFlowCore() {
       observer.disconnect();
       window.removeEventListener("resize", update);
     };
-  }, [isMobile]);
+  }, [isMobile, prefersReducedMotion]);
 
   // El canvas es pointer-events-none (no debe bloquear clics sobre el texto), así
   // que el parallax escucha el puntero a nivel de ventana.
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || prefersReducedMotion) return;
     const handleMove = (e: PointerEvent) => {
       pointerRef.current = {
         x: (e.clientX / window.innerWidth) * 2 - 1,
@@ -581,19 +583,22 @@ export function DataFlowCore() {
     };
     window.addEventListener("pointermove", handleMove, { passive: true });
     return () => window.removeEventListener("pointermove", handleMove);
-  }, [isMobile]);
+  }, [isMobile, prefersReducedMotion]);
 
   return (
     <div ref={rootRef} className="w-full h-full relative pointer-events-none select-none">
       {/* El fallback va siempre en el HTML y su visibilidad la decide CSS, así que en
-          mobile se ve desde el primer paint, antes de que cargue el JS. */}
-      <div className="absolute inset-0 md:hidden">
+          mobile (o con prefers-reduced-motion, en cualquier ancho) se ve desde el
+          primer paint, antes de que cargue el JS. motion-reduce:!block fuerza la
+          prioridad sobre md:hidden vía !important — sin eso el orden de las media
+          queries generadas por Tailwind no está garantizado. */}
+      <div className="absolute inset-0 md:hidden motion-reduce:!block">
         <DataFlowStaticFallback />
       </div>
-      {/* En mobile el contenedor queda en display:none (R3F no crea contexto WebGL
-          con tamaño 0) y el Canvas se desmonta en cuanto se detecta mobile. */}
-      {!isMobile && (
-        <div className="absolute inset-0 hidden md:block">
+      {/* En mobile o con motion reducida el contenedor queda en display:none (R3F no
+          crea contexto WebGL con tamaño 0) y el Canvas ni siquiera se monta. */}
+      {!isMobile && !prefersReducedMotion && (
+        <div className="absolute inset-0 hidden md:block motion-reduce:!hidden">
           <Canvas
             camera={{ position: [0, 0, 10], fov: 40 }}
             gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}

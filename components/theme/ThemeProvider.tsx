@@ -38,6 +38,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       root.classList.remove("dark");
     }
+    // Mismo valor que --color-bg de cada tema en globals.css — mantiene la barra
+    // de la app (Android) / la UI del navegador (iOS) alineada con el tema activo,
+    // no con prefers-color-scheme del SO.
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", t === "dark" ? "#0B0D14" : "#FAFAFB");
   };
 
   const setTheme = (newTheme: Theme) => {

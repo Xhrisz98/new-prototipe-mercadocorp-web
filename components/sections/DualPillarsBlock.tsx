@@ -41,7 +41,7 @@ export function DualPillarsBlock({
             return (
               <div
                 key={idx}
-                className="flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] transition-all duration-300 hover:border-[var(--color-primary)]/40 hover:shadow-xl"
+                className="flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] transition-[border-color,box-shadow] duration-300 hover:border-[var(--color-primary)]/40 hover:shadow-xl"
               >
                 <div>
                   <div className="flex items-center gap-3 mb-6">

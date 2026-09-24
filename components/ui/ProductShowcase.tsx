@@ -70,7 +70,7 @@ export function ProductShowcase({
               <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)]/50" />
               <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)]/30" />
             </div>
-            <span className="text-[10px] sm:text-xs font-mono text-[var(--color-text-muted)] font-medium">
+            <span className="text-[10px] sm:text-xs text-[var(--color-text-muted)] font-medium">
               app.mercadocorp.ec / preview
             </span>
             <div className="w-8" />

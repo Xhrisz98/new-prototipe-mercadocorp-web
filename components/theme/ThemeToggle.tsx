@@ -28,7 +28,7 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={isDark ? t("theme_toggle_light") : t("theme_toggle_dark")}
       title={isDark ? t("theme_toggle_light") : t("theme_toggle_dark")}
-      className="relative w-9 h-9 flex items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-border)]/40 hover:text-[var(--color-primary)] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] cursor-pointer"
+      className="relative w-9 h-9 flex items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-border)]/40 hover:text-[var(--color-primary)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] cursor-pointer"
     >
       {isDark ? (
         <Sun className="w-4 h-4 text-[var(--color-primary)] transition-transform duration-300 rotate-0 hover:rotate-45" />

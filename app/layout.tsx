@@ -34,9 +34,13 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${kanit.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <head>
+        {/* Colores por defecto (tema oscuro, el inicial): el script bloqueante de abajo
+            los corrige de inmediato si localStorage dice "light", antes del primer paint.
+            ThemeProvider actualiza este mismo tag en cada toggle posterior. */}
+        <meta name="theme-color" content="#0B0D14" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||!t){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}var l=localStorage.getItem('mercadocorp_locale');if(l){document.documentElement.lang=l;}}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');var isDark=t==='dark'||!t;if(isDark){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',isDark?'#0B0D14':'#FAFAFB');var l=localStorage.getItem('mercadocorp_locale');if(l){document.documentElement.lang=l;}}catch(e){}})()`,
           }}
         />
       </head>

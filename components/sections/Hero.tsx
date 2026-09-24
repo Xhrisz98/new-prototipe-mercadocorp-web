@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, Shield, Cpu, Zap } from "lucide-react";
 
@@ -29,6 +29,7 @@ export function Hero({
   showProofChips = false,
 }: HeroProps) {
   const isCenter = align === "center";
+  const prefersReducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -131,7 +132,7 @@ export function Hero({
               href={ctaPrimary.href}
               icon={<ArrowRight className="w-4 h-4" />}
               iconPosition="right"
-              className="shadow-xl hover:shadow-[0_0_30px_rgba(0,34,210,0.35)] transition-all duration-300"
+              className="shadow-xl hover:shadow-[0_0_30px_rgba(0,34,210,0.35)] transition-shadow duration-300"
             >
               {ctaPrimary.label}
             </Button>
@@ -141,7 +142,7 @@ export function Hero({
                 variant="secondary"
                 size="lg"
                 href={ctaSecondary.href}
-                className="backdrop-blur-md bg-[var(--color-text)]/5 dark:bg-white/5 border border-[var(--color-text)]/15 dark:border-white/20 text-[var(--color-text)] hover:bg-[var(--color-text)]/10 dark:text-white dark:hover:bg-white/10 transition-all duration-300"
+                className="backdrop-blur-md bg-[var(--color-text)]/5 dark:bg-white/5 border border-[var(--color-text)]/15 dark:border-white/20 text-[var(--color-text)] hover:bg-[var(--color-text)]/10 dark:text-white dark:hover:bg-white/10 transition-colors duration-300"
               >
                 {ctaSecondary.label}
               </Button>
@@ -179,13 +180,13 @@ export function Hero({
               transition={{ duration: 0.8, delay: 0.5 }}
               className={`mt-8 sm:mt-10 flex flex-col justify-center gap-2.5 opacity-50 hover:opacity-100 transition-opacity cursor-default ${isCenter ? "items-center" : "items-start"}`}
             >
-              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[var(--color-text-muted)]">
-                SCROLL
+              <span className="text-xs font-medium text-[var(--color-text-muted)]">
+                Scroll
               </span>
               <div className="w-4 h-7 rounded-full border border-[var(--color-border)] flex items-start justify-center p-1">
                 <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+                  animate={prefersReducedMotion ? { y: 0 } : { y: [0, 8, 0] }}
+                  transition={prefersReducedMotion ? undefined : { repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
                   className="w-1 h-1.5 rounded-full bg-[var(--color-primary)]"
                 />
               </div>

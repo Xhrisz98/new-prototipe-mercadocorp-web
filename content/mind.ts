@@ -119,7 +119,7 @@ const contentData: Record<Locale, MindPageContent> = {
       },
     },
     internalLinks: {
-      title: "Explorar Ecosistema Relacionado",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Tecnología & Automatización", href: "/tecnologia-automatizacion" },
         { label: "E-commerce Inteligente (Mind integrado)", href: "/ecommerce-inteligente" },
@@ -203,7 +203,7 @@ const contentData: Record<Locale, MindPageContent> = {
       },
     },
     internalLinks: {
-      title: "Explore Related Solutions",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Technology & Automation", href: "/tecnologia-automatizacion" },
         { label: "Intelligent E-commerce (Mind Integrated)", href: "/ecommerce-inteligente" },
@@ -287,7 +287,7 @@ const contentData: Record<Locale, MindPageContent> = {
       },
     },
     internalLinks: {
-      title: "Связанные направления",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Технологии и Автоматизация", href: "/tecnologia-automatizacion" },
         { label: "Умный E-commerce (со встроенным Mind)", href: "/ecommerce-inteligente" },

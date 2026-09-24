@@ -476,3 +476,5 @@ Cada página del sitio enlaza como mínimo a: (1) una página "hermana" del mism
 `Inicio → Auditoría Digital (gancho) → Tecnología o Marketing (hub) → servicio específico → Casos de Éxito → Contacto`
 
 Ningún CTA de página de servicio apunta directo a Contacto sin antes ofrecer un link de "seguir navegando" (a Casos de Éxito o a otro servicio relacionado) — esto es lo que sostiene el tiempo en sitio antes de pedir la conversión.
+
+**Header oficial de `InternalLinksStrip`** (componente compartido, aparece en varias páginas): *"Antes de enviar, explore nuestro ecosistema"* — sentence case. Este texto fue redactado por el agente de implementación sin pasar por este documento; se aprueba aquí retroactivamente con esta capitalización como la versión oficial. Cualquier ocurrencia en el sitio (o su traducción EN/RU) debe coincidir con esta forma exacta.

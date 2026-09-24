@@ -48,14 +48,14 @@ export function PainBlock({ title, intro, items, ctaText, ctaLink }: PainBlockPr
           {items.map((item, idx) => (
             <div
               key={item.title}
-              className="p-7 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs flex flex-col justify-between transition-all duration-200 hover:border-[var(--color-primary)]/40 hover:-translate-y-1"
+              className="p-7 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs flex flex-col justify-between transition-[border-color,transform] duration-200 hover:border-[var(--color-primary)]/40 hover:-translate-y-1"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-10 h-10 rounded-xl bg-[var(--color-border)]/40 flex items-center justify-center">
                     {getIcon(idx)}
                   </div>
-                  <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-[var(--color-border)]/60 text-[var(--color-text-muted)]">
+                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[var(--color-border)]/60 text-[var(--color-text-muted)]">
                     {item.tag}
                   </span>
                 </div>

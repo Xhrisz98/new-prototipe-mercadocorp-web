@@ -129,7 +129,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
         scrolled
           ? "bg-[var(--color-bg)]/92 backdrop-blur-md border-b border-[var(--color-border)] shadow-xs"
           : "bg-[var(--color-bg)]/85 backdrop-blur-sm border-b border-[var(--color-border)]/60"
@@ -188,7 +188,7 @@ export function Navbar() {
                   onMouseLeave={handleMouseLeave}
                 >
                   <div className="p-3 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-xl space-y-1">
-                    <div className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] border-b border-[var(--color-border)] mb-1">
+                    <div className="px-3 py-1.5 text-xs font-semibold text-[var(--color-text-muted)] border-b border-[var(--color-border)] mb-1">
                       {t("footer_col_tech")}
                     </div>
                     {techSubmenu.map((item) => {
@@ -223,7 +223,7 @@ export function Navbar() {
             {/* Mind (Destacado con Badge de IA exclusivo) */}
             <Link
               href="/mind"
-              className={`px-3 py-2 rounded-full transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-2 rounded-full transition-colors flex items-center gap-1.5 ${
                 pathname === "/mind"
                   ? "text-[var(--color-ai)] font-semibold bg-[var(--color-surface)]"
                   : "text-[var(--color-text)] hover:text-[var(--color-ai)] hover:bg-[var(--color-surface)]"
@@ -271,7 +271,7 @@ export function Navbar() {
                   onMouseLeave={handleMouseLeave}
                 >
                   <div className="p-3 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-xl space-y-1">
-                    <div className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] border-b border-[var(--color-border)] mb-1">
+                    <div className="px-3 py-1.5 text-xs font-semibold text-[var(--color-text-muted)] border-b border-[var(--color-border)] mb-1">
                       {t("footer_col_marketing")}
                     </div>
                     {marketingSubmenu.map((item) => {
@@ -360,7 +360,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-border)]/40 transition-colors focus:outline-none cursor-pointer"
+              className="p-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-border)]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] cursor-pointer"
               aria-label={t("nav_menu")}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

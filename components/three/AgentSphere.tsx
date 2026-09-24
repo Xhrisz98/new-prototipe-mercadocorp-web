@@ -3,6 +3,7 @@
 import React, { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
 // Núcleo 3D de la esfera inteligente con el acento exclusivo #04E7AF
 function SphereCore({ isDark }: { isDark: boolean }) {
@@ -197,6 +198,7 @@ function getIsMobileSync(): boolean {
 
 export function AgentSphere({ isDark = true }: { isDark?: boolean }) {
   const [isMobile, setIsMobile] = useState<boolean>(getIsMobileSync);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)");
@@ -206,8 +208,9 @@ export function AgentSphere({ isDark = true }: { isDark?: boolean }) {
     return () => mql.removeEventListener("change", handleChange);
   }, []);
 
-  // Fallback estático bajo 768px conforme a AGENTS.md
-  if (isMobile) {
+  // Fallback estático bajo 768px (AGENTS.md), o en cualquier ancho si el usuario
+  // prefiere motion reducida — mismo criterio que DataFlowCore.
+  if (isMobile || prefersReducedMotion) {
     return (
       <div className="w-full h-[380px]">
         <MobileFallback />

@@ -145,7 +145,7 @@ export default function MindPage() {
                 {content.about.modules.map((mod, idx) => (
                   <div
                     key={idx}
-                    className="p-6 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-ai)]/50 transition-all duration-300 hover:shadow-md flex flex-col justify-between"
+                    className="p-6 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-ai)]/50 transition-[border-color,box-shadow] duration-300 hover:shadow-md flex flex-col justify-between"
                   >
                     <div>
                       <div className="w-10 h-10 rounded-xl bg-[var(--color-ai)]/10 flex items-center justify-center mb-4">

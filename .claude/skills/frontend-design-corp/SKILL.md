@@ -36,10 +36,11 @@ Esta skill es el resumen operativo de las reglas de diseño del proyecto. PROJEC
 
 Antes de escribir JSX nuevo para algo que se ve como una tarjeta, botón, badge o campo de formulario, revisa si ya existe:
 - Button (fuerza rounded-full — pill shape garantizado)
-- Card
 - Badge
 - FormField
 - RevealOnScroll
+
+Nota: Card **no existe todavía** (auditoría UI/UX vía design-review, confirmado grep — las tarjetas del sitio se replican a mano con 3 border-radius distintos mezclados). Vuelve a agregarlo a esta lista cuando se construya en una fase aparte; hasta entonces, no asumas que existe.
 
 Si un patrón visual se repite 2+ veces a mano en distintos archivos, es señal de que necesita convertirse en componente, no seguir copiándose.
 

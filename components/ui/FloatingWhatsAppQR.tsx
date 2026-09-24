@@ -20,7 +20,13 @@ export function FloatingWhatsAppQR() {
   }, []);
 
   return (
-    <aside aria-label="WhatsApp y QR Interactivo" className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50">
+    <aside
+      aria-label="WhatsApp y QR Interactivo"
+      // env(safe-area-inset-*) respeta el home-indicator de iPhone y el notch/borde
+      // redondeado en landscape — sin esto el botón queda más pegado al borde de lo
+      // previsto en esos dispositivos.
+      className="fixed z-50 bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-[calc(1.25rem+env(safe-area-inset-right))] sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))] sm:right-[calc(1.5rem+env(safe-area-inset-right))]"
+    >
       {/* Floating Card Popover */}
       <AnimatePresence>
         {isOpen && (
@@ -66,7 +72,7 @@ export function FloatingWhatsAppQR() {
           whileTap={{ scale: 0.95 }}
           aria-expanded={isOpen}
           aria-label={isOpen ? "Cerrar WhatsApp y QR" : "Abrir WhatsApp y QR interactivo"}
-          className={`inline-flex items-center gap-2.5 rounded-full shadow-2xl transition-all duration-300 cursor-pointer ${
+          className={`inline-flex items-center gap-2.5 rounded-full shadow-2xl transition-colors duration-300 cursor-pointer ${
             isOpen
               ? "bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] px-4 py-3"
               : "bg-[#25D366] text-white hover:bg-[#20bd5a] px-4 py-3.5 sm:px-5 sm:py-3.5"

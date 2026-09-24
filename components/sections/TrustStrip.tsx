@@ -31,7 +31,7 @@ export function TrustStrip({ title, logos }: TrustStripProps) {
   return (
     <section className="w-full py-10 border-y border-[var(--color-border)] bg-[var(--color-surface)]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)] mb-8">
+        <p className="text-center text-sm font-semibold text-[var(--color-text-muted)] mb-8">
           {title}
         </p>
 

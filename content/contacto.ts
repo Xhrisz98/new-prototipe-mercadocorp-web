@@ -101,7 +101,7 @@ const contentData: Record<Locale, ContactoPageContent> = {
       socialTitle: "Canales Oficiales",
     },
     internalLinks: {
-      title: "Antes de Enviar, Explore Nuestro Ecosistema",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Ver Casos de Éxito", href: "/casos-de-exito" },
         { label: "Conocer Mind (CRM + IA)", href: "/mind" },
@@ -160,7 +160,7 @@ const contentData: Record<Locale, ContactoPageContent> = {
       socialTitle: "Official Channels",
     },
     internalLinks: {
-      title: "Before You Submit, Explore Our Ecosystem",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "See Case Studies", href: "/casos-de-exito" },
         { label: "Discover Mind (CRM + AI)", href: "/mind" },
@@ -219,7 +219,7 @@ const contentData: Record<Locale, ContactoPageContent> = {
       socialTitle: "Официальные каналы",
     },
     internalLinks: {
-      title: "Прежде Чем Отправить, Изучите Нашу Экосистему",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Кейсы и результаты", href: "/casos-de-exito" },
         { label: "Подробнее о Mind (CRM + ИИ)", href: "/mind" },

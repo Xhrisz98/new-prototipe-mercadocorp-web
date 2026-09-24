@@ -88,7 +88,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Explorar Más Servicios",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Tecnología & Automatización", href: "/tecnologia-automatizacion" },
         { label: "Estrategia, Creatividad y Branding", href: "/estrategia-creatividad-branding" },
@@ -179,7 +179,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Explore Related Services",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Technology & Automation", href: "/tecnologia-automatizacion" },
         { label: "Strategy, Creativity & Branding", href: "/estrategia-creatividad-branding" },
@@ -270,7 +270,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Связанные направления",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Технологии и Автоматизация", href: "/tecnologia-automatizacion" },
         { label: "Стратегия, Креатив и Брендинг", href: "/estrategia-creatividad-branding" },

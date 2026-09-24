@@ -29,7 +29,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   // Base pill shape (rounded-full) y transiciones
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none cursor-pointer tracking-wide";
+    "inline-flex items-center justify-center font-medium rounded-full transition-[background-color,border-color,box-shadow,opacity,transform] duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none cursor-pointer tracking-wide";
 
   const sizeStyles = {
     sm: "px-3.5 py-1.5 text-xs gap-1.5",

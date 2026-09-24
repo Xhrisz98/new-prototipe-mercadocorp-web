@@ -92,7 +92,7 @@ export function InteractiveTreeQR({
 
   return (
     <div
-      className={`rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden shadow-xl transition-all duration-300 ${
+      className={`rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden shadow-xl ${
         compact ? "p-5" : "p-6 sm:p-8"
       } ${className}`}
     >
@@ -108,7 +108,7 @@ export function InteractiveTreeQR({
           <button
             type="button"
             onClick={() => setViewMode("tree")}
-            className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full transition-[background-color,color,box-shadow] duration-200 cursor-pointer ${
               viewMode === "tree"
                 ? "bg-[var(--color-primary)] text-white shadow-sm"
                 : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
@@ -120,7 +120,7 @@ export function InteractiveTreeQR({
           <button
             type="button"
             onClick={() => setViewMode("qr")}
-            className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full transition-all duration-200 cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full transition-[background-color,color,box-shadow] duration-200 cursor-pointer ${
               viewMode === "qr"
                 ? "bg-[var(--color-primary)] text-white shadow-sm"
                 : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
@@ -212,7 +212,7 @@ export function InteractiveTreeQR({
             <MessageCircle className="w-4 h-4" />
           </div>
           <div className="min-w-0">
-            <div className="text-[10px] uppercase font-bold tracking-wider text-[var(--color-text-muted)]">
+            <div className="text-xs font-bold text-[var(--color-text-muted)]">
               WhatsApp Corporativo
             </div>
             <div className="text-sm font-semibold tracking-wide text-[var(--color-text)] truncate">
@@ -224,7 +224,7 @@ export function InteractiveTreeQR({
         <button
           type="button"
           onClick={copyToClipboard}
-          className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer ${
+          className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium transition-colors duration-200 cursor-pointer ${
             copied
               ? "bg-[#25D366]/20 text-[#25D366] font-semibold"
               : "border border-[var(--color-border)] hover:border-[var(--color-primary)] text-[var(--color-text)] hover:bg-[var(--color-primary)]/5"
@@ -251,7 +251,7 @@ export function InteractiveTreeQR({
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-md hover:shadow-lg transition-all duration-200"
+          className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-md hover:shadow-lg transition-[background-color,box-shadow] duration-200"
         >
           <MessageCircle className="w-4 h-4 fill-white text-white" />
           <span>{t.chatCta}</span>

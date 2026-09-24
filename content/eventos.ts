@@ -76,7 +76,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Servicios Relacionados",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Estrategia, Creatividad y Branding", href: "/estrategia-creatividad-branding" },
         { label: "Marketing Digital (Volver al Hub)", href: "/marketing-digital" },
@@ -155,7 +155,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Related Services",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Strategy, Creativity & Branding", href: "/estrategia-creatividad-branding" },
         { label: "Digital Marketing (Hub)", href: "/marketing-digital" },
@@ -234,7 +234,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Связанные направления",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Стратегия, Креатив и Брендинг", href: "/estrategia-creatividad-branding" },
         { label: "Маркетинг (Вернуться в Хаб)", href: "/marketing-digital" },

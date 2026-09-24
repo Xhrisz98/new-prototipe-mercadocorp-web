@@ -53,7 +53,6 @@ export default function MarketingPage() {
               {content.services.items.map((service) => (
                 <PillarCard
                   key={service.number}
-                  number={service.number}
                   title={service.title}
                   description={service.description}
                   href={service.href}

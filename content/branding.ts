@@ -158,7 +158,7 @@ const contentData: Record<Locale, BrandingPageContent> = {
       },
     },
     internalLinks: {
-      title: "Explorar Más Soluciones",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Auditoría Digital (Diagnóstico Previo)", href: "/auditoria-digital" },
         { label: "Gestión Integral de Eventos", href: "/gestion-eventos" },
@@ -275,7 +275,7 @@ const contentData: Record<Locale, BrandingPageContent> = {
       },
     },
     internalLinks: {
-      title: "Explore More Solutions",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Digital Audit (Recommended Pre-requisite)", href: "/auditoria-digital" },
         { label: "End-to-End Corporate Events", href: "/gestion-eventos" },
@@ -392,7 +392,7 @@ const contentData: Record<Locale, BrandingPageContent> = {
       },
     },
     internalLinks: {
-      title: "Связанные направления",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Цифровой аудит (Предварительный шаг)", href: "/auditoria-digital" },
         { label: "Организация корпоративных событий", href: "/gestion-eventos" },

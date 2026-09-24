@@ -130,7 +130,7 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       },
     },
     internalLinks: {
-      title: "Explorar Más sobre MercadoCorp",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Casos de Éxito", href: "/casos-de-exito" },
         { label: "Tecnología & Automatización", href: "/tecnologia-automatizacion" },
@@ -215,7 +215,7 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       },
     },
     internalLinks: {
-      title: "Explore More About MercadoCorp",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Case Studies", href: "/casos-de-exito" },
         { label: "Technology & Automation", href: "/tecnologia-automatizacion" },
@@ -300,7 +300,7 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       },
     },
     internalLinks: {
-      title: "Узнать больше о MercadoCorp",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Кейсы и результаты", href: "/casos-de-exito" },
         { label: "Технологии и Автоматизация", href: "/tecnologia-automatizacion" },

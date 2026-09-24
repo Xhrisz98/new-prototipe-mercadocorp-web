@@ -65,7 +65,7 @@ export default function CasosDeExitoPage() {
               {content.cases.map((caso) => (
                 <div
                   key={caso.id}
-                  className="p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/40 transition-all duration-300 hover:shadow-xl flex flex-col justify-between"
+                  className="p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/40 transition-[border-color,box-shadow] duration-300 hover:shadow-xl flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-6">
@@ -85,20 +85,20 @@ export default function CasosDeExitoPage() {
                     </h3>
 
                     <div className="mb-4">
-                      <span className="text-xs uppercase tracking-wider text-[var(--color-primary)] font-semibold">
+                      <span className="text-sm text-[var(--color-primary)] font-semibold">
                         {caso.pillar}
                       </span>
                     </div>
 
                     <div className="space-y-3 mb-6">
-                      <div className="text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">
+                      <div className="text-sm font-semibold text-[var(--color-text-muted)]">
                         Desafío Operativo:
                       </div>
                       <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
                         {caso.problemContext}
                       </p>
 
-                      <div className="text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider pt-2">
+                      <div className="text-sm font-semibold text-[var(--color-text-muted)] pt-2">
                         Solución Implementada:
                       </div>
                       <p className="text-sm text-[var(--color-text)] leading-relaxed font-medium">

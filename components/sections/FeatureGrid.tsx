@@ -37,7 +37,7 @@ export function FeatureGrid({
           {items.map((item, idx) => (
             <div
               key={idx}
-              className={`flex flex-col justify-between p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:shadow-lg ${
+              className={`flex flex-col justify-between p-6 sm:p-8 rounded-2xl border transition-[border-color,box-shadow] duration-300 hover:shadow-lg ${
                 item.isAi
                   ? "bg-[var(--color-surface)] border-[var(--color-border)] hover:border-[var(--color-ai)]/40 relative overflow-hidden"
                   : "bg-[var(--color-surface)] border-[var(--color-border)] hover:border-[var(--color-primary)]/30"
@@ -59,7 +59,7 @@ export function FeatureGrid({
                     </Badge>
                   )}
                   {item.number && (
-                    <span className="text-xs font-mono text-[var(--color-text-muted)] font-medium">
+                    <span className="text-xs text-[var(--color-text-muted)] font-medium">
                       {item.number}
                     </span>
                   )}

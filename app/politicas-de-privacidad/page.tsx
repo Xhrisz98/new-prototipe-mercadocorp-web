@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/Badge";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getPoliticasContent } from "@/content/legales";
-import { ShieldCheck, AlertCircle } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 
 export default function PoliticasPrivacidadPage() {
   const { locale } = useLocale();
@@ -39,18 +39,11 @@ export default function PoliticasPrivacidadPage() {
             </p>
           </div>
 
-          {/* Aviso explícito de revisión jurídica */}
-          <div className="p-5 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] mb-12 flex items-start gap-3.5">
-            <AlertCircle className="w-5 h-5 text-[var(--color-primary)] shrink-0 mt-0.5" />
-            <div>
-              <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-primary)] block mb-1">
-                {content.notice.tag}
-              </span>
-              <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
-                {content.notice.body}
-              </p>
-            </div>
-          </div>
+          {/* TODO: legal review — content.notice (content/legales.ts) documenta que este
+              texto es un placeholder pendiente de validación jurídica final. Ese aviso
+              no se muestra al visitante (PROJECT_PLAN.md pide un comentario de código,
+              no un banner público); revisar content.notice.body antes de publicar el
+              texto legal definitivo. */}
 
           {/* Secciones de la Política */}
           <div className="space-y-10">

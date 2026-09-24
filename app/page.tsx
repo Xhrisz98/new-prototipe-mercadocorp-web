@@ -94,7 +94,6 @@ export default function HomePage() {
               {content.pillars.items.map((pillar) => (
                 <PillarCard
                   key={pillar.number}
-                  number={pillar.number}
                   title={pillar.title}
                   description={pillar.description}
                   href={pillar.href}

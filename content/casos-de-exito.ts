@@ -90,7 +90,7 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
       },
     },
     internalLinks: {
-      title: "Explorar Más Soluciones",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Tecnología & Automatización", href: "/tecnologia-automatizacion" },
         { label: "Marketing Digital", href: "/marketing-digital" },
@@ -140,7 +140,7 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
       },
     },
     internalLinks: {
-      title: "Explore Related Solutions",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Technology & Automation", href: "/tecnologia-automatizacion" },
         { label: "Digital Marketing", href: "/marketing-digital" },
@@ -190,7 +190,7 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
       },
     },
     internalLinks: {
-      title: "Связанные разделы",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Технологии и Автоматизация", href: "/tecnologia-automatizacion" },
         { label: "Маркетинг", href: "/marketing-digital" },

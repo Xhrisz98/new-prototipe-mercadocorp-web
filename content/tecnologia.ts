@@ -170,7 +170,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
       },
     },
     internalLinks: {
-      title: "Continuar explorando el ecosistema:",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "Mind (CRM + Agente)", href: "/mind" },
         { label: "Apps y Software a Medida", href: "/aplicaciones-herramientas-digitales" },
@@ -296,7 +296,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
       },
     },
     internalLinks: {
-      title: "Explore related ecosystem modules:",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Mind (CRM + AI)", href: "/mind" },
         { label: "Custom Applications", href: "/aplicaciones-herramientas-digitales" },
@@ -422,7 +422,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
       },
     },
     internalLinks: {
-      title: "Другие разделы экосистемы:",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Mind (CRM + ИИ)", href: "/mind" },
         { label: "Заказное ПО и Приложения", href: "/aplicaciones-herramientas-digitales" },

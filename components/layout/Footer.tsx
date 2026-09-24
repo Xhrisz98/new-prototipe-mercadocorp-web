@@ -64,7 +64,7 @@ export function Footer() {
 
           {/* Columna Tecnología & Software */}
           <div className="flex flex-col space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text)]">
+            <h3 className="text-sm font-bold text-[var(--color-text)]">
               {t("footer_col_tech")}
             </h3>
             <ul className="space-y-2.5 text-xs">
@@ -108,7 +108,7 @@ export function Footer() {
 
           {/* Columna Marketing Digital */}
           <div className="flex flex-col space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text)]">
+            <h3 className="text-sm font-bold text-[var(--color-text)]">
               {t("footer_col_marketing")}
             </h3>
             <ul className="space-y-2.5 text-xs">
@@ -149,7 +149,7 @@ export function Footer() {
 
           {/* Columna Empresa */}
           <div className="flex flex-col space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text)]">
+            <h3 className="text-sm font-bold text-[var(--color-text)]">
               {t("footer_col_company")}
             </h3>
             <ul className="space-y-2.5 text-xs">
@@ -182,7 +182,7 @@ export function Footer() {
 
           {/* Columna Legal & Redes */}
           <div className="flex flex-col space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-text)]">
+            <h3 className="text-sm font-bold text-[var(--color-text)]">
               {t("footer_col_legal")}
             </h3>
             <ul className="space-y-2.5 text-xs">

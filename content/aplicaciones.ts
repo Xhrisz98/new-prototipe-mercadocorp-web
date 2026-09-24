@@ -130,7 +130,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Explorar Soluciones Relacionadas",
+      title: "Antes de enviar, explore nuestro ecosistema",
       links: [
         { label: "E-commerce Inteligente", href: "/ecommerce-inteligente" },
         { label: "Mind: CRM + Agente de IA", href: "/mind" },
@@ -222,7 +222,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Explore Related Solutions",
+      title: "Before you submit, explore our ecosystem",
       links: [
         { label: "Intelligent E-commerce", href: "/ecommerce-inteligente" },
         { label: "Mind: CRM + AI Agent", href: "/mind" },
@@ -314,7 +314,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       },
     },
     internalLinks: {
-      title: "Связанные направления",
+      title: "Прежде чем отправить, изучите нашу экосистему",
       links: [
         { label: "Умный E-commerce", href: "/ecommerce-inteligente" },
         { label: "Mind: CRM + ИИ-агент", href: "/mind" },
