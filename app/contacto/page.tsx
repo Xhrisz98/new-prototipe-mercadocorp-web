@@ -18,6 +18,7 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
+  AlertCircle,
 } from "lucide-react";
 
 export default function ContactoPage() {
@@ -138,7 +139,8 @@ export default function ContactoPage() {
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {errorMessage && (
-                      <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-medium">
+                      <div className="flex items-center gap-2.5 p-4 rounded-xl bg-[var(--color-border)]/40 border border-[var(--color-primary)]/30 text-[var(--color-text)] text-sm font-medium">
+                        <AlertCircle className="w-4 h-4 shrink-0 text-[var(--color-primary)]" />
                         {errorMessage}
                       </div>
                     )}

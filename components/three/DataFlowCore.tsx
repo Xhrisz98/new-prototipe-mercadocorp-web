@@ -11,7 +11,10 @@ import { useTheme } from "@/components/theme/ThemeProvider";
 // nunca sigue acelerando.
 const HERO_SCROLL_RANGE = 300;
 
-const TRAIL_COUNT = 1800;
+const TRAIL_COUNT_DESKTOP = 1800;
+// Tablet (768-1024px): ~45% menos partículas que desktop — el viewport es más
+// angosto y el mismo conteo se ve saturado/pesado en ese rango intermedio.
+const TRAIL_COUNT_TABLET = Math.round(TRAIL_COUNT_DESKTOP * 0.55);
 const TRAIL_POINTS = 12;
 const BASE_SPEED = 0.16;
 const ACTIVE_SPEED_MULT = 2.6;
@@ -28,15 +31,26 @@ const SCREEN_TILT = 0.34;
 // useState(getIsMobileSync) la rama mobile no coincidía con el HTML del servidor
 // y React descartaba y regeneraba todo el árbol ("Hydration failed").
 const MOBILE_QUERY = "(max-width: 767px)";
+// Tramo intermedio: animado pero reducido. El límite es solo de ancho (nunca de
+// alto/orientación), así que una tablet en landscape (ej. iPad 1024x768) sigue
+// cayendo aquí por su ancho real y no se trata como mobile ni como desktop.
+const TABLET_QUERY = "(min-width: 768px) and (max-width: 1024px)";
 
-function subscribeMobile(onChange: () => void) {
-  const mql = window.matchMedia(MOBILE_QUERY);
-  mql.addEventListener("change", onChange);
-  return () => mql.removeEventListener("change", onChange);
+function subscribeMedia(query: string) {
+  return (onChange: () => void) => {
+    const mql = window.matchMedia(query);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  };
 }
+
+const subscribeMobile = subscribeMedia(MOBILE_QUERY);
+const subscribeTablet = subscribeMedia(TABLET_QUERY);
 
 const getMobileSnapshot = () => window.matchMedia(MOBILE_QUERY).matches;
 const getMobileServerSnapshot = () => false;
+const getTabletSnapshot = () => window.matchMedia(TABLET_QUERY).matches;
+const getTabletServerSnapshot = () => false;
 
 // PRNG determinista: la misma espiral en cada render.
 function mulberry32(seed: number) {
@@ -63,14 +77,14 @@ interface Trail {
 
 // Anillos concéntricos con densidad decreciente hacia afuera, más una fracción de
 // "polvo" disperso entre bandas para dar profundidad.
-function buildTrails(): Trail[] {
+function buildTrails(count: number): Trail[] {
   const rand = mulberry32(51423);
   const bands = [0.18, 0.24, 0.31, 0.39, 0.48, 0.58, 0.69, 0.8, 0.91, 1.0];
   const weights = bands.map((b) => Math.pow(1.12 - b, 1.25));
   const totalWeight = weights.reduce((sum, w) => sum + w, 0);
 
   const trails: Trail[] = [];
-  for (let i = 0; i < TRAIL_COUNT; i++) {
+  for (let i = 0; i < count; i++) {
     const isDust = rand() < 0.16;
     let radius: number;
     if (isDust) {
@@ -137,8 +151,8 @@ function setTrailAttributes(
   }
 }
 
-function buildGeometries() {
-  const trails = buildTrails();
+function buildGeometries(count: number) {
+  const trails = buildTrails(count);
   const segments = TRAIL_POINTS - 1;
 
   const BOLD_OFFSETS = [-0.0045, 0, 0.0045];
@@ -310,11 +324,12 @@ interface HeroLayout {
 
 interface SceneProps {
   isDark: boolean;
+  isTablet: boolean;
   layoutRef: React.RefObject<HeroLayout>;
   pointerRef: React.RefObject<{ x: number; y: number }>;
 }
 
-function FlowScene({ isDark, layoutRef, pointerRef }: SceneProps) {
+function FlowScene({ isDark, isTablet, layoutRef, pointerRef }: SceneProps) {
   const viewport = useThree((s) => s.viewport);
   const outerRef = useRef<THREE.Group>(null);
   const tiltRef = useRef<THREE.Group>(null);
@@ -325,7 +340,10 @@ function FlowScene({ isDark, layoutRef, pointerRef }: SceneProps) {
   const phase = useRef(0);
   const parallax = useRef({ x: 0, y: 0 });
 
-  const { lines, heads } = useMemo(() => buildGeometries(), []);
+  const { lines, heads } = useMemo(
+    () => buildGeometries(isTablet ? TRAIL_COUNT_TABLET : TRAIL_COUNT_DESKTOP),
+    [isTablet]
+  );
 
   const { lineMaterial, headMaterial, coreMaterial } = useMemo(() => {
     const uniforms = {
@@ -399,9 +417,21 @@ function FlowScene({ isDark, layoutRef, pointerRef }: SceneProps) {
     const layout = layoutRef.current ?? { safeX: 0, centerFrac: 0.5, visibleFrac: 1 };
 
     // Composición: la espiral vive en el lado derecho y se recorta contra el borde,
-    // dejando la izquierda libre para el texto.
-    const scale = viewport.height * layout.visibleFrac * 0.62;
-    const centerX = viewport.width * 0.5 * 0.6;
+    // dejando la izquierda libre para el texto. En tablet el hero es más angosto y
+    // el texto (max-w-xl) ocupa proporcionalmente más ancho, así que la espiral se
+    // reduce y se recorre más a la derecha para no quedar desproporcionada.
+    const scaleFactor = isTablet ? 0.52 : 0.62;
+    const centerXFactor = isTablet ? 0.7 : 0.6;
+    // Ultrawide (>1440px CSS): el tamaño está atado a viewport.height, así que un
+    // canvas muy ancho dejaría la espiral chica con espacio vacío alrededor. Se
+    // compensa con un boost gradual hasta +25% a partir de ~2200px.
+    const cssWidth = state.size.width;
+    const widescreenT = isTablet
+      ? 0
+      : THREE.MathUtils.clamp((cssWidth - 1440) / (2200 - 1440), 0, 1);
+    const widescreenBoost = THREE.MathUtils.lerp(1, 1.25, widescreenT);
+    const scale = viewport.height * layout.visibleFrac * scaleFactor * widescreenBoost;
+    const centerX = viewport.width * 0.5 * centerXFactor;
     const centerY = (1 - 2 * layout.centerFrac) * viewport.height * 0.5;
 
     progress.current = THREE.MathUtils.lerp(progress.current, scrollTarget.current, 0.08);
@@ -493,6 +523,7 @@ const NAVBAR_PX = 80;
 export function DataFlowCore() {
   const { theme } = useTheme();
   const isMobile = useSyncExternalStore(subscribeMobile, getMobileSnapshot, getMobileServerSnapshot);
+  const isTablet = useSyncExternalStore(subscribeTablet, getTabletSnapshot, getTabletServerSnapshot);
   const rootRef = useRef<HTMLDivElement>(null);
   const layoutRef = useRef<HeroLayout>({ safeX: 0, centerFrac: 0.5, visibleFrac: 1 });
   const pointerRef = useRef({ x: 0, y: 0 });
@@ -568,7 +599,7 @@ export function DataFlowCore() {
             gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
             dpr={[1, 1.75]}
           >
-            <FlowScene isDark={theme === "dark"} layoutRef={layoutRef} pointerRef={pointerRef} />
+            <FlowScene isDark={theme === "dark"} isTablet={isTablet} layoutRef={layoutRef} pointerRef={pointerRef} />
           </Canvas>
         </div>
       )}

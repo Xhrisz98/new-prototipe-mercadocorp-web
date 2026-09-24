@@ -31,9 +31,9 @@ export function ThemeToggle() {
       className="relative w-9 h-9 flex items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-border)]/40 hover:text-[var(--color-primary)] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] cursor-pointer"
     >
       {isDark ? (
-        <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 rotate-0 hover:rotate-45" />
+        <Sun className="w-4 h-4 text-[var(--color-primary)] transition-transform duration-300 rotate-0 hover:rotate-45" />
       ) : (
-        <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300 -rotate-12 hover:rotate-0" />
+        <Moon className="w-4 h-4 text-[var(--color-text)] transition-transform duration-300 -rotate-12 hover:rotate-0" />
       )}
     </button>
   );

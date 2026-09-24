@@ -13,16 +13,19 @@ interface PainBlockProps {
 }
 
 export function PainBlock({ title, intro, items, ctaText, ctaLink }: PainBlockProps) {
+  // Los 3 íconos comparten el azul de marca (--color-primary); la diferenciación
+  // visual entre tarjetas viene de la opacidad, no de hues distintos fuera de token.
+  const ICON_OPACITY = ["", "/80", "/65"];
+
   const getIcon = (idx: number) => {
+    const className = `w-5 h-5 text-[var(--color-primary)]${ICON_OPACITY[idx] ?? ""}`;
     switch (idx) {
-      case 0:
-        return <AlertCircle className="w-5 h-5 text-amber-500" />;
       case 1:
-        return <TrendingDown className="w-5 h-5 text-rose-500" />;
+        return <TrendingDown className={className} />;
       case 2:
-        return <Clock className="w-5 h-5 text-indigo-500" />;
+        return <Clock className={className} />;
       default:
-        return <AlertCircle className="w-5 h-5 text-amber-500" />;
+        return <AlertCircle className={className} />;
     }
   };
 

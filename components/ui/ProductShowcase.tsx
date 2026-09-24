@@ -66,9 +66,9 @@ export function ProductShowcase({
           {/* Barra superior de ventana tipo navegador / panel */}
           <div className="flex items-center justify-between px-3 py-2 bg-[var(--color-bg)]/80 rounded-t-xl sm:rounded-t-2xl border-b border-[var(--color-border)] mb-1">
             <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-              <span className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)]/70" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)]/50" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)]/30" />
             </div>
             <span className="text-[10px] sm:text-xs font-mono text-[var(--color-text-muted)] font-medium">
               app.mercadocorp.ec / preview
