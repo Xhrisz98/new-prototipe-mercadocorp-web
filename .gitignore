@@ -33,3 +33,11 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# agent skills instaladas (contenido regenerable con `npx skills add` desde skills-lock.json).
+# Los symlinks de .claude/skills/* apuntan a rutas absolutas dentro de .agents/, así que
+# también se ignoran para no versionar un symlink roto en otra máquina.
+.agents/
+.claude/skills/*
+# excepto la skill propia del proyecto (directorio real, no symlink instalado)
+!.claude/skills/frontend-design-corp

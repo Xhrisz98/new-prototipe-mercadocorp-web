@@ -47,10 +47,10 @@ app/
 components/
   ui/                        # Button (pill), Card, Badge, FormField, ProductShowcase (mockup de navegador para capturas de producto), FloatingWhatsAppQR (widget flotante global), InteractiveTreeQR (QR + WhatsApp), ScrollProgress (barra de progreso de scroll)
   layout/                    # Navbar (con toggle tema + LanguageSelector), Footer
-  sections/                  # Hero, PillarCard, FAQAccordion, CaseStudyCard, StatsStrip, TrustStrip, ReasoningBlock, ServiceNodeDiagram (2D, SVG + Motion — diagrama de 3 nodos con scroll-reveal, hub Tecnología, ver §5.4 Capa 1)
-  three/                     # NeuralNetworkCore (Hero Inicio — red neuronal de IA abstracta: nodos + conexiones por capas, morph controlado por scroll; reemplaza a NeuralAgentCore, que a su vez había reemplazado a KineticNeuralCore, que a su vez había reemplazado al ParticleNetwork original), AgentSphere (Mind) — cada uno "use client" con fallback estático mobile
+  sections/                  # Hero, PillarCard, FAQAccordion, CaseStudyCard, StatsStrip, TrustStrip, ReasoningBlock, ServiceNodeDiagram (2D, diagrama de nodos interactivo en Tecnología)
+  three/                     # DataFlowCore (Hero Inicio — espiral 3D de partículas de luz en flujo, representando velocidad/proceso de datos; reemplaza a NeuralNetworkCore, que a su vez reemplazó a NeuralAgentCore, que a su vez reemplazó a KineticNeuralCore), AgentSphere (Mind) — cada uno "use client" con fallback estático mobile
 
-**Deuda técnica activa a limpiar una vez NeuralNetworkCore esté verificado:** `KineticNeuralCore.tsx` y `NeuralAgentCore.tsx` quedan como código muerto (no importados) tras este cambio — es la tercera iteración del hero de Inicio. A diferencia de las veces anteriores, esta vez ambos archivos se eliminan del repo apenas se confirme visualmente que `NeuralNetworkCore` funciona — no se conservan "por si acaso". Acumular componentes 3D huérfanos ya es un patrón repetido que hay que cortar aquí.
+**Deuda técnica activa a limpiar una vez DataFlowCore esté verificado:** `KineticNeuralCore.tsx` y `NeuralAgentCore.tsx` permanecen como código muerto en el repo (nunca se llegó a eliminar tras el pivote anterior); `NeuralNetworkCore.tsx` se suma a esa lista si llegó a construirse antes de este cambio. Los 3 (o los que existan) se eliminan en el mismo commit donde se confirme visualmente que `DataFlowCore` funciona — ya van 4 iteraciones del mismo componente, esta vez sí se limpia sin excepciones.
 lib/
   design-tokens.ts           # Todos los colores/tipografía de la sección 4, como constantes — nunca hardcodear hex sueltos en componentes
 content/
@@ -114,7 +114,7 @@ Cada página usa el copy exacto de `copywriting-nueva-web-mercadocorp.md` (títu
 4. CTA final
 
 **Casos especiales:**
-- **Inicio (`/`)** — única página con el componente Three.js `NeuralNetworkCore` en el hero: red neuronal de IA abstracta (nodos en capas conectados por líneas de luz, no una neurona biológica), posicionada de forma asimétrica para no cruzar el bloque de texto del H1. En reposo (0% scroll) los nodos/conexiones están en azules de marca; al hacer scroll dentro del rango del hero, converge hacia un estado "activado" con acento verde `#04E7AF` únicamente en ese estado final. Reemplaza a `NeuralAgentCore` (neurona orgánica, descartada por no leerse como "red neuronal de IA")
+- **Inicio (`/`)** — única página con el componente Three.js `DataFlowCore` en el hero: espiral 3D de miles de partículas de luz en flujo, transmitiendo velocidad/proceso de datos (no una forma biológica ni un diagrama de red). Posicionada asimétricamente hacia el lado derecho, dejando el tercio izquierdo despejado para el bloque de texto del H1. En reposo (0% scroll), rotación de la espiral en azules de marca; al hacer scroll dentro del rango del hero, la espiral acelera/se contrae y el núcleo se enciende en verde `#04E7AF` únicamente en ese estado final. Reemplaza a `NeuralNetworkCore` (red de nodos, descartada por no transmitir suficiente sensación de "tecnología/velocidad")
 - **Mind (`/mind`)** — único lugar del sitio con el acento verde `#04E7AF` y el componente `AgentSphere`; el CTA principal es un link externo `target="_blank"` a `mind.ec`/`crm.mind.ec`, no un formulario interno
 - **Casos de Éxito (`/casos-de-exito`)** — construir con datos placeholder tipados (`content/casos-de-exito.ts` con array vacío o de ejemplo comentado) hasta que se confirme la lista definitiva de clientes — **no inventar clientes ni cifras**
 - **Nosotros (`/nosotros`)** — la sección "Trayectoria" queda como placeholder visual (título + nota "Próximamente") hasta tener hitos reales
@@ -159,7 +159,16 @@ Como ya estaba definido: cada tarjeta de servicio revela su captura asociada al 
 
 La Capa 1 vive más arriba en la página (cerca del hero del hub, como transición conceptual), la Capa 2 vive junto a cada tarjeta de servicio — no se superponen ni compiten por el mismo espacio de scroll.
 
-## 6. Fases de construcción (pensadas para el Manager View de Antigravity — varios agentes en paralelo)
+## 5.5 Scroll-reveal como estándar del sitio (no por componente)
+
+Todo bloque de contenido con entidad propia (tarjetas de servicio, PainBlock, StatsStrip, TrustStrip, FAQ, casos de éxito, etc.) se revela al entrar al viewport mediante **un único componente wrapper reutilizable** (`components/ui/RevealOnScroll.tsx`, usa `whileInView` de Motion) — nunca una animación de entrada distinta escrita a mano por componente. Parámetros estándar: fade + slide vertical sutil (12-16px), stagger de ~80ms entre elementos hermanos dentro de un mismo grid/lista, se dispara una sola vez (no se revierte al scrollear hacia arriba). Cualquier componente que ya tenga su propia animación de entrada ad-hoc se migra a este wrapper.
+
+## 5.6 Profundidad de tarjetas — sombra en capas
+
+Las tarjetas (`Card`, `ProductShowcase`, `PainBlock`, etc.) usan una técnica de sombra en dos capas para dar profundidad sin salirse de los tokens de marca:
+- Capa exterior (drop shadow): usa `--color-brand-primary` a baja opacidad (~12-16%) en vez de negro puro, para que la sombra se sienta "de marca" y no genérica
+- Capa interior (inner highlight): blanco a baja opacidad en tema claro, blanco muy tenue en tema oscuro, para dar sensación de superficie elevada
+- Nunca colores de sombra fuera de estas dos combinaciones — la técnica se adapta a los tokens existentes, no se copian los valores hex literales de una referencia externa
 
 **Fase 0 — Fundaciones (agente único, bloqueante para todo lo demás)**
 - Setup del proyecto Next.js + Tailwind + fuentes + `design-tokens.ts`
