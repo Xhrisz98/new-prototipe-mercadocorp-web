@@ -111,19 +111,24 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* flex-wrap en vez de grid de columnas fijas: 3 pilares en un grid de 2
+                columnas en md dejaba el tercero solo, pegado a la izquierda. Cada
+                tarjeta conserva el ancho de su columna original (flex-none) y el
+                conjunto se centra con justify-center sin importar la última fila. */}
+            <div className="flex flex-wrap justify-center gap-8">
               {content.pillars.items.map((pillar, idx) => (
-                <PillarCard
-                  key={pillar.number}
-                  title={pillar.title}
-                  description={pillar.description}
-                  href={pillar.href}
-                  ctaLabel={pillar.ctaLabel}
-                  badge={pillar.badge}
-                  isMind={pillar.isMind}
-                  image={pillarImages[idx]}
-                  index={idx}
-                />
+                <div key={pillar.number} className="w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-21.333px)] flex-none">
+                  <PillarCard
+                    title={pillar.title}
+                    description={pillar.description}
+                    href={pillar.href}
+                    ctaLabel={pillar.ctaLabel}
+                    badge={pillar.badge}
+                    isMind={pillar.isMind}
+                    image={pillarImages[idx]}
+                    index={idx}
+                  />
+                </div>
               ))}
             </div>
           </div>

@@ -61,11 +61,16 @@ export default function CasosDeExitoPage() {
                 </p>
               </div>
             ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            // flex-wrap en vez de grid de 3 columnas fijas: mientras la lista de
+            // casos confirmados crezca de a uno, casi nunca será múltiplo de 3 —
+            // un grid dejaría la última fila incompleta pegada a la izquierda.
+            // Cada tarjeta conserva el ancho de columna original (flex-none) y el
+            // conjunto se centra con justify-center sin importar el resto.
+            <div className="flex flex-wrap justify-center gap-8">
               {content.cases.map((caso) => (
                 <div
                   key={caso.id}
-                  className="p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/40 transition-[border-color,box-shadow] duration-300 hover:shadow-xl flex flex-col justify-between"
+                  className="w-full md:w-[calc(33.333%-21.333px)] flex-none p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/40 transition-[border-color,box-shadow] duration-300 hover:shadow-xl flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-6">

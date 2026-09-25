@@ -49,11 +49,16 @@ export function CaseStudyPreview({
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* flex-wrap en vez de grid de 3 columnas fijas: con 2 casos (el número
+            actual, antes de confirmar más clientes) un grid de 3 dejaba la tarjeta
+            sola pegada a la izquierda con un hueco al lado. Cada tarjeta conserva el
+            ancho de una columna de 3 en md+ (flex-none, no crece) y el conjunto se
+            centra con justify-center sin importar cuántas quepan en la fila. */}
+        <div className="flex flex-wrap justify-center gap-6">
           {items.map((item) => (
             <div
               key={item.client}
-              className="p-7 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1"
+              className="w-full md:w-[calc(33.333%-16px)] flex-none p-7 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">

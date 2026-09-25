@@ -35,7 +35,12 @@ export function TrustStrip({ title, logos }: TrustStripProps) {
           {title}
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 items-center justify-center">
+        {/* flex-wrap en vez de grid de columnas fijas: con un número de logos que no
+            llena exacto la última fila (5, 3...), un grid dejaba la fila incompleta
+            desalineada a la izquierda. Con flex-wrap + justify-center, cualquier
+            cantidad queda centrada, y cada tarjeta mide su propio contenido (nunca
+            truncado) en vez de una columna de ancho fijo. */}
+        <div className="flex flex-wrap justify-center gap-4">
           {logos.map((logo, idx) => (
             <div
               key={logo.name}
@@ -44,9 +49,9 @@ export function TrustStrip({ title, logos }: TrustStripProps) {
               <div className="text-[var(--color-primary)] shrink-0">
                 {getIcon(idx)}
               </div>
-              <div className="min-w-0">
-                <span className="text-xs font-bold block truncate">{logo.name}</span>
-                <span className="text-[10px] text-[var(--color-text-muted)] block truncate">
+              <div>
+                <span className="text-xs font-bold block">{logo.name}</span>
+                <span className="text-[10px] text-[var(--color-text-muted)] block">
                   {logo.category}
                 </span>
               </div>

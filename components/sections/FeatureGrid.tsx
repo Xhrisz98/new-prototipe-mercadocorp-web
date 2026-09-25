@@ -33,11 +33,16 @@ export function FeatureGrid({
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {/* flex-wrap en vez de grid de columnas fijas: content/branding.ts (7 items)
+            y content/eventos.ts (4 items) no dividen exacto entre 2 o 3 columnas,
+            dejando la última fila con una tarjeta sola pegada a la izquierda. Cada
+            tarjeta conserva el ancho de su columna original (flex-none) y el
+            conjunto se centra con justify-center sin importar el resto de la fila. */}
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8">
           {items.map((item, idx) => (
             <div
               key={idx}
-              className={`flex flex-col justify-between p-6 sm:p-8 rounded-2xl border transition-[border-color,box-shadow] duration-300 hover:shadow-lg ${
+              className={`w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-21.333px)] flex-none flex flex-col justify-between p-6 sm:p-8 rounded-2xl border transition-[border-color,box-shadow] duration-300 hover:shadow-lg ${
                 item.isAi
                   ? "bg-[var(--color-surface)] border-[var(--color-border)] hover:border-[var(--color-ai)]/40 relative overflow-hidden"
                   : "bg-[var(--color-surface)] border-[var(--color-border)] hover:border-[var(--color-primary)]/30"
