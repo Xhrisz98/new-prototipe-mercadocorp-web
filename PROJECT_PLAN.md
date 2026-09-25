@@ -170,6 +170,15 @@ Las tarjetas (`Card`, `ProductShowcase`, `PainBlock`, etc.) usan una técnica de
 - Capa interior (inner highlight): blanco a baja opacidad en tema claro, blanco muy tenue en tema oscuro, para dar sensación de superficie elevada
 - Nunca colores de sombra fuera de estas dos combinaciones — la técnica se adapta a los tokens existentes, no se copian los valores hex literales de una referencia externa
 
+## 5.7 Fotografía de stock — temporal, marcada para reemplazo
+
+Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como placeholder temporal, en vez de solo ícono, hasta que exista fotografía/ilustración propia de marca. Reglas obligatorias:
+
+- Cada uso lleva un comentario `// TODO: reemplazar con [descripción de qué debería ir ahí]` junto a la imagen en el código — mismo principio que el placeholder de Casos de Éxito y de `legales.ts`
+- Prohibido cualquier cliché de stock corporativo: gente estrechando manos, laptops en cafetería, oficinas genéricas sonriendo a cámara, post-its de colores, persona con cabeza entre las manos
+- Nunca imágenes generadas por IA para esto — solo fotografía real de Unsplash
+- Tono visual: oscuro/monocromático o con dominante azul, abstracto cuando sea posible (server rooms, fibra óptica, circuitos, dashboards) — nunca literal/genérico
+- `ProductShowcase` NO lleva foto adicional de stock — ya es imagen real/mockup de producto, agregar una segunda foto ahí duplica peso visual sin aportar nada
 **Fase 0 — Fundaciones (agente único, bloqueante para todo lo demás)**
 - Setup del proyecto Next.js + Tailwind + fuentes + `design-tokens.ts`
 - `ThemeProvider` con toggle claro/oscuro persistente (`localStorage` + atributo `class` en `<html>`)

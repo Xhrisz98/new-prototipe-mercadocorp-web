@@ -28,6 +28,13 @@
   --color-ai-accent: #04E7AF;
   --color-ai: #04E7AF;
   --color-card-bg: #FFFFFF;
+  /* §5.6 — Sombra de tarjeta en dos capas: drop shadow con el azul de marca
+     (~12-16% de opacidad, nunca negro puro) + inner highlight blanco que da
+     sensación de superficie elevada. */
+  --shadow-card: 0 1px 2px rgba(0, 34, 210, 0.05), 0 10px 28px rgba(0, 34, 210, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  --shadow-card-hover: 0 2px 4px rgba(0, 34, 210, 0.07), 0 18px 44px rgba(0, 34, 210, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .dark {
@@ -44,6 +51,22 @@
   --color-ai-accent: #04E7AF;
   --color-ai: #04E7AF;
   --color-card-bg: #151822;
+  /* En oscuro la sombra usa el azul vibrante y el highlight interior baja a un
+     blanco muy tenue (§5.6). */
+  --shadow-card: 0 1px 2px rgba(63, 95, 255, 0.1), 0 10px 28px rgba(63, 95, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-card-hover: 0 2px 6px rgba(63, 95, 255, 0.14), 0 18px 44px rgba(63, 95, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Clases propias (no utilidades de Tailwind) para que la sombra en capas viva en
+   un solo sitio y no se repita como valor literal en cada tarjeta. */
+.card-elevation {
+  box-shadow: var(--shadow-card);
+}
+
+.card-elevation-interactive:hover {
+  box-shadow: var(--shadow-card-hover);
 }
 
 * {
