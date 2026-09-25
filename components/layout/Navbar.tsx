@@ -143,11 +143,11 @@ export function Navbar() {
           </div>
 
           {/* Navegación Desktop con Mega-menús / Dropdowns */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-sm font-medium">
+          <nav className="hidden lg:flex items-center gap-0 xl:gap-1.5 text-sm font-medium">
             {/* Inicio */}
             <Link
               href="/"
-              className={`px-3 py-2 rounded-full transition-colors ${
+              className={`px-2.5 xl:px-3 py-2 rounded-full transition-colors ${
                 pathname === "/"
                   ? "text-[var(--color-primary)] font-semibold"
                   : "text-[var(--color-text)] hover:text-[var(--color-primary)] hover:bg-[var(--color-surface)]"
@@ -164,7 +164,7 @@ export function Navbar() {
             >
               <button
                 type="button"
-                className={`px-3 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer ${
+                className={`px-2.5 xl:px-3 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer ${
                   isTechActive || activeDropdown === "tech"
                     ? "text-[var(--color-primary)] font-semibold bg-[var(--color-surface)]"
                     : "text-[var(--color-text)] hover:text-[var(--color-primary)] hover:bg-[var(--color-surface)]"
@@ -223,7 +223,7 @@ export function Navbar() {
             {/* Mind (Destacado con Badge de IA exclusivo) */}
             <Link
               href="/mind"
-              className={`px-3 py-2 rounded-full transition-colors flex items-center gap-1.5 ${
+              className={`px-2.5 xl:px-3 py-2 rounded-full transition-colors flex items-center gap-1.5 ${
                 pathname === "/mind"
                   ? "text-[var(--color-ai)] font-semibold bg-[var(--color-surface)]"
                   : "text-[var(--color-text)] hover:text-[var(--color-ai)] hover:bg-[var(--color-surface)]"
@@ -243,7 +243,7 @@ export function Navbar() {
             >
               <button
                 type="button"
-                className={`px-3 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer ${
+                className={`px-2.5 xl:px-3 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer ${
                   isMarketingActive || activeDropdown === "marketing"
                     ? "text-[var(--color-primary)] font-semibold bg-[var(--color-surface)]"
                     : "text-[var(--color-text)] hover:text-[var(--color-primary)] hover:bg-[var(--color-surface)]"
@@ -315,7 +315,7 @@ export function Navbar() {
             {/* Nosotros */}
             <Link
               href="/nosotros"
-              className={`px-3 py-2 rounded-full transition-colors ${
+              className={`px-2.5 xl:px-3 py-2 rounded-full transition-colors ${
                 pathname === "/nosotros"
                   ? "text-[var(--color-primary)] font-semibold"
                   : "text-[var(--color-text)] hover:text-[var(--color-primary)] hover:bg-[var(--color-surface)]"
@@ -327,7 +327,7 @@ export function Navbar() {
             {/* Casos de Éxito */}
             <Link
               href="/casos-de-exito"
-              className={`px-3 py-2 rounded-full transition-colors ${
+              className={`px-2.5 xl:px-3 py-2 rounded-full transition-colors ${
                 pathname === "/casos-de-exito"
                   ? "text-[var(--color-primary)] font-semibold"
                   : "text-[var(--color-text)] hover:text-[var(--color-primary)] hover:bg-[var(--color-surface)]"
@@ -337,17 +337,21 @@ export function Navbar() {
             </Link>
           </nav>
 
-          {/* Controles Desktop (Idioma, Tema, Botón CTA Píldora) */}
-          <div className="hidden lg:flex items-center gap-2 xl:gap-3">
-            <LanguageSelector />
+          {/* Controles Desktop (Idioma, Tema, Botón CTA Píldora).
+              Compactos en lg (1024-1279px): en ese rango el menú + controles no
+              cabían en el ancho disponible y desbordaban el viewport 32px. */}
+          <div className="hidden lg:flex items-center gap-1 xl:gap-3">
+            <LanguageSelector variant="compact" />
             <ThemeToggle />
             <Button
               variant="primary"
               size="sm"
               href="/contacto"
-              icon={<ArrowRight className="w-3.5 h-3.5" />}
+              icon={<ArrowRight className="hidden xl:inline-block w-3.5 h-3.5" />}
               iconPosition="right"
-              className="ml-1 font-medium"
+              // !px-3: sm ya trae px-3.5; el !important garantiza que gane sin
+              // depender del orden en que Tailwind genera las utilidades.
+              className="font-medium whitespace-nowrap !px-3 xl:!px-3.5"
             >
               {t("nav_cta")}
             </Button>

@@ -144,7 +144,7 @@ const contentData: Record<Locale, HomeContent> = {
           description:
             "Agentes de IA, CRMs a medida, integraciones y automatización de procesos que eliminan el trabajo manual repetitivo.",
           href: "/tecnologia-automatizacion",
-          ctaLabel: "Ver Tecnología y Automatización →",
+          ctaLabel: "Ver Tecnología y Automatización",
           badge: "Pilar Principal",
         },
         {
@@ -153,7 +153,7 @@ const contentData: Record<Locale, HomeContent> = {
           description:
             "Nuestro propio producto: un CRM con un agente de ventas por WhatsApp que atiende, asesora y cierra ventas sin descanso.",
           href: "/mind",
-          ctaLabel: "Conocer Mind →",
+          ctaLabel: "Conocer Mind",
           badge: "CRM + IA Flagship",
           isMind: true,
         },
@@ -163,7 +163,7 @@ const contentData: Record<Locale, HomeContent> = {
           description:
             "Cuando la base tecnológica ya está resuelta, potenciamos cómo el mercado percibe su marca: contenido, branding y eventos.",
           href: "/marketing-digital",
-          ctaLabel: "Ver Marketing Digital →",
+          ctaLabel: "Ver Marketing Digital",
           badge: "Complementario",
         },
       ],
@@ -368,7 +368,7 @@ const contentData: Record<Locale, HomeContent> = {
           description:
             "AI agents, custom CRMs, integrations, and business process automation that eliminate manual grunt work.",
           href: "/tecnologia-automatizacion",
-          ctaLabel: "Explore Technology & Automation →",
+          ctaLabel: "Explore Technology & Automation",
           badge: "Core Pillar",
         },
         {
@@ -377,7 +377,7 @@ const contentData: Record<Locale, HomeContent> = {
           description:
             "Our flagship product: a dedicated CRM with an AI sales agent over WhatsApp that advises, qualifies, and closes 24/7.",
           href: "/mind",
-          ctaLabel: "Discover Mind →",
+          ctaLabel: "Discover Mind",
           badge: "Flagship CRM + AI",
           isMind: true,
         },
@@ -387,7 +387,7 @@ const contentData: Record<Locale, HomeContent> = {
           description:
             "Once technological foundations are resolved, we elevate market perception: content, branding, and event management.",
           href: "/marketing-digital",
-          ctaLabel: "Explore Digital Marketing →",
+          ctaLabel: "Explore Digital Marketing",
           badge: "Complementary",
         },
       ],
@@ -592,7 +592,7 @@ const contentData: Record<Locale, HomeContent> = {
           description:
             "ИИ-агенты, заказные CRM-системы, интеграции и сквозная автоматизация повторяющихся бизнес-процессов.",
           href: "/tecnologia-automatizacion",
-          ctaLabel: "Технологии и Автоматизация →",
+          ctaLabel: "Технологии и Автоматизация",
           badge: "Основной Столп",
         },
         {
@@ -601,7 +601,7 @@ const contentData: Record<Locale, HomeContent> = {
           description:
             "Наш флагманский продукт: CRM со встроенным ИИ-агентом в WhatsApp, консультирующим и закрывающим сделки 24/7.",
           href: "/mind",
-          ctaLabel: "Узнать о Mind →",
+          ctaLabel: "Узнать о Mind",
           badge: "Флагман CRM + ИИ",
           isMind: true,
         },
@@ -611,7 +611,7 @@ const contentData: Record<Locale, HomeContent> = {
           description:
             "Когда технологическая основа готова, мы усиливаем позиционирование: контент-стратегия, брендинг и события.",
           href: "/marketing-digital",
-          ctaLabel: "Цифровой Маркетинг →",
+          ctaLabel: "Цифровой Маркетинг",
           badge: "Дополнительно",
         },
       ],

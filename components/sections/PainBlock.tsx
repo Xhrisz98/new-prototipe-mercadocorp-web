@@ -2,7 +2,29 @@
 
 import React from "react";
 import Link from "next/link";
+import { PhotoCard } from "@/components/ui/PhotoCard";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { AlertCircle, Clock, TrendingDown, ArrowRight } from "lucide-react";
+
+// Fotografía de stock TEMPORAL (Unsplash) — PROJECT_PLAN.md §5.7.
+const PAIN_IMAGES = [
+  {
+    // TODO: reemplazar con foto propia de una operación real desordenada (pantallas
+    // con hojas de cálculo dispersas), cuando exista banco de imágenes de marca.
+    src: "/images/stock/tangled-network-cables.jpg",
+    alt: "Manojo de cables de red azules entrelazados en un rack, sin orden aparente",
+  },
+  {
+    // TODO: reemplazar con foto propia de un embudo comercial real en el CRM Mind.
+    src: "/images/stock/light-streaks-blue.jpg",
+    alt: "Estelas de luz azul en larga exposición alejándose sobre un fondo oscuro",
+  },
+  {
+    // TODO: reemplazar con foto propia de un proceso manual repetitivo del cliente.
+    src: "/images/stock/optic-fiber-pattern.jpg",
+    alt: "Filamentos de fibra óptica azul repitiendo el mismo patrón sobre fondo negro",
+  },
+];
 
 interface PainBlockProps {
   title: string;
@@ -32,7 +54,7 @@ export function PainBlock({ title, intro, items, ctaText, ctaLink }: PainBlockPr
   return (
     <section className="w-full py-20 bg-[var(--color-bg)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-14">
+        <RevealOnScroll className="max-w-3xl mx-auto text-center mb-14">
           <h2
             className="text-2xl sm:text-4xl font-medium tracking-tight mb-4 text-[var(--color-text)]"
             style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
@@ -42,32 +64,31 @@ export function PainBlock({ title, intro, items, ctaText, ctaLink }: PainBlockPr
           <p className="text-sm sm:text-base text-[var(--color-text-muted)] leading-relaxed">
             {intro}
           </p>
-        </div>
+        </RevealOnScroll>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {items.map((item, idx) => (
-            <div
+            <PhotoCard
               key={item.title}
-              className="p-7 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs flex flex-col justify-between transition-[border-color,transform] duration-200 hover:border-[var(--color-primary)]/40 hover:-translate-y-1"
+              image={PAIN_IMAGES[idx % PAIN_IMAGES.length]}
+              revealIndex={idx}
+              overlay={
+                <span className="inline-flex items-center rounded-full bg-black/55 px-2.5 py-0.5 text-xs font-semibold text-white backdrop-blur-sm">
+                  {item.tag}
+                </span>
+              }
             >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-[var(--color-border)]/40 flex items-center justify-center">
-                    {getIcon(idx)}
-                  </div>
-                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[var(--color-border)]/60 text-[var(--color-text-muted)]">
-                    {item.tag}
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-bold mb-3 text-[var(--color-text)]">
-                  {item.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
-                  {item.description}
-                </p>
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-border)]/40">
+                {getIcon(idx)}
               </div>
-            </div>
+
+              <h3 className="text-lg font-bold mb-3 text-[var(--color-text)]">
+                {item.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
+                {item.description}
+              </p>
+            </PhotoCard>
           ))}
         </div>
 

@@ -22,6 +22,27 @@ export default function HomePage() {
   const { locale } = useLocale();
   const content = getHomeContent(locale);
 
+  // Fotografía de stock TEMPORAL (Unsplash) para los 3 pilares — PROJECT_PLAN.md §5.7.
+  // El orden corresponde al de content.pillars.items.
+  const pillarImages = [
+    {
+      // TODO: reemplazar con foto propia de una implementación real de automatización
+      // en cliente, cuando exista banco de imágenes de marca.
+      src: "/images/stock/circuit-board-blue.jpg",
+      alt: "Placa de circuito impreso en tonos azul profundo, vista macro",
+    },
+    {
+      // TODO: reemplazar con captura real del agente de IA de Mind conversando por WhatsApp.
+      src: "/images/stock/fiber-optic-blue-lights.jpg",
+      alt: "Haz de fibras ópticas iluminadas en azul irradiando desde un punto central",
+    },
+    {
+      // TODO: reemplazar con foto propia de una campaña o pieza de contenido real del equipo.
+      src: "/images/stock/optic-fiber-strands.jpg",
+      alt: "Filamentos de fibra óptica azul proyectando destellos sobre fondo oscuro",
+    },
+  ];
+
   const internalLinks = [
     { label: "Tecnología y Automatización", href: "/tecnologia-automatizacion" },
     { label: "Mind (CRM + Agente IA)", href: "/mind" },
@@ -90,8 +111,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {content.pillars.items.map((pillar) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {content.pillars.items.map((pillar, idx) => (
                 <PillarCard
                   key={pillar.number}
                   title={pillar.title}
@@ -100,6 +121,8 @@ export default function HomePage() {
                   ctaLabel={pillar.ctaLabel}
                   badge={pillar.badge}
                   isMind={pillar.isMind}
+                  image={pillarImages[idx]}
+                  index={idx}
                 />
               ))}
             </div>
