@@ -114,7 +114,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           description:
             "Un CRM con un agente de ventas por WhatsApp disponible 24/7, entrenado con el conocimiento de su negocio para atender, cotizar y cerrar sin descanso.",
           href: "/mind",
-          ctaLabel: "Conocer Mind →",
+          ctaLabel: "Conocer Mind",
           badge: "CRM + IA Flagship",
           isMind: true,
         },
@@ -124,7 +124,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           description:
             "Software a medida: apps internas, gestores, CRMs personalizados e integraciones de ecosistemas que eliminan los silos de información.",
           href: "/aplicaciones-herramientas-digitales",
-          ctaLabel: "Ver el servicio →",
+          ctaLabel: "Ver el servicio",
           badge: "Software a Medida",
         },
         {
@@ -133,7 +133,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           description:
             "Tiendas en línea potenciadas con IA y automatización que venden 24 horas con menos fricción y carritos recuperados automáticamente.",
           href: "/ecommerce-inteligente",
-          ctaLabel: "Ver el servicio →",
+          ctaLabel: "Ver el servicio",
           badge: "Comercio Autónomo",
         },
       ],
@@ -240,7 +240,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           description:
             "A CRM with a WhatsApp sales agent available 24/7, trained on your business knowledge to assist, quote, and close deals tirelessly.",
           href: "/mind",
-          ctaLabel: "Explore Mind →",
+          ctaLabel: "Explore Mind",
           badge: "Flagship CRM + AI",
           isMind: true,
         },
@@ -250,7 +250,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           description:
             "Custom software: internal apps, management tools, custom CRMs, and ecosystem integrations that eliminate information silos.",
           href: "/aplicaciones-herramientas-digitales",
-          ctaLabel: "View service →",
+          ctaLabel: "View service",
           badge: "Custom Software",
         },
         {
@@ -259,7 +259,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           description:
             "Online stores powered by AI and automation that sell around the clock with less friction and automatically recovered carts.",
           href: "/ecommerce-inteligente",
-          ctaLabel: "View service →",
+          ctaLabel: "View service",
           badge: "Autonomous Commerce",
         },
       ],
@@ -366,7 +366,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           description:
             "CRM с ИИ-агентом продаж в WhatsApp, доступным 24/7, обученным на знаниях вашего бизнеса, чтобы обслуживать, консультировать по ценам и закрывать сделки без устали.",
           href: "/mind",
-          ctaLabel: "Узнать о Mind →",
+          ctaLabel: "Узнать о Mind",
           badge: "Флагман CRM + ИИ",
           isMind: true,
         },
@@ -376,7 +376,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           description:
             "Заказное ПО: внутренние приложения, системы управления, кастомные CRM и экосистемные интеграции, устраняющие изоляцию данных.",
           href: "/aplicaciones-herramientas-digitales",
-          ctaLabel: "Подробнее об услуге →",
+          ctaLabel: "Подробнее об услуге",
           badge: "Заказное ПО",
         },
         {
@@ -385,7 +385,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
           description:
             "Интернет-магазины на базе ИИ и автоматизации, продающие круглосуточно с меньшим трением и автоматическим возвратом брошенных корзин.",
           href: "/ecommerce-inteligente",
-          ctaLabel: "Подробнее об услуге →",
+          ctaLabel: "Подробнее об услуге",
           badge: "Автономные Продажи",
         },
       ],

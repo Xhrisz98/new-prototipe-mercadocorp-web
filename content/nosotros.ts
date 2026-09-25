@@ -66,7 +66,7 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       subheadline:
         "Nacimos para integrar, innovar y escalar junto a empresas que están dispuestas a construir un sistema real, no una campaña puntual.",
       ctaPrimary: {
-        label: "Conocer nuestro trabajo →",
+        label: "Conocer nuestro trabajo",
         href: "/casos-de-exito",
       },
       ctaSecondary: {
@@ -151,7 +151,7 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       subheadline:
         "We were born to integrate, innovate, and scale alongside companies willing to build a real system, not a one-off campaign.",
       ctaPrimary: {
-        label: "Get to know our work →",
+        label: "Get to know our work",
         href: "/casos-de-exito",
       },
       ctaSecondary: {
@@ -236,7 +236,7 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       subheadline:
         "Мы созданы для того, чтобы интегрировать, внедрять инновации и расти вместе с компаниями, готовыми строить настоящую систему, а не разовую кампанию.",
       ctaPrimary: {
-        label: "Узнать о нашей работе →",
+        label: "Узнать о нашей работе",
         href: "/casos-de-exito",
       },
       ctaSecondary: {

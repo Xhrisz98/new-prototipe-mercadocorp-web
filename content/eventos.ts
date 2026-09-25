@@ -18,7 +18,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Nos encargamos de absolutamente todo para transformar su idea en una experiencia memorable — desde la conceptualización hasta el último proveedor confirmado.",
       ctaPrimary: {
-        label: "Contarles mi idea de evento →",
+        label: "Contarles mi idea de evento",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -62,7 +62,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "Un evento que también alimenta su presencia digital",
       body: "A diferencia de una productora de eventos tradicional, integramos la experiencia offline con su estrategia digital: contenido, cobertura y relaciones públicas que extienden el impacto del evento más allá del día en que ocurre.",
       cta: {
-        label: "Solicitar propuesta de evento →",
+        label: "Solicitar propuesta de evento",
         href: "/contacto",
       },
     },
@@ -97,7 +97,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "We take care of absolutely everything to turn your idea into a memorable experience — from conceptualization to the last confirmed vendor.",
       ctaPrimary: {
-        label: "Share your event idea →",
+        label: "Share your event idea",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -141,7 +141,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "An event that also fuels your digital presence",
       body: "Unlike a traditional event production company, we integrate the offline experience with your digital strategy: content, coverage, and public relations that extend the event's impact beyond the day it happens.",
       cta: {
-        label: "Request an event proposal →",
+        label: "Request an event proposal",
         href: "/contacto",
       },
     },
@@ -176,7 +176,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Мы берем на себя абсолютно все, чтобы превратить вашу идею в незабываемое впечатление — от концепции до последнего подтвержденного подрядчика.",
       ctaPrimary: {
-        label: "Поделиться идеей события →",
+        label: "Поделиться идеей события",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -220,7 +220,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "Событие, которое также работает на ваше цифровое присутствие",
       body: "В отличие от традиционного event-агентства, мы связываем офлайн-опыт с вашей цифровой стратегией: контент, освещение мероприятия и PR-материалы, продлевающие эффект события за пределы дня, когда оно проходит.",
       cta: {
-        label: "Запросить предложение по мероприятию →",
+        label: "Запросить предложение по мероприятию",
         href: "/contacto",
       },
     },

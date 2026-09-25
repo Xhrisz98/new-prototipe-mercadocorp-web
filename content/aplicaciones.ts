@@ -59,7 +59,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Hay procesos y flujos de trabajo que las herramientas genéricas no resuelven. Diseñamos y desarrollamos soluciones digitales a medida que automatizan, centralizan y amplían las capacidades reales de su operación.",
       ctaPrimary: {
-        label: "Cuénteme su proceso →",
+        label: "Cuénteme su proceso",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -116,7 +116,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "¿No es más caro construir algo a medida?",
       body: "Es más caro seguir pagando licencias de herramientas genéricas que no encajan, y más caro aún seguir perdiendo horas de su equipo en tareas manuales que un sistema podría resolver solo. Lo a medida se paga una vez y trabaja para usted todos los días.",
       cta: {
-        label: "Solicitar una propuesta técnica →",
+        label: "Solicitar una propuesta técnica",
         href: "/contacto",
       },
     },
@@ -151,7 +151,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Standard off-the-shelf tools often fail unique workflows. We engineer tailor-made digital solutions that automate, centralize, and expand your operational capacity.",
       ctaPrimary: {
-        label: "Tell us about your process →",
+        label: "Tell us about your process",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -208,7 +208,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "Isn't custom development more expensive?",
       body: "It is more expensive to keep paying for generic software licenses that don't fit, and even more costly to keep losing your team's hours on manual tasks that a system could handle on its own. Custom software is paid for once and works for you every day.",
       cta: {
-        label: "Request a technical proposal →",
+        label: "Request a technical proposal",
         href: "/contacto",
       },
     },
@@ -243,7 +243,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Типовые инструменты часто не решают такие задачи. Мы проектируем и разрабатываем кастомные цифровые решения, которые автоматизируют, централизуют и расширяют реальные возможности вашей работы.",
       ctaPrimary: {
-        label: "Рассказать о вашем процессе →",
+        label: "Рассказать о вашем процессе",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -300,7 +300,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "Разве кастомная разработка не дороже?",
       body: "Гораздо дороже годами оплачивать лицензии типового софта, который не решает задачи, и терять часы команды на рутину. Индивидуальное ПО создается один раз и работает на вас ежедневно.",
       cta: {
-        label: "Запросить техническое предложение →",
+        label: "Запросить техническое предложение",
         href: "/contacto",
       },
     },

@@ -61,7 +61,7 @@ const contentData: Record<Locale, MarketingContent> = {
       subheadline:
         "El contenido sin estrategia es ruido. La estrategia sin tecnología detrás no escala. Aquí conectamos ambas cosas.",
       ctaPrimary: {
-        label: "Auditar mi presencia digital →",
+        label: "Auditar mi presencia digital",
         href: "/auditoria-digital",
       },
     },
@@ -106,7 +106,7 @@ const contentData: Record<Locale, MarketingContent> = {
           description:
             "Identidad, narrativa y contenido estratégico: posicionamos a su empresa y a sus ejecutivos como referentes indiscutibles de su sector.",
           href: "/estrategia-creatividad-branding",
-          ctaLabel: "Ver el servicio →",
+          ctaLabel: "Ver el servicio",
           badge: "Branding & Contenido",
         },
         {
@@ -115,7 +115,7 @@ const contentData: Record<Locale, MarketingContent> = {
           description:
             "Diagnóstico exhaustivo y honesto de su presencia digital (SEO, redes, pauta, competencia) con una hoja de ruta accionable a 90 días.",
           href: "/auditoria-digital",
-          ctaLabel: "Ver el servicio →",
+          ctaLabel: "Ver el servicio",
           badge: "Diagnóstico & Estrategia",
         },
         {
@@ -124,7 +124,7 @@ const contentData: Record<Locale, MarketingContent> = {
           description:
             "De la idea conceptual a una experiencia corporativa memorable: diseño, presupuesto, logística integral y proveedores de primer nivel.",
           href: "/gestion-eventos",
-          ctaLabel: "Ver el servicio →",
+          ctaLabel: "Ver el servicio",
           badge: "Experiencias B2B",
         },
       ],
@@ -173,7 +173,7 @@ const contentData: Record<Locale, MarketingContent> = {
       subheadline:
         "Content without strategy is noise. Strategy without technology behind it doesn't scale. Here we connect both.",
       ctaPrimary: {
-        label: "Audit my digital presence →",
+        label: "Audit my digital presence",
         href: "/auditoria-digital",
       },
     },
@@ -218,7 +218,7 @@ const contentData: Record<Locale, MarketingContent> = {
           description:
             "Identity, narrative, and strategic content: we position your company and its executives as undisputed benchmarks in your industry.",
           href: "/estrategia-creatividad-branding",
-          ctaLabel: "View service →",
+          ctaLabel: "View service",
           badge: "Branding & Content",
         },
         {
@@ -227,7 +227,7 @@ const contentData: Record<Locale, MarketingContent> = {
           description:
             "An honest, deep-dive examination of your digital footprints (SEO, social, paid media, competitors) paired with a 90-day execution roadmap.",
           href: "/auditoria-digital",
-          ctaLabel: "View service →",
+          ctaLabel: "View service",
           badge: "Diagnostic & Strategy",
         },
         {
@@ -236,7 +236,7 @@ const contentData: Record<Locale, MarketingContent> = {
           description:
             "From the initial concept to a memorable corporate experience: design, budgeting, end-to-end logistics, and top-tier vendors.",
           href: "/gestion-eventos",
-          ctaLabel: "View service →",
+          ctaLabel: "View service",
           badge: "B2B Experiences",
         },
       ],
@@ -285,7 +285,7 @@ const contentData: Record<Locale, MarketingContent> = {
       subheadline:
         "Контент без стратегии — это шум. Стратегия без технологий не масштабируется. Мы объединяем оба направления.",
       ctaPrimary: {
-        label: "Аудит цифрового присутствия →",
+        label: "Аудит цифрового присутствия",
         href: "/auditoria-digital",
       },
     },
@@ -330,7 +330,7 @@ const contentData: Record<Locale, MarketingContent> = {
           description:
             "Идентичность, сторителлинг и смысловой контент: позиционируем компанию и топ-менеджеров как признанных экспертов индустрии.",
           href: "/estrategia-creatividad-branding",
-          ctaLabel: "Подробнее об услуге →",
+          ctaLabel: "Подробнее об услуге",
           badge: "Брендинг и Контент",
         },
         {
@@ -339,7 +339,7 @@ const contentData: Record<Locale, MarketingContent> = {
           description:
             "Глубокая и честная диагностика цифрового присутствия компании (SEO, соцсети, платная реклама, конкуренты) с понятным планом действий на 90 дней.",
           href: "/auditoria-digital",
-          ctaLabel: "Подробнее об услуге →",
+          ctaLabel: "Подробнее об услуге",
           badge: "Диагностика и Стратегия",
         },
         {
@@ -348,7 +348,7 @@ const contentData: Record<Locale, MarketingContent> = {
           description:
             "От концептуальной идеи до запоминающегося корпоративного события: бюджет, дизайн, подрядчики и логистика под ключ.",
           href: "/gestion-eventos",
-          ctaLabel: "Подробнее об услуге →",
+          ctaLabel: "Подробнее об услуге",
           badge: "B2B Мероприятия",
         },
       ],

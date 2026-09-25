@@ -62,7 +62,7 @@ const contentData: Record<Locale, BrandingPageContent> = {
       subheadline:
         "Ya sea la marca de su empresa o la suya como líder de industria, construimos la identidad, la narrativa y el contenido que la sostienen en el tiempo — no publicaciones sueltas para llenar un calendario.",
       ctaPrimary: {
-        label: "Quiero construir mi marca →",
+        label: "Quiero construir mi marca",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -179,7 +179,7 @@ const contentData: Record<Locale, BrandingPageContent> = {
       subheadline:
         "Whether it is your company's brand or your own as an industry leader, we build the identity, narrative, and content that sustain it over time — not random posts just to fill a calendar.",
       ctaPrimary: {
-        label: "Build my brand →",
+        label: "Build my brand",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -296,7 +296,7 @@ const contentData: Record<Locale, BrandingPageContent> = {
       subheadline:
         "Будь то бренд вашей компании или ваш личный бренд как лидера отрасли, мы создаем айдентику, нарратив и контент, которые поддерживают его во времени — а не случайные посты ради заполнения графика.",
       ctaPrimary: {
-        label: "Создать сильный бренд →",
+        label: "Создать сильный бренд",
         href: "/contacto",
       },
       ctaSecondary: {

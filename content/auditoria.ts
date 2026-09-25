@@ -18,7 +18,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Muchas empresas gastan en campañas y contenido sin saber qué genera resultados y qué está drenando su presupuesto. Le damos un diagnóstico honesto, basado en datos, con acciones priorizadas — no una lista de problemas sin salida.",
       ctaPrimary: {
-        label: "Solicitar mi Auditoría Digital →",
+        label: "Solicitar mi Auditoría Digital",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -74,7 +74,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "¿No sabe si su problema es de marketing o de tecnología? Empiece aquí.",
       body: "La auditoría cubre ambos frentes: si el problema es que sus leads se enfrían por falta de automatización, se lo decimos y lo derivamos a Tecnología. Si el problema es de visibilidad o contenido, seguimos en Marketing. Sin sesgo hacia 'vendernos lo que ya ofrecemos'.",
       cta: {
-        label: "Quiero mi diagnóstico honesto →",
+        label: "Quiero mi diagnóstico honesto",
         href: "/contacto",
       },
     },
@@ -109,7 +109,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Many companies spend on campaigns and content without knowing what generates results and what is draining their budget. We give you an honest, data-driven diagnostic with prioritized actions — not a list of problems with no way out.",
       ctaPrimary: {
-        label: "Request my Digital Audit →",
+        label: "Request my Digital Audit",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -165,7 +165,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "Not sure if your bottleneck is marketing or technology? Start here.",
       body: "The audit covers both fronts: if leads are cooling off due to lack of automation, we'll tell you and route you to Technology. If the issue is visibility or content, we stay within Marketing. No bias toward 'selling you what we already offer'.",
       cta: {
-        label: "Get my objective diagnostic →",
+        label: "Get my objective diagnostic",
         href: "/contacto",
       },
     },
@@ -200,7 +200,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Многие компании тратят деньги на кампании и контент, не понимая, что приносит результат, а что сжигает бюджет. Мы даем честный анализ на основе данных с приоритизированными действиями — а не список проблем без выхода.",
       ctaPrimary: {
-        label: "Запросить цифровой аудит →",
+        label: "Запросить цифровой аудит",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -256,7 +256,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "Не знаете, где сбой — в маркетинге или в технологиях? Начните отсюда.",
       body: "Аудит охватывает оба направления: если проблема в том, что лиды остывают из-за отсутствия автоматизации, мы честно скажем об этом и направим вас в блок Технологий. Если проблема в видимости или контенте, продолжаем работу в Маркетинге. Без уклона в сторону «продать то, что мы и так предлагаем».",
       cta: {
-        label: "Получить честный аудит →",
+        label: "Получить честный аудит",
         href: "/contacto",
       },
     },

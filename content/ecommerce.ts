@@ -18,7 +18,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Tener una tienda ya no es suficiente. Integramos IA, automatización y estrategia comercial en un solo ecosistema diseñado para convertir visitas en clientes, y clientes en compradores recurrentes.",
       ctaPrimary: {
-        label: "Quiero potenciar mi tienda →",
+        label: "Quiero potenciar mi tienda",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -75,7 +75,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "Cada carrito abandonado sin seguimiento es una venta que ya pagó por atraer",
       body: "La mayoría de tiendas online pierden entre el 60-70% de sus carritos. Automatizar el seguimiento no es un lujo, es recuperar presupuesto de marketing que ya se gastó.",
       cta: {
-        label: "Auditar mi tienda actual →",
+        label: "Auditar mi tienda actual",
         href: "/auditoria-digital",
       },
     },
@@ -110,7 +110,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Having a simple store is no longer enough. We merge AI, process automation, and commercial strategy into an ecosystem designed to turn visitors into buyers and buyers into repeat clients.",
       ctaPrimary: {
-        label: "Supercharge my store →",
+        label: "Supercharge my store",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -167,7 +167,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "Every unrecovered abandoned cart is a sale you already paid to attract",
       body: "Most online stores lose between 60-70% of their carts. Automating follow-up is not a luxury — it's recovering marketing budget you already spent.",
       cta: {
-        label: "Audit my current store →",
+        label: "Audit my current store",
         href: "/auditoria-digital",
       },
     },
@@ -202,7 +202,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       subheadline:
         "Просто витрины уже недостаточно. Мы объединяем ИИ, автоматизацию процессов и коммерческую стратегию в единую экосистему для постоянного роста повторных покупок.",
       ctaPrimary: {
-        label: "Масштабировать мой магазин →",
+        label: "Масштабировать мой магазин",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -259,7 +259,7 @@ const contentData: Record<Locale, ServicePageContent> = {
       title: "Каждая брошенная корзина без напоминания — это потерянные деньги на рекламу",
       body: "В большинстве интернет-магазинов бросают 60-70% начатых покупок. Автоматизация возврата — это не роскошь, а прямой возврат уже вложенного рекламного бюджета.",
       cta: {
-        label: "Провести аудит моего магазина →",
+        label: "Провести аудит моего магазина",
         href: "/auditoria-digital",
       },
     },

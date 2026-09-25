@@ -61,7 +61,7 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
       subheadline:
         "Resultados reales de empresas que decidieron dejar de operar con parches y construir un sistema que trabaja para ellas.",
       ctaPrimary: {
-        label: "Quiero ser el próximo caso →",
+        label: "Quiero ser el próximo caso",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -111,7 +111,7 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
       subheadline:
         "Measurable outcomes from companies that chose to stop relying on manual patches and engineered a system that works for them around the clock.",
       ctaPrimary: {
-        label: "Become the next success story →",
+        label: "Become the next success story",
         href: "/contacto",
       },
       ctaSecondary: {
@@ -161,7 +161,7 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
       subheadline:
         "Практические результаты компаний, которые отказались от временных решений и построили систему, работающую на них каждый день.",
       ctaPrimary: {
-        label: "Стать следующим кейсом →",
+        label: "Стать следующим кейсом",
         href: "/contacto",
       },
       ctaSecondary: {

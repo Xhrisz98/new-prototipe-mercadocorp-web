@@ -130,7 +130,7 @@ const contentData: Record<Locale, HomeContent> = {
           tag: "Inercia manual",
         },
       ],
-      ctaText: "¿Le suena familiar? → Descubra cómo lo resolvemos",
+      ctaText: "¿Le suena familiar? Descubra cómo lo resolvemos",
       ctaLink: "/tecnologia-automatizacion",
     },
     pillars: {
@@ -232,7 +232,7 @@ const contentData: Record<Locale, HomeContent> = {
       subtitle:
         "Resultados reales de empresas que decidieron dejar de operar con parches y construir un sistema que trabaja para ellas.",
       cta: {
-        label: "Ver todos los casos de éxito →",
+        label: "Ver todos los casos de éxito",
         href: "/casos-de-exito",
       },
       items: [
@@ -354,7 +354,7 @@ const contentData: Record<Locale, HomeContent> = {
           tag: "Manual drag",
         },
       ],
-      ctaText: "Sounds familiar? → Discover how we fix it",
+      ctaText: "Sounds familiar? Discover how we fix it",
       ctaLink: "/tecnologia-automatizacion",
     },
     pillars: {
@@ -456,7 +456,7 @@ const contentData: Record<Locale, HomeContent> = {
       subtitle:
         "Real transformations from companies that stopped band-aiding operations and built systems that work for them.",
       cta: {
-        label: "View all case studies →",
+        label: "View all case studies",
         href: "/casos-de-exito",
       },
       items: [
@@ -578,7 +578,7 @@ const contentData: Record<Locale, HomeContent> = {
           tag: "Рутинный балласт",
         },
       ],
-      ctaText: "Знакомая ситуация? → Узнайте, как мы это решаем",
+      ctaText: "Знакомая ситуация? Узнайте, как мы это решаем",
       ctaLink: "/tecnologia-automatizacion",
     },
     pillars: {
@@ -680,7 +680,7 @@ const contentData: Record<Locale, HomeContent> = {
       subtitle:
         "Реальные кейсы компаний, которые отказались от временных заплаток в пользу работающей системы.",
       cta: {
-        label: "Все кейсы компании →",
+        label: "Все кейсы компании",
         href: "/casos-de-exito",
       },
       items: [

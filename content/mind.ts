@@ -100,7 +100,7 @@ const contentData: Record<Locale, MindPageContent> = {
         external: true,
       },
       ctaSecondary: {
-        label: "Prefiero que me llamen →",
+        label: "Prefiero que me llamen",
         href: "/contacto",
       },
     },
@@ -184,7 +184,7 @@ const contentData: Record<Locale, MindPageContent> = {
         external: true,
       },
       ctaSecondary: {
-        label: "Request a Callback →",
+        label: "Request a Callback",
         href: "/contacto",
       },
     },
@@ -268,7 +268,7 @@ const contentData: Record<Locale, MindPageContent> = {
         external: true,
       },
       ctaSecondary: {
-        label: "Заказать звонок →",
+        label: "Заказать звонок",
         href: "/contacto",
       },
     },
