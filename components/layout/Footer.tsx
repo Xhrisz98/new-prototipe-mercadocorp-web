@@ -6,10 +6,10 @@ import { Logo } from "@/components/ui/Logo";
 import { Badge } from "@/components/ui/Badge";
 import { LanguageSelector } from "@/components/i18n/LanguageSelector";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { WhatsAppLogo } from "@/components/ui/WhatsAppLogo";
 import {
   MapPin,
   Clock,
-  MessageSquare,
   Mail,
 } from "lucide-react";
 
@@ -49,7 +49,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 transition-colors"
               >
-                <MessageSquare className="w-3.5 h-3.5" />
+                <WhatsAppLogo className="w-3.5 h-3.5" />
                 <span>WhatsApp</span>
               </a>
               <a

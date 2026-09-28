@@ -2,7 +2,8 @@
 
 import React from "react";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, MessageSquare } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { WhatsAppLogo } from "@/components/ui/WhatsAppLogo";
 
 interface FinalCTAProps {
   title: string;
@@ -52,7 +53,7 @@ export function FinalCTA({
               variant="secondary"
               size="lg"
               href={ctaSecondary.href}
-              icon={<MessageSquare className="w-4 h-4 text-[#25D366]" />}
+              icon={<WhatsAppLogo className="w-4 h-4" />}
               iconPosition="left"
             >
               {ctaSecondary.label}

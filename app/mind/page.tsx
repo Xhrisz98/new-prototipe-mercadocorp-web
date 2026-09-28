@@ -11,9 +11,9 @@ import { ProductShowcase } from "@/components/ui/ProductShowcase";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { getMindContent } from "@/content/mind";
+import { WhatsAppLogo } from "@/components/ui/WhatsAppLogo";
 import {
   ExternalLink,
-  MessageSquare,
   Sparkles,
   Layers,
   CalendarCheck,
@@ -90,7 +90,7 @@ export default function MindPage() {
                     href={content.hero.ctaSecondary.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    icon={<MessageSquare className="w-4 h-4" />}
+                    icon={<WhatsAppLogo className="w-4 h-4" />}
                     iconPosition="left"
                   >
                     {content.hero.ctaSecondary.label}
@@ -264,7 +264,7 @@ export default function MindPage() {
                 href={content.closingCta.ctaSecondary.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                icon={<MessageSquare className="w-4 h-4" />}
+                icon={<WhatsAppLogo className="w-4 h-4" />}
                 iconPosition="left"
               >
                 {content.closingCta.ctaSecondary.label}

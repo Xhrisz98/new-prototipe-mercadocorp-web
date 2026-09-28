@@ -9,10 +9,10 @@ import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getContactoContent } from "@/content/contacto";
 import { InteractiveTreeQR } from "@/components/ui/InteractiveTreeQR";
+import { WhatsAppLogo } from "@/components/ui/WhatsAppLogo";
 import {
   Clock,
   MapPin,
-  MessageSquare,
   CheckCircle2,
   Send,
   Sparkles,
@@ -362,7 +362,7 @@ export default function ContactoPage() {
 
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-[#25D366]/10 text-[#25D366] flex items-center justify-center shrink-0 mt-0.5">
-                      <MessageSquare className="w-5 h-5" />
+                      <WhatsAppLogo className="w-5 h-5" />
                     </div>
                     <div>
                       <div className="text-sm font-semibold text-[var(--color-text)]">

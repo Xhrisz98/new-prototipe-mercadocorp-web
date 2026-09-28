@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { WhatsAppLogo } from "@/components/ui/WhatsAppLogo";
 import {
-  MessageCircle,
   Copy,
   Check,
   ExternalLink,
@@ -187,7 +187,7 @@ export function InteractiveTreeQR({
               className="relative w-full h-full flex flex-col items-center justify-center"
             >
               <Image
-                src="/images/tree-qr-scannable.png"
+                src="/images/tree-qr-scannable-blue.png"
                 alt="MercadoCorp Scannable WhatsApp QR Code"
                 fill
                 sizes="(max-width: 640px) 280px, 320px"
@@ -209,7 +209,7 @@ export function InteractiveTreeQR({
       <div className="mt-5 p-3 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)] flex items-center justify-between gap-2">
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="w-8 h-8 rounded-xl bg-[#25D366]/15 text-[#25D366] flex items-center justify-center shrink-0">
-            <MessageCircle className="w-4 h-4" />
+            <WhatsAppLogo className="w-4 h-4" />
           </div>
           <div className="min-w-0">
             <div className="text-xs font-bold text-[var(--color-text-muted)]">
@@ -253,7 +253,7 @@ export function InteractiveTreeQR({
           rel="noopener noreferrer"
           className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-md hover:shadow-lg transition-[background-color,box-shadow] duration-200"
         >
-          <MessageCircle className="w-4 h-4 fill-white text-white" />
+          <WhatsAppLogo className="w-4 h-4" variant="white" />
           <span>{t.chatCta}</span>
         </a>
 

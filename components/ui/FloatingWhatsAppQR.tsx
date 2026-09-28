@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, X } from "lucide-react";
+import { X } from "lucide-react";
 import { InteractiveTreeQR } from "@/components/ui/InteractiveTreeQR";
+import { WhatsAppLogo } from "@/components/ui/WhatsAppLogo";
 
 export function FloatingWhatsAppQR() {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,7 +87,7 @@ export function FloatingWhatsAppQR() {
           ) : (
             <>
               <div className="relative">
-                <MessageCircle className="w-5 h-5 fill-white text-white" />
+                <WhatsAppLogo className="w-5 h-5" variant="white" />
                 <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
