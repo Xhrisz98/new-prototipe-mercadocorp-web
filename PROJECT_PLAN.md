@@ -179,6 +179,22 @@ Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como 
 - Nunca imágenes generadas por IA para esto — solo fotografía real de Unsplash
 - Tono visual: oscuro/monocromático o con dominante azul, abstracto cuando sea posible (server rooms, fibra óptica, circuitos, dashboards) — nunca literal/genérico
 - `ProductShowcase` NO lleva foto adicional de stock — ya es imagen real/mockup de producto, agregar una segunda foto ahí duplica peso visual sin aportar nada
+
+## 5.8 Árbol 3D — transformación del QR de WhatsApp
+
+`InteractiveTreeQR` pasa de tener una imagen decorativa de "árbol" a un componente Three.js real (`components/three/TreeGrowthReveal.tsx`):
+
+- **Estado por defecto:** QR de WhatsApp en 2D (recoloreado a azules de marca — ver validación de contraste abajo)
+- **Al hacer clic:** la tarjeta gira 180° (transición, no la escena 3D en sí — puede ser CSS 3D transform o Framer/Motion) y revela, del otro lado, un árbol construido en Three.js que **crece progresivamente** (tronco → ramas primarias → ramas secundarias, animación de construcción, no aparece de golpe)
+- **Paleta:** únicamente azules de marca (`#0022D2` / `#3F5FFF`), consistente con el resto de piezas 3D del sitio — sin verde salvo que se use el acento reservado de forma puntual (ej. un brillo en las "hojas" si se justifica como señal de "vivo/activo")
+- **Interacción de vuelta:** un segundo clic (o botón explícito) regresa al estado QR — mismo giro de 180° en reversa
+- **Mobile:** fallback — puede mantenerse el giro pero con una versión más liviana del árbol (menos geometría/ramas), o una imagen estática del árbol ya construido si el rendimiento no lo permite; decidir tras medir en dispositivo real
+- **Accesibilidad:** respeta `prefers-reduced-motion` (salta directo al estado final sin animación de giro/crecimiento), igual que el resto de piezas 3D del sitio
+
+**Validación obligatoria antes de aprobar el recolor del QR:** escanear el QR recoloreado con un teléfono real (no solo verificar visualmente) — el contraste entre módulos debe mantenerse suficiente para que siga funcionando como QR, no solo "verse bien".
+
+## 6. Fases de construcción (pensadas para el Manager View de Antigravity — varios agentes en paralelo)
+
 **Fase 0 — Fundaciones (agente único, bloqueante para todo lo demás)**
 - Setup del proyecto Next.js + Tailwind + fuentes + `design-tokens.ts`
 - `ThemeProvider` con toggle claro/oscuro persistente (`localStorage` + atributo `class` en `<html>`)

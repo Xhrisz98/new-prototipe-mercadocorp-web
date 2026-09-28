@@ -56,12 +56,12 @@ const contentData: Record<Locale, MindPageContent> = {
       subheadline:
         "Mind no es un chatbot. Es un CRM completo con un agente de ventas por IA que atiende, asesora y cierra ventas por WhatsApp — entrenado con la voz y el conocimiento de su negocio, disponible 24/7.",
       ctaPrimary: {
-        label: "Ver Mind en mind.ec →",
+        label: "Ver Mind en mind.ec",
         href: "https://mind.ec",
         external: true,
       },
       ctaSecondary: {
-        label: "Cotizar por WhatsApp →",
+        label: "Cotizar por WhatsApp",
         href: "https://wa.me/593983315439?text=Hola,%20deseo%20información%20sobre%20Mind",
         external: true,
       },
@@ -95,7 +95,7 @@ const contentData: Record<Locale, MindPageContent> = {
       description:
         "Mind es un producto independiente, con desarrollo y actualizaciones propias — por eso el detalle completo, demos y documentación viven en mind.ec. Aquí solo lo presentamos como parte del ecosistema de servicios de MercadoCorp.",
       ctaPrimary: {
-        label: "Conocer Mind a fondo →",
+        label: "Conocer Mind a fondo",
         href: "https://mind.ec",
         external: true,
       },
@@ -140,12 +140,12 @@ const contentData: Record<Locale, MindPageContent> = {
       subheadline:
         "Mind is not a chatbot. It is a complete CRM with an AI sales agent that attends to, advises, and closes sales on WhatsApp — trained on the voice and knowledge of your business, available 24/7.",
       ctaPrimary: {
-        label: "Explore Mind at mind.ec →",
+        label: "Explore Mind at mind.ec",
         href: "https://mind.ec",
         external: true,
       },
       ctaSecondary: {
-        label: "Get a Quote via WhatsApp →",
+        label: "Get a Quote via WhatsApp",
         href: "https://wa.me/593983315439?text=Hello,%20I%20would%20like%20information%20about%20Mind",
         external: true,
       },
@@ -179,7 +179,7 @@ const contentData: Record<Locale, MindPageContent> = {
       description:
         "Mind is a standalone product with its own development and updates — that's why the full details, demos, and documentation live at mind.ec. Here we simply present it as part of the MercadoCorp services ecosystem.",
       ctaPrimary: {
-        label: "Deep Dive into Mind →",
+        label: "Deep Dive into Mind",
         href: "https://mind.ec",
         external: true,
       },
@@ -224,12 +224,12 @@ const contentData: Record<Locale, MindPageContent> = {
       subheadline:
         "Mind — это не чат-бот. Это полноценная CRM с агентом продаж на базе ИИ, который обслуживает, консультирует и закрывает продажи в WhatsApp — обученный на голосе и знаниях вашего бизнеса, доступный 24/7.",
       ctaPrimary: {
-        label: "Открыть Mind на mind.ec →",
+        label: "Открыть Mind на mind.ec",
         href: "https://mind.ec",
         external: true,
       },
       ctaSecondary: {
-        label: "Запросить расценки в WhatsApp →",
+        label: "Запросить расценки в WhatsApp",
         href: "https://wa.me/593983315439?text=Здравствуйте,%20интересует%20Mind",
         external: true,
       },
@@ -263,7 +263,7 @@ const contentData: Record<Locale, MindPageContent> = {
       description:
         "Mind — это независимый продукт с собственной разработкой и обновлениями — поэтому полная информация, демо и документация находятся на mind.ec. Здесь мы лишь представляем его как часть экосистемы услуг MercadoCorp.",
       ctaPrimary: {
-        label: "Узнать все о Mind →",
+        label: "Узнать все о Mind",
         href: "https://mind.ec",
         external: true,
       },
