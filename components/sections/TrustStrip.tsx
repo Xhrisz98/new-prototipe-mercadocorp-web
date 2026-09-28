@@ -20,10 +20,17 @@ interface LogoMark {
   light?: string;
   dark?: string;
   alt: string;
+  // El ícono de Next.js en svgl.app es un disco negro opaco sin variante dark
+  // (solo el wordmark completo trae light/dark, y no encaja en este slot
+  // cuadrado). En tema oscuro pierde contraste contra la tarjeta casi negra,
+  // así que se le agrega un aro circular claro detrás, visible como margen
+  // alrededor del disco — el propio disco es opaco, por lo que un fondo del
+  // mismo tamaño quedaría tapado por completo.
+  needsDarkBackdrop?: boolean;
 }
 
 const LOGO_MARKS: Record<string, LogoMark[]> = {
-  "Next.js": [{ src: "/images/logos/nextjs.svg", alt: "Next.js" }],
+  "Next.js": [{ src: "/images/logos/nextjs.svg", alt: "Next.js", needsDarkBackdrop: true }],
   "Python / AI": [{ src: "/images/logos/python.svg", alt: "Python" }],
   PostgreSQL: [{ src: "/images/logos/postgresql.svg", alt: "PostgreSQL" }],
   "OpenAI / Claude": [
@@ -44,6 +51,16 @@ const LOGO_MARKS: Record<string, LogoMark[]> = {
 function LogoMarkImg({ mark, isDark }: { mark: LogoMark; isDark: boolean }) {
   const src = mark.src ?? (isDark ? mark.dark : mark.light);
   if (!src) return null;
+
+  if (mark.needsDarkBackdrop && isDark) {
+    return (
+      <div className="h-5 w-5 rounded-full bg-[#F5F5F5] flex items-center justify-center shrink-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={mark.alt} className="h-4 w-4 object-contain" />
+      </div>
+    );
+  }
+
   // SVG de marca estático y diminuto (<9kb): no aporta nada pasarlo por next/image.
   // eslint-disable-next-line @next/next/no-img-element
   return <img src={src} alt={mark.alt} className="h-5 w-5 object-contain" />;
