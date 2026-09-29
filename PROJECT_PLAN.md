@@ -45,10 +45,10 @@ app/
   politicas-de-privacidad/page.tsx
   terminos-y-condiciones/page.tsx
 components/
-  ui/                        # Button (pill), Card, Badge, FormField, ProductShowcase (mockup de navegador para capturas de producto), FloatingWhatsAppQR (widget flotante global), InteractiveTreeQR (QR + WhatsApp; tarjeta de dos caras que gira hacia three/TreeGrowthReveal), ScrollProgress (barra de progreso de scroll)
+  ui/                        # Button (pill), Card, Badge, FormField, ProductShowcase (mockup de navegador para capturas de producto), FloatingWhatsAppQR (widget flotante global), InteractiveTreeQR (QR + WhatsApp), ScrollProgress (barra de progreso de scroll)
   layout/                    # Navbar (con toggle tema + LanguageSelector), Footer
   sections/                  # Hero, PillarCard, FAQAccordion, CaseStudyCard, StatsStrip, TrustStrip, ReasoningBlock, ServiceNodeDiagram (2D, diagrama de nodos interactivo en Tecnología)
-  three/                     # DataFlowCore (Hero Inicio — espiral 3D de partículas de luz en flujo, representando velocidad/proceso de datos; reemplaza a NeuralNetworkCore, que a su vez reemplazó a NeuralAgentCore, que a su vez reemplazó a KineticNeuralCore), AgentSphere (Mind) — cada uno "use client" con fallback estático mobile; TreeGrowthReveal (reverso de InteractiveTreeQR, ver §5.8 — árbol procedural en azules de marca que crece tronco → primarias → secundarias → terciarias en ~2.1s, puntas con acento #04E7AF mínimo; se monta al terminar el giro de 180° de la tarjeta y se desmonta al volver al QR; carga diferida vía next/dynamic; prefers-reduced-motion → árbol ya construido sin giro animado; mobile <768px usa la variante "lite" con menos ramas en vez de fallback estático, decisión tomada tras medir rendimiento)
+  three/                     # DataFlowCore (Hero Inicio — espiral 3D de partículas de luz en flujo, representando velocidad/proceso de datos; reemplaza a NeuralNetworkCore, que a su vez reemplazó a NeuralAgentCore, que a su vez reemplazó a KineticNeuralCore), AgentSphere (Mind), TreeQRMorph + TreeQRMorphScene (reverso de InteractiveTreeQR, §5.8 v3 — el QR real (`tree-qr-scannable-blue.png`, sin tocar) y un árbol decorativo son dos estados de reposo unidos por una transición continua de partículas: los 625 módulos del QR vuelan del plano hacia tronco/ramas/copa y viceversa, pasando de cubo a blob esférico en pleno vuelo — el primer frame de la transición sigue siendo píxel-idéntico a la imagen real. TreeQRMorph monta la escena en diferido y en tiempo ocioso; TreeQRMorphScene contiene la lógica de partículas/cámara; sin fallback estático mobile — a diferencia de DataFlowCore/AgentSphere, se midió con CPU emulada 4×/6× y rinde ~53-60fps en las tres fases, así que corre la misma escena en mobile) — todos "use client"; DataFlowCore y AgentSphere con fallback estático mobile
 
 **Deuda técnica activa a limpiar una vez DataFlowCore esté verificado:** `KineticNeuralCore.tsx` y `NeuralAgentCore.tsx` permanecen como código muerto en el repo (nunca se llegó a eliminar tras el pivote anterior); `NeuralNetworkCore.tsx` se suma a esa lista si llegó a construirse antes de este cambio. Los 3 (o los que existan) se eliminan en el mismo commit donde se confirme visualmente que `DataFlowCore` funciona — ya van 4 iteraciones del mismo componente, esta vez sí se limpia sin excepciones.
 lib/
@@ -180,18 +180,27 @@ Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como 
 - Tono visual: oscuro/monocromático o con dominante azul, abstracto cuando sea posible (server rooms, fibra óptica, circuitos, dashboards) — nunca literal/genérico
 - `ProductShowcase` NO lleva foto adicional de stock — ya es imagen real/mockup de producto, agregar una segunda foto ahí duplica peso visual sin aportar nada
 
-## 5.8 Árbol 3D — transformación del QR de WhatsApp
+## 5.8 Árbol 3D — transformación continua de partículas entre QR y árbol (v3)
 
-`InteractiveTreeQR` pasa de tener una imagen decorativa de "árbol" a un componente Three.js real (`components/three/TreeGrowthReveal.tsx`):
+**Historial:** v1 fue una tarjeta que gira 180° entre QR 2D y árbol 3D (`TreeGrowthReveal.tsx`, commit `d550c16`). v2 intentó fusionar el QR dentro de la geometría del árbol para que fuera escaneable en cualquier momento (`TreeQRFusion.tsx`) — funcionaba (validado con teléfono real) pero el resultado visual de frente se veía como "cartel sobre un tronco", no como un árbol. Se descarta v2 por ese motivo, no por falla técnica.
 
-- **Estado por defecto:** QR de WhatsApp en 2D (recoloreado a azules de marca — ver validación de contraste abajo)
-- **Al hacer clic:** la tarjeta gira 180° (transición, no la escena 3D en sí — puede ser CSS 3D transform o Framer/Motion) y revela, del otro lado, un árbol construido en Three.js que **crece progresivamente** (tronco → ramas primarias → ramas secundarias, animación de construcción, no aparece de golpe)
-- **Paleta:** únicamente azules de marca (`#0022D2` / `#3F5FFF`), consistente con el resto de piezas 3D del sitio — sin verde salvo que se use el acento reservado de forma puntual (ej. un brillo en las "hojas" si se justifica como señal de "vivo/activo")
-- **Interacción de vuelta:** un segundo clic (o botón explícito) regresa al estado QR — mismo giro de 180° en reversa
-- **Mobile:** fallback — puede mantenerse el giro pero con una versión más liviana del árbol (menos geometría/ramas), o una imagen estática del árbol ya construido si el rendimiento no lo permite; decidir tras medir en dispositivo real
-- **Accesibilidad:** respeta `prefers-reduced-motion` (salta directo al estado final sin animación de giro/crecimiento), igual que el resto de piezas 3D del sitio
+**Concepto v3, el definitivo:** dos estados de reposo simples y seguros, conectados por **una animación de transición continua tipo partículas** (los módulos del QR se despegan del plano 2D y migran para construir el árbol, y viceversa) — nunca un corte ni un giro de tarjeta.
 
-**Validación obligatoria antes de aprobar el recolor del QR:** escanear el QR recoloreado con un teléfono real (no solo verificar visualmente) — el contraste entre módulos debe mantenerse suficiente para que siga funcionando como QR, no solo "verse bien".
+- **Estado de reposo A (QR):** la imagen plana real ya validada (`tree-qr-scannable-blue.png`) — sin cambios, sin riesgo, es un `<img>` normal
+- **Estado de reposo B (árbol):** escena Three.js puramente decorativa — el árbol NO necesita codificar el QR ni mantener ningún ángulo de cámara especial; puede tener idle rotation, bloom, la libertad visual que se quiera, igual que `AgentSphere`/`DataFlowCore`
+- **Transición A→B (al tocar el QR):** se reemplaza el `<img>` por un canvas Three.js que arranca con partículas posicionadas exactamente en la cuadrícula de módulos del QR (mismas posiciones y colores que la imagen real, para que el arranque de la animación sea visualmente idéntico al estado A) y anima esas partículas migrando hacia las posiciones del tronco/ramas/follaje del árbol — es la misma "materia" reorganizándose, no una escena nueva apareciendo de la nada
+- **Transición B→A (al tocar el árbol):** el proceso se revierte — las partículas del árbol migran de vuelta a la cuadrícula plana del QR; al llegar, el canvas se retira y se vuelve a mostrar el `<img>` real y validado (nunca se deja el QR "en versión partículas" como estado de reposo — el reposo siempre es la imagen real)
+- **Ningún requisito de escaneabilidad durante la transición ni en el estado B** — solo el estado de reposo A (la imagen real) necesita ser escaneable, y esa imagen nunca se modifica
+
+**Paleta:** azules de marca en ambos estados — la transición puede interpolar libremente entre los colores exactos del QR validado y los azules del árbol, ya que ningún frame intermedio necesita ser escaneable
+
+**Validación:** ya no aplica la validación estricta de v2 (ángulo de escaneo, sin bloom, sin idle) — el único requisito es que el estado de reposo A siga siendo exactamente la imagen ya validada, sin alteración
+
+**Mobile:** si la animación de partículas no rinde bien, el fallback es un crossfade simple entre los dos estados de reposo (sin partículas migrando) — sigue transmitiendo "esto cambia", solo sin el efecto de transformación continua
+
+**Accesibilidad:** respeta `prefers-reduced-motion` — salta directo entre estado A y B sin la animación de partículas intermedia
+
+**Qué pasa con el trabajo anterior:** `TreeGrowthReveal.tsx` (v1) y `TreeQRFusion.tsx` (v2) se eliminan del repo una vez que v3 esté construido y aprobado — la lógica de crecimiento progresivo de ambos es reutilizable como base del árbol decorativo del estado B, pero ninguno de los dos se mantiene como código vivo en paralelo.
 
 ## 6. Fases de construcción (pensadas para el Manager View de Antigravity — varios agentes en paralelo)
 
