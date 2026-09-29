@@ -48,7 +48,7 @@ components/
   ui/                        # Button (pill), Card, Badge, FormField, ProductShowcase (mockup de navegador para capturas de producto), FloatingWhatsAppQR (widget flotante global), InteractiveTreeQR (QR + WhatsApp), ScrollProgress (barra de progreso de scroll)
   layout/                    # Navbar (con toggle tema + LanguageSelector), Footer
   sections/                  # Hero, PillarCard, FAQAccordion, CaseStudyCard, StatsStrip, TrustStrip, ReasoningBlock, ServiceNodeDiagram (2D, diagrama de nodos interactivo en Tecnología)
-  three/                     # DataFlowCore (Hero Inicio — espiral 3D de partículas de luz en flujo, representando velocidad/proceso de datos; reemplaza a NeuralNetworkCore, que a su vez reemplazó a NeuralAgentCore, que a su vez reemplazó a KineticNeuralCore), AgentSphere (Mind), TreeQRMorph + TreeQRMorphScene (reverso de InteractiveTreeQR, §5.8 v3 — el QR real (`tree-qr-scannable-blue.png`, sin tocar) y un árbol decorativo son dos estados de reposo unidos por una transición continua de partículas: los 625 módulos del QR vuelan del plano hacia tronco/ramas/copa y viceversa, pasando de cubo a blob esférico en pleno vuelo — el primer frame de la transición sigue siendo píxel-idéntico a la imagen real. TreeQRMorph monta la escena en diferido y en tiempo ocioso; TreeQRMorphScene contiene la lógica de partículas/cámara; sin fallback estático mobile — a diferencia de DataFlowCore/AgentSphere, se midió con CPU emulada 4×/6× y rinde ~53-60fps en las tres fases, así que corre la misma escena en mobile) — todos "use client"; DataFlowCore y AgentSphere con fallback estático mobile
+  three/                     # DataFlowCore (Hero Inicio — espiral 3D de partículas de luz en flujo, representando velocidad/proceso de datos; reemplaza a NeuralNetworkCore, que a su vez reemplazó a NeuralAgentCore, que a su vez reemplazó a KineticNeuralCore), AgentSphere (Mind) — cada uno "use client" con fallback estático mobile
 
 **Deuda técnica activa a limpiar una vez DataFlowCore esté verificado:** `KineticNeuralCore.tsx` y `NeuralAgentCore.tsx` permanecen como código muerto en el repo (nunca se llegó a eliminar tras el pivote anterior); `NeuralNetworkCore.tsx` se suma a esa lista si llegó a construirse antes de este cambio. Los 3 (o los que existan) se eliminan en el mismo commit donde se confirme visualmente que `DataFlowCore` funciona — ya van 4 iteraciones del mismo componente, esta vez sí se limpia sin excepciones.
 lib/
@@ -201,6 +201,25 @@ Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como 
 **Accesibilidad:** respeta `prefers-reduced-motion` — salta directo entre estado A y B sin la animación de partículas intermedia
 
 **Qué pasa con el trabajo anterior:** `TreeGrowthReveal.tsx` (v1) y `TreeQRFusion.tsx` (v2) se eliminan del repo una vez que v3 esté construido y aprobado — la lógica de crecimiento progresivo de ambos es reutilizable como base del árbol decorativo del estado B, pero ninguno de los dos se mantiene como código vivo en paralelo.
+
+## 5.9 MarketingFunnel — hero de la página Marketing Digital (hub) — v2
+
+`components/three/MarketingFunnel.tsx` — cuarta pieza 3D del sitio (junto a `DataFlowCore`, `AgentSphere`, `TreeQRMorph`).
+
+**Revisión v2:** la v1 (rotación autónoma sin scroll, nodos sin etiqueta) se descarta por falta de legibilidad semántica — un funnel de luz azul sin etiquetas se lee como "visualización de datos genérica", no específicamente como "embudo de marketing". v2 corrige esto con etiquetas reales y comportamiento de scroll.
+
+- **Concepto:** un funnel translúcido de luz (wireframe con vórtice interior, ver referencia visual) hacia el que convergen 4 nodos, cada uno representando un canal real del pilar de Marketing: E-commerce, CRM, Publicidad, Automatización
+- **Etiquetas por nodo (obligatorio, no opcional):** cada nodo lleva un ícono de `lucide-react` + texto corto, anclado en 3D vía `<Html>` de `@react-three/drei` (misma técnica ya usada en el sitio para overlays sobre canvas) — sin esto, la pieza no cumple su propósito comunicativo
+- **Comportamiento de scroll (reemplaza la rotación autónoma de v1):** mismo patrón arquitectónico que `DataFlowCore` (progreso de scroll dentro del hero controla el estado, 0-100%)
+  - 0% scroll: funnel en wireframe simple, los 4 nodos presentes pero sin activar (sin ícono/etiqueta visible, sin línea de luz)
+  - A medida que avanza el scroll: los 4 nodos se activan en secuencia (no simultáneos) — aparece su ícono+etiqueta, y una línea de luz visible fluye desde el nodo hacia el funnel
+  - 100% scroll: los 4 nodos activos, funnel con pulso brillante de convergencia en el punto de salida — refuerza visualmente el mensaje de "Marketing 360": los 4 canales combinándose en un resultado
+  - Fuera del rango de scroll del hero: queda fijo en el estado correspondiente (igual criterio que las demás piezas con scroll-morph del sitio)
+- **Referencia visual:** la imagen aprobada del funnel wireframe con vórtice — tómala como base de la geometría, no como estado final (esa imagen representa aproximadamente el 100% de scroll, con la convergencia activa)
+- **Paleta:** únicamente azules de marca (`#0022D2`/`#3F5FFF`) — sin verde en ningún punto, este pilar no tiene contexto de IA/agentes
+- **Composición:** posicionado de forma asimétrica para no cruzar el bloque de texto del H1 — mismo error a evitar que ya corregimos dos veces en el hero de Inicio
+- **Accesibilidad:** respeta `prefers-reduced-motion` — salta directo al estado 100% (los 4 nodos ya activos, funnel convergido), sin animación de scroll progresivo
+- **Mobile:** fallback estático mediante detección síncrona con `matchMedia` en el primer render (nunca `isMobile = null` + `useEffect`)
 
 ## 6. Fases de construcción (pensadas para el Manager View de Antigravity — varios agentes en paralelo)
 

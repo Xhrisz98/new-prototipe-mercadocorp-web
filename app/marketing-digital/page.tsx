@@ -12,6 +12,7 @@ import { TrustStrip } from "@/components/sections/TrustStrip";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMarketingContent } from "@/content/marketing";
+import { MarketingFunnel } from "@/components/three/MarketingFunnel";
 
 export default function MarketingPage() {
   const { locale } = useLocale();
@@ -28,7 +29,11 @@ export default function MarketingPage() {
           h1={content.hero.h1}
           subheadline={content.hero.subheadline}
           ctaPrimary={content.hero.ctaPrimary}
-          align="center"
+          align="left"
+          // Funnel 3D (§5.9): de fondo a la derecha del texto en ≥1024px; debajo del
+          // texto en anchos menores, donde el costado no tiene espacio sin cruzar el H1.
+          threeCanvas={<MarketingFunnel placement="background" labels={content.funnel.nodes} ariaLabel={content.funnel.ariaLabel} />}
+          inlineVisual={<MarketingFunnel placement="inline" labels={content.funnel.nodes} ariaLabel={content.funnel.ariaLabel} />}
         />
 
         {/* Franja de Confianza (Plataformas y Canales) */}

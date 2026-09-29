@@ -12,6 +12,11 @@ interface HeroProps {
   ctaPrimary: { label: string; href: string };
   ctaSecondary?: { label: string; href: string };
   threeCanvas?: React.ReactNode;
+  // Visual en el flujo del documento, debajo del bloque de texto — para anchos donde
+  // el canvas de fondo no tiene espacio al costado sin cruzar el H1 (ej.
+  // MarketingFunnel en tablet/mobile). Queda fuera del bloque que se desvanece con
+  // el scroll.
+  inlineVisual?: React.ReactNode;
   align?: "center" | "left";
   showScrollIndicator?: boolean;
   showProofChips?: boolean;
@@ -24,6 +29,7 @@ export function Hero({
   ctaPrimary,
   ctaSecondary,
   threeCanvas,
+  inlineVisual,
   align = "center",
   showScrollIndicator = true,
   showProofChips = false,
@@ -194,6 +200,12 @@ export function Hero({
           )}
         </div>
       </motion.div>
+
+      {inlineVisual && (
+        <div className={`relative z-10 w-full mx-auto px-4 sm:px-6 lg:px-8 ${isCenter ? "max-w-5xl" : "max-w-7xl"}`}>
+          {inlineVisual}
+        </div>
+      )}
     </section>
   );
 }

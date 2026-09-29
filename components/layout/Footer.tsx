@@ -222,7 +222,7 @@ export function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="https://instagram.com/mercadocorp"
+                  href="https://www.instagram.com/mercadocorpec/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"

@@ -15,6 +15,12 @@ export interface MarketingContent {
     subheadline: string;
     ctaPrimary: { label: string; href: string };
   };
+  // Etiquetas de los 4 nodos del MarketingFunnel (PROJECT_PLAN.md §5.9), en el
+  // orden en que se activan con el scroll.
+  funnel: {
+    nodes: [string, string, string, string];
+    ariaLabel: string;
+  };
   trust: {
     title: string;
     logos: { name: string; category: string }[];
@@ -64,6 +70,10 @@ const contentData: Record<Locale, MarketingContent> = {
         label: "Auditar mi presencia digital",
         href: "/auditoria-digital",
       },
+    },
+    funnel: {
+      nodes: ["E-commerce", "CRM", "Publicidad", "Automatización"],
+      ariaLabel: "Embudo de marketing: E-commerce, CRM, Publicidad y Automatización convergen en un solo resultado",
     },
     trust: {
       title: "Plataformas y canales que ya activamos para nuestros clientes.",
@@ -177,6 +187,11 @@ const contentData: Record<Locale, MarketingContent> = {
         href: "/auditoria-digital",
       },
     },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
+    funnel: {
+      nodes: ["E-commerce", "CRM", "Advertising", "Automation"],
+      ariaLabel: "Marketing funnel: E-commerce, CRM, Advertising and Automation converge into a single result",
+    },
     trust: {
       title: "Platforms and channels we already activate for our clients.",
       logos: [
@@ -288,6 +303,11 @@ const contentData: Record<Locale, MarketingContent> = {
         label: "Аудит цифрового присутствия",
         href: "/auditoria-digital",
       },
+    },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
+    funnel: {
+      nodes: ["E-commerce", "CRM", "Реклама", "Автоматизация"],
+      ariaLabel: "Маркетинговая воронка: E-commerce, CRM, реклама и автоматизация сходятся в единый результат",
     },
     trust: {
       title: "Платформы и каналы, которые мы уже используем для наших клиентов.",
