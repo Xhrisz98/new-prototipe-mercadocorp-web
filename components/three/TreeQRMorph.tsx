@@ -26,14 +26,18 @@ interface TreeQRMorphProps {
 
 export function TreeQRMorph({ view, isDark }: TreeQRMorphProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
-  // sceneMounted: la escena se precalienta en un momento ocioso (contexto WebGL +
-  // shaders listos) para que el toque no espere ~1s de inicialización.
+  // sceneMounted: en ≥768px la escena se precalienta en un momento ocioso (contexto
+  // WebGL + shaders listos) para que el toque no espere ~1s de inicialización. En
+  // mobile no se precalienta: abrir Contacto o el widget flotante no debe crear un
+  // contexto WebGL que el usuario quizá nunca use — ahí se monta recién al pedir el
+  // árbol.
   const [sceneMounted, setSceneMounted] = useState(false);
   const [sceneReady, setSceneReady] = useState(false);
   // showCanvas: el canvas está a la vista y el <img> oculto.
   const [showCanvas, setShowCanvas] = useState(false);
 
   useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) return;
     const w = window as Window & {
       requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
       cancelIdleCallback?: (id: number) => void;

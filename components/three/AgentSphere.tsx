@@ -4,6 +4,7 @@ import React, { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
+import { WebGLRelease } from "@/components/three/WebGLRelease";
 
 // Núcleo 3D de la esfera inteligente con el acento exclusivo #04E7AF
 function SphereCore({ isDark }: { isDark: boolean }) {
@@ -229,6 +230,7 @@ export function AgentSphere({ isDark = true }: { isDark?: boolean }) {
         <pointLight position={[10, 10, 10]} intensity={1.2} color="#04E7AF" />
         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#3F5FFF" />
         <SphereCore isDark={isDark} />
+        <WebGLRelease />
       </Canvas>
     </div>
   );

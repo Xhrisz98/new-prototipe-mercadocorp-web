@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { colors } from "@/lib/design-tokens";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
+import { WebGLRelease } from "@/components/three/WebGLRelease";
 
 // Rango de scroll (px) del hero para el morph reposo → activado. Fuera del rango
 // el estado queda fijo: la velocidad depende del progreso ya acotado, así que
@@ -605,6 +606,7 @@ export function DataFlowCore() {
             dpr={[1, 1.75]}
           >
             <FlowScene isDark={theme === "dark"} isTablet={isTablet} layoutRef={layoutRef} pointerRef={pointerRef} />
+            <WebGLRelease />
           </Canvas>
         </div>
       )}

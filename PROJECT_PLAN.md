@@ -48,14 +48,14 @@ components/
   ui/                        # Button (pill), Card, Badge, FormField, ProductShowcase (mockup de navegador para capturas de producto), FloatingWhatsAppQR (widget flotante global), InteractiveTreeQR (QR + WhatsApp), ScrollProgress (barra de progreso de scroll)
   layout/                    # Navbar (con toggle tema + LanguageSelector), Footer
   sections/                  # Hero, PillarCard, FAQAccordion, CaseStudyCard, StatsStrip, TrustStrip, ReasoningBlock, ServiceNodeDiagram (2D, diagrama de nodos interactivo en Tecnología)
-  three/                     # DataFlowCore (Hero Inicio — espiral 3D de partículas de luz en flujo, representando velocidad/proceso de datos; reemplaza a NeuralNetworkCore, que a su vez reemplazó a NeuralAgentCore, que a su vez reemplazó a KineticNeuralCore), AgentSphere (Mind) — cada uno "use client" con fallback estático mobile
-
-**Deuda técnica activa a limpiar una vez DataFlowCore esté verificado:** `KineticNeuralCore.tsx` y `NeuralAgentCore.tsx` permanecen como código muerto en el repo (nunca se llegó a eliminar tras el pivote anterior); `NeuralNetworkCore.tsx` se suma a esa lista si llegó a construirse antes de este cambio. Los 3 (o los que existan) se eliminan en el mismo commit donde se confirme visualmente que `DataFlowCore` funciona — ya van 4 iteraciones del mismo componente, esta vez sí se limpia sin excepciones.
+  three/                     # DataFlowCore (Hero Inicio — espiral 3D de partículas de luz en flujo), AgentSphere (Mind), TreeQRMorph + TreeQRMorphScene (transición de partículas QR↔árbol en InteractiveTreeQR), MarketingFunnel (hero de Marketing Digital, con <Html> de drei para etiquetas de nodo) — cada uno "use client" con fallback estático mobile
 lib/
   design-tokens.ts           # Todos los colores/tipografía de la sección 4, como constantes — nunca hardcodear hex sueltos en componentes
 content/
   <page>.ts                  # Copy de cada página extraído de copywriting-nueva-web-mercadocorp.md como objetos tipados, no strings sueltos en el JSX
 ```
+
+**Deuda técnica:** `KineticNeuralCore.tsx`, `NeuralAgentCore.tsx`, `NeuralNetworkCore.tsx`, `TreeGrowthReveal.tsx` y `TreeQRFusion.tsx` son iteraciones descartadas de piezas 3D que ya deberían estar eliminadas del repo según las decisiones tomadas en sus secciones correspondientes — confirmar en la próxima limpieza que ninguna quedó atrás.
 
 ### 3.1 Internacionalización (ES/EN/RU) — formalizado
 
@@ -202,24 +202,24 @@ Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como 
 
 **Qué pasa con el trabajo anterior:** `TreeGrowthReveal.tsx` (v1) y `TreeQRFusion.tsx` (v2) se eliminan del repo una vez que v3 esté construido y aprobado — la lógica de crecimiento progresivo de ambos es reutilizable como base del árbol decorativo del estado B, pero ninguno de los dos se mantiene como código vivo en paralelo.
 
-## 5.9 MarketingFunnel — hero de la página Marketing Digital (hub) — v2
+## 5.9 MarketingFunnel — hero de la página Marketing Digital (hub) — v3
 
 `components/three/MarketingFunnel.tsx` — cuarta pieza 3D del sitio (junto a `DataFlowCore`, `AgentSphere`, `TreeQRMorph`).
 
-**Revisión v2:** la v1 (rotación autónoma sin scroll, nodos sin etiqueta) se descarta por falta de legibilidad semántica — un funnel de luz azul sin etiquetas se lee como "visualización de datos genérica", no específicamente como "embudo de marketing". v2 corrige esto con etiquetas reales y comportamiento de scroll.
+**Historial:** v1 (rotación autónoma sin scroll, nodos sin etiqueta) se descartó por falta de legibilidad. v2 agregó etiquetas y activación secuencial pero mantenía los 4 nodos **ocultos/inactivos** en el estado inicial (0% scroll). v3 corrige esto: los nodos son visibles desde el principio, y lo que cambia con el scroll es su **posición**, no su existencia.
 
-- **Concepto:** un funnel translúcido de luz (wireframe con vórtice interior, ver referencia visual) hacia el que convergen 4 nodos, cada uno representando un canal real del pilar de Marketing: E-commerce, CRM, Publicidad, Automatización
-- **Etiquetas por nodo (obligatorio, no opcional):** cada nodo lleva un ícono de `lucide-react` + texto corto, anclado en 3D vía `<Html>` de `@react-three/drei` (misma técnica ya usada en el sitio para overlays sobre canvas) — sin esto, la pieza no cumple su propósito comunicativo
-- **Comportamiento de scroll (reemplaza la rotación autónoma de v1):** mismo patrón arquitectónico que `DataFlowCore` (progreso de scroll dentro del hero controla el estado, 0-100%)
-  - 0% scroll: funnel en wireframe simple, los 4 nodos presentes pero sin activar (sin ícono/etiqueta visible, sin línea de luz)
-  - A medida que avanza el scroll: los 4 nodos se activan en secuencia (no simultáneos) — aparece su ícono+etiqueta, y una línea de luz visible fluye desde el nodo hacia el funnel
-  - 100% scroll: los 4 nodos activos, funnel con pulso brillante de convergencia en el punto de salida — refuerza visualmente el mensaje de "Marketing 360": los 4 canales combinándose en un resultado
-  - Fuera del rango de scroll del hero: queda fijo en el estado correspondiente (igual criterio que las demás piezas con scroll-morph del sitio)
-- **Referencia visual:** la imagen aprobada del funnel wireframe con vórtice — tómala como base de la geometría, no como estado final (esa imagen representa aproximadamente el 100% de scroll, con la convergencia activa)
-- **Paleta:** únicamente azules de marca (`#0022D2`/`#3F5FFF`) — sin verde en ningún punto, este pilar no tiene contexto de IA/agentes
-- **Composición:** posicionado de forma asimétrica para no cruzar el bloque de texto del H1 — mismo error a evitar que ya corregimos dos veces en el hero de Inicio
-- **Accesibilidad:** respeta `prefers-reduced-motion` — salta directo al estado 100% (los 4 nodos ya activos, funnel convergido), sin animación de scroll progresivo
-- **Mobile:** fallback estático mediante detección síncrona con `matchMedia` en el primer render (nunca `isMobile = null` + `useEffect`)
+- **Concepto:** un funnel translúcido de luz (wireframe con vórtice interior) con 4 nodos representando los canales del pilar de Marketing: E-commerce, CRM, Publicidad, Automatización
+- **Etiquetas por nodo (obligatorio):** ícono de `lucide-react` + texto corto, anclado en 3D vía `<Html>` de `@react-three/drei`
+- **Comportamiento de scroll (v3 — reemplaza la activación de v2):**
+  - 0% scroll: los 4 nodos ya son visibles con su ícono+etiqueta desde la carga, **flotando sueltos cerca del funnel** (sin línea de luz conectada, sin haber entrado todavía) — nunca ocultos ni "por revelar"
+  - A medida que avanza el scroll: cada nodo **viaja** desde su posición flotante hacia el punto del funnel que corresponde a su fase/orden (ej. entra primero el que represente el paso inicial del recorrido de marketing, y así sucesivamente) — al llegar a su punto, se conecta con una línea de luz visible
+  - 100% scroll: los 4 nodos ya ubicados en su posición final dentro/junto al funnel, todos conectados, con el pulso de convergencia en la salida
+  - Fuera del rango de scroll del hero: queda fijo en el estado correspondiente
+- **Referencia visual:** la imagen del funnel wireframe con vórtice, como base de la geometría — representa aproximadamente el estado 100%
+- **Paleta:** únicamente azules de marca — sin verde en ningún punto
+- **Composición:** asimétrica, sin cruzar el H1 (ya resuelto en la implementación actual con `align="left"` en el Hero de Marketing)
+- **Accesibilidad:** respeta `prefers-reduced-motion` — salta directo al estado 100% (nodos ya ubicados en posición final), sin animación de viaje
+- **Mobile:** fallback estático compacto — los 4 nodos visibles sin espaciado vertical excesivo entre ellos ni entre la sección y el resto del hero (CTA/indicador de scroll); el usuario no debería necesitar scrollear de más para ver el conjunto completo en una pantalla de 375px de ancho. Misma composición conceptual que desktop (nodos ya visibles desde el inicio, sin necesidad de interacción para verlos todos)
 
 ## 6. Fases de construcción (pensadas para el Manager View de Antigravity — varios agentes en paralelo)
 
@@ -255,9 +255,11 @@ Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como 
 - [ ] `#04E7AF` solo aparece en contexto de Mind/agentes (verificado por grep)
 - [ ] El logo nunca se renderiza en un color distinto a los oficiales del manual
 - [ ] Cada página de servicio tiene como mínimo los 2-3 links internos definidos en su copy
-- [ ] `ParticleNetwork` (Inicio) y `AgentSphere` (Mind) tienen fallback estático en viewport < 768px
+- [ ] `DataFlowCore` (Inicio), `AgentSphere` (Mind), `TreeQRMorph` (Contacto) y `MarketingFunnel` (Marketing) tienen fallback estático en viewport < 768px
+- [ ] Las 4 piezas 3D liberan su contexto WebGL correctamente al desmontarse (cleanup en `useEffect`) — sin `THREE.WebGLRenderer: Context Lost` en consola al navegar entre páginas
 - [ ] Lighthouse ≥ 90 en Performance y Accesibilidad en Inicio y Mind (páginas con Three.js)
 - [ ] Ningún texto de Casos de Éxito o Nosotros→Trayectoria inventa cifras o clientes no confirmados
+- [ ] `favicon.ico` carga sin 404 en todas las páginas
 
 ## 8. Fuera de alcance (no hacer sin confirmación explícita)
 

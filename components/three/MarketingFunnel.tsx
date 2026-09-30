@@ -8,12 +8,15 @@ import { ShoppingCart, Users, Megaphone, Workflow, type LucideIcon } from "lucid
 import { colors } from "@/lib/design-tokens";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
+import { WebGLRelease } from "@/components/three/WebGLRelease";
 
-// Hero de Marketing Digital (PROJECT_PLAN.md §5.9 v2): funnel wireframe con vórtice
-// interior hacia el que convergen 4 nodos etiquetados (E-commerce, CRM, Publicidad,
-// Automatización). El scroll dentro del hero (0-100%, mismo mecanismo que
-// DataFlowCore: window.scrollY sobre un rango, suavizado con lerp) activa los nodos
-// en secuencia y, al final, el pulso de convergencia en la salida del funnel.
+// Hero de Marketing Digital (PROJECT_PLAN.md §5.9 v3): funnel wireframe con vórtice
+// interior y 4 nodos etiquetados (E-commerce, CRM, Publicidad, Automatización). Los
+// nodos se ven desde la carga, flotando sueltos cerca del funnel; el scroll dentro
+// del hero (0-100%, mismo mecanismo que DataFlowCore: window.scrollY sobre un rango,
+// suavizado con lerp) los hace viajar uno a uno hasta su punto junto a la boca, donde
+// se conectan con una línea de luz. Al 100% los 4 están conectados y late el pulso de
+// convergencia en la salida.
 //
 // Dos montajes, cada uno con su propio Canvas solo si su media query coincide:
 // - placement="background" (≥1024px): canvas de fondo del hero; el funnel se ubica
@@ -46,13 +49,19 @@ const serverFalse = () => false;
 // DataFlowCore): al converger todavía queda a la vista buena parte del hero, así el
 // funnel no tiene que encogerse para entrar.
 const SCROLL_RANGE_FRACTION = 0.36;
-// Ventanas de activación de cada nodo (en progreso 0-1) y del pulso de convergencia.
-const NODE_WINDOWS: [number, number][] = [
-  [0.06, 0.22],
-  [0.26, 0.42],
-  [0.46, 0.62],
-  [0.66, 0.82],
-];
+// Orden de entrada = recorrido de marketing: la publicidad atrae, el e-commerce
+// convierte, el CRM retiene la relación y la automatización la escala. Índices sobre
+// el orden de `labels` (E-commerce, CRM, Publicidad, Automatización).
+const ENTRY_ORDER = [2, 0, 1, 3];
+const SLOT_OF_NODE = ENTRY_ORDER.reduce<number[]>((acc, node, slot) => {
+  acc[node] = slot;
+  return acc;
+}, []);
+// Cada nodo tiene su tramo de progreso: primero viaja desde su posición flotante y,
+// al llegar, se dibuja su línea de luz hacia la boca.
+const SLOT_SPAN = 0.2;
+const travelWindow = (slot: number): [number, number] => [0.03 + SLOT_SPAN * slot, 0.15 + SLOT_SPAN * slot];
+const connectWindow = (slot: number): [number, number] => [0.15 + SLOT_SPAN * slot, 0.21 + SLOT_SPAN * slot];
 const CONVERGE_WINDOW: [number, number] = [0.82, 1];
 
 // Perfil del funnel (espacio local, eje +Y hacia la boca).
@@ -73,15 +82,20 @@ const GLSL_PROFILE = /* glsl */ `
 `;
 const VORTEX_TURNS = 3.2;
 
-// Nodos (espacio local del funnel, antes de la inclinación). Alturas alternadas para
-// que las etiquetas no se pisen entre sí.
+// Nodos (espacio local del funnel, antes de la inclinación). DOCKS: posición final
+// junto a la boca (estado 100%), alturas alternadas para que las etiquetas no se
+// pisen. FLOATS: dónde flotan sueltos al 0% — un poco más afuera, los de arriba más
+// altos y los de abajo más bajos, así cada uno se ve lejos de su punto de llegada.
 const NODE_ICONS: LucideIcon[] = [ShoppingCart, Users, Megaphone, Workflow];
-const NODES = [
-  { angle: (200 * Math.PI) / 180, r: 1.5, y: 1.2 },
-  { angle: (-20 * Math.PI) / 180, r: 1.55, y: 1.1 },
-  { angle: (160 * Math.PI) / 180, r: 1.5, y: 0.45 },
-  { angle: (20 * Math.PI) / 180, r: 1.5, y: 0.5 },
-].map((n) => new THREE.Vector3(Math.cos(n.angle) * n.r, n.y, Math.sin(n.angle) * n.r));
+const polar = (deg: number, r: number, y: number) => {
+  const a = (deg * Math.PI) / 180;
+  return new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r);
+};
+const DOCKS = [polar(200, 1.5, 1.2), polar(-20, 1.55, 1.1), polar(160, 1.5, 0.45), polar(20, 1.5, 0.5)];
+const FLOATS = [polar(200, 1.62, 1.5), polar(-20, 1.67, 1.42), polar(160, 1.62, 0.12), polar(20, 1.62, 0.18)];
+// Deriva mientras flotan (se apaga al llegar) y arco del viaje.
+const BOB = 0.05;
+const TRAVEL_ARC = 0.12;
 
 // Inclinación del funnel: la boca mira hacia la cámara (elipse visible, como la
 // referencia) con una leve inclinación lateral.
@@ -89,10 +103,17 @@ const TILT = new THREE.Euler(0.42, 0, -0.16);
 
 // Extensión real del conjunto en pantalla (unidades locales), aplicando la misma
 // inclinación que la escena a nodos, boca y salida. Sin esto, la rotación en Z
-// levanta los nodos de la izquierda y sus etiquetas quedaban cortadas arriba.
+// levanta los nodos de la izquierda y sus etiquetas quedaban cortadas arriba. Incluye
+// las posiciones flotantes (con su deriva y el arco del viaje) para que ninguna
+// etiqueta se corte en ningún punto del scroll, y el encuadre no salte entre estados.
 const EXTENTS = (() => {
   const q = new THREE.Quaternion().setFromEuler(TILT);
-  const pts = [...NODES.map((n) => n.clone())];
+  const lift = new THREE.Vector3(0, BOB + TRAVEL_ARC, 0);
+  const pts = [
+    ...DOCKS.map((n) => n.clone()),
+    ...FLOATS.map((n) => n.clone().add(lift)),
+    ...FLOATS.map((n) => n.clone().sub(new THREE.Vector3(0, BOB, 0))),
+  ];
   for (let i = 0; i < 16; i++) {
     const a = (i / 16) * Math.PI * 2;
     pts.push(new THREE.Vector3(Math.cos(a) * R_TOP, Y_TOP, Math.sin(a) * R_TOP));
@@ -386,6 +407,7 @@ function FunnelScene({ isDark, instant, labels, layoutRef, progressTarget, rootR
   const spinRef = useRef<THREE.Group>(null);
   const exitGlowRef = useRef<THREE.Sprite>(null);
   const neckGlowRef = useRef<THREE.Sprite>(null);
+  const nodeRefs = useRef<(THREE.Group | null)[]>([]);
   const nodeGlowRefs = useRef<(THREE.Sprite | null)[]>([]);
   const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const progress = useRef(instant ? 1 : 0);
@@ -395,7 +417,7 @@ function FunnelScene({ isDark, instant, labels, layoutRef, progressTarget, rootR
   const wire = useMemo(() => buildWireframe(), []);
   const vortex = useMemo(() => buildVortex(), []);
   const particles = useMemo(() => buildVortexParticles(420), []);
-  const nodeLines = useMemo(() => NODES.map((n) => buildNodeLine(n)), []);
+  const nodeLines = useMemo(() => DOCKS.map((n) => buildNodeLine(n)), []);
   const glowTex = useMemo(() => makeGlowTexture(), []);
 
   const palette = useMemo(
@@ -434,7 +456,7 @@ function FunnelScene({ isDark, instant, labels, layoutRef, progressTarget, rootR
         fragmentShader: particleFragment,
         uniforms: { uTime: { value: 0 }, uPx: { value: 300 }, uIntensity: { value: 0 }, uHighlight: { value: palette.highlight } },
       }),
-      lines: NODES.map(
+      lines: DOCKS.map(
         () =>
           new THREE.ShaderMaterial({
             ...common,
@@ -505,8 +527,10 @@ function FunnelScene({ isDark, instant, labels, layoutRef, progressTarget, rootR
       materials.particles.uniforms.uPx.value = CAMERA_Z * gl.getPixelRatio() * (L.k / 150);
     }
 
-    // Activación secuencial de los nodos.
-    const acts = NODE_WINDOWS.map((w) => smooth(span(p, w)));
+    // Viaje (flotante → punto junto a la boca) y conexión de cada nodo, en el orden
+    // del recorrido de marketing.
+    const travels = DOCKS.map((_, i) => smooth(span(p, travelWindow(SLOT_OF_NODE[i]))));
+    const acts = DOCKS.map((_, i) => smooth(span(p, connectWindow(SLOT_OF_NODE[i]))));
     const activeSum = acts.reduce((a, b) => a + b, 0);
     const conv = smooth(span(p, CONVERGE_WINDOW));
 
@@ -519,19 +543,27 @@ function FunnelScene({ isDark, instant, labels, layoutRef, progressTarget, rootR
     materials.particles.uniforms.uIntensity.value = (0.1 + 0.18 * activeSum + 0.2 * conv) * (isDark ? 1 : 0.8);
 
     acts.forEach((a, i) => {
+      const e = travels[i];
+      const node = nodeRefs.current[i];
+      if (node) {
+        // Mientras flota deriva suavemente; al llegar queda fijo en su punto.
+        const loose = 1 - e;
+        node.position.lerpVectors(FLOATS[i], DOCKS[i], e);
+        node.position.x += Math.cos(tNow * 0.9 + i * 1.3) * 0.03 * loose;
+        node.position.y += Math.sin(tNow * 1.3 + i * 1.7) * BOB * loose + Math.sin(Math.PI * e) * TRAVEL_ARC;
+      }
       materials.lines[i].uniforms.uReveal.value = a;
       materials.lines[i].uniforms.uTime.value = tNow + i * 0.3;
       const glow = nodeGlowRefs.current[i];
       if (glow) {
         const pulse = 1 + Math.sin(tNow * 2.2 + i) * 0.08 * a;
-        glow.scale.setScalar((0.16 + 0.14 * a) * pulse);
-        (glow.material as THREE.SpriteMaterial).opacity = 0.35 + 0.65 * a;
+        glow.scale.setScalar((0.18 + 0.12 * a) * pulse);
+        (glow.material as THREE.SpriteMaterial).opacity = 0.6 + 0.4 * a;
       }
+      // La etiqueta se ve siempre; al conectarse su borde toma el azul de marca.
       const label = labelRefs.current[i];
-      if (label) {
-        label.style.opacity = a.toFixed(3);
-        label.style.transform = `translate(-50%, calc(-100% - 12px)) scale(${(0.9 + 0.1 * a).toFixed(3)})`;
-      }
+      const connected = a > 0.5 ? "true" : "false";
+      if (label && label.dataset.connected !== connected) label.dataset.connected = connected;
     });
 
     const exit = exitGlowRef.current;
@@ -569,32 +601,40 @@ function FunnelScene({ isDark, instant, labels, layoutRef, progressTarget, rootR
           <spriteMaterial map={glowTex} color={spriteColor} transparent depthWrite={false} blending={spriteBlending} />
         </sprite>
 
-        {NODES.map((n, i) => {
+        {DOCKS.map((dock, i) => {
           const Icon = NODE_ICONS[i];
           return (
             <group key={i}>
+              {/* La línea nace en el punto final: solo se revela cuando el nodo llegó. */}
               <lineSegments geometry={nodeLines[i]} material={materials.lines[i]} frustumCulled={false} />
-              <sprite
+              <group
                 ref={(el) => {
-                  nodeGlowRefs.current[i] = el;
+                  nodeRefs.current[i] = el;
                 }}
-                position={n}
+                position={instant ? dock : FLOATS[i]}
               >
-                <spriteMaterial map={glowTex} color={spriteColor} transparent depthWrite={false} blending={spriteBlending} />
-              </sprite>
-              <Html position={n} zIndexRange={[5, 0]} style={{ pointerEvents: "none" }}>
-                <div
+                <sprite
                   ref={(el) => {
-                    labelRefs.current[i] = el;
+                    nodeGlowRefs.current[i] = el;
                   }}
-                  className="whitespace-nowrap inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-[var(--color-surface)]/85 backdrop-blur-md border border-[var(--color-border)] text-[var(--color-text)] shadow-sm select-none"
-                  style={{ opacity: 0, transform: "translate(-50%, calc(-100% - 12px)) scale(0.9)", transformOrigin: "50% 100%" }}
-                  data-funnel-node={i}
                 >
-                  <Icon className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
-                  <span>{labels[i]}</span>
-                </div>
-              </Html>
+                  <spriteMaterial map={glowTex} color={spriteColor} transparent depthWrite={false} blending={spriteBlending} />
+                </sprite>
+                <Html zIndexRange={[5, 0]} style={{ pointerEvents: "none" }}>
+                  <div
+                    ref={(el) => {
+                      labelRefs.current[i] = el;
+                    }}
+                    className="whitespace-nowrap inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-[var(--color-surface)]/85 backdrop-blur-md border border-[var(--color-border)] text-[var(--color-text)] shadow-sm select-none transition-colors duration-300 data-[connected=true]:border-[var(--color-primary)]/60"
+                    style={{ transform: "translate(-50%, calc(-100% - 12px))" }}
+                    data-funnel-node={i}
+                    data-connected={instant ? "true" : "false"}
+                  >
+                    <Icon className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
+                    <span>{labels[i]}</span>
+                  </div>
+                </Html>
+              </group>
             </group>
           );
         })}
@@ -605,75 +645,95 @@ function FunnelScene({ isDark, instant, labels, layoutRef, progressTarget, rootR
 
 // ---------- Fallback estático mobile (<768px): estado 100% ----------
 
-// Posiciones de los nodos en el viewBox (320×280) y el lado hacia el que se alinea
-// cada etiqueta para no salirse del recuadro.
+// Compacto para que texto + funnel entren en una pantalla de 375×812 (§5.9): viewBox
+// 320×190 (antes 320×280), etiquetas pegadas al borde superior y cuello corto. Los
+// nodos de abajo quedan al costado del cuerpo, donde ya se angostó, para que ninguna
+// etiqueta tape la boca.
+const FB_W = 320;
+const FB_H = 190;
+const FB_CX = 160;
+const FB_MOUTH_Y = 58;
+const FB_NECK_Y = 140;
+const FB_NECK_END_Y = 156;
+const FB_EXIT_Y = 166;
+// Mismo perfil que radiusAt() del 3D (potencia 1.7): de él salen anillos, paredes y
+// espiral, así el vórtice nunca se sale de las paredes.
+function fbRadius(y: number) {
+  if (y >= FB_NECK_Y) return 8;
+  return 8 + 80 * Math.pow((FB_NECK_Y - y) / (FB_NECK_Y - FB_MOUTH_Y), 1.7);
+}
+const FB_SQUASH = 0.22; // elipse de la boca vista en perspectiva
+const FB_RINGS = [FB_MOUTH_Y, 78, 96, 112, 126].map((y) => ({ y, rx: fbRadius(y), ry: Math.max(3, fbRadius(y) * FB_SQUASH) }));
+const fbPolyline = (pts: [number, number][]) => pts.map(([x, y], i) => `${i ? "L" : "M"} ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
+const FB_WALLS = [-1, 1].map((side) => {
+  const pts: [number, number][] = [];
+  for (let k = 0; k <= 24; k++) {
+    const y = FB_MOUTH_Y + ((FB_NECK_END_Y - FB_MOUTH_Y) * k) / 24;
+    pts.push([FB_CX + side * fbRadius(y), y]);
+  }
+  return fbPolyline(pts);
+});
+const FB_SPIRALS = [0, 1, 2].map((s) => {
+  const pts: [number, number][] = [];
+  for (let k = 0; k <= 60; k++) {
+    const t = k / 60;
+    const y = FB_MOUTH_Y + 4 + (FB_NECK_Y + 6 - FB_MOUTH_Y - 4) * Math.pow(t, 0.9);
+    const r = fbRadius(y) * 0.78;
+    const a = (s / 3) * Math.PI * 2 + t * VORTEX_TURNS * Math.PI * 2;
+    pts.push([FB_CX + Math.cos(a) * r, y + Math.sin(a) * r * FB_SQUASH]);
+  }
+  return fbPolyline(pts);
+});
+// Estado 100%: cada nodo en su punto (mismo orden espacial que DOCKS en 3D) y su línea
+// de luz hacia la boca. `align`: lado hacia el que crece la etiqueta.
 const FALLBACK_NODES = [
-  { x: 48, y: 74, align: "left" },
-  { x: 296, y: 62, align: "right" },
-  { x: 62, y: 150, align: "left" },
-  { x: 286, y: 140, align: "right" },
+  { x: 40, y: 40, align: "left", line: "M 40 40 Q 52 30, 80 50" },
+  { x: 282, y: 34, align: "right", line: "M 282 34 Q 268 26, 240 50" },
+  { x: 36, y: 140, align: "left", line: "M 36 140 Q 40 84, 98 71" },
+  { x: 292, y: 140, align: "right", line: "M 292 140 Q 288 84, 222 71" },
 ] as const;
-const FB_CX = 180;
 
 function FunnelStaticFallback({ labels }: { labels: [string, string, string, string] }) {
-  const rings = [
-    { y: 78, rx: 96, ry: 24 },
-    { y: 104, rx: 70, ry: 17 },
-    { y: 128, rx: 48, ry: 12 },
-    { y: 150, rx: 30, ry: 8 },
-    { y: 170, rx: 16, ry: 5 },
-  ];
   return (
-    <div className="relative w-full max-w-[380px] mx-auto aspect-[320/280]">
-      <svg viewBox="0 0 320 280" className="absolute inset-0 w-full h-full" aria-hidden="true">
+    <div className="relative w-full max-w-[380px] mx-auto aspect-[320/190]">
+      <svg viewBox={`0 0 ${FB_W} ${FB_H}`} className="absolute inset-0 w-full h-full" aria-hidden="true">
         <defs>
           <radialGradient id="mf-exit">
             <stop offset="0%" stopColor={colors.brand.primaryDark} stopOpacity="0.95" />
             <stop offset="100%" stopColor={colors.brand.primaryDark} stopOpacity="0" />
           </radialGradient>
         </defs>
-        {/* Paredes del funnel */}
-        <path d={`M ${FB_CX - 96} 78 C ${FB_CX - 70} 130, ${FB_CX - 14} 160, ${FB_CX - 9} 190 L ${FB_CX - 9} 238`} fill="none" stroke={colors.brand.primaryDark} strokeOpacity="0.6" strokeWidth="1.2" />
-        <path d={`M ${FB_CX + 96} 78 C ${FB_CX + 70} 130, ${FB_CX + 14} 160, ${FB_CX + 9} 190 L ${FB_CX + 9} 238`} fill="none" stroke={colors.brand.primaryDark} strokeOpacity="0.6" strokeWidth="1.2" />
-        {rings.map((r, i) => (
+        {FB_WALLS.map((d, i) => (
+          <path key={i} d={d} fill="none" stroke={colors.brand.primaryDark} strokeOpacity="0.6" strokeWidth="1.2" />
+        ))}
+        {FB_RINGS.map((r, i) => (
           <ellipse key={i} cx={FB_CX} cy={r.y} rx={r.rx} ry={r.ry} fill="none" stroke={i === 0 ? colors.brand.primaryDark : colors.brand.primary} strokeOpacity={i === 0 ? 0.85 : 0.45} strokeWidth={i === 0 ? 1.4 : 0.9} />
         ))}
         {/* Vórtice interior */}
-        {[0, 1, 2].map((i) => (
-          <path
-            key={i}
-            d={`M ${FB_CX - 74 + i * 10} ${86 + i * 3} Q ${FB_CX + 60 - i * 8} ${104 + i * 4}, ${FB_CX - 30 + i * 4} ${126 + i * 3} T ${FB_CX + 12 - i * 3} ${160 + i * 2} T ${FB_CX} 196`}
-            fill="none"
-            stroke={colors.brand.primaryDark}
-            strokeOpacity={0.8 - i * 0.18}
-            strokeWidth={1.6 - i * 0.3}
-            strokeLinecap="round"
-          />
+        {FB_SPIRALS.map((d, i) => (
+          <path key={i} d={d} fill="none" stroke={colors.brand.primaryDark} strokeOpacity={0.8 - i * 0.18} strokeWidth={1.5 - i * 0.3} strokeLinecap="round" strokeLinejoin="round" />
         ))}
         {/* Líneas de luz nodo → boca */}
-        {FALLBACK_NODES.map((n, i) => {
-          const endX = n.x < FB_CX ? FB_CX - 78 : FB_CX + 78;
-          return (
-            <path key={i} d={`M ${n.x} ${n.y} Q ${(n.x + endX) / 2} ${Math.min(n.y, 78) - 26}, ${endX} 80`} fill="none" stroke={colors.brand.primaryDark} strokeOpacity="0.75" strokeWidth="1.3" />
-          );
-        })}
         {FALLBACK_NODES.map((n, i) => (
-          <circle key={i} cx={n.x} cy={n.y} r="4.5" fill={colors.brand.primaryDark} />
+          <path key={i} d={n.line} fill="none" stroke={colors.brand.primaryDark} strokeOpacity="0.75" strokeWidth="1.3" />
+        ))}
+        {FALLBACK_NODES.map((n, i) => (
+          <circle key={i} cx={n.x} cy={n.y} r="4" fill={colors.brand.primaryDark} />
         ))}
         {/* Pulso de convergencia en la salida */}
-        <circle cx={FB_CX} cy="244" r="30" fill="url(#mf-exit)" />
-        <circle cx={FB_CX} cy="244" r="4" fill={colors.brand.primaryDark} />
+        <circle cx={FB_CX} cy={FB_EXIT_Y} r="22" fill="url(#mf-exit)" />
+        <circle cx={FB_CX} cy={FB_EXIT_Y} r="3.5" fill={colors.brand.primaryDark} />
       </svg>
       {FALLBACK_NODES.map((n, i) => {
         const Icon = NODE_ICONS[i];
         return (
           <div
             key={i}
-            className="absolute whitespace-nowrap inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[var(--color-surface)]/90 border border-[var(--color-border)] text-[var(--color-text)] shadow-sm"
+            className="absolute whitespace-nowrap inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[var(--color-surface)]/90 border border-[var(--color-primary)]/60 text-[var(--color-text)] shadow-sm"
             style={{
-              left: `${(n.x / 320) * 100}%`,
-              top: `${(n.y / 280) * 100}%`,
-              transform: `translate(${n.align === "left" ? "-18%" : "-82%"}, calc(-100% - 10px))`,
+              left: `${(n.x / FB_W) * 100}%`,
+              top: `${(n.y / FB_H) * 100}%`,
+              transform: `translate(${n.align === "left" ? "-18%" : "-82%"}, calc(-100% - 8px))`,
             }}
           >
             <Icon className="w-3.5 h-3.5 text-[var(--color-primary)]" aria-hidden="true" />
@@ -788,6 +848,7 @@ export function MarketingFunnel({ placement, labels, ariaLabel }: MarketingFunne
         progressTarget={progressTarget}
         rootRef={rootRef}
       />
+      <WebGLRelease />
     </Canvas>
   ) : null;
 
@@ -800,7 +861,7 @@ export function MarketingFunnel({ placement, labels, ariaLabel }: MarketingFunne
   }
 
   return (
-    <div className="lg:hidden mt-8 md:mt-10" role="img" aria-label={ariaLabel}>
+    <div className="lg:hidden mt-4 md:mt-10" role="img" aria-label={ariaLabel}>
       {/* <768px: fallback estático, siempre en el HTML (visible desde el primer paint). */}
       <div className="md:hidden">
         <FunnelStaticFallback labels={labels} />

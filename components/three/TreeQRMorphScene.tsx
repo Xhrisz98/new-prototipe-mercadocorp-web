@@ -4,6 +4,7 @@ import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "re
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { colors } from "@/lib/design-tokens";
+import { WebGLRelease } from "@/components/three/WebGLRelease";
 
 // Escena de partículas de TreeQRMorph (PROJECT_PLAN.md §5.8 v3). Vive en su propio
 // archivo para cargarse en diferido: el estado de reposo A (el <img> real) no depende
@@ -771,6 +772,7 @@ export default function TreeQRMorphScene(props: TreeQRMorphSceneProps) {
           dpr={[1, 2]}
         >
           <MorphScene {...props} samples={samples} rootRef={rootRef} />
+          <WebGLRelease />
         </Canvas>
       )}
     </div>
