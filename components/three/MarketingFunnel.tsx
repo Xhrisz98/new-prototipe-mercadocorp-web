@@ -651,7 +651,13 @@ function FunnelScene({ isDark, instant, labels, layoutRef, progressTarget, rootR
 // etiqueta tape la boca.
 const FB_W = 320;
 const FB_H = 190;
-const FB_CX = 160;
+// Centro corrido 34 unidades a la izquierda del centro real del viewBox (160): a
+// 375×812 el widget flotante de WhatsApp (fixed, ancla inferior derecha del viewport,
+// fuera del flujo de esta sección) cae justo sobre el pulso de salida cuando el
+// funnel queda centrado. Se mueve el embudo entero — boca, paredes, vórtice y
+// salida — en vez de mover el widget global, que ya está calibrado (safe-area) para
+// las 14 páginas.
+const FB_CX = 126;
 const FB_MOUTH_Y = 58;
 const FB_NECK_Y = 140;
 const FB_NECK_END_Y = 156;
@@ -686,11 +692,14 @@ const FB_SPIRALS = [0, 1, 2].map((s) => {
 });
 // Estado 100%: cada nodo en su punto (mismo orden espacial que DOCKS en 3D) y su línea
 // de luz hacia la boca. `align`: lado hacia el que crece la etiqueta.
+// Los puntos donde cada línea llega a la boca están expresados como offset de
+// FB_CX (no como número absoluto): si FB_CX se corre, la boca y las líneas se
+// mueven juntas y siguen calzando.
 const FALLBACK_NODES = [
-  { x: 40, y: 40, align: "left", line: "M 40 40 Q 52 30, 80 50" },
-  { x: 282, y: 34, align: "right", line: "M 282 34 Q 268 26, 240 50" },
-  { x: 36, y: 140, align: "left", line: "M 36 140 Q 40 84, 98 71" },
-  { x: 292, y: 140, align: "right", line: "M 292 140 Q 288 84, 222 71" },
+  { x: 40, y: 40, align: "left", line: `M 40 40 Q ${FB_CX - 108} 30, ${FB_CX - 80} 50` },
+  { x: 282, y: 34, align: "right", line: `M 282 34 Q ${FB_CX + 108} 26, ${FB_CX + 80} 50` },
+  { x: 36, y: 140, align: "left", line: `M 36 140 Q ${FB_CX - 120} 84, ${FB_CX - 62} 71` },
+  { x: 292, y: 140, align: "right", line: `M 292 140 Q ${FB_CX + 128} 84, ${FB_CX + 62} 71` },
 ] as const;
 
 function FunnelStaticFallback({ labels }: { labels: [string, string, string, string] }) {
