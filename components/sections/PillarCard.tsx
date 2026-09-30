@@ -4,8 +4,9 @@ import React from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { IconBadge } from "@/components/ui/IconBadge";
 import { PhotoCard, type PhotoCardImage } from "@/components/ui/PhotoCard";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, type LucideIcon } from "lucide-react";
 
 interface PillarCardProps {
   title: string;
@@ -14,9 +15,12 @@ interface PillarCardProps {
   ctaLabel: string;
   badge?: string;
   isMind?: boolean;
-  /** Foto de cabecera. Sin ella la tarjeta queda solo con texto (uso actual de los
-   *  hubs, pendientes de migrar a IconBadge). */
+  /** Foto de cabecera. Sin ella la tarjeta queda solo con texto. */
   image?: PhotoCardImage;
+  /** Ícono de servicio (IconBadge) — variante sin foto: tarjetas de servicio de
+   *  los hubs (Tecnología, Marketing). Sin efecto si `image` está presente (el
+   *  badge ya ocupa el espacio de cabecera sobre la foto). */
+  icon?: LucideIcon;
   index?: number;
 }
 
@@ -28,6 +32,7 @@ export function PillarCard({
   badge,
   isMind = false,
   image,
+  icon: Icon,
   index = 0,
 }: PillarCardProps) {
   const accent = isMind ? "ai" : "brand";
@@ -77,7 +82,16 @@ export function PillarCard({
 
   return (
     <Card accent={accent} revealIndex={index} className="group">
-      {badgeNode && <div className="mb-6 flex items-center justify-end">{badgeNode}</div>}
+      {Icon ? (
+        <div className="mb-6 flex items-center justify-between gap-3">
+          {/* reveal=false: Card ya envuelve todo en RevealOnScroll (§5.5) — un
+              segundo reveal anidado en el ícono se vería como un doble fade. */}
+          <IconBadge icon={Icon} accent={accent} reveal={false} />
+          {badgeNode}
+        </div>
+      ) : (
+        badgeNode && <div className="mb-6 flex items-center justify-end">{badgeNode}</div>
+      )}
       {body}
     </Card>
   );

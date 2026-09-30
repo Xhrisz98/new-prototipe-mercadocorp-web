@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { ProductShowcase } from "@/components/ui/ProductShowcase";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMindContent } from "@/content/mind";
 import { WhatsAppLogo } from "@/components/ui/WhatsAppLogo";
@@ -166,27 +167,26 @@ export default function MindPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {content.about.modules.map((mod, idx) => (
-                  <div
-                    key={idx}
-                    className="p-6 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-ai)]/50 transition-[border-color,box-shadow] duration-300 hover:shadow-md flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="w-10 h-10 rounded-xl bg-[var(--color-ai)]/10 flex items-center justify-center mb-4">
-                        {moduleIcons[idx % moduleIcons.length]}
+                  <RevealOnScroll key={idx} index={idx}>
+                    <div className="h-full p-6 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)] hover:border-[var(--color-ai)]/50 transition-[border-color,box-shadow] duration-300 hover:shadow-md flex flex-col justify-between">
+                      <div>
+                        <div className="w-10 h-10 rounded-xl bg-[var(--color-ai)]/10 flex items-center justify-center mb-4">
+                          {moduleIcons[idx % moduleIcons.length]}
+                        </div>
+                        <h4 className="text-base font-semibold text-[var(--color-text)] mb-2">
+                          {mod.name}
+                        </h4>
+                        <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
+                          {mod.description}
+                        </p>
                       </div>
-                      <h4 className="text-base font-semibold text-[var(--color-text)] mb-2">
-                        {mod.name}
-                      </h4>
-                      <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
-                        {mod.description}
-                      </p>
-                    </div>
 
-                    <div className="mt-5 pt-4 border-t border-[var(--color-border)] flex items-center gap-1.5 text-xs text-[var(--color-ai)] font-medium">
-                      <ShieldCheck className="w-3.5 h-3.5" />
-                      <span>Integrado en Mind</span>
+                      <div className="mt-5 pt-4 border-t border-[var(--color-border)] flex items-center gap-1.5 text-xs text-[var(--color-ai)] font-medium">
+                        <ShieldCheck className="w-3.5 h-3.5" />
+                        <span>Integrado en Mind</span>
+                      </div>
                     </div>
-                  </div>
+                  </RevealOnScroll>
                 ))}
               </div>
             </div>

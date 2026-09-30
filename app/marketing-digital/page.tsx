@@ -13,6 +13,12 @@ import { StatsStrip } from "@/components/sections/StatsStrip";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMarketingContent } from "@/content/marketing";
 import { MarketingFunnel } from "@/components/three/MarketingFunnel";
+import { Palette, Search, CalendarCheck } from "lucide-react";
+
+// Ícono por servicio, mismo orden que content.services.items (§5.9 IconBadge —
+// adopción en tarjetas de servicio de los hubs): Estrategia/Branding, Auditoría
+// Digital, Gestión de Eventos.
+const SERVICE_ICONS = [Palette, Search, CalendarCheck];
 
 export default function MarketingPage() {
   const { locale } = useLocale();
@@ -55,7 +61,7 @@ export default function MarketingPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {content.services.items.map((service) => (
+              {content.services.items.map((service, idx) => (
                 <PillarCard
                   key={service.number}
                   title={service.title}
@@ -63,6 +69,8 @@ export default function MarketingPage() {
                   href={service.href}
                   ctaLabel={service.ctaLabel}
                   badge={service.badge}
+                  icon={SERVICE_ICONS[idx % SERVICE_ICONS.length]}
+                  index={idx}
                 />
               ))}
             </div>

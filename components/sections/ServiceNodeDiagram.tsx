@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, type Variants } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import { Bot, Workflow, Code2 } from "lucide-react";
 import { colors } from "@/lib/design-tokens";
 
@@ -36,22 +36,30 @@ const nodeVariants: Variants = {
   active: {},
 };
 
-const ringVariants: Variants = {
-  rest: { opacity: 0, scale: 0.5 },
-  active: {
-    opacity: 1,
-    scale: 1,
-    // Activación puntual del acento #04E7AF antes de asentarse en el azul de
-    // marca — excepción permitida por PROJECT_PLAN.md §5.4 (contexto Tecnología/IA).
-    backgroundColor: [colors.brand.primary, colors.brand.aiAccent, colors.brand.primary],
-    transition: {
-      // `times` solo aplica al color (única propiedad con 3 keyframes reales) —
-      // compartirlo con opacity/scale (valores simples) las hacía oscilar.
-      default: { duration: 0.4, ease: "easeOut" },
-      backgroundColor: { duration: 0.9, times: [0, 0.4, 1], ease: "easeInOut" },
-    },
-  },
-};
+// Con prefers-reduced-motion, el color queda fijo en el azul de marca (sin el
+// keyframe de 3 pasos por #04E7AF) — un array de keyframes sí se reproduce
+// completo aunque initial/animate coincidan, así que la única forma de que no
+// "parpadee" es no declarar el array en absoluto.
+function buildRingVariants(reduceMotion: boolean): Variants {
+  return {
+    rest: { opacity: 0, scale: 0.5 },
+    active: reduceMotion
+      ? { opacity: 1, scale: 1, backgroundColor: colors.brand.primary, transition: { duration: 0 } }
+      : {
+          opacity: 1,
+          scale: 1,
+          // Activación puntual del acento #04E7AF antes de asentarse en el azul de
+          // marca — excepción permitida por PROJECT_PLAN.md §5.4 (contexto Tecnología/IA).
+          backgroundColor: [colors.brand.primary, colors.brand.aiAccent, colors.brand.primary],
+          transition: {
+            // `times` solo aplica al color (única propiedad con 3 keyframes reales) —
+            // compartirlo con opacity/scale (valores simples) las hacía oscilar.
+            default: { duration: 0.4, ease: "easeOut" },
+            backgroundColor: { duration: 0.9, times: [0, 0.4, 1], ease: "easeInOut" },
+          },
+        },
+  };
+}
 
 const contentVariants: Variants = {
   rest: { opacity: 0, y: 6 },
@@ -64,13 +72,21 @@ const labelVariants: Variants = {
 };
 
 export function ServiceNodeDiagram() {
+  // Guard de accesibilidad: a diferencia de las demás piezas animadas del sitio,
+  // este diagrama no tenía ningún guard de prefers-reduced-motion. Con motion
+  // reducida salta directo al estado activo (sin stagger ni whileInView), mismo
+  // criterio que el resto del sitio.
+  const reduceMotion = useReducedMotion();
+  const ringVariants = React.useMemo(() => buildRingVariants(!!reduceMotion), [reduceMotion]);
+
   return (
     <section className="w-full py-14 sm:py-18 bg-[var(--color-bg)]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="relative w-full h-56 sm:h-64"
-          initial="rest"
-          whileInView="active"
+          initial={reduceMotion ? "active" : "rest"}
+          animate={reduceMotion ? "active" : undefined}
+          whileInView={reduceMotion ? undefined : "active"}
           viewport={{ once: true, amount: 0.6 }}
           variants={containerVariants}
         >

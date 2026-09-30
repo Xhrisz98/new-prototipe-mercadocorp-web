@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Badge } from "@/components/ui/Badge";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { Building2, User, CheckCircle } from "lucide-react";
 
 interface DualPillarsBlockProps {
@@ -39,47 +40,46 @@ export function DualPillarsBlock({
           {paths.map((path, idx) => {
             const isPersonal = idx === 1;
             return (
-              <div
-                key={idx}
-                className="flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] transition-[border-color,box-shadow] duration-300 hover:border-[var(--color-primary)]/40 hover:shadow-xl"
-              >
-                <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center">
-                      {isPersonal ? (
-                        <User className="w-5 h-5" />
-                      ) : (
-                        <Building2 className="w-5 h-5" />
-                      )}
-                    </div>
-                    <Badge variant="brand" size="sm">
-                      {path.category}
-                    </Badge>
-                  </div>
-
-                  <h3
-                    className="text-xl sm:text-2xl font-medium tracking-tight mb-4 text-[var(--color-text)]"
-                    style={{ fontFamily: "var(--font-kanit), sans-serif" }}
-                  >
-                    {path.title}
-                  </h3>
-
-                  <p className="text-sm sm:text-base text-[var(--color-text-muted)] leading-relaxed mb-8">
-                    {path.body}
-                  </p>
-
-                  <div className="space-y-3 pt-6 border-t border-[var(--color-border)]">
-                    {path.points.map((point, pIdx) => (
-                      <div key={pIdx} className="flex items-start gap-2.5">
-                        <CheckCircle className="w-4 h-4 text-[var(--color-primary)] mt-0.5 shrink-0" />
-                        <span className="text-sm text-[var(--color-text)] font-medium">
-                          {point}
-                        </span>
+              <RevealOnScroll key={idx} index={idx}>
+                <div className="flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] transition-[border-color,box-shadow] duration-300 hover:border-[var(--color-primary)]/40 hover:shadow-xl h-full">
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center">
+                        {isPersonal ? (
+                          <User className="w-5 h-5" />
+                        ) : (
+                          <Building2 className="w-5 h-5" />
+                        )}
                       </div>
-                    ))}
+                      <Badge variant="brand" size="sm">
+                        {path.category}
+                      </Badge>
+                    </div>
+
+                    <h3
+                      className="text-xl sm:text-2xl font-medium tracking-tight mb-4 text-[var(--color-text)]"
+                      style={{ fontFamily: "var(--font-kanit), sans-serif" }}
+                    >
+                      {path.title}
+                    </h3>
+
+                    <p className="text-sm sm:text-base text-[var(--color-text-muted)] leading-relaxed mb-8">
+                      {path.body}
+                    </p>
+
+                    <div className="space-y-3 pt-6 border-t border-[var(--color-border)]">
+                      {path.points.map((point, pIdx) => (
+                        <div key={pIdx} className="flex items-start gap-2.5">
+                          <CheckCircle className="w-4 h-4 text-[var(--color-primary)] mt-0.5 shrink-0" />
+                          <span className="text-sm text-[var(--color-text)] font-medium">
+                            {point}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </RevealOnScroll>
             );
           })}
         </div>

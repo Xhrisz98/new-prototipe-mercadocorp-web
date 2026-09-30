@@ -27,9 +27,11 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  // Base pill shape (rounded-full) y transiciones
+  // Base pill shape (rounded-full) y transiciones. "group" habilita el nudge del
+  // ícono derecho al pasar el cursor (ver abajo) — mismo gesto que ya usan los CTAs
+  // manuales de texto+flecha (CaseStudyPreview, PillarCard).
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-full transition-[background-color,border-color,box-shadow,opacity,transform] duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none cursor-pointer tracking-wide";
+    "group inline-flex items-center justify-center font-medium rounded-full transition-[background-color,border-color,box-shadow,opacity,transform] duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none cursor-pointer tracking-wide";
 
   const sizeStyles = {
     sm: "px-3.5 py-1.5 text-xs gap-1.5",
@@ -55,7 +57,14 @@ export const Button: React.FC<ButtonProps> = ({
     <>
       {icon && iconPosition === "left" && <span className="inline-flex shrink-0">{icon}</span>}
       <span>{children}</span>
-      {icon && iconPosition === "right" && <span className="inline-flex shrink-0">{icon}</span>}
+      {/* Nudge solo a la derecha: es la posición que usan las flechas de "avanzar"
+          (ArrowRight); un ícono a la izquierda (ej. WhatsAppLogo) no tiene esa
+          semántica direccional, así que no se le aplica. */}
+      {icon && iconPosition === "right" && (
+        <span className="inline-flex shrink-0 transition-transform duration-200 group-hover:translate-x-1">
+          {icon}
+        </span>
+      )}
     </>
   );
 

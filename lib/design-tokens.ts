@@ -30,5 +30,17 @@ export const fonts = {
   body: "Montserrat", // todo lo demás
 } as const;
 
+// Duraciones de transición ya en uso real en el sitio (Button, Card, Navbar/menús,
+// ProductShowcase/PhotoCard) — se formalizan aquí como referencia, sin cambiar
+// ningún valor existente. Los componentes siguen usando las clases de Tailwind
+// (duration-200, etc.); estos tokens documentan qué significa cada uno.
+export const durations = {
+  hover: 200, // ms — hover de botones, bordes, íconos
+  card: 300, // ms — elevación/sombra de tarjetas
+  menu: 150, // ms — menús y selectores (Navbar, LanguageSelector)
+  slow: 500, // ms — transiciones de imagen (zoom de PhotoCard/ProductShowcase)
+} as const;
+
 export type ColorTokens = typeof colors;
 export type FontTokens = typeof fonts;
+export type DurationTokens = typeof durations;

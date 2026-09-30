@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 interface MethodologyProps {
   title: string;
@@ -25,23 +26,22 @@ export function Methodology({ title, subtitle, steps }: MethodologyProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {steps.map((step) => (
-            <div
-              key={step.number}
-              className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)]/50 hover:bg-[var(--color-bg)] transition-colors flex flex-col justify-between"
-            >
-              <div>
-                <span className="inline-block text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-[var(--color-primary)]/10 text-[var(--color-primary)] mb-4">
-                  Paso {step.number}
-                </span>
-                <h3 className="text-base sm:text-lg font-bold mb-2 text-[var(--color-text)]">
-                  {step.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
-                  {step.description}
-                </p>
+          {steps.map((step, idx) => (
+            <RevealOnScroll key={step.number} index={idx}>
+              <div className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)]/50 hover:bg-[var(--color-bg)] transition-colors flex flex-col justify-between h-full">
+                <div>
+                  <span className="inline-block text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-[var(--color-primary)]/10 text-[var(--color-primary)] mb-4">
+                    Paso {step.number}
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold mb-2 text-[var(--color-text)]">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
               </div>
-            </div>
+            </RevealOnScroll>
           ))}
         </div>
       </div>

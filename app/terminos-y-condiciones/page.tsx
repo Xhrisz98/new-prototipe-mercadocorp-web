@@ -4,6 +4,7 @@ import React from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/Badge";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getTerminosContent } from "@/content/legales";
 import { FileText } from "lucide-react";
@@ -48,17 +49,19 @@ export default function TerminosCondicionesPage() {
           {/* Secciones de Términos y Condiciones */}
           <div className="space-y-10">
             {content.sections.map((sec, idx) => (
-              <div key={idx} className="border-b border-[var(--color-border)] pb-8 last:border-b-0">
-                <h2
-                  className="text-xl font-medium tracking-tight mb-3 text-[var(--color-text)]"
-                  style={{ fontFamily: "var(--font-kanit), sans-serif" }}
-                >
-                  {sec.title}
-                </h2>
-                <p className="text-sm sm:text-base text-[var(--color-text-muted)] leading-relaxed">
-                  {sec.content}
-                </p>
-              </div>
+              <RevealOnScroll key={idx} index={idx}>
+                <div className="border-b border-[var(--color-border)] pb-8 last:border-b-0">
+                  <h2
+                    className="text-xl font-medium tracking-tight mb-3 text-[var(--color-text)]"
+                    style={{ fontFamily: "var(--font-kanit), sans-serif" }}
+                  >
+                    {sec.title}
+                  </h2>
+                  <p className="text-sm sm:text-base text-[var(--color-text-muted)] leading-relaxed">
+                    {sec.content}
+                  </p>
+                </div>
+              </RevealOnScroll>
             ))}
           </div>
         </div>

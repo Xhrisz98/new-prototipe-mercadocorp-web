@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/Hero";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { Badge } from "@/components/ui/Badge";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getCasosDeExitoContent } from "@/content/casos-de-exito";
 import { Building, ShieldCheck, CheckCircle2, ArrowRight, Hourglass } from "lucide-react";
@@ -67,67 +68,70 @@ export default function CasosDeExitoPage() {
             // Cada tarjeta conserva el ancho de columna original (flex-none) y el
             // conjunto se centra con justify-center sin importar el resto.
             <div className="flex flex-wrap justify-center gap-8">
-              {content.cases.map((caso) => (
-                <div
+              {content.cases.map((caso, idx) => (
+                <RevealOnScroll
                   key={caso.id}
-                  className="w-full md:w-[calc(33.333%-21.333px)] flex-none p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/40 transition-[border-color,box-shadow] duration-300 hover:shadow-xl flex flex-col justify-between"
+                  index={idx}
+                  className="w-full md:w-[calc(33.333%-21.333px)] flex-none"
                 >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-6">
-                      <Badge variant="outline" size="sm">
-                        {caso.clientIndustry}
-                      </Badge>
-                      <div className="w-8 h-8 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center">
-                        <Building className="w-4 h-4" />
+                  <div className="h-full p-8 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/40 transition-[border-color,box-shadow] duration-300 hover:shadow-xl flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-6">
+                        <Badge variant="outline" size="sm">
+                          {caso.clientIndustry}
+                        </Badge>
+                        <div className="w-8 h-8 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center">
+                          <Building className="w-4 h-4" />
+                        </div>
+                      </div>
+
+                      <h3
+                        className="text-xl font-medium tracking-tight mb-3 text-[var(--color-text)]"
+                        style={{ fontFamily: "var(--font-kanit), sans-serif" }}
+                      >
+                        {caso.clientName}
+                      </h3>
+
+                      <div className="mb-4">
+                        <span className="text-sm text-[var(--color-primary)] font-semibold">
+                          {caso.pillar}
+                        </span>
+                      </div>
+
+                      <div className="space-y-3 mb-6">
+                        <div className="text-sm font-semibold text-[var(--color-text-muted)]">
+                          Desafío Operativo:
+                        </div>
+                        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                          {caso.problemContext}
+                        </p>
+
+                        <div className="text-sm font-semibold text-[var(--color-text-muted)] pt-2">
+                          Solución Implementada:
+                        </div>
+                        <p className="text-sm text-[var(--color-text)] leading-relaxed font-medium">
+                          {caso.solutionBuilt}
+                        </p>
                       </div>
                     </div>
 
-                    <h3
-                      className="text-xl font-medium tracking-tight mb-3 text-[var(--color-text)]"
-                      style={{ fontFamily: "var(--font-kanit), sans-serif" }}
-                    >
-                      {caso.clientName}
-                    </h3>
-
-                    <div className="mb-4">
-                      <span className="text-sm text-[var(--color-primary)] font-semibold">
-                        {caso.pillar}
+                    <div className="pt-5 border-t border-[var(--color-border)] flex items-center justify-between">
+                      <span className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
+                        <CheckCircle2 className="w-4 h-4 text-[var(--color-primary)]" />
+                        En Producción
                       </span>
-                    </div>
-
-                    <div className="space-y-3 mb-6">
-                      <div className="text-sm font-semibold text-[var(--color-text-muted)]">
-                        Desafío Operativo:
-                      </div>
-                      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-                        {caso.problemContext}
-                      </p>
-
-                      <div className="text-sm font-semibold text-[var(--color-text-muted)] pt-2">
-                        Solución Implementada:
-                      </div>
-                      <p className="text-sm text-[var(--color-text)] leading-relaxed font-medium">
-                        {caso.solutionBuilt}
-                      </p>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        href="/contacto"
+                        icon={<ArrowRight className="w-3.5 h-3.5" />}
+                        iconPosition="right"
+                      >
+                        Replicar
+                      </Button>
                     </div>
                   </div>
-
-                  <div className="pt-5 border-t border-[var(--color-border)] flex items-center justify-between">
-                    <span className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
-                      <CheckCircle2 className="w-4 h-4 text-[var(--color-primary)]" />
-                      En Producción
-                    </span>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      href="/contacto"
-                      icon={<ArrowRight className="w-3.5 h-3.5" />}
-                      iconPosition="right"
-                    >
-                      Replicar
-                    </Button>
-                  </div>
-                </div>
+                </RevealOnScroll>
               ))}
             </div>
             )}

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 interface StatsStripProps {
   stats?: { value: string; label: string; description: string }[];
@@ -37,21 +38,23 @@ export function StatsStrip({ stats }: StatsStripProps) {
     <section className="w-full py-16 border-y border-[var(--color-border)] bg-[var(--color-surface)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {items.map((item) => (
-            <div key={item.label} className="text-center sm:text-left">
-              <div
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--color-primary)] mb-2 tracking-tight"
-                style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
-              >
-                {item.value}
+          {items.map((item, idx) => (
+            <RevealOnScroll key={item.label} index={idx}>
+              <div className="text-center sm:text-left">
+                <div
+                  className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--color-primary)] mb-2 tracking-tight"
+                  style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
+                >
+                  {item.value}
+                </div>
+                <div className="text-sm font-bold text-[var(--color-text)] mb-1">
+                  {item.label}
+                </div>
+                <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-              <div className="text-sm font-bold text-[var(--color-text)] mb-1">
-                {item.label}
-              </div>
-              <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
-                {item.description}
-              </p>
-            </div>
+            </RevealOnScroll>
           ))}
         </div>
       </div>

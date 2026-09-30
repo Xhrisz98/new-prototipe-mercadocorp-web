@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useTheme } from "@/components/theme/ThemeProvider";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 interface TrustStripProps {
   title: string;
@@ -83,27 +84,26 @@ export function TrustStrip({ title, logos }: TrustStripProps) {
             cantidad queda centrada, y cada tarjeta mide su propio contenido (nunca
             truncado) en vez de una columna de ancho fijo. */}
         <div className="flex flex-wrap justify-center gap-4">
-          {logos.map((logo) => {
+          {logos.map((logo, idx) => {
             const marks = LOGO_MARKS[logo.name];
             return (
-              <div
-                key={logo.name}
-                className="flex items-center gap-2.5 p-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] transition-transform duration-200 hover:-translate-y-0.5"
-              >
-                {marks ? (
-                  <div className="flex items-center gap-1 shrink-0">
-                    {marks.map((mark, i) => (
-                      <LogoMarkImg key={i} mark={mark} isDark={isDark} />
-                    ))}
+              <RevealOnScroll key={logo.name} index={idx}>
+                <div className="flex items-center gap-2.5 p-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] transition-transform duration-200 hover:-translate-y-0.5">
+                  {marks ? (
+                    <div className="flex items-center gap-1 shrink-0">
+                      {marks.map((mark, i) => (
+                        <LogoMarkImg key={i} mark={mark} isDark={isDark} />
+                      ))}
+                    </div>
+                  ) : null}
+                  <div>
+                    <span className="text-xs font-bold block">{logo.name}</span>
+                    <span className="text-[10px] text-[var(--color-text-muted)] block">
+                      {logo.category}
+                    </span>
                   </div>
-                ) : null}
-                <div>
-                  <span className="text-xs font-bold block">{logo.name}</span>
-                  <span className="text-[10px] text-[var(--color-text-muted)] block">
-                    {logo.category}
-                  </span>
                 </div>
-              </div>
+              </RevealOnScroll>
             );
           })}
         </div>

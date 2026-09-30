@@ -13,7 +13,13 @@ import { TrustStrip } from "@/components/sections/TrustStrip";
 import { ServiceNodeDiagram } from "@/components/sections/ServiceNodeDiagram";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getTecnologiaContent } from "@/content/tecnologia";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Bot, Code2, ShoppingCart } from "lucide-react";
+
+// Ícono por servicio, mismo orden que content.services.items (§5.9 IconBadge —
+// adopción en tarjetas de servicio de los hubs). ShoppingCart/Code2 reutilizan el
+// mismo lenguaje visual que MarketingFunnel (E-commerce) y ServiceNodeDiagram
+// (Software a Medida) para esos conceptos.
+const SERVICE_ICONS = [Bot, Code2, ShoppingCart];
 
 export default function TecnologiaPage() {
   const { locale } = useLocale();
@@ -55,7 +61,7 @@ export default function TecnologiaPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {content.services.items.map((service) => (
+              {content.services.items.map((service, idx) => (
                 <PillarCard
                   key={service.number}
                   title={service.title}
@@ -64,6 +70,8 @@ export default function TecnologiaPage() {
                   ctaLabel={service.ctaLabel}
                   badge={service.badge}
                   isMind={service.isMind}
+                  icon={SERVICE_ICONS[idx % SERVICE_ICONS.length]}
+                  index={idx}
                 />
               ))}
             </div>

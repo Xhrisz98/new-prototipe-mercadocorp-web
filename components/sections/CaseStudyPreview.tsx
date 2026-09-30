@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 interface CaseStudyItem {
   client: string;
@@ -55,44 +56,47 @@ export function CaseStudyPreview({
             ancho de una columna de 3 en md+ (flex-none, no crece) y el conjunto se
             centra con justify-center sin importar cuántas quepan en la fila. */}
         <div className="flex flex-wrap justify-center gap-6">
-          {items.map((item) => (
-            <div
+          {items.map((item, idx) => (
+            <RevealOnScroll
               key={item.client}
-              className="w-full md:w-[calc(33.333%-16px)] flex-none p-7 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1"
+              index={idx}
+              className="w-full md:w-[calc(33.333%-16px)] flex-none"
             >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <Badge variant="brand" size="sm">
-                    {item.pillar}
-                  </Badge>
-                </div>
-
-                <h3 className="text-lg font-bold text-[var(--color-text)] mb-3">
-                  {item.client}
-                </h3>
-
-                <div className="space-y-3 text-xs sm:text-sm">
-                  <div>
-                    <span className="font-semibold text-[var(--color-text)] block mb-1">
-                      Desafío:
-                    </span>
-                    <p className="text-[var(--color-text-muted)] leading-relaxed">
-                      {item.problem}
-                    </p>
+              <div className="h-full p-7 rounded-3xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xs flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <Badge variant="brand" size="sm">
+                      {item.pillar}
+                    </Badge>
                   </div>
 
-                  <div className="pt-2 border-t border-[var(--color-border)]/50">
-                    <span className="font-semibold text-[var(--color-primary)] flex items-center gap-1 mb-1">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      Solución Implementada:
-                    </span>
-                    <p className="text-[var(--color-text-muted)] leading-relaxed">
-                      {item.solution}
-                    </p>
+                  <h3 className="text-lg font-bold text-[var(--color-text)] mb-3">
+                    {item.client}
+                  </h3>
+
+                  <div className="space-y-3 text-xs sm:text-sm">
+                    <div>
+                      <span className="font-semibold text-[var(--color-text)] block mb-1">
+                        Desafío:
+                      </span>
+                      <p className="text-[var(--color-text-muted)] leading-relaxed">
+                        {item.problem}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-[var(--color-border)]/50">
+                      <span className="font-semibold text-[var(--color-primary)] flex items-center gap-1 mb-1">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        Solución Implementada:
+                      </span>
+                      <p className="text-[var(--color-text-muted)] leading-relaxed">
+                        {item.solution}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </RevealOnScroll>
           ))}
         </div>
       </div>

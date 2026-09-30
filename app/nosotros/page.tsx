@@ -8,6 +8,8 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { IconBadge } from "@/components/ui/IconBadge";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getNosotrosContent } from "@/content/nosotros";
 import {
@@ -82,39 +84,43 @@ export default function NosotrosPage() {
               {content.dualSpecialization.pillars.map((pilar, idx) => {
                 const isTech = idx === 0;
                 return (
-                  <div
-                    key={idx}
-                    className="p-8 sm:p-10 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/40 transition-[border-color,box-shadow] duration-300 hover:shadow-xl flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="w-12 h-12 rounded-2xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-6">
-                        {isTech ? <Cpu className="w-6 h-6" /> : <TrendingUp className="w-6 h-6" />}
+                  <RevealOnScroll key={idx} index={idx}>
+                    <div className="h-full p-8 sm:p-10 rounded-3xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-primary)]/40 transition-[border-color,box-shadow] duration-300 hover:shadow-xl flex flex-col justify-between">
+                      <div>
+                        {/* reveal=false: esta tarjeta ya revela completa vía el
+                            RevealOnScroll externo — evita un segundo fade anidado. */}
+                        <IconBadge
+                          icon={isTech ? Cpu : TrendingUp}
+                          size="md"
+                          reveal={false}
+                          className="mb-6"
+                        />
+
+                        <h3
+                          className="text-2xl font-medium tracking-tight mb-4 text-[var(--color-text)]"
+                          style={{ fontFamily: "var(--font-kanit), sans-serif" }}
+                        >
+                          {pilar.name}
+                        </h3>
+
+                        <p className="text-sm sm:text-base text-[var(--color-text-muted)] leading-relaxed mb-8">
+                          {pilar.description}
+                        </p>
                       </div>
 
-                      <h3
-                        className="text-2xl font-medium tracking-tight mb-4 text-[var(--color-text)]"
-                        style={{ fontFamily: "var(--font-kanit), sans-serif" }}
-                      >
-                        {pilar.name}
-                      </h3>
-
-                      <p className="text-sm sm:text-base text-[var(--color-text-muted)] leading-relaxed mb-8">
-                        {pilar.description}
-                      </p>
+                      <div className="pt-6 border-t border-[var(--color-border)]">
+                        <Button
+                          variant="secondary"
+                          size="md"
+                          href={pilar.href}
+                          icon={<ArrowRight className="w-4 h-4" />}
+                          iconPosition="right"
+                        >
+                          {isTech ? "Ver Tecnología & Automatización" : "Ver Marketing Digital"}
+                        </Button>
+                      </div>
                     </div>
-
-                    <div className="pt-6 border-t border-[var(--color-border)]">
-                      <Button
-                        variant="secondary"
-                        size="md"
-                        href={pilar.href}
-                        icon={<ArrowRight className="w-4 h-4" />}
-                        iconPosition="right"
-                      >
-                        {isTech ? "Ver Tecnología & Automatización" : "Ver Marketing Digital"}
-                      </Button>
-                    </div>
-                  </div>
+                  </RevealOnScroll>
                 );
               })}
             </div>
@@ -135,23 +141,22 @@ export default function NosotrosPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {content.philosophy.values.map((val, idx) => (
-                <div
-                  key={idx}
-                  className="p-8 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)]"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[var(--color-primary)]/10 flex items-center justify-center mb-5">
-                    {valueIcons[idx % valueIcons.length]}
+                <RevealOnScroll key={idx} index={idx}>
+                  <div className="h-full p-8 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)]">
+                    <div className="w-10 h-10 rounded-xl bg-[var(--color-primary)]/10 flex items-center justify-center mb-5">
+                      {valueIcons[idx % valueIcons.length]}
+                    </div>
+                    <h3
+                      className="text-lg font-semibold text-[var(--color-text)] mb-3"
+                      style={{ fontFamily: "var(--font-kanit), sans-serif" }}
+                    >
+                      {val.title}
+                    </h3>
+                    <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                      {val.description}
+                    </p>
                   </div>
-                  <h3
-                    className="text-lg font-semibold text-[var(--color-text)] mb-3"
-                    style={{ fontFamily: "var(--font-kanit), sans-serif" }}
-                  >
-                    {val.title}
-                  </h3>
-                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-                    {val.description}
-                  </p>
-                </div>
+                </RevealOnScroll>
               ))}
             </div>
           </div>

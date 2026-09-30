@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 interface FAQItem {
   question: string;
@@ -42,32 +43,34 @@ export function FAQAccordion({ title, subtitle, items }: FAQAccordionProps) {
           {items.map((item, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <div
-                key={item.question}
-                className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-colors"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggle(idx)}
-                  className="w-full flex items-center justify-between p-5 sm:p-6 text-left focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[var(--color-primary)] cursor-pointer"
-                  aria-expanded={isOpen}
-                >
-                  <span className="text-sm sm:text-base font-bold text-[var(--color-text)] pr-4">
-                    {item.question}
-                  </span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-[var(--color-text-muted)] shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-[var(--color-primary)]" : ""
-                    }`}
-                  />
-                </button>
+              <RevealOnScroll key={item.question} index={idx}>
+                <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden transition-colors">
+                  <button
+                    type="button"
+                    onClick={() => toggle(idx)}
+                    // hover visible: antes esta fila no daba ninguna señal al pasar el
+                    // cursor (solo cursor-pointer) — único botón interactivo del sitio
+                    // sin retroalimentación de hover.
+                    className="w-full flex items-center justify-between p-5 sm:p-6 text-left hover:bg-[var(--color-bg)]/60 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[var(--color-primary)] cursor-pointer"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="text-sm sm:text-base font-bold text-[var(--color-text)] pr-4">
+                      {item.question}
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-[var(--color-text-muted)] shrink-0 transition-transform duration-200 ${
+                        isOpen ? "rotate-180 text-[var(--color-primary)]" : ""
+                      }`}
+                    />
+                  </button>
 
-                {isOpen && (
-                  <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed border-t border-[var(--color-border)]/40 mt-1 animate-in fade-in duration-150">
-                    <p className="pt-3">{item.answer}</p>
-                  </div>
-                )}
-              </div>
+                  {isOpen && (
+                    <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 text-xs sm:text-sm text-[var(--color-text-muted)] leading-relaxed border-t border-[var(--color-border)]/40 mt-1 animate-in fade-in duration-150">
+                      <p className="pt-3">{item.answer}</p>
+                    </div>
+                  )}
+                </div>
+              </RevealOnScroll>
             );
           })}
         </div>

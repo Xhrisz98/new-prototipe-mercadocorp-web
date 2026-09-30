@@ -35,6 +35,12 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.75);
   --shadow-card-hover: 0 2px 4px rgba(0, 34, 210, 0.07), 0 18px 44px rgba(0, 34, 210, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  /* Duraciones ya en uso real (Button, Card, Navbar/menús, PhotoCard/ProductShowcase)
+     formalizadas como variable — no cambian ningún valor existente, ver lib/design-tokens.ts. */
+  --duration-hover: 200ms;
+  --duration-card: 300ms;
+  --duration-menu: 150ms;
+  --duration-slow: 500ms;
 }
 
 .dark {
