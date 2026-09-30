@@ -45,6 +45,15 @@ export function Hero({
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 75]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.4, 0]);
   const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
+  // Parallax de fondo de los dos glows. Ligado al scroll (no al cursor): DataFlowCore
+  // ya reacciona al puntero, y una segunda capa siguiendo al cursor competiría con la
+  // pieza 3D. El contenido baja 75px en el recorrido del hero; los glows bajan más
+  // (se perciben más lentos = más lejos), el grande y más difuso más que el chico.
+  // prefers-reduced-motion: rango [0, 0] (sin desplazamiento). Se mantiene el mismo
+  // `style` en ambos casos — alternar entre style/undefined según useReducedMotion
+  // (null en el servidor) desalinearía los atributos al hidratar.
+  const glowFarY = useTransform(scrollYProgress, [0, 1], [0, prefersReducedMotion ? 0 : 180]);
+  const glowNearY = useTransform(scrollYProgress, [0, 1], [0, prefersReducedMotion ? 0 : 110]);
 
   return (
     <section
@@ -59,15 +68,30 @@ export function Hero({
       )}
 
       {/* Iluminación Atmosférica estilo CollectUI (Multi-capa Radial Glow).
-          En layout a la izquierda el brillo acompaña al visual del lado derecho. */}
-      <div
-        className={`absolute ${isCenter ? "top-1/3 left-1/2" : "top-1/2 left-[72%]"} -translate-x-1/2 -translate-y-1/2 w-[650px] md:w-[900px] h-[400px] md:h-[500px] bg-[var(--color-primary)]/15 dark:bg-[var(--color-primary)]/20 rounded-full blur-[130px] pointer-events-none z-0`}
+          En layout a la izquierda el brillo acompaña al visual del lado derecho.
+          Cada glow va en su propio contenedor de parallax: el desplazamiento vive en
+          el contenedor y el glow conserva intacto su centrado con -translate-*.
+          prefers-reduced-motion: sin desplazamiento (drift continuo ligado al scroll,
+          no respuesta a una acción puntual) — mismo criterio que DataFlowCore; ver
+          glowFarY/glowNearY. */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none z-0 will-change-transform"
+        style={{ y: glowFarY }}
         aria-hidden="true"
-      />
-      <div
-        className={`absolute ${isCenter ? "top-1/4 left-1/2" : "top-[52%] left-[74%]"} -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] h-[250px] bg-[#3F5FFF]/20 dark:bg-[#3F5FFF]/25 rounded-full blur-[90px] pointer-events-none z-0`}
+      >
+        <div
+          className={`absolute ${isCenter ? "top-1/3 left-1/2" : "top-1/2 left-[72%]"} -translate-x-1/2 -translate-y-1/2 w-[650px] md:w-[900px] h-[400px] md:h-[500px] bg-[var(--color-primary)]/15 dark:bg-[var(--color-primary)]/20 rounded-full blur-[130px]`}
+        />
+      </motion.div>
+      <motion.div
+        className="absolute inset-0 pointer-events-none z-0 will-change-transform"
+        style={{ y: glowNearY }}
         aria-hidden="true"
-      />
+      >
+        <div
+          className={`absolute ${isCenter ? "top-1/4 left-1/2" : "top-[52%] left-[74%]"} -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] h-[250px] bg-[#3F5FFF]/20 dark:bg-[#3F5FFF]/25 rounded-full blur-[90px]`}
+        />
+      </motion.div>
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}
@@ -138,7 +162,9 @@ export function Hero({
               href={ctaPrimary.href}
               icon={<ArrowRight className="w-4 h-4" />}
               iconPosition="right"
-              className="shadow-xl hover:shadow-[0_0_30px_rgba(0,34,210,0.35)] transition-shadow duration-300"
+              // Sin transition-shadow: pisaba el transition-property de Button (que ya
+              // incluye box-shadow y transform), y el hover:scale saltaba sin animar.
+              className="shadow-xl hover:shadow-[0_0_30px_rgba(0,34,210,0.35)] duration-300"
             >
               {ctaPrimary.label}
             </Button>
@@ -148,7 +174,9 @@ export function Hero({
                 variant="secondary"
                 size="lg"
                 href={ctaSecondary.href}
-                className="backdrop-blur-md bg-[var(--color-text)]/5 dark:bg-white/5 border border-[var(--color-text)]/15 dark:border-white/20 text-[var(--color-text)] hover:bg-[var(--color-text)]/10 dark:text-white dark:hover:bg-white/10 transition-colors duration-300"
+                // Sin transition-colors: mismo motivo que el CTA primario (el
+                // transition-property de Button ya cubre fondo, borde y transform).
+                className="backdrop-blur-md bg-[var(--color-text)]/5 dark:bg-white/5 border border-[var(--color-text)]/15 dark:border-white/20 text-[var(--color-text)] hover:bg-[var(--color-text)]/10 dark:text-white dark:hover:bg-white/10 duration-300"
               >
                 {ctaSecondary.label}
               </Button>

@@ -51,7 +51,17 @@ export const Button: React.FC<ButtonProps> = ({
       "bg-transparent text-[var(--color-text)] hover:bg-[var(--color-border)]/30 focus:ring-[var(--color-text-muted)]",
   };
 
-  const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`.trim();
+  // Hover lift: 1.02 (rango sutil acordado 1.01-1.03), acompaña al nudge del ícono.
+  // Solo en las variantes píldora — `ghost` es un botón de texto con tinte de fondo,
+  // y escalar texto suelto se lee como temblor, no como profundidad. motion-safe:
+  // con prefers-reduced-motion el botón conserva solo el cambio de color/sombra.
+  // motion-safe:active repite el press de la base: el hover vive dentro del media
+  // query de motion-safe, que el CSS emite después de `active:` y le ganaba — sin
+  // esto, al presionar el botón quedaba en 1.02 en vez de hundirse a 0.98.
+  const hoverLift =
+    variant === "ghost" ? "" : "motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]";
+
+  const combinedClasses = `${baseStyles} ${hoverLift} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`.trim();
 
   const content = (
     <>

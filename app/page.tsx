@@ -127,6 +127,8 @@ export default function HomePage() {
                     isMind={pillar.isMind}
                     image={pillarImages[idx]}
                     index={idx}
+                    // Cursor-tilt: exclusivo de estas 3 tarjetas (Bloque B).
+                    tilt
                   />
                 </div>
               ))}
