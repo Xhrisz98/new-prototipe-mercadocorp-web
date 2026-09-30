@@ -6,10 +6,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
-import { AgentSphere } from "@/components/three/AgentSphere";
 import { ProductShowcase } from "@/components/ui/ProductShowcase";
 import { useLocale } from "@/components/i18n/LocaleProvider";
-import { useTheme } from "@/components/theme/ThemeProvider";
 import { getMindContent } from "@/content/mind";
 import { WhatsAppLogo } from "@/components/ui/WhatsAppLogo";
 import {
@@ -25,9 +23,7 @@ import {
 
 export default function MindPage() {
   const { locale } = useLocale();
-  const { theme } = useTheme();
   const content = getMindContent(locale);
-  const isDark = theme === "dark";
 
   const moduleIcons = [
     <Layers key="0" className="w-5 h-5 text-[var(--color-ai)]" />,
@@ -98,11 +94,38 @@ export default function MindPage() {
                 </div>
               </div>
 
-              {/* Columna Visual 3D: AgentSphere */}
+              {/* Columna Visual: video real del producto (§5.10 — reemplaza a AgentSphere).
+                  Mismo lenguaje visual que ProductShowcase (panel con marco, barra tipo
+                  navegador, sombra). El video trae su propio fondo blanco horneado (mp4
+                  no soporta alfa); ese blanco vive solo dentro del marco — el resto del
+                  hero sigue el tema activo. */}
               <div className="lg:col-span-5 flex justify-center items-center">
-                <div className="w-full max-w-[480px] rounded-3xl p-2 bg-[var(--color-surface)]/60 border border-[var(--color-ai)]/20 shadow-2xl backdrop-blur-sm relative">
-                  <AgentSphere isDark={isDark} />
-                  <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border)] pt-3">
+                <div className="w-full max-w-[480px] rounded-3xl p-2 bg-[var(--color-surface)] border border-[var(--color-ai)]/20 shadow-2xl overflow-hidden">
+                  <div className="flex items-center justify-between px-3 py-2 bg-[var(--color-bg)]/80 rounded-t-xl border-b border-[var(--color-border)] mb-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-ai)]/70" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-ai)]/50" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-ai)]/30" />
+                    </div>
+                    <span className="text-[10px] sm:text-xs text-[var(--color-text-muted)] font-medium">
+                      mind.ec / live
+                    </span>
+                    <div className="w-8" />
+                  </div>
+
+                  <div className="relative aspect-video w-full overflow-hidden rounded-b-xl bg-white">
+                    <video
+                      src="/videos/mind-hero.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      aria-hidden="true"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between px-3 py-3 text-xs text-[var(--color-text-muted)] border-t border-[var(--color-border)] bg-[var(--color-surface)]">
                     <span className="flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-[var(--color-ai)] animate-pulse" />
                       Mind Engine Online

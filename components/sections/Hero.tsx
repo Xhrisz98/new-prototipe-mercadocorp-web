@@ -51,7 +51,7 @@ export function Hero({
       ref={containerRef}
       className="relative w-full pt-12 pb-14 md:pt-18 md:pb-24 overflow-hidden flex flex-col justify-center min-h-[calc(100vh-5rem)]"
     >
-      {/* Canvas 3D de fondo (ParticleNetwork o AgentSphere) */}
+      {/* Canvas 3D de fondo (ej. DataFlowCore en Inicio, MarketingFunnel en Marketing) */}
       {threeCanvas && (
         <div className="absolute inset-0 z-0 pointer-events-none opacity-85 dark:opacity-95">
           {threeCanvas}

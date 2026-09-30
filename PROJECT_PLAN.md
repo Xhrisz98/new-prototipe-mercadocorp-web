@@ -48,7 +48,7 @@ components/
   ui/                        # Button (pill), Card, Badge, FormField, ProductShowcase (mockup de navegador para capturas de producto), FloatingWhatsAppQR (widget flotante global), InteractiveTreeQR (QR + WhatsApp), ScrollProgress (barra de progreso de scroll)
   layout/                    # Navbar (con toggle tema + LanguageSelector), Footer
   sections/                  # Hero, PillarCard, FAQAccordion, CaseStudyCard, StatsStrip, TrustStrip, ReasoningBlock, ServiceNodeDiagram (2D, diagrama de nodos interactivo en Tecnología)
-  three/                     # DataFlowCore (Hero Inicio — espiral 3D de partículas de luz en flujo), AgentSphere (Mind), TreeQRMorph + TreeQRMorphScene (transición de partículas QR↔árbol en InteractiveTreeQR), MarketingFunnel (hero de Marketing Digital, con <Html> de drei para etiquetas de nodo) — cada uno "use client" con fallback estático mobile
+  three/                     # DataFlowCore (Hero Inicio — espiral 3D de partículas de luz en flujo), TreeQRMorph + TreeQRMorphScene (transición de partículas QR↔árbol en InteractiveTreeQR), MarketingFunnel (hero de Marketing Digital, con <Html> de drei para etiquetas de nodo) — cada uno "use client" con fallback estático mobile. AgentSphere se retiró en §5.10: el hero de Mind usa un video real (public/videos/mind-hero.mp4) en vez de una pieza 3D
 lib/
   design-tokens.ts           # Todos los colores/tipografía de la sección 4, como constantes — nunca hardcodear hex sueltos en componentes
 content/
@@ -102,7 +102,7 @@ export const fonts = {
 
 **Regla no negociable:** el logo de MercadoCorp se renderiza siempre en sus colores oficiales (`#0022D2`, blanco o negro) — nunca recoloreado para adaptarse al tema oscuro ni a ninguna sección. Esto está explícito en el manual de marca como uso incorrecto.
 
-**Regla del acento verde (`#04E7AF`):** grep del código antes de dar por terminada cualquier página — si `04E7AF` aparece fuera de `mind/page.tsx`, `components/three/AgentSphere.tsx`, o cualquier badge/mención explícita de "Mind"/"agente de IA", es un error de implementación.
+**Regla del acento verde (`#04E7AF`):** grep del código antes de dar por terminada cualquier página — si `04E7AF` aparece fuera de `mind/page.tsx` o cualquier badge/mención explícita de "Mind"/"agente de IA", es un error de implementación.
 
 ## 5. Especificación por página
 
@@ -115,7 +115,7 @@ Cada página usa el copy exacto de `copywriting-nueva-web-mercadocorp.md` (títu
 
 **Casos especiales:**
 - **Inicio (`/`)** — única página con el componente Three.js `DataFlowCore` en el hero: espiral 3D de miles de partículas de luz en flujo, transmitiendo velocidad/proceso de datos (no una forma biológica ni un diagrama de red). Posicionada asimétricamente hacia el lado derecho, dejando el tercio izquierdo despejado para el bloque de texto del H1. En reposo (0% scroll), rotación de la espiral en azules de marca; al hacer scroll dentro del rango del hero, la espiral acelera/se contrae y el núcleo se enciende en verde `#04E7AF` únicamente en ese estado final. Reemplaza a `NeuralNetworkCore` (red de nodos, descartada por no transmitir suficiente sensación de "tecnología/velocidad")
-- **Mind (`/mind`)** — único lugar del sitio con el acento verde `#04E7AF` y el componente `AgentSphere`; el CTA principal es un link externo `target="_blank"` a `mind.ec`/`crm.mind.ec`, no un formulario interno
+- **Mind (`/mind`)** — único lugar del sitio con el acento verde `#04E7AF`; el CTA principal es un link externo `target="_blank"` a `mind.ec`/`crm.mind.ec`, no un formulario interno. **El hero usa un video real (ver §5.10) en vez de `AgentSphere`** — `AgentSphere.tsx` se elimina del repo una vez confirmado el reemplazo
 - **Casos de Éxito (`/casos-de-exito`)** — construir con datos placeholder tipados (`content/casos-de-exito.ts` con array vacío o de ejemplo comentado) hasta que se confirme la lista definitiva de clientes — **no inventar clientes ni cifras**
 - **Nosotros (`/nosotros`)** — la sección "Trayectoria" queda como placeholder visual (título + nota "Próximamente") hasta tener hitos reales
 - **Políticas de Privacidad / Términos** — contenido legal placeholder con nota `<!-- TODO: legal review -->`, no generar texto legal por IA sin revisión de un humano
@@ -187,7 +187,7 @@ Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como 
 **Concepto v3, el definitivo:** dos estados de reposo simples y seguros, conectados por **una animación de transición continua tipo partículas** (los módulos del QR se despegan del plano 2D y migran para construir el árbol, y viceversa) — nunca un corte ni un giro de tarjeta.
 
 - **Estado de reposo A (QR):** la imagen plana real ya validada (`tree-qr-scannable-blue.png`) — sin cambios, sin riesgo, es un `<img>` normal
-- **Estado de reposo B (árbol):** escena Three.js puramente decorativa — el árbol NO necesita codificar el QR ni mantener ningún ángulo de cámara especial; puede tener idle rotation, bloom, la libertad visual que se quiera, igual que `AgentSphere`/`DataFlowCore`
+- **Estado de reposo B (árbol):** escena Three.js puramente decorativa — el árbol NO necesita codificar el QR ni mantener ningún ángulo de cámara especial; puede tener idle rotation, bloom, la libertad visual que se quiera, igual que `DataFlowCore`
 - **Transición A→B (al tocar el QR):** se reemplaza el `<img>` por un canvas Three.js que arranca con partículas posicionadas exactamente en la cuadrícula de módulos del QR (mismas posiciones y colores que la imagen real, para que el arranque de la animación sea visualmente idéntico al estado A) y anima esas partículas migrando hacia las posiciones del tronco/ramas/follaje del árbol — es la misma "materia" reorganizándose, no una escena nueva apareciendo de la nada
 - **Transición B→A (al tocar el árbol):** el proceso se revierte — las partículas del árbol migran de vuelta a la cuadrícula plana del QR; al llegar, el canvas se retira y se vuelve a mostrar el `<img>` real y validado (nunca se deja el QR "en versión partículas" como estado de reposo — el reposo siempre es la imagen real)
 - **Ningún requisito de escaneabilidad durante la transición ni en el estado B** — solo el estado de reposo A (la imagen real) necesita ser escaneable, y esa imagen nunca se modifica
@@ -204,7 +204,7 @@ Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como 
 
 ## 5.9 MarketingFunnel — hero de la página Marketing Digital (hub) — v3
 
-`components/three/MarketingFunnel.tsx` — cuarta pieza 3D del sitio (junto a `DataFlowCore`, `AgentSphere`, `TreeQRMorph`).
+`components/three/MarketingFunnel.tsx` — una de las piezas 3D del sitio (junto a `DataFlowCore` y `TreeQRMorph`; `AgentSphere` se retiró del hero de Mind en §5.10).
 
 **Historial:** v1 (rotación autónoma sin scroll, nodos sin etiqueta) se descartó por falta de legibilidad. v2 agregó etiquetas y activación secuencial pero mantenía los 4 nodos **ocultos/inactivos** en el estado inicial (0% scroll). v3 corrige esto: los nodos son visibles desde el principio, y lo que cambia con el scroll es su **posición**, no su existencia.
 
@@ -220,6 +220,16 @@ Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como 
 - **Composición:** asimétrica, sin cruzar el H1 (ya resuelto en la implementación actual con `align="left"` en el Hero de Marketing)
 - **Accesibilidad:** respeta `prefers-reduced-motion` — salta directo al estado 100% (nodos ya ubicados en posición final), sin animación de viaje
 - **Mobile:** fallback estático compacto — los 4 nodos visibles sin espaciado vertical excesivo entre ellos ni entre la sección y el resto del hero (CTA/indicador de scroll); el usuario no debería necesitar scrollear de más para ver el conjunto completo en una pantalla de 375px de ancho. Misma composición conceptual que desktop (nodos ya visibles desde el inicio, sin necesidad de interacción para verlos todos)
+
+## 5.10 Hero de Mind — video real reemplaza a AgentSphere
+
+**Decisión:** `AgentSphere` (esfera de partículas 3D) se reemplaza en el hero de Mind por un video real del producto, heredado del sitio anterior (`Mind-Animacion-BG.mp4`).
+
+- **Auto-alojado, nunca enlazado al dominio viejo:** el video se descarga y se sirve desde `public/videos/` del proyecto nuevo — nunca `src` apuntando a `mercadocorp.ec` en producción (dependencia externa innecesaria y frágil)
+- **Contenido dentro de un panel/tarjeta blanca contenida** (mismo lenguaje visual que el mockup de navegador de `ProductShowcase`) — el video tiene fondo transparente pero necesita un fondo blanco para verse bien, así que ese blanco vive **dentro del marco del panel**, no como fondo de todo el hero. El resto del hero (texto, fondo general) sigue respetando el tema claro/oscuro activo — nunca se fuerza toda la página a blanco
+- **Atributos del video:** `autoplay muted loop playsInline` (equivalente a como corría en el sitio viejo), sin controles visibles
+- **`AgentSphere.tsx` se elimina del repo** una vez confirmado visualmente el reemplazo — no se mantiene como código muerto en paralelo (mismo criterio aplicado a todas las iteraciones descartadas de piezas 3D en este documento)
+- **Responsive:** el panel del video se adapta de forma fluida a mobile/tablet/desktop, manteniendo su proporción y sin desbordar ni verse recortado en ningún breakpoint
 
 ## 6. Fases de construcción (pensadas para el Manager View de Antigravity — varios agentes en paralelo)
 
@@ -255,7 +265,7 @@ Decisión: `PillarCard` y `PainBlock` usan fotografía de stock (Unsplash) como 
 - [ ] `#04E7AF` solo aparece en contexto de Mind/agentes (verificado por grep)
 - [ ] El logo nunca se renderiza en un color distinto a los oficiales del manual
 - [ ] Cada página de servicio tiene como mínimo los 2-3 links internos definidos en su copy
-- [ ] `DataFlowCore` (Inicio), `AgentSphere` (Mind), `TreeQRMorph` (Contacto) y `MarketingFunnel` (Marketing) tienen fallback estático en viewport < 768px
+- [ ] `DataFlowCore` (Inicio), `TreeQRMorph` (Contacto) y `MarketingFunnel` (Marketing) tienen fallback estático en viewport < 768px — Mind ya no tiene pieza 3D (§5.10: video real, sin motor 3D que degradar)
 - [ ] Las 4 piezas 3D liberan su contexto WebGL correctamente al desmontarse (cleanup en `useEffect`) — sin `THREE.WebGLRenderer: Context Lost` en consola al navegar entre páginas
 - [ ] Lighthouse ≥ 90 en Performance y Accesibilidad en Inicio y Mind (páginas con Three.js)
 - [ ] Ningún texto de Casos de Éxito o Nosotros→Trayectoria inventa cifras o clientes no confirmados

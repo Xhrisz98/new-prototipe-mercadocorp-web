@@ -3,8 +3,8 @@
 import { useSyncExternalStore } from "react";
 
 // Mismo patrón de detección síncrona vía matchMedia que ya usan DataFlowCore/
-// AgentSphere para mobile: useSyncExternalStore evita el mismatch de hidratación
-// que dejaría un useState(getSnapshot) + useEffect.
+// MarketingFunnel/TreeQRMorph para mobile: useSyncExternalStore evita el mismatch
+// de hidratación que dejaría un useState(getSnapshot) + useEffect.
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 function subscribe(onChange: () => void) {
