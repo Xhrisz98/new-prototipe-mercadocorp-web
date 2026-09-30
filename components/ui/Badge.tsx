@@ -17,8 +17,11 @@ export const Badge: React.FC<BadgeProps> = ({
   dot = false,
   children,
 }) => {
+  // max-w-full: con shrink-0 un texto largo (ej. el badge del hero de Contacto en
+  // ruso, 415px) no podía encogerse ni partirse y desbordaba el viewport en mobile.
+  // El tope lo limita al contenedor y el texto hace wrap; sin efecto si ya cabe.
   const baseStyles =
-    "inline-flex items-center font-medium rounded-full tracking-wide shrink-0";
+    "inline-flex items-center font-medium rounded-full tracking-wide shrink-0 max-w-full";
 
   const sizeStyles = {
     sm: "px-2.5 py-0.5 text-[11px] gap-1.5",

@@ -25,26 +25,26 @@ export const Logo: React.FC<LogoProps> = ({
       aria-label="MercadoCorp - Inicio"
     >
       {/* Versión para Tema Claro */}
-      <div className={`relative ${variant === "white" ? "hidden" : "block dark:hidden"}`}>
+      <div className={`relative min-w-0 ${variant === "white" ? "hidden" : "block dark:hidden"}`}>
         <Image
           src="/images/logo-mercadocorp.webp"
           alt="MercadoCorp"
           width={width}
           height={height}
           priority
-          className="h-auto w-auto max-h-[38px] object-contain"
+          className="h-auto w-auto max-h-[38px] max-w-full object-contain"
         />
       </div>
 
       {/* Versión para Tema Oscuro */}
-      <div className={`relative ${variant === "white" ? "block" : "hidden dark:block"}`}>
+      <div className={`relative min-w-0 ${variant === "white" ? "block" : "hidden dark:block"}`}>
         <Image
           src="/images/logo-mercadocorp-white.png"
           alt="MercadoCorp"
           width={width}
           height={height}
           priority
-          className="h-auto w-auto max-h-[38px] object-contain"
+          className="h-auto w-auto max-h-[38px] max-w-full object-contain"
         />
       </div>
     </Link>

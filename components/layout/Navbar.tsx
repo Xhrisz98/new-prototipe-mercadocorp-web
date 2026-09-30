@@ -138,8 +138,12 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logotipo Oficial */}
-          <div className="flex items-center shrink-0 pr-4">
-            <Logo width={180} height={38} />
+          {/* Bajo 340px la fila (logo 145 + pr 16 + controles 171) medía 332 en 288
+              disponibles. El logo era el único bloque shrink-0 de ancho fijo y el de
+              más margen: ahora puede encoger (min-w-0 + max-w-full en Logo) y pr/gap
+              se reducen solo en ese rango; desde 340px nada cambia. */}
+          <div className="flex items-center min-w-0 pr-4 max-[340px]:pr-2">
+            <Logo width={180} height={38} className="min-w-0" />
           </div>
 
           {/* Navegación Desktop con Mega-menús / Dropdowns */}
@@ -357,7 +361,7 @@ export function Navbar() {
 
           {/* Botón Menú Móvil (incluye el rango 1024-1279px, ya que el nav
               desktop completo no aparece hasta xl) */}
-          <div className="flex items-center gap-2 xl:hidden">
+          <div className="flex items-center shrink-0 gap-2 max-[340px]:gap-1 xl:hidden">
             <LanguageSelector />
             <ThemeToggle />
             <button

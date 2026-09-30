@@ -385,7 +385,7 @@ export default function ContactoPage() {
                   <h4 className="text-sm font-semibold text-[var(--color-text)] mb-4">
                     {content.sidebar.socialTitle}
                   </h4>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-3">
                     <a
                       href="https://linkedin.com/company/mercadocorp"
                       target="_blank"
