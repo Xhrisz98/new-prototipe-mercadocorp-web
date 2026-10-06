@@ -390,8 +390,20 @@ A diferencia de una productora de eventos tradicional, integramos la experiencia
 **H1:** No creemos en soluciones mágicas. Creemos en construir, paso a paso.
 **Subheadline:** Nacimos para integrar, innovar y escalar junto a empresas que están dispuestas a construir un sistema real, no una campaña puntual.
 
-### Historia (se mantiene la estructura, ajuste de enfoque)
-De agencia enfocada en marketing digital, evolucionamos hacia una consultora tecnológica: hoy estructuramos la tecnología y la automatización como el eje real del crecimiento de nuestros clientes, con el marketing digital como el complemento que amplifica ese sistema una vez que ya funciona.
+### Historia
+**Etiqueta:** Sobre nosotros · **Título:** Nuestra historia
+
+*Texto del sitio actual (mercadocorp.ec/nosotros), conservado casi literal. Único cambio: la cola del tercer párrafo, que fija el orden "tecnología como base, marketing como complemento". La marca deportiva queda sin nombre, igual que en el sitio actual.*
+
+MercadoCorp surge como una respuesta estratégica a una necesidad concreta del mercado: estructurar el marketing como un eje de crecimiento empresarial, no únicamente como una herramienta de comunicación.
+
+Nuestra trayectoria comenzó impulsando a una marca referente del sector deportivo en su proceso de profesionalización. Aplicamos una estructura de negocio donde la planificación y el rendimiento dictan cada movimiento, transformando su visión en resultados tangibles.
+
+A partir de la sólida experiencia de sus socios fundadores en gestión corporativa, ampliamos nuestro alcance hacia el segmento B2B. Hoy atendemos a organizaciones que buscan evolucionar su modelo comercial mediante una transformación digital estructurada, medible y alineada a objetivos estratégicos, con la tecnología y la automatización como base y el marketing digital como complemento.
+
+*Pendiente de aprobación (no incluida): una frase puente opcional sobre cómo la operación de los clientes llevó a la automatización, agentes de IA y software a la medida. Es una afirmación sobre la historia de la empresa, solo se agrega si el usuario la confirma.*
+
+**Imagen:** foto temporal, sin personas (arquitectura corporativa de vidrio en tonos azules, en línea con la imagen del manual de marca) con `TODO: reemplazar con la foto del equipo` (§5.7 del plan). Alt descriptivo.
 
 ### Especialización Dual
 **Tecnología** — Automatización, agentes de IA, CRMs y software a medida.
@@ -401,7 +413,21 @@ De agencia enfocada en marketing digital, evolucionamos hacia una consultora tec
 Estrategia Integral · Innovación Constante · Sinergia y Colaboración *(se mantienen los 3 valores del sitio actual, ya que aplican igual de bien al nuevo posicionamiento)*.
 
 ### Trayectoria
-*(Sección para hitos reales — pendiente de que confirmes fechas/hitos concretos a incluir)*
+**Etiqueta:** Nuestra trayectoria · **Título:** Evolución y proyección (con "proyección" resaltada en el azul de marca)
+
+Pestañas accesibles por teclado, pestaña activa por defecto: **2026**. Cada pestaña lleva una insignia de estado para que se lea como visión o plan y no como logro.
+
+**2025** — *pendiente de contenido real.* No se inventan hitos. La pestaña se agrega cuando haya texto; la estructura de datos admite N pestañas.
+
+**2026 · Visión** (texto del sitio actual, conservado literal)
+- **Especialización sectorial:** Liderazgo en sectores industriales que demandan procesos digitales complejos, automatización avanzada y RevOps.
+- **Expansión Latam:** Apertura de operaciones regionales, exportando nuestro modelo de consultoría estratégica a nuevos mercados latinoamericanos.
+
+*Estado confirmado por el usuario: la expansión Latam todavía no ocurrió, por eso se presenta como visión y no como logro. Con el año por terminar, si no va a ocurrir en 2026, conviene moverla a 2027 (cambio de una línea en `content/nosotros.ts`). La especialización sectorial también es una visión: no está confirmada como logro.*
+
+**2027 · Proyección** (propuesta de copy, pendiente de aprobación del usuario)
+- **Mind a escala:** Llevar Mind, nuestro CRM con agente de IA, a más empresas: un producto propio, construido para crecer junto a sus clientes.
+- **Liderazgo local con dos pilares:** Consolidar nuestro posicionamiento en Ecuador integrando ambos pilares de la mano: tecnología y automatización como base, marketing digital como amplificador.
 
 **CTA de cierre:** `Conocer nuestro trabajo →` /casos-de-exito | `Hablemos →` /contacto
 
@@ -477,4 +503,4 @@ Cada página del sitio enlaza como mínimo a: (1) una página "hermana" del mism
 
 Ningún CTA de página de servicio apunta directo a Contacto sin antes ofrecer un link de "seguir navegando" (a Casos de Éxito o a otro servicio relacionado) — esto es lo que sostiene el tiempo en sitio antes de pedir la conversión.
 
-**Header oficial de `InternalLinksStrip`** (componente compartido, aparece en varias páginas): *"Antes de enviar, explore nuestro ecosistema"* — sentence case. Este texto fue redactado por el agente de implementación sin pasar por este documento; se aprueba aquí retroactivamente con esta capitalización como la versión oficial. Cualquier ocurrencia en el sitio (o su traducción EN/RU) debe coincidir con esta forma exacta.
+**Header oficial de `InternalLinksStrip`** (componente compartido, unificado en las 14 páginas): *"Antes de enviar, explore nuestro ecosistema"* — sentence case. Este texto fue redactado por el agente de implementación sin pasar por este documento; se aprueba aquí retroactivamente con esta capitalización como la ÚNICA versión oficial para todo el sitio. Las 9 variantes distintas encontradas en otras páginas ("Explorar Soluciones Relacionadas", "Servicios y Recursos Relacionados", etc.) quedan reemplazadas por esta — mismo criterio de consistencia que ya aplicamos a `RevealOnScroll`, `Button` y la disciplina de color: un componente compartido, un solo texto, no una variante por página. Cualquier ocurrencia en el sitio (o su traducción EN/RU) debe coincidir con esta forma exacta.

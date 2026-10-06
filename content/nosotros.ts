@@ -17,8 +17,10 @@ export interface NosotrosPageContent {
     ctaSecondary: { label: string; href: string };
   };
   history: {
+    label: string;
     title: string;
-    body: string;
+    paragraphs: string[];
+    imageAlt: string;
   };
   dualSpecialization: {
     title: string;
@@ -37,9 +39,19 @@ export interface NosotrosPageContent {
     }[];
   };
   trajectory: {
-    title: string;
-    statusBadge: string;
-    note: string;
+    label: string;
+    titlePrefix: string;
+    /** Única palabra resaltada en azul de marca dentro del título. */
+    titleHighlight: string;
+    tablistLabel: string;
+    /** Arreglo de años — agregar 2025 cuando haya contenido real es añadir un
+     *  elemento aquí, sin tocar TrajectoryTabs. */
+    years: {
+      year: string;
+      /** Insignia de estado ("Visión"/"Proyección") — nunca se presenta como logro. */
+      badge: string;
+      milestones: { title: string; description: string }[];
+    }[];
   };
   finalCta: {
     title: string;
@@ -75,8 +87,14 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       },
     },
     history: {
-      title: "De Agencia Digital a Consultora Tecnológica B2B",
-      body: "De agencia enfocada en marketing digital, evolucionamos hacia una consultora tecnológica: hoy estructuramos la tecnología y la automatización como el eje real del crecimiento de nuestros clientes, con el marketing digital como el complemento que amplifica ese sistema una vez que ya funciona.",
+      label: "Sobre nosotros",
+      title: "Nuestra historia",
+      paragraphs: [
+        "MercadoCorp surge como una respuesta estratégica a una necesidad concreta del mercado: estructurar el marketing como un eje de crecimiento empresarial, no únicamente como una herramienta de comunicación.",
+        "Nuestra trayectoria comenzó impulsando a una marca referente del sector deportivo en su proceso de profesionalización. Aplicamos una estructura de negocio donde la planificación y el rendimiento dictan cada movimiento, transformando su visión en resultados tangibles.",
+        "A partir de la sólida experiencia de sus socios fundadores en gestión corporativa, ampliamos nuestro alcance hacia el segmento B2B. Hoy atendemos a organizaciones que buscan evolucionar su modelo comercial mediante una transformación digital estructurada, medible y alineada a objetivos estratégicos, con la tecnología y la automatización como base y el marketing digital como complemento.",
+      ],
+      imageAlt: "Fachada de vidrio azul de un edificio corporativo, vista en ángulo ascendente",
     },
     dualSpecialization: {
       title: "Especialización Dual",
@@ -112,9 +130,44 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       ],
     },
     trajectory: {
-      title: "Trayectoria y Cronología de Hitos",
-      statusBadge: "Próximamente",
-      note: "Estamos consolidando la documentación detallada y la línea de tiempo oficial de hitos de la compañía para publicarla aquí.",
+      label: "Nuestra trayectoria",
+      titlePrefix: "Evolución y ",
+      titleHighlight: "proyección",
+      tablistLabel: "Seleccionar año de trayectoria",
+      years: [
+        {
+          year: "2026",
+          badge: "Visión",
+          milestones: [
+            {
+              title: "Especialización sectorial",
+              description:
+                "Liderazgo en sectores industriales que demandan procesos digitales complejos, automatización avanzada y RevOps.",
+            },
+            {
+              title: "Expansión Latam",
+              description:
+                "Apertura de operaciones regionales, exportando nuestro modelo de consultoría estratégica a nuevos mercados latinoamericanos.",
+            },
+          ],
+        },
+        {
+          year: "2027",
+          badge: "Proyección",
+          milestones: [
+            {
+              title: "Mind a escala",
+              description:
+                "Llevar Mind, nuestro CRM con agente de IA, a más empresas: un producto propio, construido para crecer junto a sus clientes.",
+            },
+            {
+              title: "Liderazgo local con dos pilares",
+              description:
+                "Consolidar nuestro posicionamiento en Ecuador integrando ambos pilares de la mano: tecnología y automatización como base, marketing digital como amplificador.",
+            },
+          ],
+        },
+      ],
     },
     finalCta: {
       title: "¿Listo para construir un sistema real para su negocio?",
@@ -159,9 +212,16 @@ const contentData: Record<Locale, NosotrosPageContent> = {
         href: "/contacto",
       },
     },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
     history: {
-      title: "From Digital Agency to B2B Technology Consultancy",
-      body: "From an agency focused on digital marketing, we evolved into a technology consultancy: today we structure technology and automation as the true driver of our clients' growth, with digital marketing as the complement that amplifies that system once it's already working.",
+      label: "About us",
+      title: "Our story",
+      paragraphs: [
+        "MercadoCorp emerged as a strategic response to a concrete market need: structuring marketing as a driver of business growth, not merely as a communication tool.",
+        "Our journey began by guiding a leading sports-sector brand through its professionalization process. We applied a business structure where planning and performance dictate every move, turning its vision into tangible results.",
+        "Building on our founding partners' solid experience in corporate management, we expanded our reach into the B2B segment. Today we serve organizations seeking to evolve their business model through a structured, measurable digital transformation aligned with strategic objectives, with technology and automation as the foundation and digital marketing as the complement.",
+      ],
+      imageAlt: "Blue glass facade of a corporate building, seen from a low upward angle",
     },
     dualSpecialization: {
       title: "Dual Specialization",
@@ -196,10 +256,46 @@ const contentData: Record<Locale, NosotrosPageContent> = {
         },
       ],
     },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
     trajectory: {
-      title: "Trajectory and Timeline of Milestones",
-      statusBadge: "Coming Soon",
-      note: "We are consolidating the detailed documentation and official timeline of the company's milestones to publish here.",
+      label: "Our trajectory",
+      titlePrefix: "Evolution and ",
+      titleHighlight: "projection",
+      tablistLabel: "Select trajectory year",
+      years: [
+        {
+          year: "2026",
+          badge: "Vision",
+          milestones: [
+            {
+              title: "Sector specialization",
+              description:
+                "Leadership in industrial sectors that demand complex digital processes, advanced automation, and RevOps.",
+            },
+            {
+              title: "Latam expansion",
+              description:
+                "Opening regional operations, exporting our strategic consulting model to new Latin American markets.",
+            },
+          ],
+        },
+        {
+          year: "2027",
+          badge: "Projection",
+          milestones: [
+            {
+              title: "Mind at scale",
+              description:
+                "Bringing Mind, our CRM with an AI sales agent, to more companies: our own product, built to grow alongside our clients.",
+            },
+            {
+              title: "Local leadership with two pillars",
+              description:
+                "Consolidating our position in Ecuador by integrating both pillars together: technology and automation as the foundation, digital marketing as the amplifier.",
+            },
+          ],
+        },
+      ],
     },
     finalCta: {
       title: "Ready to build a real system for your business?",
@@ -244,9 +340,16 @@ const contentData: Record<Locale, NosotrosPageContent> = {
         href: "/contacto",
       },
     },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
     history: {
-      title: "От диджитал-агентства к B2B технологическому консалтингу",
-      body: "Начав как агентство цифрового маркетинга, мы превратились в технологическую консалтинговую компанию: сегодня мы выстраиваем технологии и автоматизацию как настоящую основу роста наших клиентов, а цифровой маркетинг служит дополнением, которое усиливает эту систему, когда она уже работает.",
+      label: "О нас",
+      title: "Наша история",
+      paragraphs: [
+        "MercadoCorp возникла как стратегический ответ на конкретную потребность рынка: выстроить маркетинг как инструмент роста бизнеса, а не только как средство коммуникации.",
+        "Наш путь начался с развития ведущего бренда в спортивной отрасли на этапе его профессионализации. Мы применили бизнес-структуру, где планирование и результативность определяют каждое решение, превращая видение клиента в конкретные результаты.",
+        "Опираясь на солидный опыт наших партнёров-основателей в корпоративном управлении, мы расширили присутствие в сегменте B2B. Сегодня мы работаем с организациями, которые стремятся развивать свою бизнес-модель через структурированную, измеримую цифровую трансформацию, согласованную со стратегическими целями, где технологии и автоматизация — основа, а цифровой маркетинг — дополнение.",
+      ],
+      imageAlt: "Голубой стеклянный фасад корпоративного здания, вид снизу вверх",
     },
     dualSpecialization: {
       title: "Двойная специализация",
@@ -281,10 +384,46 @@ const contentData: Record<Locale, NosotrosPageContent> = {
         },
       ],
     },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
     trajectory: {
-      title: "Путь развития и хронология этапов",
-      statusBadge: "Скоро",
-      note: "Мы завершаем подготовку подробной документации и официальной хронологии ключевых этапов компании для публикации здесь.",
+      label: "Наш путь развития",
+      titlePrefix: "Эволюция и ",
+      titleHighlight: "перспектива",
+      tablistLabel: "Выбрать год траектории",
+      years: [
+        {
+          year: "2026",
+          badge: "Видение",
+          milestones: [
+            {
+              title: "Отраслевая специализация",
+              description:
+                "Лидерство в промышленных секторах, которым необходимы сложные цифровые процессы, продвинутая автоматизация и RevOps.",
+            },
+            {
+              title: "Экспансия в Латинскую Америку",
+              description:
+                "Открытие региональных операций и экспорт нашей модели стратегического консалтинга на новые латиноамериканские рынки.",
+            },
+          ],
+        },
+        {
+          year: "2027",
+          badge: "Перспектива",
+          milestones: [
+            {
+              title: "Mind в масштабе",
+              description:
+                "Внедрение Mind — нашего CRM с ИИ-агентом продаж — в больше компаний: собственный продукт, созданный для роста вместе с клиентами.",
+            },
+            {
+              title: "Локальное лидерство на двух опорах",
+              description:
+                "Укрепление нашей позиции в Эквадоре за счёт интеграции обоих направлений: технологии и автоматизация как основа, цифровой маркетинг как усилитель.",
+            },
+          ],
+        },
+      ],
     },
     finalCta: {
       title: "Готовы построить настоящую систему для вашего бизнеса?",

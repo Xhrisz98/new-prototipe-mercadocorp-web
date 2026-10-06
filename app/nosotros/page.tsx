@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
+import { TrajectoryTabs } from "@/components/sections/TrajectoryTabs";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { IconBadge } from "@/components/ui/IconBadge";
@@ -18,9 +20,20 @@ import {
   Compass,
   Lightbulb,
   Users2,
-  Clock,
+  Target,
+  Globe2,
+  Rocket,
+  Building2,
   ArrowRight,
+  type LucideIcon,
 } from "lucide-react";
+
+// Íconos de las 2 tarjetas de cada año, en el mismo orden que
+// content.trajectory.years[].milestones (§5 — caso especial de Nosotros).
+const TRAJECTORY_ICONS: Record<string, LucideIcon[]> = {
+  "2026": [Target, Globe2],
+  "2027": [Rocket, Building2],
+};
 
 export default function NosotrosPage() {
   const { locale } = useLocale();
@@ -47,21 +60,49 @@ export default function NosotrosPage() {
           align="center"
         />
 
-        {/* Sección Historia y Evolución */}
+        {/* Sección Historia (copywriting-nueva-web-mercadocorp.md §10) */}
         <section className="w-full py-16 md:py-24 bg-[var(--color-surface)] border-y border-[var(--color-border)]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Badge variant="brand" size="sm" className="mb-4">
-              Nuestra Evolución
-            </Badge>
-            <h2
-              className="text-2xl sm:text-4xl font-medium tracking-tight mb-6 text-[var(--color-text)]"
-              style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
-            >
-              {content.history.title}
-            </h2>
-            <p className="text-base sm:text-xl text-[var(--color-text-muted)] leading-relaxed font-normal">
-              {content.history.body}
-            </p>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+              <RevealOnScroll>
+                <div>
+                  <Badge variant="brand" size="sm" className="mb-4">
+                    {content.history.label}
+                  </Badge>
+                  <h2
+                    className="text-2xl sm:text-4xl font-medium tracking-tight mb-6 text-[var(--color-text)]"
+                    style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
+                  >
+                    {content.history.title}
+                  </h2>
+                  <div className="space-y-4">
+                    {content.history.paragraphs.map((p, idx) => (
+                      <p
+                        key={idx}
+                        className="text-sm sm:text-base text-[var(--color-text-muted)] leading-relaxed"
+                      >
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </RevealOnScroll>
+
+              <RevealOnScroll index={1}>
+                <div>
+                  {/* TODO: reemplazar con la foto del equipo */}
+                  <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden card-elevation">
+                    <Image
+                      src="/images/stock/blue-glass-tower-facade.jpg"
+                      alt={content.history.imageAlt}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </RevealOnScroll>
+            </div>
           </div>
         </section>
 
@@ -162,31 +203,33 @@ export default function NosotrosPage() {
           </div>
         </section>
 
-        {/* Sección Trayectoria (Placeholder visual según especificación de AGENTS.md) */}
+        {/* Sección Trayectoria — pestañas por año (copywriting §10 / PROJECT_PLAN §5) */}
         <section className="w-full py-16 md:py-24">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="p-8 sm:p-12 rounded-3xl bg-[var(--color-surface)] border border-dashed border-[var(--color-border)]">
-              <div className="w-12 h-12 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mx-auto mb-5">
-                <Clock className="w-6 h-6" />
-              </div>
-
-              <div className="flex justify-center mb-3">
-                <Badge variant="outline" size="sm">
-                  {content.trajectory.statusBadge}
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <RevealOnScroll>
+              <div className="mb-10">
+                <Badge variant="brand" size="sm" className="mb-4">
+                  {content.trajectory.label}
                 </Badge>
+                <h2
+                  className="text-2xl sm:text-4xl font-medium tracking-tight text-[var(--color-text)]"
+                  style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
+                >
+                  {content.trajectory.titlePrefix}
+                  <span className="text-[var(--color-primary)]">
+                    {content.trajectory.titleHighlight}
+                  </span>
+                </h2>
               </div>
+            </RevealOnScroll>
 
-              <h2
-                className="text-2xl sm:text-3xl font-medium tracking-tight mb-4 text-[var(--color-text)]"
-                style={{ fontFamily: "var(--font-kanit), sans-serif", fontStyle: "italic" }}
-              >
-                {content.trajectory.title}
-              </h2>
-
-              <p className="text-sm sm:text-base text-[var(--color-text-muted)] max-w-xl mx-auto leading-relaxed">
-                {content.trajectory.note}
-              </p>
-            </div>
+            <RevealOnScroll index={1}>
+              <TrajectoryTabs
+                years={content.trajectory.years}
+                tablistLabel={content.trajectory.tablistLabel}
+                icons={TRAJECTORY_ICONS}
+              />
+            </RevealOnScroll>
           </div>
         </section>
 
