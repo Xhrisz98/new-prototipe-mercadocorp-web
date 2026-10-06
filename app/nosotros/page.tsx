@@ -20,6 +20,8 @@ import {
   Compass,
   Lightbulb,
   Users2,
+  Brain,
+  Network,
   Target,
   Globe2,
   Rocket,
@@ -31,6 +33,7 @@ import {
 // Íconos de las 2 tarjetas de cada año, en el mismo orden que
 // content.trajectory.years[].milestones (§5 — caso especial de Nosotros).
 const TRAJECTORY_ICONS: Record<string, LucideIcon[]> = {
+  "2025": [Brain, Network],
   "2026": [Target, Globe2],
   "2027": [Rocket, Building2],
 };
@@ -228,6 +231,7 @@ export default function NosotrosPage() {
                 years={content.trajectory.years}
                 tablistLabel={content.trajectory.tablistLabel}
                 icons={TRAJECTORY_ICONS}
+                defaultYear="2026"
               />
             </RevealOnScroll>
           </div>

@@ -8,7 +8,8 @@ import type { LucideIcon } from "lucide-react";
 
 export interface TrajectoryYear {
   year: string;
-  /** Insignia de estado ("Visión"/"Proyección") — nunca se presenta como logro. */
+  /** Insignia de estado ("Hito" para años cerrados, "Visión"/"Proyección" para
+   *  años futuros) — un año futuro nunca se presenta como logro. */
   badge: string;
   milestones: { title: string; description: string }[];
 }
@@ -18,6 +19,8 @@ interface TrajectoryTabsProps {
   tablistLabel: string;
   /** Íconos por año, en el mismo orden que `milestones` de ese año. */
   icons: Record<string, LucideIcon[]>;
+  /** Año activo al cargar. Si no coincide con ninguno, se usa years[0]. */
+  defaultYear?: string;
 }
 
 // Pestañas accesibles por año (PROJECT_PLAN.md §5 — caso especial de Nosotros).
@@ -25,9 +28,10 @@ interface TrajectoryTabsProps {
 // "Tabs with Automatic Activation") — más simple que activación manual y correcto para
 // contenido liviano como este. Roving tabindex: solo la pestaña activa es alcanzable
 // con Tab; las demás se navegan con flechas/Home/End.
-export function TrajectoryTabs({ years, tablistLabel, icons }: TrajectoryTabsProps) {
-  const [activeYear, setActiveYear] = useState(years[0]?.year ?? "");
-  const [displayedYear, setDisplayedYear] = useState(activeYear);
+export function TrajectoryTabs({ years, tablistLabel, icons, defaultYear }: TrajectoryTabsProps) {
+  const initialYear = years.some((y) => y.year === defaultYear) ? defaultYear! : (years[0]?.year ?? "");
+  const [activeYear, setActiveYear] = useState(initialYear);
+  const [displayedYear, setDisplayedYear] = useState(initialYear);
   const [fading, setFading] = useState(false);
   const reduceMotion = useReducedMotion();
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
@@ -78,7 +82,7 @@ export function TrajectoryTabs({ years, tablistLabel, icons }: TrajectoryTabsPro
       <div
         role="tablist"
         aria-label={tablistLabel}
-        className="inline-flex p-1 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] mb-10"
+        className="inline-flex p-1 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] mb-12"
       >
         {years.map((y, idx) => {
           const isActive = y.year === activeYear;
@@ -96,10 +100,12 @@ export function TrajectoryTabs({ years, tablistLabel, icons }: TrajectoryTabsPro
               tabIndex={isActive ? 0 : -1}
               onClick={() => selectYear(y.year)}
               onKeyDown={(e) => handleKeyDown(e, idx)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] ${
+              // motion-safe:hover:scale — mismo micro-gesto que Button.tsx (1.01-1.03),
+              // nunca en la pestaña activa: ya está "levantada" por su propio color.
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-[background-color,color,transform] duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] ${
                 isActive
                   ? "bg-[var(--color-primary)] text-white"
-                  : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                  : "text-[var(--color-text-muted)] hover:text-[var(--color-text)] motion-safe:hover:scale-[1.03] motion-safe:active:scale-[0.97]"
               }`}
             >
               {y.year}
@@ -117,7 +123,7 @@ export function TrajectoryTabs({ years, tablistLabel, icons }: TrajectoryTabsPro
           fading ? "opacity-0" : "opacity-100"
         }`}
       >
-        <div className="mb-6">
+        <div className="mb-8">
           <Badge variant="outline" size="sm">
             {displayed.badge}
           </Badge>
@@ -126,26 +132,53 @@ export function TrajectoryTabs({ years, tablistLabel, icons }: TrajectoryTabsPro
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {displayed.milestones.map((m, i) => {
             const Icon = icons[displayed.year]?.[i];
+            const isLast = i === displayed.milestones.length - 1;
             return (
-              // reveal=false: el bloque Trayectoria completo ya revela una vez al
-              // entrar al viewport (ver nosotros/page.tsx) — un segundo reveal acá
-              // se dispararía de nuevo en cada cambio de pestaña, encima del fade.
-              <Card key={m.title} reveal={false} padding="md">
-                {Icon && (
-                  <div className="w-12 h-12 rounded-2xl bg-[var(--color-primary)]/10 flex items-center justify-center mb-5">
-                    <Icon className="w-6 h-6 text-[var(--color-primary)]" aria-hidden="true" />
-                  </div>
-                )}
-                <h3
-                  className="text-lg font-semibold text-[var(--color-text)] mb-2"
-                  style={{ fontFamily: "var(--font-kanit), sans-serif" }}
-                >
-                  {m.title}
-                </h3>
-                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-                  {m.description}
-                </p>
-              </Card>
+              <div key={m.title} className="flex flex-col">
+                {/* Línea de tiempo: nodo centrado sobre cada tarjeta + conector que
+                    empalma exactamente en la mitad del gap con el nodo vecino (cada
+                    nodo extiende la mitad de su propio ancho de columna + la mitad
+                    del gap-6 hacia cada lado — funciona para cualquier cantidad de
+                    columnas, no solo 2). Decorativo: oculto en mobile apilado, donde
+                    una línea horizontal entre tarjetas no se lee como secuencia. */}
+                <div className="relative hidden sm:flex justify-center mb-5 h-3.5" aria-hidden="true">
+                  {/* gap-6 = 1.5rem: cada mitad de conector cubre 50% de su propia
+                      columna + 0.75rem (mitad del gap) — empalma exacto con el vecino
+                      sin medir nada en JS, para cualquier cantidad de columnas. */}
+                  {i > 0 && (
+                    <span className="absolute top-1/2 -translate-y-1/2 right-1/2 w-[calc(50%+0.75rem)] h-px bg-[var(--color-border)]" />
+                  )}
+                  {!isLast && (
+                    <span className="absolute top-1/2 -translate-y-1/2 left-1/2 w-[calc(50%+0.75rem)] h-px bg-[var(--color-border)]" />
+                  )}
+                  <span className="relative flex h-3.5 w-3.5 items-center justify-center">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-primary)]/40 motion-safe:animate-pulse" />
+                    <span className="relative z-10 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-[var(--color-primary)] bg-[var(--color-surface)]">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-primary)]" />
+                    </span>
+                  </span>
+                </div>
+
+                {/* reveal=false: el bloque Trayectoria completo ya revela una vez al
+                    entrar al viewport (ver nosotros/page.tsx) — un segundo reveal acá
+                    se dispararía de nuevo en cada cambio de pestaña, encima del fade. */}
+                <Card reveal={false} padding="md" className="flex-1">
+                  {Icon && (
+                    <div className="w-12 h-12 rounded-2xl bg-[var(--color-primary)]/10 flex items-center justify-center mb-5">
+                      <Icon className="w-6 h-6 text-[var(--color-primary)]" aria-hidden="true" />
+                    </div>
+                  )}
+                  <h3
+                    className="text-lg font-semibold text-[var(--color-text)] mb-2"
+                    style={{ fontFamily: "var(--font-kanit), sans-serif" }}
+                  >
+                    {m.title}
+                  </h3>
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                    {m.description}
+                  </p>
+                </Card>
+              </div>
             );
           })}
         </div>

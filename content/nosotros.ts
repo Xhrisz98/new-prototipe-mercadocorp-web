@@ -48,7 +48,8 @@ export interface NosotrosPageContent {
      *  elemento aquí, sin tocar TrajectoryTabs. */
     years: {
       year: string;
-      /** Insignia de estado ("Visión"/"Proyección") — nunca se presenta como logro. */
+      /** Insignia de estado ("Hito" para años ya cerrados, "Visión"/"Proyección"
+       *  para años futuros) — nunca se presenta un año futuro como logro. */
       badge: string;
       milestones: { title: string; description: string }[];
     }[];
@@ -135,6 +136,22 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       titleHighlight: "proyección",
       tablistLabel: "Seleccionar año de trayectoria",
       years: [
+        {
+          year: "2025",
+          badge: "Hito",
+          milestones: [
+            {
+              title: "Integración de IA",
+              description:
+                "Implementación de herramientas de Inteligencia Artificial para optimizar procesos de análisis y generación de contenido estratégico.",
+            },
+            {
+              title: "Fortalecimiento Digital",
+              description:
+                "Desarrollo de ecosistemas digitales robustos enfocados en la captación y trazabilidad de leads B2B calificados.",
+            },
+          ],
+        },
         {
           year: "2026",
           badge: "Visión",
@@ -264,6 +281,22 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       tablistLabel: "Select trajectory year",
       years: [
         {
+          year: "2025",
+          badge: "Milestone",
+          milestones: [
+            {
+              title: "AI Integration",
+              description:
+                "Implementation of Artificial Intelligence tools to optimize analysis processes and strategic content generation.",
+            },
+            {
+              title: "Digital Strengthening",
+              description:
+                "Development of robust digital ecosystems focused on capturing and tracking qualified B2B leads.",
+            },
+          ],
+        },
+        {
           year: "2026",
           badge: "Vision",
           milestones: [
@@ -391,6 +424,22 @@ const contentData: Record<Locale, NosotrosPageContent> = {
       titleHighlight: "перспектива",
       tablistLabel: "Выбрать год траектории",
       years: [
+        {
+          year: "2025",
+          badge: "Веха",
+          milestones: [
+            {
+              title: "Интеграция ИИ",
+              description:
+                "Внедрение инструментов искусственного интеллекта для оптимизации процессов анализа и создания стратегического контента.",
+            },
+            {
+              title: "Укрепление цифровых позиций",
+              description:
+                "Разработка надёжных цифровых экосистем, нацеленных на привлечение и отслеживание квалифицированных B2B-лидов.",
+            },
+          ],
+        },
         {
           year: "2026",
           badge: "Видение",
