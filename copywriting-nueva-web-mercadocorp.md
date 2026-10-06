@@ -20,7 +20,8 @@
 
 ### Hero
 **H1:** Automatice el crecimiento de su empresa con Inteligencia Artificial
-**Subheadline:** Dejamos de vender "estrategias". Construimos el sistema de agentes de IA, automatización y software que hace que su negocio opere sin fricción — y sin depender de más gente para escalar.
+**Subheadline:** Estrategia y sistema, de la mano. Construimos agentes de IA, automatización y software a la medida de su operación, para que su negocio funcione sin fricción y escale sin depender de más gente.
+*(Aprobado por el usuario. Reemplaza a "Dejamos de vender 'estrategias'…", que contradecía el servicio: estrategia y sistema van de la mano. Orden: primero qué hacemos, después cómo (a la medida) y al final para qué.)*
 
 **CTA primario:** `Solicitar Diagnóstico Tecnológico Gratuito` → /contacto
 **CTA secundario:** `Ver a Mind en acción` → /mind
@@ -52,14 +53,19 @@
 > Cuando la base tecnológica ya está resuelta, potenciamos cómo el mercado percibe su marca: contenido, branding y eventos.
 > [Ver Marketing Digital →](/marketing-digital)
 
-### Metodología (se mantiene, 6 pasos)
+### Metodología (6 pasos, lenguaje general: aplica a tecnología, marketing o ambas)
 **H2:** Un sistema, no una promesa
-01. Reunión Inicial — Entendemos sus objetivos y su operación actual.
-02. Auditoría — Diagnóstico técnico para encontrar dónde se pierde tiempo y dinero.
-03. Estrategia — Hoja de ruta y arquitectura de la solución (software, automatización o marketing).
-04. Ejecución — Desarrollo e implementación con precisión técnica.
-05. Monitoreo — Validamos que el sistema funcione en producción, no solo en la demo.
-06. Resultados — Reportes, ajuste continuo y escalamiento.
+**Subtítulo:** Seis pasos, adaptados a su negocio, para pasar de lo que hoy le duele a un sistema que funciona.
+*(Antes: "Metodología probada en 6 pasos… con precisión técnica". "Probada" afirmaba un respaldo que no tenemos medido y "precisión técnica" limitaba el proceso a lo digital.)*
+
+01. **Reunión inicial** — Entendemos sus objetivos y su operación actual a fondo.
+02. **Auditoría** — Mapeamos los dolores reales de su negocio: dónde se pierden ventas, tiempo y dinero.
+03. **Estrategia** — Diseñamos la hoja de ruta y la solución a su medida, según lo que su operación realmente necesita.
+04. **Ejecución** — Implementamos con las herramientas y metodologías que su caso exige, sea tecnología, marketing o ambas.
+05. **Monitoreo** — Validamos que funcione en su operación real, no solo en la presentación.
+06. **Resultados** — Reportes, ajuste continuo y escalamiento planificado.
+
+*Pasos 02 y 04 son los que pediste. Los pasos 03 y 05 los generalicé por el mismo criterio (el 03 decía "software o automatización"; el 05 hablaba de "producción" y "demo"). Se pueden revertir sin tocar el resto.*
 
 ### Franja de cifras de capacidad (reemplaza métricas de cliente puntual — ver guía sección 6)
 - **24/7** — Atención y ventas automatizadas, sin horario
@@ -67,10 +73,32 @@
 - **Ecuador · LatAm** — Presencia y operación remota sin fricción
 - **A medida** — Cada sistema se construye sobre su operación real, no sobre una plantilla
 
-### Casos de éxito (resumen)
-**H2:** El impacto de un sistema bien construido
-(3 tarjetas resumen con link a página completa — copy cualitativo por caso, ver Casos de Éxito)
-**CTA de bloque:** `Ver todos los casos de éxito →` /casos-de-exito
+### Proyectos reales (resumen) — antes "Casos de éxito"
+**H2:** Sistemas a la medida, en proyectos reales
+**Subtítulo:** Cada proyecto se construye sobre la operación de la empresa, sin plantillas. Los presentamos por sector.
+*(Antes: "El impacto de un sistema bien construido" y "Resultados reales…". No tenemos métricas medidas, así que se evita "impacto" y "resultados"; lo que sí podemos afirmar es qué se construyó.)*
+
+Tres tarjetas, una por pilar, con la estructura: servicio · sector · Desafío · Solución implementada. Sin nombres de clientes y sin cifras.
+
+**1. Tecnología & Automatización** · Sector: Deportes y distribución
+- **Desafío:** Un catálogo amplio, con variantes de talla y color, stock cambiante y más de un canal de venta que atender al mismo tiempo.
+- **Solución implementada:** Backend propio con base de datos y una automatización que publica el catálogo del ERP en el marketplace, evita duplicados, cruza el stock real de cada variante y da de baja lo descontinuado.
+
+**2. Mind: CRM + agente de IA** · Sector: Bienestar y clases
+- **Desafío:** Responder a tiempo las consultas por WhatsApp y coordinar reservas y clientes sin depender de tareas manuales.
+- **Solución implementada:** Mind a la medida: un CRM propio con agente de IA en WhatsApp, módulo de reservas y la identidad de la marca del cliente, sobre una base de datos aislada.
+
+**3. Marketing Digital** · Sector: Comercio y retail
+- **Desafío:** Sostener la captación de clientes mes a mes, sin depender de campañas puntuales.
+- **Solución implementada:** Gestión mensual continua de campañas en Meta Ads y Google Ads, con mantenimiento permanente.
+
+**CTA de bloque:** `Ver todos los casos de éxito` → /casos-de-exito *(pendiente de decisión: esa página sigue en estado vacío, ver abajo)*
+
+*Notas internas, no se publican:*
+- *Origen: tarjeta 1 = trabajo de backend, automatización ERP→marketplace de un cliente de deportes; tarjeta 2 = implementación de Mind en un cliente externo; tarjeta 3 = campañas mensuales de dos clientes. Redactado a partir de lo construido según las notas del proyecto, no de palabras ni métricas del cliente.*
+- *Por confirmar antes de publicar: (a) el sector real de la tarjeta 2 y que esa implementación ya esté en producción; (b) el sector de la tarjeta 3, que no consta en las notas; (c) que la publicación al marketplace esté operativa en todas las categorías (en las notas, calzado tenía pendientes).*
+- *Anonimato: un lector del mismo sector podría reconocer al cliente por la descripción. Confirmar que cada cliente acepta aparecer así.*
+- *Las dos tarjetas anteriores (carritos abandonados y checkout por WhatsApp; CRM con inventario en tiempo real) no corresponden a ningún proyecto de las notas: se reemplazan.*
 
 ### FAQ (nuevas + mantenidas)
 - **¿Qué es exactamente un agente de IA y en qué se diferencia de un chatbot?** Un chatbot responde preguntas con guiones fijos. Un agente de IA entiende contexto, consulta su CRM en tiempo real y puede asesorar, cotizar y cerrar una venta de principio a fin, como lo haría una persona de su equipo.

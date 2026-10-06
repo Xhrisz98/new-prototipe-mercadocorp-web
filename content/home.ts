@@ -85,7 +85,7 @@ const contentData: Record<Locale, HomeContent> = {
       badge: "Consultoría Tecnológica B2B",
       h1: "Automatice el crecimiento de su empresa con Inteligencia Artificial",
       subheadline:
-        "Dejamos de vender \"estrategias\". Construimos el sistema de agentes de IA, automatización y software que hace que su negocio opere sin fricción — y sin depender de más gente para escalar.",
+        "Estrategia y sistema, de la mano. Construimos agentes de IA, automatización y software a la medida de su operación, para que su negocio funcione sin fricción y escale sin depender de más gente.",
       ctaPrimary: {
         label: "Solicitar Diagnóstico Tecnológico Gratuito",
         href: "/contacto",
@@ -171,7 +171,7 @@ const contentData: Record<Locale, HomeContent> = {
     methodology: {
       title: "Un sistema, no una promesa",
       subtitle:
-        "Metodología probada en 6 pasos para transformar su operación con precisión técnica.",
+        "Seis pasos, adaptados a su negocio, para pasar de lo que hoy le duele a un sistema que funciona.",
       steps: [
         {
           number: "01",
@@ -181,22 +181,22 @@ const contentData: Record<Locale, HomeContent> = {
         {
           number: "02",
           title: "Auditoría",
-          description: "Diagnóstico técnico para encontrar dónde se pierde tiempo y dinero.",
+          description: "Mapeamos los dolores reales de su negocio: dónde se pierden ventas, tiempo y dinero.",
         },
         {
           number: "03",
           title: "Estrategia",
-          description: "Hoja de ruta y arquitectura de la solución (software o automatización).",
+          description: "Diseñamos la hoja de ruta y la solución a su medida, según lo que su operación realmente necesita.",
         },
         {
           number: "04",
           title: "Ejecución",
-          description: "Desarrollo e implementación con precisión técnica y código a medida.",
+          description: "Implementamos con las herramientas y metodologías que su caso exige, sea tecnología, marketing o ambas.",
         },
         {
           number: "05",
           title: "Monitoreo",
-          description: "Validamos que el sistema funcione en producción, no solo en la demo.",
+          description: "Validamos que funcione en su operación real, no solo en la presentación.",
         },
         {
           number: "06",
@@ -228,27 +228,37 @@ const contentData: Record<Locale, HomeContent> = {
       },
     ],
     caseStudiesPreview: {
-      title: "El impacto de un sistema bien construido",
+      title: "Sistemas a la medida, en proyectos reales",
       subtitle:
-        "Resultados reales de empresas que decidieron dejar de operar con parches y construir un sistema que trabaja para ellas.",
+        "Cada proyecto se construye sobre la operación de la empresa, sin plantillas. Los presentamos por sector.",
       cta: {
         label: "Ver todos los casos de éxito",
         href: "/casos-de-exito",
       },
       items: [
         {
-          client: "Sector Retail & Distribución",
-          pillar: "E-commerce Inteligente",
-          problem: "Carritos abandonados y pedidos que tardaban horas en procesarse.",
+          client: "Sector Deportes y Distribución",
+          pillar: "Tecnología & Automatización",
+          problem:
+            "Un catálogo amplio, con variantes de talla y color, stock cambiante y más de un canal de venta que atender al mismo tiempo.",
           solution:
-            "Integración de tienda con agente conversacional para asesoría en vivo y automatización de checkout vía WhatsApp.",
+            "Backend propio con base de datos y una automatización que publica el catálogo del ERP en el marketplace, evita duplicados, cruza el stock real de cada variante y da de baja lo descontinuado.",
         },
         {
-          client: "Servicios Corporativos B2B",
-          pillar: "Software a Medida",
-          problem: "Silos de información entre cotizaciones comerciales y facturación interna.",
+          client: "Sector Bienestar y Clases",
+          pillar: "Mind: CRM + Agente de IA",
+          problem:
+            "Responder a tiempo las consultas por WhatsApp y coordinar reservas y clientes sin depender de tareas manuales.",
           solution:
-            "CRM y gestor de operaciones personalizado con sincronización de inventario en tiempo real.",
+            "Mind a la medida: un CRM propio con agente de IA en WhatsApp, módulo de reservas y la identidad de la marca del cliente, sobre una base de datos aislada.",
+        },
+        {
+          client: "Sector Comercio y Retail",
+          pillar: "Marketing Digital",
+          problem:
+            "Sostener la captación de clientes mes a mes, sin depender de campañas puntuales.",
+          solution:
+            "Gestión mensual continua de campañas en Meta Ads y Google Ads, con mantenimiento permanente.",
         },
       ],
     },
@@ -308,8 +318,9 @@ const contentData: Record<Locale, HomeContent> = {
     hero: {
       badge: "B2B Tech Consultancy",
       h1: "Automate your company's growth with Artificial Intelligence",
+      // Traducción generada, pendiente de revisión nativa (§3.1).
       subheadline:
-        "We no longer sell \"strategies\". We build the system of AI agents, automation, and software that makes your business operate without friction — without depending on more people to scale.",
+        "Strategy and system, hand in hand. We build AI agents, automation, and software tailored to your operation, so your business runs without friction and scales without depending on more people.",
       ctaPrimary: {
         label: "Request Free Tech Diagnostic",
         href: "/contacto",
@@ -392,10 +403,12 @@ const contentData: Record<Locale, HomeContent> = {
         },
       ],
     },
+    // Traducción generada, pendiente de revisión nativa (§3.1): subtitle y pasos
+    // 02-05 (el resto de methodology no cambió).
     methodology: {
       title: "A system, not a promise",
       subtitle:
-        "A proven 6-step engineering methodology to transform your operations with technical precision.",
+        "Six steps, tailored to your business, to go from what hurts today to a system that works.",
       steps: [
         {
           number: "01",
@@ -405,22 +418,22 @@ const contentData: Record<Locale, HomeContent> = {
         {
           number: "02",
           title: "Audit",
-          description: "Technical diagnostic to find where time and money are being lost.",
+          description: "We map your business's real pain points: where sales, time, and money are being lost.",
         },
         {
           number: "03",
           title: "Strategy",
-          description: "Roadmap and solution architecture (software or automation).",
+          description: "We design the roadmap and the solution tailored to you, based on what your operation actually needs.",
         },
         {
           number: "04",
           title: "Execution",
-          description: "Development and implementation with technical precision and custom code.",
+          description: "We implement with the tools and methodologies your case requires, whether technology, marketing, or both.",
         },
         {
           number: "05",
           title: "Monitoring",
-          description: "We validate that the system works in production, not just in the demo.",
+          description: "We validate that it works in your real operation, not just in the presentation.",
         },
         {
           number: "06",
@@ -451,28 +464,39 @@ const contentData: Record<Locale, HomeContent> = {
         description: "Built around your real operation, no templates.",
       },
     ],
+    // Traducción generada, pendiente de revisión nativa (§3.1).
     caseStudiesPreview: {
-      title: "The tangible impact of engineered systems",
+      title: "Custom-built systems, in real projects",
       subtitle:
-        "Real transformations from companies that stopped band-aiding operations and built systems that work for them.",
+        "Each project is built around the company's real operation, with no templates. We present them by sector.",
       cta: {
         label: "View all case studies",
         href: "/casos-de-exito",
       },
       items: [
         {
-          client: "Retail & Distribution Sector",
-          pillar: "Smart E-commerce",
-          problem: "Abandoned carts and orders that took hours to process.",
+          client: "Sports & Distribution Sector",
+          pillar: "Technology & Automation",
+          problem:
+            "A wide catalog with size and color variants, shifting stock, and more than one sales channel to manage at the same time.",
           solution:
-            "Store integrated with a conversational agent for live assistance and WhatsApp checkout automation.",
+            "A proprietary backend with its own database and an automation that publishes the ERP catalog to the marketplace, prevents duplicates, cross-checks real stock per variant, and discontinues what's no longer sold.",
         },
         {
-          client: "B2B Corporate Services",
-          pillar: "Custom Software",
-          problem: "Information silos between commercial quotes and internal invoicing.",
+          client: "Wellness & Classes Sector",
+          pillar: "Mind: CRM + AI Agent",
+          problem:
+            "Responding to WhatsApp inquiries on time and coordinating bookings and clients without relying on manual tasks.",
           solution:
-            "Custom CRM and operations manager with real-time inventory synchronization.",
+            "A tailored Mind: a dedicated CRM with an AI agent on WhatsApp, a booking module, and the client's own brand identity, on an isolated database.",
+        },
+        {
+          client: "Retail & Commerce Sector",
+          pillar: "Digital Marketing",
+          problem:
+            "Sustaining customer acquisition month after month, without relying on one-off campaigns.",
+          solution:
+            "Ongoing monthly management of Meta Ads and Google Ads campaigns, with continuous maintenance.",
         },
       ],
     },
@@ -532,8 +556,9 @@ const contentData: Record<Locale, HomeContent> = {
     hero: {
       badge: "B2B Технологический Консалтинг",
       h1: "Автоматизируйте рост вашего бизнеса с помощью Искусственного Интеллекта",
+      // Traducción generada, pendiente de revisión nativa (§3.1).
       subheadline:
-        "Мы больше не продаем «стратегии». Мы создаем систему ИИ-агентов, автоматизации и программного обеспечения, которая позволяет вашему бизнесу работать без сбоев — и масштабироваться, не завися от увеличения штата.",
+        "Стратегия и система — рука об руку. Мы создаём ИИ-агентов, автоматизацию и программное обеспечение под вашу операционную модель, чтобы бизнес работал без сбоев и масштабировался, не завися от роста штата.",
       ctaPrimary: {
         label: "Запросить Технологический Аудит",
         href: "/contacto",
@@ -616,10 +641,12 @@ const contentData: Record<Locale, HomeContent> = {
         },
       ],
     },
+    // Traducción generada, pendiente de revisión nativa (§3.1): subtitle y pasos
+    // 02-05 (el resto de methodology no cambió).
     methodology: {
       title: "Система, а не обещания",
       subtitle:
-        "Проверенная 6-этапная методология внедрения для трансформации бизнеса с инженерной точностью.",
+        "Шесть этапов, адаптированных под ваш бизнес, чтобы перейти от сегодняшних проблем к работающей системе.",
       steps: [
         {
           number: "01",
@@ -629,22 +656,22 @@ const contentData: Record<Locale, HomeContent> = {
         {
           number: "02",
           title: "Аудит",
-          description: "Технический диагноз, чтобы найти, где теряются время и деньги.",
+          description: "Фиксируем реальные болевые точки вашего бизнеса: где теряются продажи, время и деньги.",
         },
         {
           number: "03",
           title: "Стратегия",
-          description: "Дорожная карта и архитектура решения (ПО или автоматизация).",
+          description: "Разрабатываем дорожную карту и решение под ваши задачи, исходя из того, что действительно нужно вашей операции.",
         },
         {
           number: "04",
           title: "Выполнение",
-          description: "Разработка и внедрение с технической точностью и кодом под ваши задачи.",
+          description: "Внедряем с помощью инструментов и методологий, которые требует именно ваш случай — будь то технологии, маркетинг или оба направления.",
         },
         {
           number: "05",
           title: "Мониторинг",
-          description: "Проверяем, что система работает в реальной эксплуатации, а не только в демо-версии.",
+          description: "Проверяем, что система работает в вашей реальной эксплуатации, а не только на презентации.",
         },
         {
           number: "06",
@@ -675,28 +702,39 @@ const contentData: Record<Locale, HomeContent> = {
         description: "Разработка под реальные процессы без типовых шаблонов.",
       },
     ],
+    // Traducción generada, pendiente de revisión nativa (§3.1).
     caseStudiesPreview: {
-      title: "Эффект продуманных цифровых систем",
+      title: "Индивидуальные системы в реальных проектах",
       subtitle:
-        "Реальные кейсы компаний, которые отказались от временных заплаток в пользу работающей системы.",
+        "Каждый проект строится вокруг реальной работы компании, без шаблонов. Представляем их по отраслям.",
       cta: {
         label: "Все кейсы компании",
         href: "/casos-de-exito",
       },
       items: [
         {
-          client: "Розничные Сети и Дистрибуция",
-          pillar: "Умный E-commerce",
-          problem: "Брошенные корзины и заказы, обработка которых занимала часы.",
+          client: "Спортивная Розница и Дистрибуция",
+          pillar: "Технологии и Автоматизация",
+          problem:
+            "Широкий каталог с вариантами размера и цвета, меняющиеся остатки и несколько каналов продаж одновременно.",
           solution:
-            "Интеграция магазина с диалоговым агентом для консультаций в реальном времени и автоматизации оформления заказа через WhatsApp.",
+            "Собственный backend с базой данных и автоматизация, которая публикует каталог из ERP на маркетплейсе, исключает дубли, сверяет реальные остатки по каждому варианту и снимает с публикации то, что уже не продаётся.",
         },
         {
-          client: "Корпоративные B2B Услуги",
-          pillar: "Заказное ПО",
-          problem: "Информационная разобщенность между коммерческими предложениями и внутренним выставлением счетов.",
+          client: "Сектор Оздоровления и Занятий",
+          pillar: "Mind: CRM + ИИ-агент",
+          problem:
+            "Вовремя отвечать на обращения в WhatsApp и координировать бронирования и клиентов без ручных задач.",
           solution:
-            "Кастомная CRM и система управления операциями с синхронизацией склада в реальном времени.",
+            "Mind под конкретный бизнес: собственная CRM с ИИ-агентом в WhatsApp, модуль бронирования и фирменный стиль клиента, на изолированной базе данных.",
+        },
+        {
+          client: "Сектор Розничной Торговли",
+          pillar: "Цифровой Маркетинг",
+          problem:
+            "Поддерживать привлечение клиентов месяц за месяцем, не полагаясь на разовые кампании.",
+          solution:
+            "Постоянное ежемесячное ведение кампаний в Meta Ads и Google Ads с непрерывным сопровождением.",
         },
       ],
     },
