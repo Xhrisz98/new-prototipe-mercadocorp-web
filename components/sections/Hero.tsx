@@ -149,8 +149,11 @@ export function Hero({
             {subheadline}
           </motion.p>
 
-          {/* Grupo de CTAs Dual Píldora (Inspiración CollectUI: Sólido + Vidrio Esmerilado) */}
+          {/* Grupo de CTAs Dual Píldora (Inspiración CollectUI: Sólido + Vidrio Esmerilado).
+              data-hero-ctas: TailoredDashboard lo mide para que el hero fijo (pin)
+              nunca deje los CTAs fuera de la pantalla. */}
           <motion.div
+            data-hero-ctas
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}

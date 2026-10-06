@@ -4,7 +4,7 @@ import React from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { DataFlowCore } from "@/components/three/DataFlowCore";
+import { TailoredDashboard, TailoredDashboardPin } from "@/components/three/TailoredDashboard";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { PainBlock } from "@/components/sections/PainBlock";
 import { PillarCard } from "@/components/sections/PillarCard";
@@ -57,18 +57,23 @@ export default function HomePage() {
       <Navbar />
 
       <main className="flex-1">
-        {/* 1. Hero con Canvas Three.js DataFlowCore (espiral de flujo de datos, lado derecho) */}
-        <Hero
-          badge={content.hero.badge}
-          h1={content.hero.h1}
-          subheadline={content.hero.subheadline}
-          ctaPrimary={content.hero.ctaPrimary}
-          ctaSecondary={content.hero.ctaSecondary}
-          threeCanvas={<DataFlowCore />}
-          align="left"
-          showProofChips={true}
-          showScrollIndicator={true}
-        />
+        {/* 1. Hero con TailoredDashboard (PROJECT_PLAN.md §5.11): desde 1024px el hero
+            queda fijo mientras los paneles encajan; en tablet el visual va en su
+            propio bloque bajo el texto y en mobile es una imagen estática. */}
+        <TailoredDashboardPin>
+          <Hero
+            badge={content.hero.badge}
+            h1={content.hero.h1}
+            subheadline={content.hero.subheadline}
+            ctaPrimary={content.hero.ctaPrimary}
+            ctaSecondary={content.hero.ctaSecondary}
+            threeCanvas={<TailoredDashboard placement="background" labels={content.dashboard} />}
+            inlineVisual={<TailoredDashboard placement="inline" labels={content.dashboard} />}
+            align="left"
+            showProofChips={true}
+            showScrollIndicator={true}
+          />
+        </TailoredDashboardPin>
 
         {/* 2. Franja de confianza tecnológica */}
         <TrustStrip

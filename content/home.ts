@@ -16,6 +16,12 @@ export interface HomeContent {
     ctaPrimary: { label: string; href: string };
     ctaSecondary: { label: string; href: string };
   };
+  // Etiquetas del visual TailoredDashboard del hero (PROJECT_PLAN.md §5.11).
+  dashboard: {
+    technology: string;
+    marketing: string;
+    tailored: string;
+  };
   trust: {
     title: string;
     logos: { name: string; category: string }[];
@@ -94,6 +100,11 @@ const contentData: Record<Locale, HomeContent> = {
         label: "Ver a Mind en acción",
         href: "/mind",
       },
+    },
+    dashboard: {
+      technology: "Tecnología",
+      marketing: "Marketing Digital",
+      tailored: "A medida",
     },
     trust: {
       title: "Tecnología que ya opera dentro de empresas como la suya.",
@@ -329,6 +340,13 @@ const contentData: Record<Locale, HomeContent> = {
         label: "See Mind in action",
         href: "/mind",
       },
+    },
+    // Traducción generada, pendiente de revisión nativa (§3.1). "Bespoke" = mismo
+    // término que ya usa stats para "A medida".
+    dashboard: {
+      technology: "Technology",
+      marketing: "Digital Marketing",
+      tailored: "Bespoke",
     },
     trust: {
       title: "Technology that already operates within companies like yours.",
@@ -567,6 +585,13 @@ const contentData: Record<Locale, HomeContent> = {
         label: "Посмотреть Mind в действии",
         href: "/mind",
       },
+    },
+    // Traducción generada, pendiente de revisión nativa (§3.1). "Кастомно" = mismo
+    // término que ya usa stats para "A medida".
+    dashboard: {
+      technology: "Технологии",
+      marketing: "Цифровой Маркетинг",
+      tailored: "Кастомно",
     },
     trust: {
       title: "Технологии, которые уже работают в таких же компаниях, как ваша.",
