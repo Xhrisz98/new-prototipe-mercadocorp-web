@@ -36,6 +36,16 @@ const MOBILE_QUERY = "(max-width: 767px)";
 const DESKTOP_QUERY = "(min-width: 1024px)";
 const FINE_POINTER_QUERY = "(pointer: fine)";
 
+// Alto del Navbar sticky (h-20).
+const NAV_H = 80;
+// Margen mínimo bajo el Navbar para que el H1 compactado y los CTAs quepan (ver
+// .fit-pin-hero en app/globals.css, mismo umbral exacto). Por debajo de
+// NAV_H + MIN_FIT_PX de alto de viewport no hay pin: el hero muestra directamente
+// el estado final, sin ensamblaje a medias (nunca se libera con el pin a mitad).
+const MIN_FIT_PX = 480;
+// "Demasiado bajo para fijar" — 559px = NAV_H(80) + MIN_FIT_PX(480) - 1.
+const TOO_SHORT_QUERY = `(max-height: ${NAV_H + MIN_FIT_PX - 1}px)`;
+
 function subscribeMedia(query: string) {
   return (onChange: () => void) => {
     const mql = window.matchMedia(query);
@@ -45,18 +55,16 @@ function subscribeMedia(query: string) {
 }
 const subscribeMobile = subscribeMedia(MOBILE_QUERY);
 const subscribeDesktop = subscribeMedia(DESKTOP_QUERY);
+const subscribeTooShort = subscribeMedia(TOO_SHORT_QUERY);
 const getMobile = () => window.matchMedia(MOBILE_QUERY).matches;
 const getDesktop = () => window.matchMedia(DESKTOP_QUERY).matches;
+const getTooShort = () => window.matchMedia(TOO_SHORT_QUERY).matches;
 const serverFalse = () => false;
 
 // ---------- Pin ----------
 
 // Recorrido de scroll del hero fijo, en vh (§5.11: ~200-250vh).
 export const PIN_TRAVEL_VH = 220;
-// Alto del Navbar sticky (h-20).
-const NAV_H = 80;
-// Aire mínimo bajo los CTAs mientras el hero está fijo.
-const CTA_MARGIN = 12;
 
 // Envoltorio del hero de Inicio: el hero queda fijo (sticky) mientras se recorre el
 // espaciador. Es scroll nativo — no se intercepta la rueda ni el teclado. Sin JS o
@@ -1226,6 +1234,7 @@ export function TailoredDashboard({ placement, labels }: TailoredDashboardProps)
   const reduced = usePrefersReducedMotion();
   const isMobile = useSyncExternalStore(subscribeMobile, getMobile, serverFalse);
   const isDesktop = useSyncExternalStore(subscribeDesktop, getDesktop, serverFalse);
+  const tooShort = useSyncExternalStore(subscribeTooShort, getTooShort, serverFalse);
   const rootRef = useRef<HTMLDivElement>(null);
   // Contenedor oculto con los íconos lucide; el Canvas se monta cuando ya existe.
   const [iconSource, setIconSource] = useState<HTMLDivElement | null>(null);
@@ -1237,6 +1246,15 @@ export function TailoredDashboard({ placement, labels }: TailoredDashboardProps)
   const [inView, setInView] = useState(true);
 
   const mount3D = placement === "background" ? isDesktop : !isDesktop && !isMobile;
+  // El pin se activa bajo exactamente las mismas condiciones que compactan el Hero
+  // en app/globals.css (.fit-pin-hero): escritorio, alto suficiente, sin movimiento
+  // reducido. Nunca se libera a medio ensamblaje — o el hero queda fijo con el
+  // sticky top SIEMPRE en NAV_H hasta p=1 + reposo, o no hay pin y se muestra
+  // directamente el estado final (ver `instant`).
+  const canPin = placement === "background" && isDesktop && !reduced && !tooShort;
+  // Estado final estático sin animación: movimiento reducido, o pantalla demasiado
+  // baja para fijar el hero aun compactado (§5.11 — "nunca un ensamblaje a medias").
+  const instant = reduced || (placement === "background" && tooShort);
 
   // Pin + encuadre + progreso.
   useEffect(() => {
@@ -1245,44 +1263,25 @@ export function TailoredDashboard({ placement, labels }: TailoredDashboardProps)
     const hero = root?.closest("section");
     if (!root || !hero) return;
     const text = hero.querySelector<HTMLElement>("[data-hero-text]");
-    const h1 = hero.querySelector<HTMLElement>("h1");
-    const ctas = hero.querySelector<HTMLElement>("[data-hero-ctas]");
     const track = placement === "background" ? root.closest<HTMLElement>("[data-hero-pin]") : null;
     const sticky = track?.querySelector<HTMLElement>("[data-hero-pin-sticky]") ?? null;
     const spacer = track?.querySelector<HTMLElement>("[data-hero-pin-spacer]") ?? null;
-    const pin = { on: false, top: NAV_H };
 
-    const applyPin = (on: boolean, top: number) => {
-      pin.on = on;
-      pin.top = top;
+    const applyPin = (on: boolean) => {
       if (!track || !sticky || !spacer) return;
       sticky.style.position = on ? "sticky" : "";
-      sticky.style.top = on ? `${top}px` : "";
+      sticky.style.top = on ? `${NAV_H}px` : "";
       spacer.style.display = on ? "block" : "none";
       track.dataset.pinned = on ? "true" : "false";
     };
+    applyPin(canPin);
 
-    // El hero de Inicio (~980px) no siempre cabe en la pantalla. Si no cabe, el pin se
-    // ancla más arriba (top negativo) para que los CTAs queden a la vista; solo se
-    // fija si así el H1 sigue completo bajo el Navbar. Si ni eso alcanza (pantallas
-    // muy bajas), no hay pin y la coreografía sigue el scroll del hero.
+    // Región donde cabe el visual: con el pin, .fit-pin-hero ya garantiza que el
+    // hero entero mide como máximo el alto disponible bajo el Navbar, así que la
+    // franja visible es siempre el hero completo (sin recorte alguno). Sin pin
+    // (tablet, reduced motion, pantalla demasiado baja) también es el hero
+    // completo, como bloque normal del documento.
     const measure = () => {
-      const vh = window.innerHeight;
-      const heroH = hero.offsetHeight;
-      let bandTop = 0;
-      let bandBottom = root.clientHeight;
-      if (placement === "background") {
-        const fits = heroH <= vh - NAV_H;
-        const ctaBottom = ctas ? offsetWithin(ctas, hero).y + ctas.offsetHeight : heroH;
-        const h1Top = h1 ? offsetWithin(h1, hero).y : 0;
-        const top = fits ? NAV_H : Math.min(NAV_H, vh - ctaBottom - CTA_MARGIN);
-        const on = !reduced && !!track && top + h1Top >= NAV_H;
-        applyPin(on, top);
-        // Franja del hero visible mientras está fijo (o al cargar, sin pin).
-        bandTop = on ? Math.max(0, NAV_H - top) : 0;
-        bandBottom = Math.min(heroH, on ? vh - top : vh - NAV_H);
-      }
-
       const w = root.clientWidth;
       let left: number;
       let right: number;
@@ -1293,8 +1292,8 @@ export function TailoredDashboard({ placement, labels }: TailoredDashboardProps)
         left = EDGE_MARGIN;
         right = w - EDGE_MARGIN;
       }
-      const top = bandTop + BAND_PAD + LABEL_TOP_PX;
-      const bottom = bandBottom - BAND_PAD - LABEL_BOTTOM_PX;
+      const top = BAND_PAD + LABEL_TOP_PX;
+      const bottom = hero.offsetHeight - BAND_PAD - LABEL_BOTTOM_PX;
       const regionW = Math.max(0, right - left);
       const regionH = Math.max(0, bottom - top);
       const E = EXTENTS;
@@ -1308,10 +1307,10 @@ export function TailoredDashboard({ placement, labels }: TailoredDashboardProps)
 
     const updateProgress = () => {
       let p = 1;
-      if (!reduced) {
+      if (!instant) {
         if (placement === "background") {
-          if (pin.on && track && spacer) {
-            p = (pin.top - track.getBoundingClientRect().top) / Math.max(1, spacer.offsetHeight);
+          if (canPin && track && spacer) {
+            p = (NAV_H - track.getBoundingClientRect().top) / Math.max(1, spacer.offsetHeight);
           } else {
             p = window.scrollY / Math.max(1, hero.offsetHeight * 0.45);
           }
@@ -1342,9 +1341,9 @@ export function TailoredDashboard({ placement, labels }: TailoredDashboardProps)
       ro.disconnect();
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", onResize);
-      applyPin(false, NAV_H);
+      applyPin(false);
     };
-  }, [mount3D, placement, reduced]);
+  }, [mount3D, placement, canPin, instant]);
 
   // Solo se dibuja mientras el visual está a la vista.
   useEffect(() => {
@@ -1364,7 +1363,7 @@ export function TailoredDashboard({ placement, labels }: TailoredDashboardProps)
 
   // Parallax del cursor: solo puntero fino y sin movimiento reducido.
   useEffect(() => {
-    if (!mount3D || reduced || !window.matchMedia(FINE_POINTER_QUERY).matches) return;
+    if (!mount3D || instant || !window.matchMedia(FINE_POINTER_QUERY).matches) return;
     const onMove = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
       pointerRef.current = {
@@ -1378,7 +1377,7 @@ export function TailoredDashboard({ placement, labels }: TailoredDashboardProps)
       window.removeEventListener("pointermove", onMove);
       pointerRef.current = { x: 0, y: 0 };
     };
-  }, [mount3D, reduced]);
+  }, [mount3D, instant]);
 
   const canvas = mount3D ? (
     <>
@@ -1399,7 +1398,7 @@ export function TailoredDashboard({ placement, labels }: TailoredDashboardProps)
         >
           <DashboardScene
             isDark={isDark}
-            instant={reduced}
+            instant={instant}
             labels={labels}
             layoutRef={layoutRef}
             progressRef={progressRef}

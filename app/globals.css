@@ -122,3 +122,56 @@ h1, h2, .font-display {
 body, p, span, a, button, input, textarea, select, h3, h4, h5, h6 {
   font-family: var(--font-montserrat), sans-serif;
 }
+
+/* TailoredDashboard (Inicio) — hero fijo (pin), PROJECT_PLAN.md §5.11.
+   Mismos umbrales que deciden el pin en components/three/TailoredDashboard.tsx
+   (NAV_H=80 + MIN_FIT_PX=480 → 560px de alto, 1024px de ancho, sin movimiento
+   reducido): el pin nunca se desactiva por falta de espacio ni corta contenido
+   detrás del Navbar. Cuando SÍ se va a fijar, el hero se compacta con clamp()
+   atado a 100svh para que H1, subheadline, CTAs y el visual quepan siempre bajo
+   el Navbar. Fuera de esta condición (reduced motion, <1024px o <560px de alto)
+   el hero vuelve a su tamaño normal sin pin — ver la regla "altura normal" de
+   prefers-reduced-motion y el piso MIN_FIT_PX en TailoredDashboard.tsx. */
+@media (min-width: 1024px) and (min-height: 560px) and (prefers-reduced-motion: no-preference) {
+  .fit-pin-hero {
+    height: calc(100svh - 5rem);
+    min-height: calc(100svh - 5rem);
+    padding-top: clamp(0.5rem, 2.5svh, 3rem);
+    padding-bottom: clamp(0.5rem, 2.5svh, 3rem);
+  }
+  .fit-pin-hero [data-hero-badge] {
+    margin-bottom: clamp(0.25rem, 1.2svh, 1.5rem);
+  }
+  .fit-pin-hero h1 {
+    font-size: clamp(1.625rem, 4.4svh, 3.75rem);
+    margin-bottom: clamp(0.5rem, 1.4svh, 1.5rem);
+  }
+  /* Subheadline: data-hero-text solo tiene un <p> hijo directo (la bajada). */
+  .fit-pin-hero [data-hero-text] > p {
+    margin-bottom: clamp(0.5rem, 1.6svh, 2.25rem);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+  .fit-pin-hero [data-hero-ctas] {
+    gap: clamp(0.5rem, 1.2svh, 1rem);
+  }
+}
+
+/* Por debajo de ~760px de alto ya no entran los chips de prueba técnica. */
+@media (min-width: 1024px) and (max-height: 759px) and (min-height: 560px) and (prefers-reduced-motion: no-preference) {
+  .fit-pin-hero [data-hero-chips] {
+    display: none;
+  }
+}
+
+/* Por debajo de ~620px de alto se retiran también el badge y el indicador
+   "Scroll": con el pin fijo durante todo el recorrido no hace falta invitar a
+   seguir bajando, y liberan el espacio que el H1 y los CTAs necesitan. */
+@media (min-width: 1024px) and (max-height: 619px) and (min-height: 560px) and (prefers-reduced-motion: no-preference) {
+  .fit-pin-hero [data-hero-badge],
+  .fit-pin-hero [data-hero-scroll] {
+    display: none;
+  }
+}

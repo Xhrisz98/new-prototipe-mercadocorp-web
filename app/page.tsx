@@ -72,6 +72,7 @@ export default function HomePage() {
             align="left"
             showProofChips={true}
             showScrollIndicator={true}
+            fitPin={true}
           />
         </TailoredDashboardPin>
 

@@ -20,6 +20,13 @@ interface HeroProps {
   align?: "center" | "left";
   showScrollIndicator?: boolean;
   showProofChips?: boolean;
+  // TailoredDashboard (PROJECT_PLAN.md §5.11): este hero va a quedar fijo (sticky)
+  // en pantalla mientras dura el pin. En vez de que el pin se desactive cuando el
+  // contenido no cabe en el alto disponible, el hero se compacta con clamp() atado
+  // a 100svh (ver .fit-pin-hero en app/globals.css — mismos umbrales de ancho/alto/
+  // movimiento reducido que decide el pin en components/three/TailoredDashboard.tsx)
+  // para que H1, subheadline, CTAs y el visual quepan siempre bajo el Navbar.
+  fitPin?: boolean;
 }
 
 export function Hero({
@@ -33,6 +40,7 @@ export function Hero({
   align = "center",
   showScrollIndicator = true,
   showProofChips = false,
+  fitPin = false,
 }: HeroProps) {
   const isCenter = align === "center";
   const prefersReducedMotion = useReducedMotion();
@@ -58,7 +66,7 @@ export function Hero({
   return (
     <section
       ref={containerRef}
-      className="relative w-full pt-12 pb-14 md:pt-18 md:pb-24 overflow-hidden flex flex-col justify-center min-h-[calc(100vh-5rem)]"
+      className={`relative w-full pt-12 pb-14 md:pt-18 md:pb-24 overflow-hidden flex flex-col justify-center min-h-[calc(100vh-5rem)] ${fitPin ? "fit-pin-hero" : ""}`}
     >
       {/* Canvas 3D de fondo (ej. DataFlowCore en Inicio, MarketingFunnel en Marketing) */}
       {threeCanvas && (
@@ -111,6 +119,7 @@ export function Hero({
           {/* Badge estilo CollectUI con píldora translúcida y brillo sutil */}
           {badge && (
             <motion.div
+              data-hero-badge
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
@@ -189,6 +198,7 @@ export function Hero({
           {/* Telemetría y Micro-Badges de Prueba Técnica (Patrón SaaS CollectUI) */}
           {showProofChips && (
             <motion.div
+              data-hero-chips
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -212,6 +222,7 @@ export function Hero({
           {/* Indicador SCROLL Minimalista (Directamente del diseño CollectUI de referencia) */}
           {showScrollIndicator && (
             <motion.div
+              data-hero-scroll
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
