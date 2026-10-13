@@ -15,6 +15,7 @@ import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { ProductShowcase } from "@/components/ui/ProductShowcase";
+import { MindLivePreview } from "@/components/ui/MindLivePreview";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getHomeContent } from "@/content/home";
 
@@ -93,8 +94,8 @@ export default function HomePage() {
 
         {/* Demostración Visual de la Plataforma */}
         <ProductShowcase
-          imageSrc="/images/mind-crm-interface.jpg"
-          alt="Mind CRM y Agente de Ventas con IA para WhatsApp"
+          interactive={<MindLivePreview />}
+          aspectClassName=""
           badge="Demostración de Ecosistema en Vivo"
           badgeVariant="ai"
           title="Ventas y Calificación de Leads 24/7 en Tiempo Real"

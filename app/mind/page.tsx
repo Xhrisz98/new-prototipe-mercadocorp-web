@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { ProductShowcase } from "@/components/ui/ProductShowcase";
+import { MindLivePreview } from "@/components/ui/MindLivePreview";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMindContent } from "@/content/mind";
@@ -195,8 +196,8 @@ export default function MindPage() {
 
         {/* Demostración Visual de la Plataforma Mind */}
         <ProductShowcase
-          imageSrc="/images/mind-crm-interface.jpg"
-          alt="Interfaz de Mind CRM y WhatsApp AI Sales Agent"
+          interactive={<MindLivePreview />}
+          aspectClassName=""
           badge="Mind en Acción"
           badgeVariant="ai"
           title="El Embudo Comercial y la Atención por WhatsApp en una Sola Pantalla"

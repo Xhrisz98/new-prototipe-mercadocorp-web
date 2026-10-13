@@ -6,14 +6,23 @@ import { Badge } from "@/components/ui/Badge";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 
 interface ProductShowcaseProps {
-  imageSrc: string;
-  alt: string;
+  // imageSrc/alt son obligatorios salvo que se pase `interactive` (ver abajo).
+  imageSrc?: string;
+  alt?: string;
   badge?: string;
   badgeVariant?: "brand" | "ai" | "outline";
   title?: string;
   subtitle?: string;
   caption?: string;
   priority?: boolean;
+  // Contenido interactivo (ej. MindLivePreview) que reemplaza la captura estática
+  // dentro del mismo marco tipo navegador — para un producto propio del que no se
+  // puede publicar una captura real (datos de cliente), en vez de una imagen.
+  interactive?: React.ReactNode;
+  // Proporción del marco. Las capturas estáticas usan 16:9 (aspect-video); un
+  // preview interactivo con más contenido vertical (ej. dashboard + Kanban) puede
+  // necesitar más alto — no cambia el default para no afectar los demás usos.
+  aspectClassName?: string;
 }
 
 export function ProductShowcase({
@@ -25,6 +34,8 @@ export function ProductShowcase({
   subtitle,
   caption,
   priority = false,
+  interactive,
+  aspectClassName = "aspect-video",
 }: ProductShowcaseProps) {
   return (
     <div className="w-full my-12 sm:my-16">
@@ -78,16 +89,19 @@ export function ProductShowcase({
               <div className="w-8" />
             </div>
 
-            {/* Imagen del Mockup en alta resolución */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-b-xl sm:rounded-b-2xl bg-[var(--color-bg)]">
-              <Image
-                src={imageSrc}
-                alt={alt}
-                fill
-                priority={priority}
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
-              />
+            {/* Interactivo (ej. MindLivePreview) o imagen del Mockup en alta resolución */}
+            <div className={`relative ${aspectClassName} w-full overflow-hidden rounded-b-xl sm:rounded-b-2xl bg-[var(--color-bg)]`}>
+              {interactive ??
+                (imageSrc && alt && (
+                  <Image
+                    src={imageSrc}
+                    alt={alt}
+                    fill
+                    priority={priority}
+                    sizes="(max-width: 1200px) 100vw, 1200px"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
+                  />
+                ))}
             </div>
 
             {caption && (
