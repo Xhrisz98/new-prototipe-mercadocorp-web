@@ -60,6 +60,8 @@ export interface HomeContent {
     title: string;
     subtitle: string;
     cta: { label: string; href: string };
+    challengeLabel: string;
+    solutionLabel: string;
     items: {
       client: string;
       pillar: string;
@@ -246,6 +248,8 @@ const contentData: Record<Locale, HomeContent> = {
         label: "Ver todos los casos de éxito",
         href: "/casos-de-exito",
       },
+      challengeLabel: "Desafío:",
+      solutionLabel: "Solución Implementada:",
       items: [
         {
           client: "Sector Deportes y Distribución",
@@ -491,6 +495,8 @@ const contentData: Record<Locale, HomeContent> = {
         label: "View all case studies",
         href: "/casos-de-exito",
       },
+      challengeLabel: "Challenge:",
+      solutionLabel: "Solution Implemented:",
       items: [
         {
           client: "Sports & Distribution Sector",
@@ -736,6 +742,8 @@ const contentData: Record<Locale, HomeContent> = {
         label: "Все кейсы компании",
         href: "/casos-de-exito",
       },
+      challengeLabel: "Задача:",
+      solutionLabel: "Реализованное решение:",
       items: [
         {
           client: "Спортивная Розница и Дистрибуция",

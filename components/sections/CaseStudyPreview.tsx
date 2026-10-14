@@ -16,8 +16,15 @@ interface CaseStudyItem {
 interface CaseStudyPreviewProps {
   title: string;
   subtitle: string;
-  cta: { label: string; href: string };
+  // Opcional: en Inicio enlaza a /casos-de-exito; en la propia página de Casos de
+  // Éxito no hace falta (sería un link a la misma página).
+  cta?: { label: string; href: string };
   items: CaseStudyItem[];
+  // Antes estas dos etiquetas estaban escritas directo en el JSX: en EN/RU el
+  // cuerpo de la tarjeta se traducía pero la etiqueta se quedaba en español.
+  // Default en español para no cambiar nada en los usos que todavía no las pasan.
+  challengeLabel?: string;
+  solutionLabel?: string;
 }
 
 export function CaseStudyPreview({
@@ -25,6 +32,8 @@ export function CaseStudyPreview({
   subtitle,
   cta,
   items,
+  challengeLabel = "Desafío:",
+  solutionLabel = "Solución Implementada:",
 }: CaseStudyPreviewProps) {
   return (
     <section className="w-full py-20 bg-[var(--color-bg)]">
@@ -41,13 +50,15 @@ export function CaseStudyPreview({
               {subtitle}
             </p>
           </div>
-          <Link
-            href={cta.href}
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[var(--color-primary)] hover:opacity-80 transition-opacity shrink-0 group"
-          >
-            <span>{cta.label}</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
+          {cta && (
+            <Link
+              href={cta.href}
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[var(--color-primary)] hover:opacity-80 transition-opacity shrink-0 group"
+            >
+              <span>{cta.label}</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          )}
         </div>
 
         {/* flex-wrap en vez de grid de 3 columnas fijas: con 2 casos (el número
@@ -77,7 +88,7 @@ export function CaseStudyPreview({
                   <div className="space-y-3 text-xs sm:text-sm">
                     <div>
                       <span className="font-semibold text-[var(--color-text)] block mb-1">
-                        Desafío:
+                        {challengeLabel}
                       </span>
                       <p className="text-[var(--color-text-muted)] leading-relaxed">
                         {item.problem}
@@ -87,7 +98,7 @@ export function CaseStudyPreview({
                     <div className="pt-2 border-t border-[var(--color-border)]/50">
                       <span className="font-semibold text-[var(--color-primary)] flex items-center gap-1 mb-1">
                         <CheckCircle2 className="w-3.5 h-3.5" />
-                        Solución Implementada:
+                        {solutionLabel}
                       </span>
                       <p className="text-[var(--color-text-muted)] leading-relaxed">
                         {item.solution}

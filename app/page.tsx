@@ -157,6 +157,8 @@ export default function HomePage() {
           subtitle={content.caseStudiesPreview.subtitle}
           cta={content.caseStudiesPreview.cta}
           items={content.caseStudiesPreview.items}
+          challengeLabel={content.caseStudiesPreview.challengeLabel}
+          solutionLabel={content.caseStudiesPreview.solutionLabel}
         />
 
         {/* 8. FAQ */}
