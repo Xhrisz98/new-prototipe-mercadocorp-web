@@ -9,6 +9,7 @@ import { ReasoningBlock } from "@/components/sections/ReasoningBlock";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { ProductShowcase } from "@/components/ui/ProductShowcase";
+import { EcommerceLivePreview } from "@/components/ui/EcommerceLivePreview";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getEcommerceContent } from "@/content/ecommerce";
 
@@ -40,8 +41,8 @@ export default function EcommercePage() {
 
         {/* Demostración Visual de Embudo E-commerce */}
         <ProductShowcase
-          imageSrc="/images/ecommerce-ai-funnel.jpg"
-          alt="Embudo de E-commerce y Recuperación de Carritos con IA"
+          interactive={<EcommerceLivePreview />}
+          aspectClassName=""
           badge="Flujo de Conversión & Retención"
           badgeVariant="brand"
           title="Recuperación Automática de Carritos y Analítica en Tiempo Real"

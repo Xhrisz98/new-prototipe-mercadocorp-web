@@ -9,6 +9,7 @@ import { ReasoningBlock } from "@/components/sections/ReasoningBlock";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { ProductShowcase } from "@/components/ui/ProductShowcase";
+import { AuditoriaLivePreview } from "@/components/ui/AuditoriaLivePreview";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getAuditoriaContent } from "@/content/auditoria";
 
@@ -40,8 +41,8 @@ export default function AuditoriaPage() {
 
         {/* Demostración Visual de Scorecard de Auditoría */}
         <ProductShowcase
-          imageSrc="/images/digital-audit-scorecard.jpg"
-          alt="Scorecard Ejecutivo de Auditoría Digital y Hoja de Ruta a 90 Días"
+          interactive={<AuditoriaLivePreview />}
+          aspectClassName=""
           badge="Diagnóstico Ejecutivo & Hoja de Ruta"
           badgeVariant="brand"
           title="Métricas Claras, Hallazgos Priorizados y Plan a 90 Días"

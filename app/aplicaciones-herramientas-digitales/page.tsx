@@ -9,6 +9,7 @@ import { ReasoningBlock } from "@/components/sections/ReasoningBlock";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { ProductShowcase } from "@/components/ui/ProductShowcase";
+import { AplicacionesLivePreview } from "@/components/ui/AplicacionesLivePreview";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getAplicacionesContent } from "@/content/aplicaciones";
 
@@ -40,8 +41,8 @@ export default function AplicacionesPage() {
 
         {/* Demostración Visual de Panel a Medida */}
         <ProductShowcase
-          imageSrc="/images/custom-software-dashboard.jpg"
-          alt="Panel de Control y Software a Medida para Empresas"
+          interactive={<AplicacionesLivePreview />}
+          aspectClassName=""
           badge="Software Empresarial a Medida"
           badgeVariant="brand"
           title="Paneles y Gestores Diseñados Sobre su Operación Real"
