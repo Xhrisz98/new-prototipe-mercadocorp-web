@@ -124,7 +124,8 @@ Complete el formulario y agende una Sesión de Diagnóstico Inicial. Le decimos,
 **URL:** `/tecnologia-automatizacion`
 
 ### Hero
-**H1:** El software, los agentes y la automatización que su empresa necesita para operar sin fricción
+**H1:** El ecosistema de agentes de IA, automatización y software que su empresa necesita para operar sin fricción
+*(Antes: "El software, los agentes y la automatización…". El software es una pieza; lo que se entrega es el ecosistema completo. Alternativa que suma el diferenciador: "El ecosistema a la medida de su empresa: agentes de IA, automatización y software para operar sin fricción".)*
 **Subheadline:** No vendemos herramientas genéricas. Diseñamos el sistema tecnológico específico que su operación necesita — y lo conectamos con su equipo real, no con un manual de usuario.
 
 **CTA primario:** `Diagnóstico Tecnológico Gratuito` → /contacto
@@ -145,7 +146,8 @@ Complete el formulario y agende una Sesión de Diagnóstico Inicial. Le decimos,
 
 ### Bloque "Por qué tecnología antes que marketing"
 **H2:** Antes de invertir en atraer más clientes, asegure que puede atenderlos a todos
-De nada sirve una campaña exitosa si el 30% de los leads se pierde porque nadie los contactó a tiempo. Empezamos por ordenar el motor — CRM, automatización, agentes de IA — para que cada peso que después invierta en marketing tenga un sistema real detrás que lo capitalice.
+De nada sirve una campaña exitosa si muchos clientes potenciales se pierden porque nadie los contactó a tiempo. Empezamos por ordenar el motor — CRM, automatización y agentes de IA — para que lo que después invierta en marketing rinda más.
+*(Cambios: se quitó "cada peso… capitalice" por una frase simple y sin moneda; "leads" pasó a "clientes potenciales"; y se eliminó "el 30%", una cifra que escribí como ejemplo y no tiene fuente. Si tienes un dato real, se puede volver a poner.)*
 
 ### FAQ del hub
 - **¿Necesito reemplazar todas mis herramientas actuales?** No. La automatización se diseña para integrarse con lo que ya usa (WhatsApp, correo, hojas de cálculo, CRMs existentes) y reemplazar solo lo que genera fricción.

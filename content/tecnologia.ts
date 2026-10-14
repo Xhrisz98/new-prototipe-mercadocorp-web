@@ -63,7 +63,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
     },
     hero: {
       badge: "Pilar 01 — Tecnología & Automatización",
-      h1: "El software, los agentes y la automatización que su empresa necesita para operar sin fricción",
+      h1: "El ecosistema de agentes de IA, automatización y software que su empresa necesita para operar sin fricción",
       subheadline:
         "No vendemos herramientas genéricas. Diseñamos el sistema tecnológico específico que su operación necesita — y lo conectamos con su equipo real, no con un manual de usuario.",
       ctaPrimary: {
@@ -141,7 +141,7 @@ const contentData: Record<Locale, TecnologiaContent> = {
     philosophyBlock: {
       title: "Antes de invertir en atraer más clientes, asegure que puede atenderlos a todos",
       description:
-        "De nada sirve una campaña exitosa si el 30% de los leads se pierde porque nadie los contactó a tiempo. Empezamos por ordenar el motor — CRM, automatización, agentes de IA — para que cada peso que después invierta en marketing tenga un sistema real detrás que lo capitalice.",
+        "De nada sirve una campaña exitosa si muchos clientes potenciales se pierden porque nadie los contactó a tiempo. Empezamos por ordenar el motor — CRM, automatización y agentes de IA — para que lo que después invierta en marketing rinda más.",
       keyTakeaway: "Un sistema eficiente multiplica el retorno de cada lead que ingresa.",
     },
     faq: {
@@ -189,7 +189,8 @@ const contentData: Record<Locale, TecnologiaContent> = {
     },
     hero: {
       badge: "Pillar 01 — Technology & Automation",
-      h1: "The software, agents, and automation your business needs to operate friction-free",
+      // Traducción generada, pendiente de revisión nativa (§3.1).
+      h1: "The ecosystem of AI agents, automation, and software your business needs to operate without friction",
       subheadline:
         "We don't sell generic tools. We design the specific technological system your operation needs — and we connect it with your real team, not with a user manual.",
       ctaPrimary: {
@@ -266,8 +267,9 @@ const contentData: Record<Locale, TecnologiaContent> = {
     },
     philosophyBlock: {
       title: "Before spending on lead acquisition, make sure you can serve every single lead",
+      // Traducción generada, pendiente de revisión nativa (§3.1).
       description:
-        "A brilliant marketing campaign is wasted if 30% of your leads go cold because no one followed up in time. We engineer the engine first — CRM, automation, AI agents — so every dollar invested in marketing converts into captured revenue.",
+        "A successful campaign is worthless if many potential customers are lost because no one contacted them in time. We start by putting the engine in order — CRM, automation, and AI agents — so that whatever you invest in marketing afterward performs better.",
       keyTakeaway: "A robust technical backbone compounds your marketing ROI.",
     },
     faq: {
@@ -315,7 +317,8 @@ const contentData: Record<Locale, TecnologiaContent> = {
     },
     hero: {
       badge: "Столп 01 — Технологии и Автоматизация",
-      h1: "Программное обеспечение, агенты и автоматизация для работы компании без трения",
+      // Traducción generada, pendiente de revisión nativa (§3.1).
+      h1: "Экосистема ИИ-агентов, автоматизации и программного обеспечения, необходимая вашей компании для работы без трения",
       subheadline:
         "Мы не продаем шаблонные инструменты. Мы разрабатываем конкретную технологическую систему, которая нужна вашей компании, — и связываем ее с вашей реальной командой, а не с инструкцией пользователя.",
       ctaPrimary: {
@@ -392,8 +395,9 @@ const contentData: Record<Locale, TecnologiaContent> = {
     },
     philosophyBlock: {
       title: "Прежде чем тратить на привлечение клиентов, убедитесь, что можете обслужить каждого",
+      // Traducción generada, pendiente de revisión nativa (§3.1).
       description:
-        "Успешная реклама бесполезна, если 30% лидов теряются из-за несвоевременного ответа. Сначала мы настраиваем двигатель — CRM, автоматизацию, ИИ-агентов — чтобы каждый доллар, вложенный позже в маркетинг, работал на реальную систему, которая его капитализирует.",
+        "Успешная кампания бесполезна, если множество потенциальных клиентов теряются из-за того, что никто не связался с ними вовремя. Мы начинаем с того, что приводим в порядок двигатель — CRM, автоматизацию и ИИ-агентов — чтобы то, что вы потом вложите в маркетинг, приносило больше отдачи.",
       keyTakeaway: "Эффективная система многократно увеличивает отдачу от каждого поступающего лида.",
     },
     faq: {
