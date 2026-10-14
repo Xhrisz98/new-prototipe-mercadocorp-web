@@ -45,6 +45,40 @@ const getMobile = () => window.matchMedia(MOBILE_QUERY).matches;
 const getDesktop = () => window.matchMedia(DESKTOP_QUERY).matches;
 const serverFalse = () => false;
 
+// ---------- Pin (mismo mecanismo que TailoredDashboard, PROJECT_PLAN.md §5.11) ----------
+//
+// Antes, el progreso del ensamblaje dependía solo de window.scrollY: en pantallas
+// donde el hero no alcanza a cubrir todo ese recorrido, el usuario ya había pasado a
+// la siguiente sección (TrustStrip) con los nodos todavía a medio viajar. Ahora, en
+// escritorio y sin movimiento reducido, el hero queda fijo (sticky) mientras dura el
+// ensamblaje — scroll nativo, no se intercepta la rueda — y solo se libera a la
+// siguiente sección cuando los 4 nodos ya conectaron y el pulso de convergencia
+// terminó (p=1). Mismos umbrales de alto de pantalla que `.fit-pin-hero` en
+// app/globals.css para que nunca se libere a medio ensamblar.
+const NAV_H = 80;
+const MIN_FIT_PX = 480;
+const TOO_SHORT_QUERY = `(max-height: ${NAV_H + MIN_FIT_PX - 1}px)`;
+const subscribeTooShort = subscribeMedia(TOO_SHORT_QUERY);
+const getTooShort = () => window.matchMedia(TOO_SHORT_QUERY).matches;
+
+// Recorrido de scroll del hero fijo, en vh. Más corto que el de TailoredDashboard
+// (220vh): el ensamblaje del funnel es más simple (4 nodos + convergencia, sin
+// costura ni "A medida").
+export const FUNNEL_PIN_TRAVEL_VH = 160;
+
+// Envoltorio del hero de Marketing Digital: el hero queda fijo mientras se recorre
+// el espaciador. Sin JS, sin pin (tablet, mobile, movimiento reducido, pantalla
+// demasiado baja) el espaciador no se muestra y el hero se comporta como cualquier
+// otro bloque — lo escribe/borra MarketingFunnel (placement="background") tras medir.
+export function MarketingFunnelPin({ children }: { children: React.ReactNode }) {
+  return (
+    <div data-hero-pin="">
+      <div data-hero-pin-sticky="">{children}</div>
+      <div data-hero-pin-spacer="" aria-hidden="true" style={{ display: "none", height: `${FUNNEL_PIN_TRAVEL_VH}vh` }} />
+    </div>
+  );
+}
+
 // 100% del progreso al 36% del alto del hero (~300px en desktop, el mismo orden que
 // DataFlowCore): al converger todavía queda a la vista buena parte del hero, así el
 // funnel no tiene que encogerse para entrar.
@@ -768,6 +802,7 @@ export function MarketingFunnel({ placement, labels, ariaLabel }: MarketingFunne
   const prefersReducedMotion = usePrefersReducedMotion();
   const isMobile = useSyncExternalStore(subscribeMobile, getMobile, serverFalse);
   const isDesktop = useSyncExternalStore(subscribeDesktop, getDesktop, serverFalse);
+  const tooShort = useSyncExternalStore(subscribeTooShort, getTooShort, serverFalse);
   const rootRef = useRef<HTMLDivElement>(null);
   const layoutRef = useRef<Layout>({ cx: 0, cy: 0, k: 1 });
   const progressTarget = useRef(0);
@@ -775,18 +810,42 @@ export function MarketingFunnel({ placement, labels, ariaLabel }: MarketingFunne
 
   // Qué montaje dibuja con 3D en este ancho.
   const mount3D = placement === "background" ? isDesktop : !isDesktop && !isMobile;
+  // El pin solo aplica al fondo del hero en escritorio (mismas condiciones que
+  // TailoredDashboard): nunca se libera a medio ensamblar, o el hero queda fijo
+  // hasta p=1, o se muestra directamente el estado final (`instant`).
+  const canPin = placement === "background" && isDesktop && !prefersReducedMotion && !tooShort;
+  const instant = prefersReducedMotion || (placement === "background" && tooShort);
 
-  // Progreso de scroll (mismo mecanismo que DataFlowCore) + encuadre medido.
+  // Progreso de scroll (pin en el fondo de escritorio; mismo mecanismo que
+  // DataFlowCore en el resto de los casos) + encuadre medido.
   useEffect(() => {
     if (!mount3D) return;
     const root = rootRef.current;
     const hero = root?.closest("section");
     const text = hero?.querySelector<HTMLElement>("[data-hero-text]");
     if (!root || !hero) return;
+    const track = placement === "background" ? hero.closest<HTMLElement>("[data-hero-pin]") : null;
+    const sticky = track?.querySelector<HTMLElement>("[data-hero-pin-sticky]") ?? null;
+    const spacer = track?.querySelector<HTMLElement>("[data-hero-pin-spacer]") ?? null;
+
+    const applyPin = (on: boolean) => {
+      if (!track || !sticky || !spacer) return;
+      sticky.style.position = on ? "sticky" : "";
+      sticky.style.top = on ? `${NAV_H}px` : "";
+      spacer.style.display = on ? "block" : "none";
+      track.dataset.pinned = on ? "true" : "false";
+    };
+    applyPin(canPin);
 
     const update = () => {
-      const heroH = hero.getBoundingClientRect().height;
-      progressTarget.current = clamp01((window.scrollY || 0) / Math.max(1, heroH * SCROLL_RANGE_FRACTION));
+      if (instant) {
+        progressTarget.current = 1;
+      } else if (canPin && track && spacer) {
+        progressTarget.current = clamp01((NAV_H - track.getBoundingClientRect().top) / Math.max(1, spacer.offsetHeight));
+      } else {
+        const heroH = hero.getBoundingClientRect().height;
+        progressTarget.current = clamp01((window.scrollY || 0) / Math.max(1, heroH * SCROLL_RANGE_FRACTION));
+      }
 
       const c = root.getBoundingClientRect();
       if (c.width === 0 || c.height === 0) return;
@@ -830,8 +889,9 @@ export function MarketingFunnel({ placement, labels, ariaLabel }: MarketingFunne
       ro.disconnect();
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
+      applyPin(false);
     };
-  }, [mount3D, placement]);
+  }, [mount3D, placement, canPin, instant]);
 
   // Solo se dibuja mientras el hero está a la vista.
   useEffect(() => {
@@ -847,11 +907,11 @@ export function MarketingFunnel({ placement, labels, ariaLabel }: MarketingFunne
       camera={{ position: [0, 0, CAMERA_Z], fov: FOV }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       dpr={[1, 1.75]}
-      frameloop={inView && !prefersReducedMotion ? "always" : "demand"}
+      frameloop={inView && !instant ? "always" : "demand"}
     >
       <FunnelScene
         isDark={isDark}
-        instant={prefersReducedMotion}
+        instant={instant}
         labels={labels}
         layoutRef={layoutRef}
         progressTarget={progressTarget}

@@ -12,7 +12,7 @@ import { TrustStrip } from "@/components/sections/TrustStrip";
 import { StatsStrip } from "@/components/sections/StatsStrip";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { getMarketingContent } from "@/content/marketing";
-import { MarketingFunnel } from "@/components/three/MarketingFunnel";
+import { MarketingFunnel, MarketingFunnelPin } from "@/components/three/MarketingFunnel";
 import { Palette, Search, CalendarCheck } from "lucide-react";
 
 // Ícono por servicio, mismo orden que content.services.items (§5.9 IconBadge —
@@ -29,18 +29,23 @@ export default function MarketingPage() {
       <Navbar />
 
       <main className="flex-1">
-        {/* Hero del Hub */}
-        <Hero
-          badge={content.hero.badge}
-          h1={content.hero.h1}
-          subheadline={content.hero.subheadline}
-          ctaPrimary={content.hero.ctaPrimary}
-          align="left"
-          // Funnel 3D (§5.9): de fondo a la derecha del texto en ≥1024px; debajo del
-          // texto en anchos menores, donde el costado no tiene espacio sin cruzar el H1.
-          threeCanvas={<MarketingFunnel placement="background" labels={content.funnel.nodes} ariaLabel={content.funnel.ariaLabel} />}
-          inlineVisual={<MarketingFunnel placement="inline" labels={content.funnel.nodes} ariaLabel={content.funnel.ariaLabel} />}
-        />
+        {/* Hero del Hub: fijo (pin) en escritorio mientras el funnel 3D ensambla sus 4
+            nodos, igual que el hero de Inicio (PROJECT_PLAN.md §5.11) — nunca avanza a
+            la siguiente sección a medio ensamblar. */}
+        <MarketingFunnelPin>
+          <Hero
+            badge={content.hero.badge}
+            h1={content.hero.h1}
+            subheadline={content.hero.subheadline}
+            ctaPrimary={content.hero.ctaPrimary}
+            align="left"
+            // Funnel 3D (§5.9): de fondo a la derecha del texto en ≥1024px; debajo del
+            // texto en anchos menores, donde el costado no tiene espacio sin cruzar el H1.
+            threeCanvas={<MarketingFunnel placement="background" labels={content.funnel.nodes} ariaLabel={content.funnel.ariaLabel} />}
+            inlineVisual={<MarketingFunnel placement="inline" labels={content.funnel.nodes} ariaLabel={content.funnel.ariaLabel} />}
+            fitPin={true}
+          />
+        </MarketingFunnelPin>
 
         {/* Franja de Confianza (Plataformas y Canales) */}
         <TrustStrip title={content.trust.title} logos={content.trust.logos} />
