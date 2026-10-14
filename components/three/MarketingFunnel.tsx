@@ -93,10 +93,16 @@ const SLOT_OF_NODE = ENTRY_ORDER.reduce<number[]>((acc, node, slot) => {
 }, []);
 // Cada nodo tiene su tramo de progreso: primero viaja desde su posición flotante y,
 // al llegar, se dibuja su línea de luz hacia la boca.
-const SLOT_SPAN = 0.2;
+const SLOT_SPAN = 0.16;
 const travelWindow = (slot: number): [number, number] => [0.03 + SLOT_SPAN * slot, 0.15 + SLOT_SPAN * slot];
 const connectWindow = (slot: number): [number, number] => [0.15 + SLOT_SPAN * slot, 0.21 + SLOT_SPAN * slot];
-const CONVERGE_WINDOW: [number, number] = [0.82, 1];
+// La convergencia termina en 0.82, no en 1: del 0.82 al 1 (18% del recorrido fijo,
+// ~29vh de FUNNEL_PIN_TRAVEL_VH) el funnel ya está completo y en reposo —sin eso, el
+// pin se liberaba justo cuando terminaba de ensamblar y el encogimiento del hero al
+// desplazarse fuera de pantalla (Hero.tsx, contentScale) se sentía inmediato y
+// brusco. Este reposo final es el que hace que "se quede en ese estado" antes de
+// avanzar a la siguiente sección.
+const CONVERGE_WINDOW: [number, number] = [0.7, 0.82];
 
 // Perfil del funnel (espacio local, eje +Y hacia la boca).
 const Y_TOP = 1.0;
