@@ -4,6 +4,8 @@ import React from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { CaseStudyPreview } from "@/components/sections/CaseStudyPreview";
+import { ClientLogosStrip } from "@/components/sections/ClientLogosStrip";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { InternalLinksStrip } from "@/components/sections/InternalLinksStrip";
 import { Badge } from "@/components/ui/Badge";
@@ -31,6 +33,19 @@ export default function CasosDeExitoPage() {
           ctaSecondary={content.hero.ctaSecondary}
           align="center"
         />
+
+        {/* Proyectos reales, anonimizados por sector (mismos de Inicio) — prueba
+            concreta mientras se confirma la lista de clientes con nombre, abajo. */}
+        <CaseStudyPreview
+          title={content.realProjects.title}
+          subtitle={content.realProjects.subtitle}
+          items={content.realProjects.items}
+          challengeLabel={content.realProjects.challengeLabel}
+          solutionLabel={content.realProjects.solutionLabel}
+        />
+
+        {/* Marcas con las que ya trabajamos */}
+        <ClientLogosStrip title={content.brandsStrip.title} logos={content.brandsStrip.logos} />
 
         {/* Lista de Casos Cualitativos Verificados */}
         <section className="w-full py-16 md:py-24">

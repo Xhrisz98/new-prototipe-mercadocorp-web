@@ -16,6 +16,25 @@ export interface CaseStudyItem {
   isConfirmed: boolean;
 }
 
+// Proyectos reales, anonimizados por sector (mismo contenido que
+// content/home.ts → caseStudiesPreview — ver guia-nueva-web-mercadocorp.md): no
+// llevan nombre de cliente ni logo, por eso no pasan por el esquema estricto de
+// `CaseStudyItem` (que sí exige clientName/isConfirmed para un caso con nombre
+// confirmado). Se muestran aquí también, no solo en Inicio.
+export interface RealProjectItem {
+  client: string;
+  pillar: string;
+  problem: string;
+  solution: string;
+}
+
+export interface BrandLogo {
+  name: string;
+  src: string;
+  width: number;
+  height: number;
+}
+
 export interface CasosDeExitoContent {
   seo: {
     title: string;
@@ -27,6 +46,17 @@ export interface CasosDeExitoContent {
     subheadline: string;
     ctaPrimary: { label: string; href: string };
     ctaSecondary: { label: string; href: string };
+  };
+  realProjects: {
+    title: string;
+    subtitle: string;
+    challengeLabel: string;
+    solutionLabel: string;
+    items: RealProjectItem[];
+  };
+  brandsStrip: {
+    title: string;
+    logos: BrandLogo[];
   };
   notice: {
     title: string;
@@ -48,6 +78,17 @@ export interface CasosDeExitoContent {
   };
 }
 
+// Logos reales de marcas con las que ya trabajamos (provistos por el cliente,
+// mismos archivos que en mercadocorp.ec) — mismos para los 3 idiomas, un logo no
+// se traduce. Dimensiones reales del archivo (sharp image.metadata()).
+const BRAND_LOGOS: BrandLogo[] = [
+  { name: "SEB — Specialist Energy Business", src: "/images/clientes/seb.png", width: 451, height: 170 },
+  { name: "AEN — Asociación de Empresarios y Empresas del Norte de Quito", src: "/images/clientes/aen.png", width: 417, height: 70 },
+  { name: "Bullpadel", src: "/images/clientes/bullpadel.png", width: 500, height: 100 },
+  { name: "Produtecnia", src: "/images/clientes/produtecnia.png", width: 337, height: 326 },
+  { name: "Rackers", src: "/images/clientes/rackers.png", width: 225, height: 217 },
+];
+
 const contentData: Record<Locale, CasosDeExitoContent> = {
   es: {
     seo: {
@@ -68,6 +109,43 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
         label: "Ver Tecnología & Automatización",
         href: "/tecnologia-automatizacion",
       },
+    },
+    realProjects: {
+      title: "Sistemas a la medida, en proyectos reales",
+      subtitle:
+        "Cada proyecto se construye sobre la operación de la empresa, sin plantillas. Los presentamos por sector.",
+      challengeLabel: "Desafío:",
+      solutionLabel: "Solución Implementada:",
+      items: [
+        {
+          client: "Sector Deportes y Distribución",
+          pillar: "Tecnología & Automatización",
+          problem:
+            "Un catálogo amplio, con variantes de talla y color, stock cambiante y más de un canal de venta que atender al mismo tiempo.",
+          solution:
+            "Backend propio con base de datos y una automatización que publica el catálogo del ERP en el marketplace, evita duplicados, cruza el stock real de cada variante y da de baja lo descontinuado.",
+        },
+        {
+          client: "Sector Bienestar y Clases",
+          pillar: "Mind: CRM + Agente de IA",
+          problem:
+            "Responder a tiempo las consultas por WhatsApp y coordinar reservas y clientes sin depender de tareas manuales.",
+          solution:
+            "Mind a la medida: un CRM propio con agente de IA en WhatsApp, módulo de reservas y la identidad de la marca del cliente, sobre una base de datos aislada.",
+        },
+        {
+          client: "Sector Comercio y Retail",
+          pillar: "Marketing Digital",
+          problem:
+            "Sostener la captación de clientes mes a mes, sin depender de campañas puntuales.",
+          solution:
+            "Gestión mensual continua de campañas en Meta Ads y Google Ads, con mantenimiento permanente.",
+        },
+      ],
+    },
+    brandsStrip: {
+      title: "Empresas que impulsamos",
+      logos: BRAND_LOGOS,
     },
     notice: {
       title: "Casos de Éxito en Construcción",
@@ -119,6 +197,45 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
         href: "/tecnologia-automatizacion",
       },
     },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
+    realProjects: {
+      title: "Custom-built systems, in real projects",
+      subtitle:
+        "Each project is built around the company's real operation, with no templates. We present them by sector.",
+      challengeLabel: "Challenge:",
+      solutionLabel: "Solution Implemented:",
+      items: [
+        {
+          client: "Sports & Distribution Sector",
+          pillar: "Technology & Automation",
+          problem:
+            "A wide catalog with size and color variants, shifting stock, and more than one sales channel to manage at the same time.",
+          solution:
+            "A proprietary backend with its own database and an automation that publishes the ERP catalog to the marketplace, prevents duplicates, cross-checks real stock per variant, and discontinues what's no longer sold.",
+        },
+        {
+          client: "Wellness & Classes Sector",
+          pillar: "Mind: CRM + AI Agent",
+          problem:
+            "Responding to WhatsApp inquiries on time and coordinating bookings and clients without relying on manual tasks.",
+          solution:
+            "A tailored Mind: a dedicated CRM with an AI agent on WhatsApp, a booking module, and the client's own brand identity, on an isolated database.",
+        },
+        {
+          client: "Retail & Commerce Sector",
+          pillar: "Digital Marketing",
+          problem:
+            "Sustaining customer acquisition month after month, without relying on one-off campaigns.",
+          solution:
+            "Ongoing monthly management of Meta Ads and Google Ads campaigns, with continuous maintenance.",
+        },
+      ],
+    },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
+    brandsStrip: {
+      title: "Companies we power",
+      logos: BRAND_LOGOS,
+    },
     notice: {
       title: "Case Studies in Progress",
       body: "We are confirming with our clients which projects can be published with name, logo, and verified detail. This section will only be completed with real, approved case studies — we do not publish unconfirmed clients or figures.",
@@ -168,6 +285,45 @@ const contentData: Record<Locale, CasosDeExitoContent> = {
         label: "Технологии и Автоматизация",
         href: "/tecnologia-automatizacion",
       },
+    },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
+    realProjects: {
+      title: "Индивидуальные системы в реальных проектах",
+      subtitle:
+        "Каждый проект строится вокруг реальной работы компании, без шаблонов. Представляем их по отраслям.",
+      challengeLabel: "Задача:",
+      solutionLabel: "Реализованное решение:",
+      items: [
+        {
+          client: "Спортивная Розница и Дистрибуция",
+          pillar: "Технологии и Автоматизация",
+          problem:
+            "Широкий каталог с вариантами размера и цвета, меняющиеся остатки и несколько каналов продаж одновременно.",
+          solution:
+            "Собственный backend с базой данных и автоматизация, которая публикует каталог из ERP на маркетплейсе, исключает дубли, сверяет реальные остатки по каждому варианту и снимает с публикации то, что уже не продаётся.",
+        },
+        {
+          client: "Сектор Оздоровления и Занятий",
+          pillar: "Mind: CRM + ИИ-агент",
+          problem:
+            "Вовремя отвечать на обращения в WhatsApp и координировать бронирования и клиентов без ручных задач.",
+          solution:
+            "Mind под конкретный бизнес: собственная CRM с ИИ-агентом в WhatsApp, модуль бронирования и фирменный стиль клиента, на изолированной базе данных.",
+        },
+        {
+          client: "Сектор Розничной Торговли",
+          pillar: "Цифровой Маркетинг",
+          problem:
+            "Поддерживать привлечение клиентов месяц за месяцем, не полагаясь на разовые кампании.",
+          solution:
+            "Постоянное ежемесячное ведение кампаний в Meta Ads и Google Ads с непрерывным сопровождением.",
+        },
+      ],
+    },
+    // Traducción generada, pendiente de revisión nativa (§3.1).
+    brandsStrip: {
+      title: "Компании, которым мы помогаем расти",
+      logos: BRAND_LOGOS,
     },
     notice: {
       title: "Кейсы в процессе подтверждения",
