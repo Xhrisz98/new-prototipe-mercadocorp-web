@@ -6,23 +6,21 @@ import { PhotoCard } from "@/components/ui/PhotoCard";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { AlertCircle, Clock, TrendingDown, ArrowRight } from "lucide-react";
 
-// Fotografía de stock TEMPORAL (Unsplash) — PROJECT_PLAN.md §5.7.
+// Fotografía de los 3 ítems de dolor — PROJECT_PLAN.md §5.7. El orden corresponde al
+// de content.pain.items (Caos Operativo, Ventas que se Enfrían Solas, Tiempo Atrapado
+// en Tareas Repetitivas).
 const PAIN_IMAGES = [
   {
-    // TODO: reemplazar con foto propia de una operación real desordenada (pantallas
-    // con hojas de cálculo dispersas), cuando exista banco de imágenes de marca.
-    src: "/images/stock/tangled-network-cables.jpg",
-    alt: "Manojo de cables de red azules entrelazados en un rack, sin orden aparente",
+    src: "/images/stock/pain-caos-operativo.jpg",
+    alt: "Profesional agobiado por documentos y dispositivos dispersos, sin control de la operación",
   },
   {
-    // TODO: reemplazar con foto propia de un embudo comercial real en el CRM Mind.
-    src: "/images/stock/light-streaks-blue.jpg",
-    alt: "Estelas de luz azul en larga exposición alejándose sobre un fondo oscuro",
+    src: "/images/stock/pain-ventas-enfrian-solas.jpg",
+    alt: "Profesional revisando el celular rodeado de íconos de oportunidades de venta sin gestionar",
   },
   {
-    // TODO: reemplazar con foto propia de un proceso manual repetitivo del cliente.
-    src: "/images/stock/optic-fiber-pattern.jpg",
-    alt: "Filamentos de fibra óptica azul repitiendo el mismo patrón sobre fondo negro",
+    src: "/images/stock/pain-tiempo-atrapado-tareas-repetitivas.jpg",
+    alt: "Profesional abrumado por tareas manuales mientras el tiempo avanza sin control",
   },
 ];
 

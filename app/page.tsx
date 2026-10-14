@@ -23,24 +23,20 @@ export default function HomePage() {
   const { locale } = useLocale();
   const content = getHomeContent(locale);
 
-  // Fotografía de stock TEMPORAL (Unsplash) para los 3 pilares — PROJECT_PLAN.md §5.7.
-  // El orden corresponde al de content.pillars.items.
+  // Fotografía de los 3 pilares — PROJECT_PLAN.md §5.7. El orden corresponde al de
+  // content.pillars.items (Software & Automatización, Mind, Marketing Digital).
   const pillarImages = [
     {
-      // TODO: reemplazar con foto propia de una implementación real de automatización
-      // en cliente, cuando exista banco de imágenes de marca.
-      src: "/images/stock/circuit-board-blue.jpg",
-      alt: "Placa de circuito impreso en tonos azul profundo, vista macro",
+      src: "/images/stock/pillar-software-automatizacion.jpg",
+      alt: "Agentes de IA, CRMs a medida e integraciones automatizando procesos de negocio",
     },
     {
-      // TODO: reemplazar con captura real del agente de IA de Mind conversando por WhatsApp.
-      src: "/images/stock/fiber-optic-blue-lights.jpg",
-      alt: "Haz de fibras ópticas iluminadas en azul irradiando desde un punto central",
+      src: "/images/stock/pillar-mind-crm-agente-ia.png",
+      alt: "Mind: CRM con agente de IA que atiende y cierra ventas por WhatsApp",
     },
     {
-      // TODO: reemplazar con foto propia de una campaña o pieza de contenido real del equipo.
-      src: "/images/stock/optic-fiber-strands.jpg",
-      alt: "Filamentos de fibra óptica azul proyectando destellos sobre fondo oscuro",
+      src: "/images/stock/pillar-marketing-digital.jpg",
+      alt: "Profesional gestionando campañas de marketing digital desde el celular",
     },
   ];
 
@@ -95,7 +91,8 @@ export default function HomePage() {
         {/* Demostración Visual de la Plataforma */}
         <ProductShowcase
           interactive={<MindLivePreview />}
-          browserUrl="crm.mind.ec / preview"
+          browserUrl="mind.ec / preview"
+          browserUrlHref="https://mind.ec"
           aspectClassName=""
           badge="Demostración de Ecosistema en Vivo"
           badgeVariant="ai"
