@@ -24,9 +24,12 @@ interface ProductShowcaseProps {
   // necesitar más alto — no cambia el default para no afectar los demás usos.
   aspectClassName?: string;
   // Texto de la barra de dirección del marco tipo navegador. Cada producto vive en
-  // su propio dominio (Mind en crm.mind.ec, PROJECT_PLAN.md §5.x) — el default
+  // su propio dominio (Mind en mind.ec, guia-nueva-web-mercadocorp.md) — el default
   // genérico queda para los mockups sin dominio propio (Aplicaciones, E-commerce).
   browserUrl?: string;
+  // Si se pasa, la barra de dirección es un link real a este dominio (target="_blank"),
+  // para productos con web propia fuera de mercadocorp.ec (ej. Mind → mind.ec).
+  browserUrlHref?: string;
 }
 
 export function ProductShowcase({
@@ -41,6 +44,7 @@ export function ProductShowcase({
   interactive,
   aspectClassName = "aspect-video",
   browserUrl = "app.mercadocorp.ec / preview",
+  browserUrlHref,
 }: ProductShowcaseProps) {
   return (
     <div className="w-full my-12 sm:my-16">
@@ -88,9 +92,20 @@ export function ProductShowcase({
                 <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)]/50" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)]/30" />
               </div>
-              <span className="text-[10px] sm:text-xs text-[var(--color-text-muted)] font-medium">
-                {browserUrl}
-              </span>
+              {browserUrlHref ? (
+                <a
+                  href={browserUrlHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] sm:text-xs text-[var(--color-text-muted)] font-medium hover:text-[var(--color-primary)] hover:underline transition-colors"
+                >
+                  {browserUrl}
+                </a>
+              ) : (
+                <span className="text-[10px] sm:text-xs text-[var(--color-text-muted)] font-medium">
+                  {browserUrl}
+                </span>
+              )}
               <div className="w-8" />
             </div>
 
