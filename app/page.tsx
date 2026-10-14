@@ -95,6 +95,7 @@ export default function HomePage() {
         {/* Demostración Visual de la Plataforma */}
         <ProductShowcase
           interactive={<MindLivePreview />}
+          browserUrl="crm.mind.ec / preview"
           aspectClassName=""
           badge="Demostración de Ecosistema en Vivo"
           badgeVariant="ai"

@@ -197,6 +197,7 @@ export default function MindPage() {
         {/* Demostración Visual de la Plataforma Mind */}
         <ProductShowcase
           interactive={<MindLivePreview />}
+          browserUrl="crm.mind.ec / preview"
           aspectClassName=""
           badge="Mind en Acción"
           badgeVariant="ai"

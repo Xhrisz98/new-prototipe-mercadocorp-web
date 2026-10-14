@@ -23,6 +23,10 @@ interface ProductShowcaseProps {
   // preview interactivo con más contenido vertical (ej. dashboard + Kanban) puede
   // necesitar más alto — no cambia el default para no afectar los demás usos.
   aspectClassName?: string;
+  // Texto de la barra de dirección del marco tipo navegador. Cada producto vive en
+  // su propio dominio (Mind en crm.mind.ec, PROJECT_PLAN.md §5.x) — el default
+  // genérico queda para los mockups sin dominio propio (Aplicaciones, E-commerce).
+  browserUrl?: string;
 }
 
 export function ProductShowcase({
@@ -36,6 +40,7 @@ export function ProductShowcase({
   priority = false,
   interactive,
   aspectClassName = "aspect-video",
+  browserUrl = "app.mercadocorp.ec / preview",
 }: ProductShowcaseProps) {
   return (
     <div className="w-full my-12 sm:my-16">
@@ -84,7 +89,7 @@ export function ProductShowcase({
                 <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)]/30" />
               </div>
               <span className="text-[10px] sm:text-xs text-[var(--color-text-muted)] font-medium">
-                app.mercadocorp.ec / preview
+                {browserUrl}
               </span>
               <div className="w-8" />
             </div>
